@@ -1,0 +1,20 @@
+{
+    "name": "imaginer",
+    "version": "1.0.0",
+    "description": "Site de test",
+    "main": "app.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "nodemon app.js && livereload"
+    },
+    "author": "Seigneur Gaëtan",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.17.1",
+        "express-handlebars": "^5.2.0"
+    },
+    "devDependencies": {
+        "livereload": "^0.9.1",
+        "nodemon": "^2.0.6"
+    }
+}

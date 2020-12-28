@@ -1,0 +1,136 @@
+/* Color Boostrap */
+
+.bg-purple
+    background-color: $purple-400
+
+.bg-pink
+    background-color: $pink-700
+
+.bg-orange
+    background-color: $orange-400
+
+/* Margin négatif Bootstrap 0 à 20 */
+
+@for $margin from 1 through 40
+    .mt-n#{$margin}
+        margin:-($margin * .25rem) auto
+
+/* Margin positif Bootstrap 0 à 20 */
+
+@for $margin from 1 through 40
+    .mt-#{$margin}
+        margin: ($margin * .25rem) auto 0 auto   
+
+@for $margin from 1 through 40
+    .ml-#{$margin}
+        margin: 0 ($margin * .25rem) 0 auto   
+
+@for $margin from 1 through 40
+    .mr-#{$margin}
+        margin: 0 auto 0 ($margin * .25rem)   
+
+@for $margin from 1 through 40
+    .mb-#{$margin}
+        margin: 0 auto ($margin * .25rem) auto 
+        
+/* Form BootStrap */
+
+label
+    display: inline-block
+    position: relative
+    font-family: 'Lobster'
+    font-size: 15px
+    font-weight: 500
+    letter-spacing: 2px
+    color: #e0e0e0
+
+/* Display Boostrap */
+.d-none
+    display: none
+
+/* Quote */ 
+
+.blockquote
+    font-family: 'Martel'
+    letter-spacing: 1px
+    color: #e0e0e0
+    font-weight: 600
+    font-size: 16px
+    line-height: 43px
+
+.blockquote .fa-quote-left    
+    margin-right: 10px
+    font-size: 30px
+
+.blockquote .fa-quote-right    
+    margin-left: 10px
+    font-size: 30px
+
+/* Séparateur */
+
+.separator
+    position: relative
+    margin: 22px auto 0 auto
+    height: 4px
+    border: 3px solid #f8f9fa
+    background-color: #f8f9fa
+    border-radius: 2px      
+
+/* Toast Boostrap */
+.toast
+    width: auto !important
+
+.toast i
+    margin: 0 7px 0 0
+    color: #237a26
+
+/* Modal Boostrap Close */
+
+.close
+    float: right
+    font-size: 1.5rem
+    font-weight: 700
+    line-height: 1
+    color: #000
+    text-shadow: 0 1px 0 #fff
+    opacity: .5
+    transition: all 500ms
+    &:hover
+     opacity: .8
+
+button.close
+    padding: 0
+    background-color: transparent
+    border: 0
+    -webkit-appearance: none
+    -moz-appearance: none
+    appearance: none
+
+/* Modal Boostrap */
+
+
+.modal-title
+    margin-bottom: 0
+    line-height: 1.5
+    text-transform: uppercase
+    letter-spacing: 1px
+    font-family: 'Arimo'
+    font-weight: 700
+
+.modal-body a
+    font-family: "Lobster"
+    font-size: 15px
+    font-weight: 500
+    letter-spacing: 2px
+    color: #413e3a
+    cursor: pointer
+    text-decoration: none
+    transition: color 500ms
+    &:hover
+        color: #515150 !important    
+
+/* Bootstrap Width */
+
+@for $width from 1 through 100
+    .w-#{$width}
+        width: ($width * 1%) !important 
