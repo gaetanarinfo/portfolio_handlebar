@@ -93,7 +93,7 @@ $('#inscription').click(function() {
     setTimeout(function() {
         $('#inscription-modal').addClass("fade show");
         $('#inscription-modal').show(1000);
-        $('#inscription-modal').removeClass('d-none');
+        $('#inscription-modal').css('display', 'block');
     }, 550);
 });
 
@@ -108,7 +108,7 @@ $('#inscription2').click(function() {
     setTimeout(function() {
         $('#inscription-modal').addClass("fade show");
         $('#inscription-modal').show(1000);
-        $('#inscription-modal').removeClass('d-none');
+        $('#inscription-modal').css('display', 'block');
     }, 550);
 });
 
