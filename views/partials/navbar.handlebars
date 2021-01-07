@@ -10,8 +10,12 @@
                 <a href="/index#tuto" class="btn btn-nav"><i class="fab fa-youtube"></i>Tuto</a>
                 <a href="/index" href="/blog" class="btn btn-nav"><i class="far fa-newspaper"></i>Actu & Dev</a>
                 <a href="#contact" class="btn btn-nav"><i class="fas fa-reply"></i>Contact</a>
-                <a data-toggle="modal" data-target="#membres" class="btn btn-nav"><i
-                        class="fas fa-user"></i>Connexion</a> 
+                {{#if users}}
+                <a href="/user/logout" class="btn btn-nav btn-nav"><i class="fas fa-reply"></i>Déconnexion</a>
+                {{else}}
+                <a data-toggle="modal" data-target="#membres" class="btn btn-nav btn-nav"><i
+                        class="fas fa-user"></i>Connexion</a>
+                {{/if}}  
             </div>
         </div>
     </div>
@@ -28,8 +32,12 @@
                 <a href="/index#tuto" class="btn btn-nav btn-nav2"><i class="fab fa-youtube"></i>Tuto</a>
                 <a href="/index" href="/blog" class="btn btn-nav btn-nav2"><i class="far fa-newspaper"></i>Actu & Dev</a>
                 <a href="#contact" class="btn btn-nav btn-nav2"><i class="fas fa-reply"></i>Contact</a>
+                {{#if users}}
+                <a href="/user/logout" class="btn btn-nav btn-nav2"><i class="fas fa-reply"></i>Déconnexion</a>
+                {{else}}
                 <a data-toggle="modal" data-target="#membres" class="btn btn-nav btn-nav2"><i
                         class="fas fa-user"></i>Connexion</a>
+                {{/if}}  
             </div>
         </div>
     </div>
@@ -64,8 +72,12 @@
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#contact"><i class="fas fa-reply"></i>Contact</a>
                             <div class="dropdown-divider"></div>
+                            {{#if users}}
+                            <a class="dropdown-item" href="/user/logout"><i class="fas fa-reply"></i>Déconnexion</a>
+                            {{else}}
                             <a href="#" class="dropdown-item" data-toggle="modal" data-target="#membres"><i
                                     class="fas fa-user"></i>Connexion</a>
+                            {{/if}}
                         </div>
                     </li>
 

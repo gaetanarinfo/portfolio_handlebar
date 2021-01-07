@@ -1,7 +1,7 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 // MongoDb Collection Projet
-var ProjetShema = new mongoose.Schema({
+const ProjetShema = new mongoose.Schema({
 
     title: String,
     content: String,
@@ -12,6 +12,6 @@ var ProjetShema = new mongoose.Schema({
 
 });
 
-var Projet = mongoose.model('projets', ProjetShema);
+const Projet = mongoose.model('projets', ProjetShema);
 
 module.exports = Projet;

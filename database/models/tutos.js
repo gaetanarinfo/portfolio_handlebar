@@ -1,7 +1,7 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 // MongoDb Collection Tuto Youtube
-var TutoShema = new mongoose.Schema({
+const TutoShema = new mongoose.Schema({
 
     title: String,
     content: String,
@@ -11,6 +11,6 @@ var TutoShema = new mongoose.Schema({
 
 });
 
-var Tutos = mongoose.model('tutos', TutoShema);
+const Tutos = mongoose.model('tutos', TutoShema);
 
 module.exports = Tutos;
