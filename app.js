@@ -1,4 +1,4 @@
-// Reload Dev
+// Reload Server
 
 const livereload = require('livereload')
 const reload = livereload.createServer()
@@ -6,31 +6,18 @@ reload.watch(__dirname + "/app.js")
 
 const express = require('express')
 const exphbs = require('express-handlebars')
-const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
-const {
-    allowInsecurePrototypeAccess
-} = require('@handlebars/allow-prototype-access')
 const fileupload = require('express-fileupload')
 const expressSession = require('express-session')
 const MongoStore = require('connect-mongo')
-const { stripTags, limit } = require('./helpers/hbs')
+const mongoose = require('mongoose')
 const flash = require('express-flash');
 
-const Handlebars = require("handlebars")
-const moment = require("moment")
-
-// Import Auth && Rooter
-const auth = require("./middleware/auth")
-const ROUTER = require('./controllers/router')
-
-mongoose.connect('mongodb://localhost:27017/portfolio', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false
-})
 const mongoStore = MongoStore(expressSession)
+
+//ENV
+require('dotenv').config()
+require('./api/database/db')
 
 const app = express()
 
@@ -57,10 +44,8 @@ app.use(fileupload())
 const path = require('path')
 app.use(express.static(path.join(__dirname, 'public')))
 
+// Port du serveur
 const port = process.env.PORT || 3000
-
-// MiddleWare
-const redirectAuthSuccess = require('./middleware/redirectAuthSuccess')
 
 app.use('*', (req, res, next) => {
     res.locals.users = req.session.userId
@@ -70,27 +55,17 @@ app.use('*', (req, res, next) => {
 app.engine('handlebars', exphbs({
     extname: 'handlebars',
     defaultLayout: 'main',
-    handlebars: allowInsecurePrototypeAccess(Handlebars),
-    defaultLayout: 'main',
     layoutsDir: __dirname + '/views/layouts/',
     helpers: {
-        generateDate: (date, format) => {
-            return moment(date).format(format)
-        },
-        stripTags: stripTags,
-        limit: limit
+        generateDate: require('./api/helpers/hbs').generateDate,
+        limit: require('./api/helpers/hbs').limit
     }
 }))
 app.set('view engine', 'handlebars')
 
-// Router
-app.get('/', ROUTER);
-app.get('/blog', ROUTER);
-app.get('/article', ROUTER);
-app.get('/admin', auth, ROUTER);
-app.post('/user/register', redirectAuthSuccess, ROUTER);
-app.post('/user/auth', ROUTER);
-app.get('/user/logout', ROUTER);
+// Rooter
+const ROUTER = require('./api/controllers/router')
+app.use('/', ROUTER);
 
 // Page 404
 app.use((req, res) => {

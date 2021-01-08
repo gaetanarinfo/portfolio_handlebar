@@ -2,18 +2,20 @@
  * Import Module
  ****************/
 const express = require('express'),
-    router = express.Router();
+    router = express.Router(),
+    auth = require("../middleware/auth")
 
-// Import Controller
+// Import Controller <-- Require
 const homeController = require('./home/homeController')
 const blogController = require('./home/blogController')
 const articleController = require('./home/articleController')
 const adminController = require('./home/adminController')
 const userController = require('./home/userController')
-const userControllerAuth = require('./home/userControllerAuth')
-const logoutController = require('./home/logoutController')
 
-// Routes
+// MiddleWare
+const redirectAuthSuccess = require('../middleware/redirectAuthSuccess')
+
+// Routes Home
 router.route('/')
     .get(homeController.get)
 
@@ -27,15 +29,15 @@ router.route('/article')
 
 // Routes Admin
 router.route('/admin')
-    .get(adminController.get)
+    .get(auth, adminController.get)
 
-// Routes User
+// Routes User Create & Authentification & Déconnexion
 router.route('/user/register')
-    .post(userController.post)
+    .post(userController.register)
 router.route('/user/auth')
-    .post(userControllerAuth.post)
+    .post(userController.auth)
 router.route('/user/logout')
-    .get(logoutController.get)
+    .get(userController.logout)
 
 // Export
 module.exports = router

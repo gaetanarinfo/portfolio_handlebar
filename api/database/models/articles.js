@@ -1,3 +1,4 @@
+const { Int32 } = require('mongodb');
 const mongoose = require('mongoose');
 
 // MongoDb Collection Projet
@@ -8,7 +9,10 @@ const ArticleShema = new mongoose.Schema({
     image: String,
     author: String,
     dateCreate: String,
-    active: Boolean
+    active: Boolean,
+    comment: {
+        type: Number
+    }
 
 });
 

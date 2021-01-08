@@ -1,3 +1,6 @@
+// Module date en fr
+const dateFr = require('../helpers/dateFr')
+
 module.exports = {
 
     limit: function(arr, limit) {
@@ -7,4 +10,7 @@ module.exports = {
         return arr.slice(0, limit);
     },
 
+    generateDate: (dates) => {
+        return dateFr(dates, "d mmmm yyyy")
+    }
 }
