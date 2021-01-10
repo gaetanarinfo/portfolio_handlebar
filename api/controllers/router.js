@@ -24,8 +24,10 @@ router.route('/blog')
     .get(blogController.get)
 
 // Routes Article
-router.route('/article')
+router.route('/article/:id')
     .get(articleController.get)
+router.route('/article/create')
+    .post(articleController.post)
 
 // Routes Admin
 router.route('/admin')

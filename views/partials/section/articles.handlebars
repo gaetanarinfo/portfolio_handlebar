@@ -13,7 +13,7 @@
             <div class="col-md-4">
                 <div class="list-group" id="list-tab" role="tablist">
                     {{#each (limit articles 4)}}
-                    <a class="list-group-item list-group-item-action {{#if active}}active{{/if}}" id="list-home-list" data-toggle="list" href="#article{{_id}}" role="tab" aria-controls="article{{id}}"><i class="fas fa-chevron-right"></i> Le premier article de mon blog</a>
+                    <a class="list-group-item list-group-item-action {{#if active}}active{{/if}}" id="list-home-list" data-toggle="list" href="#article{{_id}}" role="tab" aria-controls="article{{id}}"><i class="fas fa-chevron-right"></i> {{title}}</a>
                     {{/each}}
                 </div>
             </div>
@@ -27,7 +27,7 @@
                             {{content}}
                         </p>
                         <div class="tab-icon p-2">
-                            <div><i class="fas fa-edit"></i> <span>Mise en ligne : {{dateCreate}}</span></div>
+                            <div><i class="fas fa-edit"></i> <span>Mise en ligne : Le {{generateDate createDate}}</span></div>
                             <div class="mt-1"><i class="fas fa-user"></i> <span class="tab-user">Posté par {{author}}</span>
                             </div>
                         </div>

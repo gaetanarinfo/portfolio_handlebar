@@ -12,6 +12,7 @@ const UsersShema = new mongoose.Schema({
         type: String,
         required: [true, "Le nom est obligatoire"]
     },
+    avatar: String,
     email: {
         type: String,
         required: [true, "L'adresse email est obligatoire"],

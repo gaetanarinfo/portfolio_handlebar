@@ -11,6 +11,6 @@ module.exports = {
     },
 
     generateDate: (dates) => {
-        return dateFr(dates, "d mmmm yyyy")
+        return dateFr(dates, "d mmmm yyyy à H:MM")
     }
 }

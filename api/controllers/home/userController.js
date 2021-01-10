@@ -1,4 +1,5 @@
 const User = require('../../database/models/users');
+const bcrypt = require('bcrypt');
 
 /*
  * Controller
@@ -31,17 +32,24 @@ module.exports = {
     auth: (req, res) => {
         const { email, password } = req.body;
 
-        console.log(req.body);
-
         User.findOne({ email }, (error, user) => {
             if (user) {
 
                 bcrypt.compare(password, user.password, (error, same) => {
                     if (same) {
 
+                        // Récupère le membres dans une session
                         req.session.userId = user._id
+                        req.session.lastname = user.lastname
+                        req.session.firstname = user.firstname
+                        req.session.avatar = user.avatar
+                        req.session.isAdmin = user.isAdmin
 
-                        res.redirect('/admin')
+                        if (req.session.isAdmin == true) {
+                            res.redirect('/admin')
+                        } else {
+                            res.redirect('/')
+                        }
                         req.flash('success', 'Connexion réussie !')
                         req.session.success = req.flash('success')
                     } else {

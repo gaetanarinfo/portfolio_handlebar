@@ -1,4 +1,5 @@
 const Blog = require('../../database/models/articles');
+const Comment = require('../../database/models/comments');
 
 /*
  * Controller
@@ -7,7 +8,8 @@ module.exports = {
     // Method Get
     get: async(req, res) => {
         const blog = await Blog.find({}).lean() // Cards Galerie
-        const numberArticle = blog.length
+        const numberArticle = blog.length // Compte le nombre d'article au blog
+        const countComment = await Comment.countDocuments({ _articleid: blog }).lean(); // Permet de compter le nombre de commentaire !!! Error
 
         var perPage = 6
         var page = req.query.page
@@ -63,7 +65,10 @@ module.exports = {
                         pagin,
                         current: page,
                         pages: Math.ceil(count / perPage),
-                        blog: get
+                        blog: get,
+                        content: 'Portfolio de Gaëtan Seigneur',
+                        countComment
+
                     })
                 })
             })

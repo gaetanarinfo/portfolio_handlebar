@@ -1,6 +1,10 @@
 module.exports = {
     // Method Get
     get: (req, res) => {
-        res.render('admin', { layout: 'admin', title: 'Administration de mon blog' })
+        if (req.session.isAdmin == true) {
+            res.render('admin', { layout: 'admin', title: 'Administration de mon blog', content: 'Portfolio de Gaëtan Seigneur' })
+        } else {
+            res.redirect('/')
+        }
     }
 }
