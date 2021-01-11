@@ -102,27 +102,37 @@
                 <!-- Mot de passe oublié -->
 
                 <!-- Inscription -->
-                <form id="inscription-modal" style="display: none;" method="POST" action="/user/register">
+                <form id="inscription-modal" style="display: none;" method="POST" action="/user/register" enctype="multipart/form-data">
                     <div class="modal-body">
                         <div class="form-group">
                             <label class="text-dark mb-2">Votre prénom</label>
-                            <input type="text" class="form-control mb-2" name="firstname" required placeholder="Prénom">
+                            <input type="text" class="form-control mb-2" name="firstname" required placeholder="Prénom" value="{{data3}}">
                         </div>
 
                         <div class="form-group">
                             <label class="text-dark mb-2">Votre nom</label>
-                            <input type="text" class="form-control mb-2" name="lastname" required placeholder="Nom">
+                            <input type="text" class="form-control mb-2" name="lastname" required placeholder="Nom" value="{{data2}}">
                         </div>
 
                         <div class="form-group">
                             <label class="text-dark mb-2">Votre adresse email</label>
-                            <input type="email" class="form-control mb-2" name="email" required placeholder="Adresse email">
+                            <input type="email" class="form-control mb-2" name="email" required placeholder="Adresse email" value="{{data1}}">
                         </div>
 
                         <div class="form-group">
                             <label class="text-dark mb-2">Votre mot de passe</label>
                             <input type="password" class="form-control mb-2" name="password" required placeholder="Mot de passe">
                         </div>
+
+                         <div class="form-group">
+                            <label class="text-dark mb-2">Votre avatar</label>
+                            <input type="file" class="form-control mb-2" name="avatar" id="avatar" onchange="updateImageDisplay()" required value="{{data4}}" accept=".png, .jpg, .jpeg, .gif">
+                        </div>
+
+                        <div class="preview">
+                            <p>Aucun fichier sélectionné pour le moment</p>
+                        </div>
+
                     </div>
 
                     <div class="modal-footer">

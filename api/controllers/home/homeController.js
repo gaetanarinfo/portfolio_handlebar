@@ -1,7 +1,7 @@
-const Projet = require('../../database/models/projets');
-const Tuto = require('../../database/models/tutos');
-const Article = require('../../database/models/articles');
-const Galerie = require('../../database/models/galeries');
+const Projet = require('../../database/models/projets'),
+    Tuto = require('../../database/models/tutos'),
+    Article = require('../../database/models/articles'),
+    Galerie = require('../../database/models/galeries');
 
 module.exports = {
     get: async(req, res) => {
@@ -15,8 +15,14 @@ module.exports = {
         req.session.success = ''
         req.session.error = ''
 
+        // Si inscription erreur alors on save pour retourner dans le formulaire inscription
+        const data1 = req.session.data1
+        const data2 = req.session.data2
+        const data3 = req.session.data3
+        const data4 = req.session.data4
+
         if (success || error) {
-            res.render('index', { success: success, projets, tutos, articles, galeries })
-        } else res.render('index', { error: error, projets, tutos, articles, galeries, title: 'Portfolio de Gaëtan Seigneur', content: 'Portfolio de Gaëtan Seigneur' })
+            res.render('index', { success: success, error: error, projets, tutos, articles, galeries, data1, data2, data3, data4 })
+        } else res.render('index', { error: error, projets, tutos, articles, galeries, title: 'Portfolio de Gaëtan Seigneur', content: 'Portfolio de Gaëtan Seigneur', data1, data2, data3, data4 })
     }
 }

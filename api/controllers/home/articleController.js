@@ -46,7 +46,15 @@ module.exports = {
 
     post: async(req, res) => {
 
-        const article = await Post.findById(req.params.id).lean()
+        Post.findById(req.body.articleid, function(err, count) {
+
+            const countNumber = count.comment
+
+            Post.findByIdAndUpdate(req.body.articleid, {
+                    comment: (countNumber) + 1,
+                },
+                (error) => {});
+        })
 
         Comment
             .create({
@@ -54,7 +62,7 @@ module.exports = {
                 author: req.session.lastname + ' ' + req.session.firstname,
                 avatar: req.session.avatar,
                 dateCreate: new Date(),
-                content: req.body.content
+                content: req.body.content,
             }, (err) => {
                 if (err) {
                     //console.log(err)

@@ -1,3 +1,4 @@
+const { countDocuments } = require('../../database/models/articles');
 const Blog = require('../../database/models/articles');
 const Comment = require('../../database/models/comments');
 
@@ -9,7 +10,7 @@ module.exports = {
     get: async(req, res) => {
         const blog = await Blog.find({}).lean() // Cards Galerie
         const numberArticle = blog.length // Compte le nombre d'article au blog
-        const countComment = await Comment.countDocuments({ _articleid: blog }).lean(); // Permet de compter le nombre de commentaire !!! Error
+
 
         var perPage = 6
         var page = req.query.page
@@ -54,10 +55,13 @@ module.exports = {
         // Render de la pagination
         var pagin = boostrapPaginator.render()
 
-        Blog.find({}).sort('-dateCreate').lean()
+        var page = req.query.page || 1
+
+        Blog.find({}).sort('-dateCreate')
             .skip((perPage * page) - perPage)
             .limit(perPage)
-            .exec(function(err, get) {
+            .lean()
+            .exec((err, get) => {
                 Blog.countDocuments().exec(function(err, count) {
                     if (err) return next(err)
                     res.render('blog', {
@@ -66,13 +70,11 @@ module.exports = {
                         current: page,
                         pages: Math.ceil(count / perPage),
                         blog: get,
-                        content: 'Portfolio de Gaëtan Seigneur',
-                        countComment
-
+                        content: 'Portfolio de Gaëtan Seigneur'
                     })
+
                 })
             })
-
     }
 
 }
