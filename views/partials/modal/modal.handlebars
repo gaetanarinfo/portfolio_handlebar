@@ -45,18 +45,18 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label class="text-dark mb-2">Adresse email</label>
-                            <input type="email" class="form-control mb-2" name="email" required="" placeholder="Adresse email">
+                            <input type="email" class="form-control mb-2" name="email" id="email" required placeholder="Adresse email">
                             <small class="form-text text-muted">Adresse email obligatoire !</small>
                         </div>
                         <div class="form-group">
                             <label class="text-dark mb-2 mt-3">Mot de passe</label>
-                            <input type="password" class="form-control mb-2" name="password" required="" placeholder="Mot de passe">
+                            <input type="password" class="form-control mb-2" name="password" id="password" required placeholder="Mot de passe">
                             <small class="form-text text-muted">Mot de passe obligatoire !</small>
                         </div>
 
                         <div class="form-group">
-                            <input type="checkbox" id="checkBoxConfirm">
-                            <label class="form-check-label text-dark mr-2 mt-3" for="checkBoxConfirm">Se souvenir de moi</label>
+                            <input type="checkbox" id="checkBoxConfirmLogin">
+                            <label class="form-check-label text-dark mr-2 mt-3" for="checkBoxConfirmLogin">Se souvenir de moi</label>
                         </div>
 
                         <div class="modal-links text-center mt-3">
@@ -76,12 +76,11 @@
                 <!-- Connexion -->
 
                 <!-- Mot de passe oublié -->
-                <form id="password-modal" class="d-none" method="POST">
+                <form id="password-modal" class="d-none" method="POST" action="/user/forgot_password">
                     <div class="modal-body">
                         <div class="form-group">
                             <label class="text-dark mb-2">Adresse email</label>
-                            <input type="email" class="form-control mb-2" id="email2" name="email2" required="" placeholder="Adresse email">
-                            <small class="form-text text-muted">Adresse email obligatoire !</small>
+                            <input type="email" class="form-control mb-2" name="email" required="" placeholder="Adresse email">
                         </div>
 
                         <div class="modal-links text-center mt-3">

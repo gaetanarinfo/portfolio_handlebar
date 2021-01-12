@@ -6,12 +6,12 @@ const express = require('express'),
     auth = require("../middleware/auth")
 
 // Import Controller <-- Require
-const homeController = require('./home/homeController')
-const blogController = require('./home/blogController')
-const articleController = require('./home/articleController')
-const adminController = require('./home/adminController')
-const userController = require('./home/userController')
-const mailController = require('./home/mailController')
+const homeController = require('./home/homeController'),
+    blogController = require('./home/blogController'),
+    articleController = require('./home/articleController'),
+    adminController = require('./home/adminController'),
+    userController = require('./home/userController'),
+    nodemailerController = require('./home/nodemailerController')
 
 // MiddleWare
 const redirectAuthSuccess = require('../middleware/redirectAuthSuccess')
@@ -36,15 +36,19 @@ router.route('/admin')
 
 // Routes User Create & Authentification & Déconnexion
 router.route('/user/register')
-    .post(userController.register)
+    .post(nodemailerController.register)
 router.route('/user/auth')
     .post(userController.auth)
 router.route('/user/logout')
     .get(userController.logout)
+router.route('/user/forgot_password')
+    //.get(nodemailerController.render_forgot_password_template)
+    .post(nodemailerController.forgot_password);
 
-// Routes mail
+
+// Routes mail register
 router.route('/mail')
-    .post(mailController.post)
+    .post(nodemailerController.contact)
 
 // Export
 module.exports = router

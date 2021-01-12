@@ -235,3 +235,33 @@ function returnFileSize(number) {
         return (number / 1048576).toFixed(1) + ' Mo';
     }
 }
+
+var email = document.getElementById('email');
+var password = document.getElementById('password');
+
+const checkBoxLogin = document.getElementById('checkBoxConfirmLogin');
+
+checkBoxLogin.addEventListener('change', function() {
+
+    sessionStorage.setItem('emailLogin', email.value);
+    sessionStorage.setItem('passwordLogin', password.value);
+
+});
+
+if (sessionStorage.getItem('emailLogin') != undefined && sessionStorage.getItem('passwordLogin') != undefined) {
+    checkBoxLogin.checked = true
+
+    email.value = sessionStorage.getItem('emailLogin');
+    password.value = sessionStorage.getItem('passwordLogin');
+
+    checkBoxLogin.addEventListener('change', function() {
+
+        email.value = '';
+        password.value = '';
+
+        sessionStorage.removeItem('emailLogin');
+        sessionStorage.removeItem('passwordLogin');
+
+    });
+
+}

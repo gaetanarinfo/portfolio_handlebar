@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 // MongoDb Collection Tuto Youtube
 const UsersShema = new mongoose.Schema({
@@ -50,6 +51,5 @@ UsersShema.pre('save', function(next) {
     })
 
 })
-
 
 module.exports = mongoose.model('users', UsersShema);
