@@ -34,6 +34,7 @@
         "mongodb": "^3.6.3",
         "mongoose": "^5.11.9",
         "monk": "^7.3.2",
+        "nodemailer": "^6.4.17",
         "pagination": "^0.4.6",
         "striptags": "^3.1.1",
         "sweetalert2": "^10.13.0"

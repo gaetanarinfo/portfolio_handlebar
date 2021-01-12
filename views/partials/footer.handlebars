@@ -47,32 +47,32 @@
     <div class="row">
         <div class="col-md-12">
             <div class="mt-4">
-                <form class="text-center" method="POST" action="/">
+                <form class="text-center" method="POST" action="/mail">
                     <div class="form-row">
                         <div class="form-group col-md-3 d-inline-block ml-3">
-                            <label for="inputEmail" class="mb-3">Votre adresse email</label>
-                            <input type="email" class="form-control" id="inputEmail" placeholder="Adresse email">
+                            <label for="email" class="mb-3">Votre adresse email</label>
+                            <input type="email" class="form-control" name="email" placeholder="Adresse email">
                         </div>
                         <div class="form-group col-md-3 d-inline-block ml-3 mt-3">
-                            <label for="inputNom" class="mb-3">Votre nom et prénom</label>
-                            <input type="text" class="form-control" id="inputNom" placeholder="Nom et Prénom">
+                            <label for="name" class="mb-3">Votre nom et prénom</label>
+                            <input type="text" class="form-control" name="name" placeholder="Nom et Prénom">
                         </div>
                         <div class="form-group col-md-3 d-inline-block mt-3">
-                            <label for="inputSujet" class="mb-3">Votre sujet</label>
-                            <select id="inputSujet" class="form-control">
+                            <label for="sujet" class="mb-3">Votre sujet</label>
+                            <select name="sujet" class="form-control">
                                 <option selected="">Choissisez un sujet...</option>
                                 <option disabled>---------</option>
-                                <option value="Bug">Bug</option>
+                                <option value="Bug sur le site">Bug sur le site</option>
                                 <option disabled>---------</option>
-                                <option value="Theme">Thème sur le site</option>
+                                <option value="Theme sur le site">Thème sur le site</option>
                                 <option disabled>---------</option>
-                                <option value="Autres">Autres sujet</option>
+                                <option value="Autres sujet">Autres sujet</option>
                             </select>
                         </div>
 
                         <div class="form-group col-md-8 m-auto mt-4">
                             <label for="inputMessage" class="mb-3">Votre message</label>
-                            <textarea id="inputMessage" class="form-control" rows="12"
+                            <textarea name="content" class="form-control" rows="12"
                                 placeholder="Ici commence le message"></textarea>
                         </div>
                     </div>

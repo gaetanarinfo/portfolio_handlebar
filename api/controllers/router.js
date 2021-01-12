@@ -11,6 +11,7 @@ const blogController = require('./home/blogController')
 const articleController = require('./home/articleController')
 const adminController = require('./home/adminController')
 const userController = require('./home/userController')
+const mailController = require('./home/mailController')
 
 // MiddleWare
 const redirectAuthSuccess = require('../middleware/redirectAuthSuccess')
@@ -40,6 +41,10 @@ router.route('/user/auth')
     .post(userController.auth)
 router.route('/user/logout')
     .get(userController.logout)
+
+// Routes mail
+router.route('/mail')
+    .post(mailController.post)
 
 // Export
 module.exports = router

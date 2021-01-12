@@ -1,6 +1,5 @@
 // Module date en fr
 const dateFr = require('../helpers/dateFr')
-const Comment = require('../database/models/comments')
 
 module.exports = {
 
