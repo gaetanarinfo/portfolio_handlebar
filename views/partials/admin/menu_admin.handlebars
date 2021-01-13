@@ -3,14 +3,14 @@
 
     <div class="card-profil">
         <div class="m-auto text-center">
-            <img src="https://store.playstation.com/store/api/chihiro/00_09_000/container/SA/en/999/EP0001-CUSA02376_00-AV00000000000011/1601165358000/image?w=240&amp;h=240&amp;bg_color=000000&amp;opacity=100&amp;_version=00_09_000"
+            <img src="../../../avatar/{{avatar}}"
                 alt="Gaëtan Seigneur" width="117" class="rounded-circle mt-4">
         </div>
 
         <div class="m-auto text-center mt-3">
-            <p><i class="fas fa-user-cog ml-1" aria-hidden="true"></i>Seigneur Gaëtan</p>
-            <p><i class="fas fa-random ml-1" aria-hidden="true"></i>Administrateur</p>
-            <p><i class="fas fa-sign-out-alt ml-1" aria-hidden="true"></i>Inscrit le : 20/11/2020</p>
+            <p><i class="fas fa-user-cog ml-1" aria-hidden="true"></i>{{name}}</p>
+            <p><i class="fas fa-random ml-1" aria-hidden="true"></i>{{#if rang}}Administrateur{{else}}Membre{{/if}}</p>
+            <p><i class="fas fa-sign-out-alt ml-1" aria-hidden="true"></i>Inscrit le : {{generateDate dateRegister}}</p>
 
             <hr>
         </div>

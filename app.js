@@ -53,6 +53,7 @@ const port = process.env.PORT || 3000
 
 app.use('*', (req, res, next) => {
     res.locals.users = req.session.userId
+    res.locals.admin = req.session.isAdmin
     next()
 })
 
@@ -62,7 +63,8 @@ app.engine('handlebars', exphbs({
     layoutsDir: __dirname + '/views/layouts/',
     helpers: {
         generateDate: require('./api/helpers/hbs').generateDate,
-        limit: require('./api/helpers/hbs').limit
+        limit: require('./api/helpers/hbs').limit,
+        ifEquals: require('./api/helpers/hbs').ifEquals
     }
 }))
 app.set('view engine', 'handlebars')

@@ -13125,6 +13125,14 @@ footer {
   background: rgba(0, 0, 0, 0.05);
 }
 
+.error-comment {
+  font-size: 14px;
+  font-weight: 500;
+  color: #d81616;
+  letter-spacing: 1px;
+  font-family: "Arimo", serif;
+}
+
 /* IMPORT SASS PAGE ID */   
 /* Global Article */
 hr {

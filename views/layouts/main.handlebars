@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{{#if title}}{{title}}{{else}}Portfolio de Gaëtan Seigneur{{/if}}</title>
-    <meta name="description" content="{{content}}">
+    <meta name="description" content="{{#if content}}{{content}}{{else}}Mon portfolio professionnel, retrouvé ici mes compétences, les derniers articles de mon blog, mes tutoriels et tant d'autres choses.{{/if}}">
     <link rel="icon" type="image/png" href="/images/favicon.png" />
 
     <!-- Bootstrap CSS -->
@@ -21,7 +21,7 @@
 
 {{{body}}}
 
-​{{notifications}}
+​{{> notifications}}
 
 ​{{> footer}}
 

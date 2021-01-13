@@ -11,10 +11,8 @@ const homeController = require('./home/homeController'),
     articleController = require('./home/articleController'),
     adminController = require('./home/adminController'),
     userController = require('./home/userController'),
-    nodemailerController = require('./home/nodemailerController')
-
-// MiddleWare
-const redirectAuthSuccess = require('../middleware/redirectAuthSuccess')
+    nodemailerController = require('./home/nodemailerController'),
+    resetpasswordController = require('./home/resetpasswordController')
 
 // Routes Home
 router.route('/')
@@ -33,6 +31,8 @@ router.route('/article/create')
 // Routes Admin
 router.route('/admin')
     .get(auth, adminController.get)
+router.route('/admin/addUser')
+    .post(auth, adminController.addUser)
 
 // Routes User Create & Authentification & Déconnexion
 router.route('/user/register')
@@ -40,11 +40,16 @@ router.route('/user/register')
 router.route('/user/auth')
     .post(userController.auth)
 router.route('/user/logout')
-    .get(userController.logout)
+    .get(auth, userController.logout)
 router.route('/user/forgot_password')
-    //.get(nodemailerController.render_forgot_password_template)
     .post(nodemailerController.forgot_password);
 
+// Routes Password Reset
+router.route('/reset-password/:token')
+    .get(resetpasswordController.get)
+
+router.route('/reset-password/:token')
+    .post(resetpasswordController.post)
 
 // Routes mail register
 router.route('/mail')

@@ -14,4 +14,15 @@ module.exports = {
         return dateFr(dates, "d mmmm yyyy à H:MM")
     },
 
+
+    ifEquals: function(a, b, options) {
+        if (a > b) {
+
+            return options.fn(this)
+        }
+
+        return options.inverse(this)
+
+    }
+
 }

@@ -1,6 +1,5 @@
-const { countDocuments } = require('../../database/models/articles');
-const Blog = require('../../database/models/articles');
-const Comment = require('../../database/models/comments');
+const Blog = require('../../database/models/articles'),
+    Comment = require('../../database/models/comments')
 
 /*
  * Controller
@@ -8,9 +7,9 @@ const Comment = require('../../database/models/comments');
 module.exports = {
     // Method Get
     get: async(req, res) => {
-        const blog = await Blog.find({}).lean() // Cards Galerie
-        const numberArticle = blog.length // Compte le nombre d'article au blog
-
+        const blog = await Blog.find({}).lean(), // Cards Galerie
+            numberArticle = blog.length, // Compte le nombre d'article au blog
+            comment = await Comment.find({}).sort('-dateCreate').lean()
 
         var perPage = 6
         var page = req.query.page
@@ -70,7 +69,8 @@ module.exports = {
                         current: page,
                         pages: Math.ceil(count / perPage),
                         blog: get,
-                        content: 'Portfolio de Gaëtan Seigneur'
+                        content: 'Portfolio de Gaëtan Seigneur',
+                        comment
                     })
 
                 })

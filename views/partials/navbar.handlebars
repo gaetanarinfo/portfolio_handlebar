@@ -10,6 +10,9 @@
                 <a href="/#tuto" class="btn btn-nav"><i class="fab fa-youtube"></i>Tuto</a>
                 <a href="/blog?page=1" class="btn btn-nav"><i class="far fa-newspaper"></i>Actu & Dev</a>
                 <a href="#contact" class="btn btn-nav"><i class="fas fa-reply"></i>Contact</a>
+                {{#if admin}}
+                    <a href="/admin" class="btn btn-nav"><i class="fas fa-user-cog"></i>Admin</a>
+                {{/if}}
                 {{#if users}}
                 <a href="/user/logout" class="btn btn-nav btn-nav">Déconnexion</a>
                 {{else}}
@@ -32,6 +35,9 @@
                 <a href="/#tuto" class="btn btn-nav btn-nav2"><i class="fab fa-youtube"></i>Tuto</a>
                 <a href="/blog?page=1" class="btn btn-nav btn-nav2"><i class="far fa-newspaper"></i>Actu & Dev</a>
                 <a href="#contact" class="btn btn-nav btn-nav2"><i class="fas fa-reply"></i>Contact</a>
+                {{#if admin}}
+                    <a href="/admin" class="btn btn-nav btn-nav2"><i class="fas fa-user-cog"></i>Admin</a>
+                {{/if}}
                 {{#if users}}
                 <a href="/user/logout" class="btn btn-nav btn-nav2">Déconnexion</a>
                 {{else}}
@@ -71,10 +77,15 @@
                                 Dev</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#contact"><i class="fas fa-reply"></i>Contact</a>
-                            <div class="dropdown-divider"></div>
+                            {{#if admin}}
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/admin"><i class="fas fa-user-cog"></i>Admin</a>
+                            {{/if}}
                             {{#if users}}
+                            <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/user/logout">Déconnexion</a>
                             {{else}}
+                            <div class="dropdown-divider"></div>
                             <a href="#" class="dropdown-item" data-toggle="modal" data-target="#membres"><i
                                     class="fas fa-user"></i>Connexion</a>
                             {{/if}}

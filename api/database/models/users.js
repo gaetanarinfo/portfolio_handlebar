@@ -1,6 +1,7 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose'),
+    bcrypt = require('bcrypt'),
+    jwt = require('jsonwebtoken'),
+    randtoken = require('rand-token')
 
 // MongoDb Collection Tuto Youtube
 const UsersShema = new mongoose.Schema({
@@ -37,6 +38,10 @@ const UsersShema = new mongoose.Schema({
     isAdmin: {
         type: Boolean,
         default: false
+    },
+    token: {
+        type: String,
+        default: randtoken.generate(30)
     }
 
 });

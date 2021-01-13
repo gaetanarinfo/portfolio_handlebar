@@ -21,62 +21,23 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                {{#each (limit membres 6)}}
                                 <tr>
-                                    <th class="th-perso">1</th>
-                                    <td class="th-perso">Seigneur Gaëtan</td>
-                                    <td class="th-perso">gaetanarinfo@gmail.com</td>
-                                    <td class="th-perso">Administrateur</td>
-                                    <td class="th-perso">23/11/2020</td>
+                                    <th class="th-perso">{{_id}}</th>
+                                    <td class="th-perso">{{lastname}} {{firstname}}</td>
+                                    <td class="th-perso">{{email}}</td>
+                                    <td class="th-perso">{{#if isAdmin}}Administrateur{{else}}Membre{{/if}}</td>
+                                    <td class="th-perso">{{generateDate createDate}}</td>
                                     <td class="th-perso"><a href="" data-toggle="modal" data-target="#modif_membre"><i
                                                 class="fas fa-user-edit ml-2" data-toggle="tooltip" data-placement="top"
                                                 title="Editer le membre"></i></a>
-                                        <a href="" data-toggle="modal" data-target="#deleteModal"><i
+                                        
+                                        {{#if isAdmin}}{{else}}<a href="" data-toggle="modal" data-target="#deleteModal"><i
                                                 class="fas fa-trash" data-toggle="tooltip" data-placement="top"
-                                                title="Supprimer un membre"></i></a>
+                                                title="Supprimer un membre"></i></a>{{/if}}
                                     </td>
                                 </tr>
-                                <tr>
-                                    <th class="th-perso">2</th>
-                                    <td class="th-perso">Seigneur Gaëtan</td>
-                                    <td class="th-perso">gaetanarinfo@gmail.com</td>
-                                    <td class="th-perso">Administrateur</td>
-                                    <td class="th-perso">23/11/2020</td>
-                                    <td class="th-perso"><a href="" data-toggle="modal" data-target="#modif_membre"><i
-                                                class="fas fa-user-edit ml-2" data-toggle="tooltip" data-placement="top"
-                                                title="Editer le membre"></i></a>
-                                        <a href="" data-toggle="modal" data-target="#deleteModal"><i
-                                                class="fas fa-trash" data-toggle="tooltip" data-placement="top"
-                                                title="Supprimer un membre"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th class="th-perso">3</th>
-                                    <td class="th-perso">Seigneur Gaëtan</td>
-                                    <td class="th-perso">gaetanarinfo@gmail.com</td>
-                                    <td class="th-perso">Administrateur</td>
-                                    <td class="th-perso">23/11/2020</td>
-                                    <td class="th-perso"><a href="" data-toggle="modal" data-target="#modif_membre"><i
-                                                class="fas fa-user-edit ml-2" data-toggle="tooltip" data-placement="top"
-                                                title="Editer le membre"></i></a>
-                                        <a href="" data-toggle="modal" data-target="#deleteModal"><i
-                                                class="fas fa-trash" data-toggle="tooltip" data-placement="top"
-                                                title="Supprimer un membre"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th class="th-perso">4</th>
-                                    <td class="th-perso">Seigneur Gaëtan</td>
-                                    <td class="th-perso">gaetanarinfo@gmail.com</td>
-                                    <td class="th-perso">Administrateur</td>
-                                    <td class="th-perso">23/11/2020</td>
-                                    <td class="th-perso"><a href="" data-toggle="modal" data-target="#modif_membre"><i
-                                                class="fas fa-user-edit ml-2" data-toggle="tooltip" data-placement="top"
-                                                title="Editer le membre"></i></a>
-                                        <a href="" data-toggle="modal" data-target="#deleteModal"><i
-                                                class="fas fa-trash" data-toggle="tooltip" data-placement="top"
-                                                title="Supprimer un membre"></i></a>
-                                    </td>
-                                </tr>
+                                {{/each}}
                             </tbody>
                         </table>
 

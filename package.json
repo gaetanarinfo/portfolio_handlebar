@@ -1,11 +1,11 @@
 {
-    "name": "portfiolio",
+    "name": "portfiolio-serveur",
     "version": "1.0.0",
     "description": "Site internet sur mon portolio",
     "main": "app.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "nodemon app.js && livereload"
+        "start": "nodemon app.js --- \"Démarrage de l'application\""
     },
     "author": "Seigneur Gaëtan",
     "license": "ISC",
@@ -15,11 +15,10 @@
         "body-parser": "^1.19.0",
         "connect-flash": "^0.1.1",
         "connect-mongo": "^3.2.0",
-        "crypto": "^1.0.1",
         "dateformat": "^4.4.1",
         "dotenv": "^8.2.0",
         "express": "^4.17.1",
-        "express-fileupload": "^1.2.0",
+        "express-fileupload": "^1.2.1",
         "express-flash": "0.0.2",
         "express-handlebars": "^5.2.0",
         "express-handlebars-paginate": "^1.0.3",
@@ -39,8 +38,8 @@
         "monk": "^7.3.2",
         "nodemailer": "^6.4.17",
         "pagination": "^0.4.6",
-        "striptags": "^3.1.1",
-        "sweetalert2": "^10.13.0"
+        "rand-token": "^1.0.1",
+        "striptags": "^3.1.1"
     },
     "devDependencies": {
         "handlebars": "^4.7.6",

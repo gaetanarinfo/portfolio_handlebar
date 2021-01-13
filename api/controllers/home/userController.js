@@ -20,6 +20,7 @@ module.exports = {
                         req.session.userId = user._id
                         req.session.lastname = user.lastname
                         req.session.firstname = user.firstname
+                        req.session.email = user.email
                         req.session.avatar = user.avatar
                         req.session.isAdmin = user.isAdmin
 

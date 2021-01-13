@@ -154,8 +154,7 @@
                         <a href="#tuto" class="a-f"><i class="fab fa-youtube ml-1" aria-hidden="true"></i> Tuto</a>
                     </li>
                     <li class="mb-3">
-                        <a href="#article" class="a-f"><i class="far fa-newspaper ml-1" aria-hidden="true"></i> Actu &
-                            Dev</a>
+                        <a href="/blog?page=1" class="a-f"><i class="far fa-newspaper ml-1" aria-hidden="true"></i> Actu & Dev</a>
                     </li>
                     <li class="mb-3">
                         <a href="#contact" class="a-f"><i class="fas fa-reply ml-1" aria-hidden="true"></i> Contact</a>
@@ -170,43 +169,35 @@
                 <h5 class="text-uppercase">Commentaire récent</h5>
                 <div class="row d-flex justify-content-center mt-3">
                     <div class="col-md-12">
-                        <div class="card comment">
-                            <div class="comment-widgets">
-                                <!-- Commentaire -->
-                                <div class="d-flex flex-row comment-row m-t-0">
-                                    <div class="p-2">
-                                        <img src="https://store.playstation.com/store/api/chihiro/00_09_000/container/SA/en/999/EP0001-CUSA02376_00-AV00000000000011/1601165358000/image?w=240&h=240&bg_color=000000&opacity=100&_version=00_09_000"
-                                            alt="Gaëtan Seigneur" width="50" class="rounded-circle">
-                                    </div>
-                                    <div class="comment-text w-100">
-                                        <h6>Gaëtan Seigneur</h6>
-                                        <span class="m-b-15 d-block">Lorem Ipsum is simply dummy text of the printing
-                                            and typesetting industry. Lorem Ipsum has</span>
-                                        <div class="comment-footer mt-1">
-                                            <span class="text-muted float-right"><i
-                                                    class="fas fa-pencil-alt ml-2"></i>Posté le Lundi 14 avril
-                                                2020</span>
-                                        </div>
-                                    </div>
+                        {{#ifEquals commentCount 0}}
+                            {{#each commentsAll}}       
+                            <div class="card comment">
+                                <div class="comment-widgets">
+                                    
+                                        <!-- Commentaire -->
+                                        <div class="d-flex flex-row comment-row m-t-0">
+                                            <div class="p-2">
+                                                <img src="/avatar/{{avatar}}"
+                                                    alt="{{author}}" width="50" class="rounded-circle">
+                                            </div>
+                                            <div class="comment-text w-100">
+                                                <h6>{{author}}</h6>
+                                                <span class="m-b-15 d-block">{{content}}</span>
+                                                <div class="comment-footer mt-1">
+                                                    <span class="text-muted float-right"><i
+                                                            class="fas fa-pencil-alt ml-2"></i>Posté le {{generateDate dateCreate}}</span>
+                                                </div>
+                                            </div>
+                                        </div>              
                                 </div>
-                                <!-- Commentaire -->
-                                <div class="d-flex flex-row comment-row m-t-0">
-                                    <div class="p-2">
-                                        <img src="https://store.playstation.com/store/api/chihiro/00_09_000/container/SA/en/999/EP0001-CUSA02376_00-AV00000000000011/1601165358000/image?w=240&h=240&bg_color=000000&opacity=100&_version=00_09_000"
-                                            alt="Gaëtan Seigneur" width="50" class="rounded-circle">
-                                    </div>
-                                    <div class="comment-text w-100">
-                                        <h6>Gaëtan Seigneur</h6>
-                                        <span class="m-b-15 d-block">Lorem Ipsum is simply dummy text of the printing
-                                            and typesetting industry. Lorem Ipsum has</span>
-                                        <div class="comment-footer mt-1">
-                                            <span class="text-muted float-right"><i
-                                                    class="fas fa-pencil-alt ml-2"></i>Posté le Lundi 14 avril
-                                                2020</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                {{/each}} 
+                                    
+                        {{else}}
+
+                            <p class="error-comment">Désolé aucun commentaire à afficher pour le moment !</p>     
+                            
+                            {{/ifEquals}}
+                           
                             <!-- Card -->
                         </div>
                     </div>
@@ -238,51 +229,3 @@
 <script src="/vendor/bootstrap/js/popper.min.js"></script>
 <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="/js/script.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<script>
-
-// Toast Success
-{{#if success}}
-
-const Toast = Swal.mixin({
-toast: true,
-position: 'top-end',
-showConfirmButton: false,
-timer: 2500,
-timerProgressBar: true,
-didOpen: (toast) => {
-toast.addEventListener('mouseenter', Swal.stopTimer)
-toast.addEventListener('mouseleave', Swal.resumeTimer)
-}
-})
-
-Toast.fire({
-icon: 'success',
-title: '{{success}}'
-})
-
-{{/if}}
-
-// Toast Error
-{{#if error}}
-
-const Toast = Swal.mixin({
-toast: true,
-position: 'top-end',
-showConfirmButton: false,
-timer: 2500,
-timerProgressBar: true,
-didOpen: (toast) => {
-toast.addEventListener('mouseenter', Swal.stopTimer)
-toast.addEventListener('mouseleave', Swal.resumeTimer)
-}
-})
-
-Toast.fire({
-icon: 'error',
-title: '{{error}}'
-})
-
-{{/if}}
-
-</script>
