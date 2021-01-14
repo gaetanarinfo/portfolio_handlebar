@@ -80,7 +80,7 @@ module.exports = {
                         req.session.data2 = req.body.lastname
                         req.session.data3 = req.body.firstname
                         req.session.data4 = avatarFile.name
-                        return res.status(500).res.flash('error', 'Une erreur est survenue !'), res.session.error = req.flash('error')
+                        return res.redirect('/')
                     } else {
 
                         User

@@ -35,6 +35,26 @@
 
     <!-- Js perso -->
     <script src="/admin/js/index.js"></script>
+    <script src="/admin/js/edit.js"></script>
+
+    <!-- Permet de voir le membre dans le modal -->
+    <script>
+    {{#each membres}}
+
+            $('#editMembre-' + '{{_id}}').click(function() {
+            
+                ViewMembre('{{_id}}', '{{lastname}}', '{{firstname}}', '{{email}}', '{{isBanned}}', '{{isAdmin}}');
+
+            });
+
+            $('#deleteMembre-' + '{{_id}}').click(function() {
+
+                DeleteMembre('{{_id}}', '{{lastname}}', '{{firstname}}');
+
+            });
+
+    {{/each}}
+    </script>
 
     ​{{> notifications}}
 

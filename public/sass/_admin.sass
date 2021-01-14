@@ -68,6 +68,18 @@ hr
     font-weight: bold
     text-transform: uppercase
 
+table > thead
+    border-bottom: 3px solid #d6d0d085 !important  
+
+table > thead > tr > th
+    padding: 15px 13px 15px 13px !important     
+
+.table-dark
+    --bs-table-bg: #0000006b !important    
+    color: #ececec !important  
+    border-color: #ececec00 !important  
+    --bs-table-hover-bg: #868a8f11 !important
+
 .table-content
     padding: 6px 0 6px 0 !important
 
@@ -155,3 +167,74 @@ table a
 @media only screen and (max-width: 390px)
     .container-menu-left
         height: 54vh !important
+
+.wrapper
+    display: -webkit-box
+    display: -ms-flexbox
+    display: flex
+    width: 400px
+    margin: 50vh auto 0
+    -ms-flex-wrap: wrap
+    flex-wrap: wrap
+        -webkit-transform: translateY(-50%)
+    transform: translateY(-50%)
+
+
+.switch_box
+    display: -webkit-box
+    display: -ms-flexbox
+    display: inline-grid
+    -webkit-box-pack: center
+        -ms-flex-pack: center
+        justify-content: center
+    -webkit-box-align: center
+        -ms-flex-align: center
+            align-items: center
+    -webkit-box-flex: 1
+        -ms-flex: 1
+            flex: 1
+
+
+/* Switch 1 Specific Styles Start */
+
+
+input[type="checkbox"].switch_1
+    font-size: 14px
+    -webkit-appearance: none
+        -moz-appearance: none
+            appearance: none
+    width: 3.5em
+    height: 1.5em
+    background: #ddd
+    border-radius: 3em
+    position: relative
+    cursor: pointer
+    outline: none
+    -webkit-transition: all .2s ease-in-out
+    transition: all .2s ease-in-out
+  
+  
+input[type="checkbox"].switch_1:checked
+    background: #0ebeff
+  
+  
+input[type="checkbox"].switch_1:after
+    position: absolute
+    content: ""
+    width: 1.5em
+    height: 1.5em
+    border-radius: 50%
+    background: #fff
+    -webkit-box-shadow: 0 0 .25em rgba(0,0,0,.3)
+            box-shadow: 0 0 .25em rgba(0,0,0,.3)
+    -webkit-transform: scale(.7)
+            transform: scale(.7)
+    left: 0
+    -webkit-transition: all .2s ease-in-out
+    transition: all .2s ease-in-out
+ 
+input[type="checkbox"].switch_1:checked:after
+    left: calc(100% - 1.5em)
+  
+	
+/* Switch 1 Specific Style End */

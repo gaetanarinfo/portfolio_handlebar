@@ -21,18 +21,18 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {{#each (limit membres 6)}}
+                                {{#each membres}}
                                 <tr>
                                     <th class="th-perso">{{_id}}</th>
                                     <td class="th-perso">{{lastname}} {{firstname}}</td>
                                     <td class="th-perso">{{email}}</td>
                                     <td class="th-perso">{{#if isAdmin}}Administrateur{{else}}Membre{{/if}}</td>
                                     <td class="th-perso">{{generateDate createDate}}</td>
-                                    <td class="th-perso"><a href="" data-toggle="modal" data-target="#modif_membre"><i
+                                    <td class="th-perso"><a id="editMembre-{{_id}}" href="" data-toggle="modal" data-target="#modif_membre"><i
                                                 class="fas fa-user-edit ml-2" data-toggle="tooltip" data-placement="top"
                                                 title="Editer le membre"></i></a>
                                         
-                                        {{#if isAdmin}}{{else}}<a href="" data-toggle="modal" data-target="#deleteModal"><i
+                                        {{#if isAdmin}}{{else}}<a id="deleteMembre-{{_id}}" href="" data-toggle="modal" data-target="#deleteModal"><i
                                                 class="fas fa-trash" data-toggle="tooltip" data-placement="top"
                                                 title="Supprimer un membre"></i></a>{{/if}}
                                     </td>
@@ -41,13 +41,7 @@
                             </tbody>
                         </table>
 
-                        <ul class="pagination justify-content-center">
-                            <li class="page-item"><a class="page-link" href="#"><i class="fas fa-angle-left"></i></a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#"><i class="fas fa-angle-right"></i></a>
-                            </li>
-                        </ul>
+                        {{{pagin}}}
                     </div>
 
                 </div>

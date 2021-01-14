@@ -10,6 +10,7 @@ const ArticleShema = new mongoose.Schema({
     dateCreate: String,
     active: Boolean,
     isAdmin: Boolean,
+    avatar: String,
     comment: {
         type: Number
     }

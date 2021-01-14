@@ -62,33 +62,28 @@
      <div class="modal-dialog modal-dialog-centered" role="document">
          <div class="modal-content">
              <div class="modal-header">
-                 <h5 class="modal-title" id="ModalLabelAddArticle">Ajouter un article au blog</h5>
+                 <h5 class="modal-title">Ajouter un article au blog</h5>
                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                      <span aria-hidden="true">&times;</span>
                  </button>
              </div>
-             <form method="POST">
+             <form method="POST" action="/admin/addArticle" enctype="multipart/form-data">
                  <div class="modal-body">
                      <div class="form-group">
-                         <label for="imageArticleB" class="text-dark mb-2">Image de l'article</label>
-                         <input type="text" class="form-control mb-2" name="imageArticleB" id="imageArticleB"
+                         <label class="text-dark mb-2">Image de l'article</label>
+                         <input type="file" class="form-control mb-2" required name="image"
                              placeholder="Image de l'article">
                      </div>
 
                      <div class="form-group">
-                         <label for="titreArticleB" class="text-dark mb-2">Titre de l'article</label>
-                         <input type="text" class="form-control mb-2" name="titreArticleB" id="titreArticleB"
+                         <label class="text-dark mb-2">Titre de l'article</label>
+                         <input type="text" class="form-control mb-2" required name="title"
                              placeholder="Titre de l'article">
                      </div>
 
                      <div class="form-group">
-                         <label for="dateProjetB" class="text-dark mb-2">Date de l'article</label>
-                         <input type="date" class="form-control mb-2" name="dateProjetB" id="dateProjetB">
-                     </div>
-
-                     <div class="form-group">
-                         <label for="contentProjet" class="text-dark mb-2">Description de l'article</label>
-                         <textarea rows="10" class="form-control mb-2" name="contentProjetB" id="contentProjetB"
+                         <label class="text-dark mb-2">Description de l'article</label>
+                         <textarea rows="10" class="form-control mb-2" name="content"
                              placeholder="Description de l'article"></textarea>
                      </div>
 
@@ -96,19 +91,11 @@
                          <label class="text-dark mb-2">Article privé ?</label>
                      </div>
 
-                     <div class="form-group mb-1 text-center">
-                         <input type="checkbox" id="checkBoxConfirmArticle" value="oui">
-                         <label class="form-check-label text-dark mr-2 mt-3" for="checkBoxConfirmArticle">Oui</label>
-
-                         <input class="mr-2" type="checkbox" id="checkBoxConfirmNonA" value="non">
-                         <label class="form-check-label text-dark mr-2 mt-3" for="checkBoxConfirmNon">Non</label>
-                     </div>
-
                  </div>
 
                  <div class="modal-footer">
                      <button type="button" class="btn btn-form-reset" data-dismiss="modal">Fermer</button>
-                     <button type="button" class="btn btn-form-send">Valider</button>
+                     <button type="submit" class="btn btn-form-send">Valider</button>
                  </div>
              </form>
          </div>
@@ -165,7 +152,7 @@
          </div>
      </div>
  </div>
- <!-- Modal Admin Ajout Article Blog -->
+ <!-- Modal Admin Ajout Membres Blog -->
 
  <!-- Modal Admin Modifier un projet -->
  <div class="modal fade" id="modif_projet" tabindex="-1" role="dialog" aria-hidden="true">
@@ -290,40 +277,47 @@
      <div class="modal-dialog modal-dialog-centered" role="document">
          <div class="modal-content">
              <div class="modal-header">
-                 <h5 class="modal-title" id="ModalLabelModifMembre">Modifier un membre</h5>
+                 <h5 class="modal-title">Modifier un membre</h5>
                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                      <span aria-hidden="true">&times;</span>
                  </button>
              </div>
-             <form method="POST">
+             <form id="editUserForm" method="POST" enctype="multipart/form-data">
                  <div class="modal-body">
                      <div class="form-group">
-                         <label for="nomA" class="text-dark mb-2">Nom du membre</label>
-                         <input type="text" class="form-control mb-2" name="nomA" id="nomA" placeholder="Nom">
+                         <label class="text-dark mb-2">Nom du membre</label>
+                         <input type="text" class="form-control mb-2" name="lastname" id="lastname" required placeholder="Nom">
                      </div>
 
                      <div class="form-group">
-                         <label for="prenomA" class="text-dark mb-2">Prénom du membre</label>
-                         <input type="text" class="form-control mb-2" name="prenomA" id="prenomA" placeholder="Prénom">
+                         <label class="text-dark mb-2">Prénom du membre</label>
+                         <input type="text" class="form-control mb-2" name="firstname" id="firstname" required placeholder="Prénom">
                      </div>
 
                      <div class="form-group">
-                         <label for="emailA" class="text-dark mb-2">Email du membre</label>
-                         <input type="text" class="form-control mb-2" name="emailA" id="emailA"
+                         <label class="text-dark mb-2">Email du membre</label>
+                         <input type="email" class="form-control mb-2" name="email" id="email" required
                              placeholder="Adresse email">
                      </div>
 
                      <div class="form-group">
-                         <label class="text-dark mb-2">Mot de passe du membre</label>
-                         <input type="password" class="form-control mb-2" name="passwordA" id="passwordA"
-                             placeholder="Mot de passe">
+                         <label class="text-dark mb-2">Avatar du membre</label>
+                         <input type="file" class="form-control mb-2" name="avatar" id="avatar">
                      </div>
+
+                    <div id="isAdmin" class="form-group text-center">
+                        <div class="switch_box box_1">
+                            <label class="text-dark mb-2">Status du membre</label>
+                            <div><input type="checkbox" class="switch_1" name="isBanned" id="isBanned" value="0"></div>
+                            <label class="text-dark mb-2" id="lab_ban">Actif</label>
+                        </div>
+                    </div>
 
                  </div>
 
                  <div class="modal-footer">
                      <button type="button" class="btn btn-form-reset" data-dismiss="modal">Fermer</button>
-                     <button type="button" class="btn btn-form-send">Valider</button>
+                     <button type="submit" class="btn btn-form-send">Valider</button>
                  </div>
              </form>
          </div>
@@ -390,12 +384,12 @@
              </div>
 
              <div class="modal-body">
-                 <p class="mt-1">Êtes-vous sur de vouloirs supprimer ?</p>
+                 <p class="mt-1 text-center">Êtes-vous sur de vouloirs supprimer ?</p>
              </div>
 
              <div class="modal-footer">
                  <button type="button" class="btn btn-form-reset" data-dismiss="modal">Fermer</button>
-                 <button type="button" class="btn btn-form-send">Valider</button>
+                 <button type="button" id="remove_user" class="btn btn-form-send">Valider</button>
              </div>
 
          </div>

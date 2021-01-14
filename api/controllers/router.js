@@ -3,13 +3,15 @@
  ****************/
 const express = require('express'),
     router = express.Router(),
-    auth = require("../middleware/auth")
+    auth = require("../middleware/auth"),
+    authAdmin = require("../middleware/authAdmin")
 
 // Import Controller <-- Require
 const homeController = require('./home/homeController'),
     blogController = require('./home/blogController'),
     articleController = require('./home/articleController'),
-    adminController = require('./home/adminController'),
+    adminControllerUser = require('./home/adminControllerUser'),
+    adminControllerArticle = require('./home/adminControllerArticle'),
     userController = require('./home/userController'),
     nodemailerController = require('./home/nodemailerController'),
     resetpasswordController = require('./home/resetpasswordController')
@@ -30,9 +32,23 @@ router.route('/article/create')
 
 // Routes Admin
 router.route('/admin')
-    .get(auth, adminController.get)
+    .get(auth, authAdmin, adminControllerUser.get)
+
+// Routes Admin Section User
 router.route('/admin/addUser')
-    .post(auth, adminController.addUser)
+    .post(auth, authAdmin, adminControllerUser.addUser)
+router.route('/admin/editUser/:id')
+    .post(auth, authAdmin, adminControllerUser.editUser)
+router.route('/admin/view_membre/:id')
+    .get(auth, authAdmin, adminControllerUser.viewUser)
+router.route('/admin/delete_membre/:id')
+    .get(auth, authAdmin, adminControllerUser.deletetUser)
+router.route('/admin/confirm_delete_membre/:id')
+    .get(auth, authAdmin, adminControllerUser.deleteUserConfirm)
+
+// Routes Admin Section Blog (Articles)
+router.route('/admin/addArticle')
+    .post(auth, authAdmin, adminControllerArticle.addArticle)
 
 // Routes User Create & Authentification & Déconnexion
 router.route('/user/register')
