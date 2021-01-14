@@ -13,7 +13,7 @@ body {
   top: 0px;
   width: 271px;
   height: 100%;
-  background-color: #00000038;
+  background-color: #000000ba;
 }
 
 .card-profil p {
@@ -105,7 +105,7 @@ table tr th {
 }
 
 table .th-perso {
-  padding: 14px 0px 0px 0px;
+  padding: 15px 13px 15px 13px !important;
   height: 50px !important;
   font-size: 15px;
 }
@@ -281,5 +281,36 @@ input[type=checkbox].switch_1:checked:after {
 }
 
 /* Switch 1 Specific Style End */
+.mask-menu {
+  display: block;
+  position: relative;
+  float: right;
+  left: -12px;
+  top: 6px;
+}
+
+.mask-menu a {
+  color: #b3b3b3;
+  transition: all 200ms;
+}
+.mask-menu a:hover {
+  color: #868686;
+}
+
+.mask-menu2 {
+  display: none;
+  position: relative;
+  float: left;
+  left: 15px;
+  top: 6px;
+}
+
+.mask-menu2 a {
+  color: #b3b3b3;
+  transition: all 200ms;
+}
+.mask-menu2 a:hover {
+  color: #868686;
+}
 
 /*# sourceMappingURL=admin.css.map */

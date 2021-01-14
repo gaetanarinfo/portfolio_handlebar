@@ -2,43 +2,16 @@ $(function() {
     $('[data-toggle="tooltip"]').tooltip()
 })
 
-$("#Membres").click(function() {
-    $('#membres').fadeIn(600);
-    $('#blog').fadeOut(10);
-    $('#youtube').fadeOut(10);
-    $('#galerie').fadeOut(10);
-    $('#projet').fadeOut(10);
-});
+$('#btn_menu').click(function() {
+    $('#menu').hide(500)
+    $('.mask-menu2').css('display', 'block')
+    $('.mask-menu').css('display', 'none')
+    return false
+})
 
-$("#Blog").click(function() {
-    $('#membres').fadeOut(10);
-    $('#blog').fadeIn(600);
-    $('#youtube').fadeOut(10);
-    $('#galerie').fadeOut(10);
-    $('#projet').fadeOut(10);
-});
-
-$("#Youtube").click(function() {
-    $('#membres').fadeOut(10);
-    $('#blog').fadeOut(10);
-    $('#youtube').fadeIn(200);
-    $('#galerie').fadeOut(10);
-    $('#projet').fadeOut(10);
-
-});
-
-$("#Galerie").click(function() {
-    $('#membres').fadeOut(10);
-    $('#blog').fadeOut(10);
-    $('#youtube').fadeOut(10);
-    $('#galerie').fadeIn(200);
-    $('#projet').fadeOut(10);
-});
-
-$("#Projet").click(function() {
-    $('#membres').fadeOut(10);
-    $('#blog').fadeOut(10);
-    $('#youtube').fadeOut(10);
-    $('#galerie').fadeOut(10);
-    $('#projet').fadeIn(200);
-});
+$('#btn_menu2').click(function() {
+    $('#menu').show(500)
+    $('.mask-menu').css('display', 'block')
+    $('.mask-menu2').css('display', 'none')
+    return false
+})

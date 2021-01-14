@@ -20,6 +20,7 @@ const homeController = require('./home/homeController'),
 router.route('/')
     .get(homeController.get)
 
+
 // Routes Blog
 router.route('/blog')
     .get(blogController.get)
@@ -32,7 +33,7 @@ router.route('/article/create')
 
 // Routes Admin
 router.route('/admin')
-    .get(auth, authAdmin, adminControllerUser.get)
+    .get(auth, authAdmin, adminControllerUser.showArticle)
 
 // Routes Admin Section User
 router.route('/admin/addUser')
@@ -47,6 +48,8 @@ router.route('/admin/confirm_delete_membre/:id')
     .get(auth, authAdmin, adminControllerUser.deleteUserConfirm)
 
 // Routes Admin Section Blog (Articles)
+router.route('/admin/articles')
+    .get(auth, authAdmin, adminControllerArticle.showArticle)
 router.route('/admin/addArticle')
     .post(auth, authAdmin, adminControllerArticle.addArticle)
 

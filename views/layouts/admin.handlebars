@@ -56,6 +56,26 @@
     {{/each}}
     </script>
 
+    <script>
+    
+        if(document.location.href == 'http://localhost:3000/admin') {
+            document.getElementById('membres').style.display = '';
+        }else if(document.location.href == 'http://localhost:3000/admin/articles') {
+            document.getElementById('blog').style.display = '';
+            document.getElementById('membres').style.display = 'none';
+            document.getElementById('galerie').style.display = 'none';
+            document.getElementById('youtube').style.display = 'none';
+            document.getElementById('projet').style.display = 'none';
+        }else if(document.location.href == 'http://localhost:3000/admin/galeries') {
+            document.getElementById('galerie').style.display = '';
+        }else if(document.location.href == 'http://localhost:3000/admin/youtubes') {
+            document.getElementById('youtube').style.display = '';
+        }else if(document.location.href == 'http://localhost:3000/admin/projets') {
+            document.getElementById('projet').style.display = '';
+        }
+
+    </script>
+
     ​{{> notifications}}
 
 </body>

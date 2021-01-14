@@ -12,7 +12,7 @@ app.use(fileupload({
 module.exports = {
 
     // Method Get
-    get: async(req, res) => {
+    showArticle: async(req, res) => {
 
         const success = req.session.success, // Message Succes
             error = req.session.error // Message Error
