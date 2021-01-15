@@ -15,8 +15,8 @@ const ArticleShema = new mongoose.Schema({
         type: Number
     },
     isPrivate: {
-        type: Boolean,
-        default: true
+        type: Number,
+        default: 0
     }
 
 });

@@ -11,7 +11,7 @@
     <div class="container">
         <div class="row" id="gallery" data-toggle="modal" data-target="#galerieModal">
             {{#each (limit galeries 4)}}
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb" style="{{#if isPrivate}}display: none;{{else}}{{/if}}">
                 <a data-target="#carouselGaetan" data-slide-to="0">
                     <img src="{{image}}" class="img-thumb zoom img-fluid " alt="">
                     <div class="thumb-title">{{title}}</div>

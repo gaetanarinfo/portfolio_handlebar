@@ -9,7 +9,7 @@
                     <div id="carouselGaetan" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner">
                             {{#each (limit galeries 4)}}
-                            <div class="carousel-item {{#if active}}active{{/if}}">
+                            <div class="carousel-item {{#if active}}active{{/if}}" style="{{#if isPrivate}}display: none;{{else}}{{/if}}">
                                 <img class="d-block w-100 img-item" src="{{image}}" alt="{{title}}">
                             </div>
                             {{/each}}

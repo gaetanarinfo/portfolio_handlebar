@@ -8,6 +8,10 @@ const GalerieShema = new mongoose.Schema({
     active: {
         type: Boolean,
         default: false
+    },
+    isPrivate: {
+        type: Number,
+        default: 0
     }
 
 });

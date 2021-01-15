@@ -10,8 +10,8 @@ const ProjetShema = new mongoose.Schema({
     date: String,
     links: Number,
     isPrivate: {
-        type: Boolean,
-        default: false
+        type: Number,
+        default: 0
     }
 
 });

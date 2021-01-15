@@ -7,7 +7,11 @@ const TutoShema = new mongoose.Schema({
     content: String,
     api: String,
     date: String,
-    links: String
+    links: String,
+    isPrivate: {
+        type: Number,
+        default: 0
+    }
 
 });
 

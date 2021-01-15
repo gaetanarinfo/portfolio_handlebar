@@ -5,16 +5,16 @@ function ViewMembre(id, lastname, firstname, email, isBanned, isAdmin) {
         $('#email').attr('value', email);
         $('#editUserForm').attr('action', '/admin/editUser/' + id)
 
-        if (isBanned == 'false') {
-            $('#isBanned').attr('value', 'false')
+        if (isBanned == 'non') {
+            $('#isBanned').attr('value', 'non')
             $('#lab_ban').html('Actif')
             $('#isBanned').attr('checked', 'checked')
         } else {
-            $('#isBanned').attr('value', 'true')
+            $('#isBanned').attr('value', 'oui')
             $('#lab_ban').html('Bannis')
         }
 
-        if (isAdmin == 'true') {
+        if (isAdmin == 'oui') {
             $('#isAdmin').css('display', 'none')
         } else {
             $('#isAdmin').css('display', 'block')
@@ -22,14 +22,14 @@ function ViewMembre(id, lastname, firstname, email, isBanned, isAdmin) {
 
         $('#isBanned').click(function() {
 
-            if ($('#isBanned').val() == 'false') {
+            if ($('#isBanned').val() == 'non') {
 
-                $('#isBanned').attr('value', 'true')
+                $('#isBanned').attr('value', 'oui')
                 $('#lab_ban').html('Bannis')
 
-            } else if ($('#isBanned').val() == 'true') {
+            } else if ($('#isBanned').val() == 'oui') {
 
-                $('#isBanned').attr('value', 'false')
+                $('#isBanned').attr('value', 'non')
                 $('#lab_ban').html('Actif')
 
             }
@@ -58,25 +58,25 @@ function ViewArticle(id, image, title, content, isPrivate) {
         $('#isPrivate2').attr('value', isPrivate);
         $('#editArticleForm').attr('action', '/admin/editArticle/' + id)
 
-        if (isPrivate == 'false') {
-            $('#isPrivate2').attr('value', 'false')
+        if (isPrivate == 'non') {
+            $('#isPrivate2').attr('value', 'non')
             $('#lab_priv2').html('En ligne')
             $('#isPrivate2').attr('checked', 'checked')
         } else {
-            $('#isPrivate2').attr('value', 'true')
+            $('#isPrivate2').attr('value', 'oui')
             $('#lab_priv2').html('Privé')
         }
 
         $('#isPrivate2').click(function() {
 
-            if ($('#isPrivate2').val() == 'false') {
+            if ($('#isPrivate2').val() == 'non') {
 
-                $('#isPrivate2').attr('value', 'true')
+                $('#isPrivate2').attr('value', 'oui')
                 $('#lab_priv2').html('Privé')
 
-            } else if ($('#isPrivate2').val() == 'true') {
+            } else if ($('#isPrivate2').val() == 'oui') {
 
-                $('#isPrivate2').attr('value', 'false')
+                $('#isPrivate2').attr('value', 'non')
                 $('#lab_priv2').html('En ligne')
 
             }
@@ -106,25 +106,25 @@ function ViewProjet(id, image, title, content, date, isPrivate) {
         $('#isPrivate4').attr('value', isPrivate);
         $('#editProjetForm').attr('action', '/admin/editProjet/' + id)
 
-        if (isPrivate == 'false') {
-            $('#isPrivate4').attr('value', 'false')
+        if (isPrivate == 'non') {
+            $('#isPrivate4').attr('value', 'non')
             $('#lab_proj2').html('En ligne')
             $('#isPrivate4').attr('checked', 'checked')
         } else {
-            $('#isPrivate4').attr('value', 'true')
+            $('#isPrivate4').attr('value', 'oui')
             $('#lab_proj2').html('Privé')
         }
 
         $('#isPrivate4').click(function() {
 
-            if ($('#isPrivate4').val() == 'false') {
+            if ($('#isPrivate4').val() == 'non') {
 
-                $('#isPrivate4').attr('value', 'true')
+                $('#isPrivate4').attr('value', 'oui')
                 $('#lab_proj2').html('Privé')
 
-            } else if ($('#isPrivate4').val() == 'true') {
+            } else if ($('#isPrivate4').val() == 'oui') {
 
-                $('#isPrivate4').attr('value', 'false')
+                $('#isPrivate4').attr('value', 'non')
                 $('#lab_proj2').html('En ligne')
 
             }
@@ -144,7 +144,7 @@ function DeleteProjet(id, title) {
     });
 }
 
-function ViewYoutube(id, title, content, api, date, links) {
+function ViewYoutube(id, title, content, api, date, links, isPrivate) {
     $.get("http://localhost:3000/admin/view_tuto/" + id, function() {
         $('#ModalLabelEditVideo').html("Modifier la vidéo " + title)
         $('#titreVideo').attr('value', title);
@@ -152,7 +152,33 @@ function ViewYoutube(id, title, content, api, date, links) {
         $('#apiVideo').attr('value', api);
         $('#linksVideo').attr('value', links);
         $('#contentVideo').html(content);
+        $('#isPrivate6').attr('value', isPrivate);
         $('#editTutoForm').attr('action', '/admin/editTuto/' + id)
+
+        if (isPrivate == 'non') {
+            $('#isPrivate6').attr('value', 'non')
+            $('#lab_vid2').html('En ligne')
+            $('#isPrivate6').attr('checked', 'checked')
+        } else {
+            $('#isPrivate6').attr('value', 'oui')
+            $('#lab_vid2').html('Privé')
+        }
+
+        $('#isPrivate6').click(function() {
+
+            if ($('#isPrivate6').val() == 'non') {
+
+                $('#isPrivate6').attr('value', 'oui')
+                $('#lab_vid2').html('Privé')
+
+            } else if ($('#isPrivate6').val() == 'oui') {
+
+                $('#isPrivate6').attr('value', 'non')
+                $('#lab_vid2').html('En ligne')
+
+            }
+
+        })
     });
 }
 
@@ -166,12 +192,38 @@ function DeleteYoutube(id, title) {
     });
 }
 
-function ViewGalerie(id, title, image) {
+function ViewGalerie(id, title, image, isPrivate) {
     $.get("http://localhost:3000/admin/view_tuto/" + id, function() {
         $('#ModalLabelEditGalerie').html("Modifier l'image " + title)
         $('#titreGalerie').attr('value', title);
         $('#imageGalerie').attr('value', image);
+        $('#isPrivate8').attr('value', isPrivate);
         $('#editGalerieForm').attr('action', '/admin/editGalerie/' + id)
+
+        if (isPrivate == 'non') {
+            $('#isPrivate8').attr('value', 'non')
+            $('#lab_img2').html('En ligne')
+            $('#isPrivate8').attr('checked', 'checked')
+        } else {
+            $('#isPrivate8').attr('value', 'oui')
+            $('#lab_img2').html('Privé')
+        }
+
+        $('#isPrivate8').click(function() {
+
+            if ($('#isPrivate8').val() == 'non') {
+
+                $('#isPrivate8').attr('value', 'oui')
+                $('#lab_img2').html('Privé')
+
+            } else if ($('#isPrivate8').val() == 'oui') {
+
+                $('#isPrivate8').attr('value', 'non')
+                $('#lab_img2').html('En ligne')
+
+            }
+
+        })
     });
 }
 
