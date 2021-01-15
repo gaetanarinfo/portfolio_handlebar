@@ -23,18 +23,16 @@ module.exports = {
                         req.session.email = user.email
                         req.session.avatar = user.avatar
                         req.session.isAdmin = user.isAdmin
+                        req.session.isLog = user.isLog
 
-                        if (req.session.isAdmin == true) {
-                            req.flash('success', 'Connexion réussie !')
-                            req.session.success = req.flash('success')
+                        User.findOneAndUpdate({ '_id': user.id }, {
+                            isLog: new Date()
+                        }, (error) => {});
 
-                            res.redirect('/')
-                        } else {
-                            req.flash('success', 'Connexion réussie !')
-                            req.session.success = req.flash('success')
+                        req.flash('success', 'Connexion réussie !')
+                        req.session.success = req.flash('success')
 
-                            res.redirect('/')
-                        }
+                        res.redirect('/')
 
                     } else {
                         req.flash('error', 'Une erreur est survenue !')
@@ -53,11 +51,7 @@ module.exports = {
     // Method logout
     logout: (req, res) => {
 
-        setTimeout(() => {
-
-            res.redirect('/')
-            req.session.destroy()
-
-        }, 1000);
+        req.session.destroy()
+        res.redirect('/')
     }
 }

@@ -1,17 +1,13 @@
-const Article = require('../../database/models/articles'),
+const Tuto = require('../../database/models/tutos')
+
+const Youtube = require('../../database/models/tutos'),
     User = require('../../database/models/users'),
-    fileupload = require("express-fileupload"),
     express = require('express'),
     app = express(),
     pagination = require('pagination')
 
-app.use(fileupload())
-
 module.exports = {
-
-    showArticle: (req, res) => {
-
-
+    showTuto: (req, res) => {
         const success = req.session.success, // Message Succes
             error = req.session.error // Message Error
 
@@ -21,13 +17,13 @@ module.exports = {
         const email = req.session.email
 
         // Nombre d'item par page
-        var perPage = 10
+        var perPage = 3
             // La page que l'on veux récupéré si il y a en pas alors page 1
         var page = req.query.page || 1
         var arrayPagesIndexes = []
 
-        // Ici on recherche nos articles
-        Article.find()
+        // Ici on recherche nos tutos
+        Tuto.find()
             // Ici On viens chercher l'index qui nous interesse
             // exemple: pour la page 2 avec 5 perPage = index 5
             // donc (5 * 2) - 5 = 5
@@ -35,10 +31,10 @@ module.exports = {
             // Ici on limite le nombre de résultat
             .limit(perPage)
             .lean()
-            .exec((err, articles) => {
+            .exec((err, tutos) => {
                 if (err) console.log(err)
                     // Ici on compte le nombre d'article total 
-                Article.countDocuments()
+                Tuto.countDocuments()
                     .exec((err, count) => {
                         if (err) return next(err)
                             // Ici on calcul le nombre de pages
@@ -50,8 +46,8 @@ module.exports = {
                         }
 
 
-                        var boostrapPaginator2 = new pagination.TemplatePaginator({
-                            prelink: '/admin/article',
+                        var boostrapPaginator3 = new pagination.TemplatePaginator({
+                            prelink: '/admin/youtubes/',
                             current: page,
                             rowsPerPage: perPage,
                             totalResult: count,
@@ -85,7 +81,7 @@ module.exports = {
                         });
 
                         // Render de la pagination
-                        var pagin2 = boostrapPaginator2.render()
+                        var pagin3 = boostrapPaginator3.render()
 
                         User.findOne({ email }, (erro, user) => {
                             if (success || error) {
@@ -96,13 +92,13 @@ module.exports = {
                                     pages: Math.ceil(count / perPage),
                                     // tableau avec les index des page: []
                                     arrayPage: arrayPagesIndexes,
-                                    // Les articles : [{}]
-                                    articles: articles,
+                                    // Les tutos : [{}]
+                                    tutos: tutos,
                                     // Pages - 1
                                     previous: parseInt(page) - 1,
                                     // Pages + 1
                                     next: parseInt(page) + 1,
-                                    pagin2,
+                                    pagin3,
 
                                     success: success,
                                     error: error,
@@ -112,6 +108,7 @@ module.exports = {
                                     name: user.firstname + ' ' + user.lastname,
                                     rang: user.isAdmin,
                                     dateRegister: user.createDate,
+                                    dateLog: user.isLog,
                                     layout: 'admin'
                                 })
                             } else {
@@ -122,13 +119,13 @@ module.exports = {
                                     pages: Math.ceil(count / perPage),
                                     // tableau avec les index des page: []
                                     arrayPage: arrayPagesIndexes,
-                                    // Les articles : [{}]
-                                    articles: articles,
+                                    // Les tutos : [{}]
+                                    tutos: tutos,
                                     // Pages - 1
                                     previous: parseInt(page) - 1,
                                     // Pages + 1
                                     next: parseInt(page) + 1,
-                                    pagin2,
+                                    pagin3,
 
                                     error: error,
 
@@ -138,6 +135,7 @@ module.exports = {
                                     name: user.firstname + ' ' + user.lastname,
                                     rang: user.isAdmin,
                                     dateRegister: user.createDate,
+                                    dateLog: user.isLog,
                                     layout: 'admin'
                                 })
                             }
@@ -146,49 +144,52 @@ module.exports = {
 
                     })
             })
+    },
+
+    editTuto: (req, res) => {
+
+        const id = req.params.id
+
+        Tuto.findOneAndUpdate({ '_id': id }, {
+            title: req.body.title,
+            content: req.body.content,
+            api: req.body.api,
+            date: req.body.date,
+        }, (error) => {
+
+            req.flash('success', "La vidéo " + req.body.title + " à été modifié !")
+            req.session.success = req.flash('success')
+
+            res.redirect('/admin/youtubes')
+
+        });
 
     },
 
-    addArticle: (req, res) => {
+    deleteTuto: (req, res) => {
 
-        const imageFile = req.files.image
+        const id = req.params.id
 
-        imageFile.mv('public/article/' + imageFile.name, function(err) {
-            if (err) {
-                req.flash('error', 'Une erreur est survenue !')
-                req.session.error = req.flash('error')
-                return res.redirect('/admin')
-            } else {
+        Tuto.findById({ _id: id }, (erro, user) => {
 
-                Article
-                    .create({
-                        image: '/article/' + imageFile.name,
-                        title: req.body.title,
-                        content: req.body.content,
-                        author: req.session.lastname + ' ' + req.session.firstname,
-                        dateCreate: new Date(),
-                        active: false,
-                        avatar: req.session.avatar
-                    }, (err) => {
-                        if (err) {
-                            //console.log(err)
-                            req.flash('error', 'Une erreur est survenue !')
-                            req.session.error = req.flash('error')
-
-                            res.redirect('/admin')
-                        } else {
-                            req.flash('success', "L'article à été posté !")
-                            req.session.success = req.flash('success')
-
-                            res.redirect('/admin')
-                        }
-
-                    })
-
-            }
+            res.render('admin')
 
         })
 
     },
 
+    deleteTutoConfirm: (req, res) => {
+
+        const id = req.params.id
+
+        Tuto.findOneAndDelete({ _id: id }, (erro, user) => {
+
+            req.flash('success', "La vidéo à été supprimé !")
+            req.session.success = req.flash('success')
+
+            res.redirect('/admin/youtubes')
+
+        })
+
+    }
 }

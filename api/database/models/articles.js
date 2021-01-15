@@ -13,6 +13,10 @@ const ArticleShema = new mongoose.Schema({
     avatar: String,
     comment: {
         type: Number
+    },
+    isPrivate: {
+        type: Boolean,
+        default: true
     }
 
 });

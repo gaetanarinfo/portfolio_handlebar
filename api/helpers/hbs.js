@@ -1,5 +1,6 @@
 // Module date en fr
-const dateFr = require('../helpers/dateFr')
+const dateFr = require('../helpers/dateFr'),
+    Handlebars = require('handlebars')
 
 module.exports = {
 
@@ -23,6 +24,11 @@ module.exports = {
 
         return options.inverse(this)
 
+    },
+
+    trimString: function(passedString) {
+        var theString = passedString.substring(0, 200);
+        return new Handlebars.SafeString(theString) + '...'
     }
 
 }

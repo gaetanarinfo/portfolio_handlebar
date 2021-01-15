@@ -1,0 +1,62 @@
+<div id="youtube" style="display: none;">
+  <div>
+    <p class="text-center">
+      Vidéos YouTube
+    </p>
+  </div>
+  <div style="margin: 0 0px 0px 23px;">
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table table-hover table-dark text-center">
+          <thead>
+            <tr>
+              <th scope="col" style="width: 28%;">
+                Titre
+              </th>
+              <th scope="col" style="width: 8%;">
+                Date
+              </th>
+              <th scope="col" style="width: 25%;">
+                Vidéo
+              </th>
+              <th scope="col" style="width: 30%">
+                Description de la vidéo
+              </th>
+              <th scope="col" style="width: 10%;">
+                Gestion
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+
+            {{#each tutos}}
+            <tr>
+              <td class="th-perso">
+                {{title}}
+              </td>
+               <td class="th-perso">
+                {{date}}
+              </td>
+              <td class="th-perso">
+                <iframe width="374" height="206" src="https://www.youtube.com/embed/{{api}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </td>
+              <td class="table-content th-perso">
+               {{trimString content}}
+              </td>
+              <td class="th-perso">
+                  <a href="" id="editYoutube-{{_id}}" data-toggle="modal" data-target="#modif_video"><i
+                        class="fas fa-edit ml-2" data-toggle="tooltip" data-placement="left"
+                        title="Editer la vidéo"></i></a>
+                <a href="" id="deleteYoutube-{{_id}}" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash"
+                        data-toggle="tooltip" data-placement="left" title="Supprimer la vidéo"></i></a>
+            </td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+
+        {{{pagin3}}}
+      </div>
+    </div>
+  </div>
+</div>

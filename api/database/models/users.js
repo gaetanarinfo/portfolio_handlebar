@@ -42,6 +42,10 @@ const UsersShema = new mongoose.Schema({
     token: {
         type: String,
         default: randtoken.generate(30)
+    },
+    isLog: {
+        type: Date,
+        default: ''
     }
 
 });

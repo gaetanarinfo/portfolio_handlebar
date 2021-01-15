@@ -114,6 +114,7 @@ module.exports = {
                                     avatar: user.avatar,
                                     name: user.firstname + ' ' + user.lastname,
                                     rang: user.isAdmin,
+                                    dateLog: user.isLog,
                                     dateRegister: user.createDate
                                 })
                             } else {
@@ -139,6 +140,7 @@ module.exports = {
                                     avatar: user.avatar,
                                     name: user.firstname + ' ' + user.lastname,
                                     rang: user.isAdmin,
+                                    dateLog: user.isLog,
                                     dateRegister: user.createDate
                                 })
                             }
@@ -146,6 +148,7 @@ module.exports = {
                     })
             })
     },
+
 
     addUser: (req, res) => {
 

@@ -8,42 +8,42 @@
                      <span aria-hidden="true">&times;</span>
                  </button>
              </div>
-             <form method="POST">
+             <form method="POST" action="/admin/addProjet" enctype="multipart/form-data">
                  <div class="modal-body">
                      <div class="form-group">
-                         <label for="imageProjetB" class="text-dark mb-2">Image du projet</label>
-                         <input type="text" class="form-control mb-2" name="imageProjetB" id="imageProjetB"
-                             placeholder="Image du projet">
+                         <label class="text-dark mb-2">Image du projet</label>
+                         <input type="file" class="form-control mb-2" id="imageProjets" name="image"
+                             placeholder="Image du projet" onchange="updateImageDisplay3()" accept=".png, .jpg, .jpeg, .gif" required>
+                     </div>
+
+                     <div class="preview3">
+                            <p>Aucun fichier sélectionné pour le moment</p>
+                        </div>
+
+                     <div class="form-group">
+                         <label class="text-dark mb-2">Titre du projet</label>
+                         <input type="text" class="form-control mb-2" name="title"
+                             placeholder="Titre du projet" required>
                      </div>
 
                      <div class="form-group">
-                         <label for="titreProjetB" class="text-dark mb-2">Titre du projet</label>
-                         <input type="text" class="form-control mb-2" name="titreProjetB" id="titreProjetB"
-                             placeholder="Titre du projet">
+                         <label class="text-dark mb-2">Date du projet</label>
+                         <input type="text" class="form-control mb-2" name="date" placeholder="31/10/2005" placeholder="MM/DD/YYYY" required>
                      </div>
 
                      <div class="form-group">
-                         <label for="dateProjetA" class="text-dark mb-2">Date du projet</label>
-                         <input type="date" class="form-control mb-2" name="dateProjetA" id="dateProjetA">
+                         <label class="text-dark mb-2">Description du projet</label>
+                         <textarea rows="10" class="form-control mb-2" name="content"
+                             placeholder="Description du projet" required></textarea>
                      </div>
 
-                     <div class="form-group">
-                         <label for="contentProjetA" class="text-dark mb-2">Description du projet</label>
-                         <textarea rows="10" class="form-control mb-2" name="contentProjetA" id="contentProjetA"
-                             placeholder="Description du projet"></textarea>
-                     </div>
-
-                     <div class="form-group mt-4 text-center">
-                         <label class="text-dark mb-2">Projet privé ?</label>
-                     </div>
-
-                     <div class="form-group mb-1 text-center">
-                         <input type="checkbox" id="checkBoxConfirmOuiB" value="oui">
-                         <label class="form-check-label text-dark mr-2 mt-3" for="checkBoxConfirmOui">Oui</label>
-
-                         <input class="mr-2" type="checkbox" id="checkBoxConfirmNonB" value="non">
-                         <label class="form-check-label text-dark mr-2 mt-3" for="checkBoxConfirmNon">Non</label>
-                     </div>
+                    <div class="form-group text-center">
+                        <div class="switch_box box_1">
+                            <label class="text-dark mb-2">Projet privé ?</label>
+                            <div><input type="checkbox" class="switch_1" name="isPrivate" id="isPrivate3" value="false" checked></div>
+                            <label class="text-dark mb-2" id="lab_proj">En ligne</label>
+                        </div>
+                    </div>
 
                  </div>
 
@@ -71,9 +71,13 @@
                  <div class="modal-body">
                      <div class="form-group">
                          <label class="text-dark mb-2">Image de l'article</label>
-                         <input type="file" class="form-control mb-2" required name="image"
-                             placeholder="Image de l'article">
+                         <input type="file" id="image" class="form-control mb-2" onchange="updateImageDisplay()" required name="image"
+                             placeholder="Image de l'article" accept=".png, .jpg, .jpeg, .gif">
                      </div>
+
+                     <div class="preview">
+                            <p>Aucun fichier sélectionné pour le moment</p>
+                        </div>
 
                      <div class="form-group">
                          <label class="text-dark mb-2">Titre de l'article</label>
@@ -87,9 +91,13 @@
                              placeholder="Description de l'article"></textarea>
                      </div>
 
-                     <div class="form-group mt-4 text-center">
-                         <label class="text-dark mb-2">Article privé ?</label>
-                     </div>
+                     <div id="isAdmin" class="form-group text-center">
+                        <div class="switch_box box_1">
+                            <label class="text-dark mb-2">Article privé ?</label>
+                            <div><input type="checkbox" class="switch_1" name="isPrivate" id="isPrivate" value="true" checked></div>
+                            <label class="text-dark mb-2" id="lab_priv">En ligne</label>
+                        </div>
+                    </div>
 
                  </div>
 
@@ -139,8 +147,12 @@
 
                      <div class="form-group">
                          <label class="text-dark mb-2">Avatar du membre</label>
-                         <input type="file" class="form-control mb-2" name="avatar" required value="{{data4}}" accept=".png, .jpg, .jpeg, .gif">
+                         <input type="file" id="avatar" class="form-control mb-2" onchange="updateImageDisplay2()" name="avatar" required accept=".png, .jpg, .jpeg, .gif">
                      </div>
+
+                    <div class="preview2">
+                        <p>Aucun fichier sélectionné pour le moment</p>
+                    </div>
 
                  </div>
 
@@ -152,60 +164,56 @@
          </div>
      </div>
  </div>
- <!-- Modal Admin Ajout Membres Blog -->
+ <!-- Modal Admin Ajout Membres -->
 
  <!-- Modal Admin Modifier un projet -->
  <div class="modal fade" id="modif_projet" tabindex="-1" role="dialog" aria-hidden="true">
      <div class="modal-dialog modal-dialog-centered" role="document">
          <div class="modal-content">
              <div class="modal-header">
-                 <h5 class="modal-title" id="ModalLabelModifProjet">Modifier le projet XXXX</h5>
+                 <h5 class="modal-title" id="ModalLabelModifProjet">Modifier le projet</h5>
                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                      <span aria-hidden="true">&times;</span>
                  </button>
              </div>
-             <form method="POST">
+             <form id="editProjetForm" method="POST" enctype="multipart/form-data">
                  <div class="modal-body">
                      <div class="form-group">
-                         <label for="imageProjet" class="text-dark mb-2">Image du projet</label>
-                         <input type="text" class="form-control mb-2" name="imageProjet" id="imageProjet"
+                         <label class="text-dark mb-2">Image du projet</label>
+                         <input type="text" class="form-control mb-2" name="image" id="imageProjet"
                              placeholder="Image du projet">
                      </div>
 
                      <div class="form-group">
-                         <label for="titreProjet" class="text-dark mb-2">Titre du projet</label>
-                         <input type="text" class="form-control mb-2" name="titreProjet" id="titreProjet"
+                         <label class="text-dark mb-2">Titre du projet</label>
+                         <input type="text" class="form-control mb-2" name="title" id="titreProjet"
                              placeholder="Titre du projet">
                      </div>
 
                      <div class="form-group">
-                         <label for="dateProjet" class="text-dark mb-2">Date du projet</label>
-                         <input type="date" class="form-control mb-2" name="dateProjet" id="dateProjet">
+                         <label class="text-dark mb-2">Date du projet</label>
+                         <input type="text" class="form-control mb-2" name="date" id="dateProjet">
                      </div>
 
                      <div class="form-group">
-                         <label for="contentProjetC" class="text-dark mb-2">Description du projet</label>
-                         <textarea rows="10" class="form-control mb-2" name="contentProjetC" id="contentProjetC"
+                         <label class="text-dark mb-2">Description du projet</label>
+                         <textarea rows="10" class="form-control mb-2" name="content" id="contentProjet"
                              placeholder="Description du projet"></textarea>
                      </div>
 
-                     <div class="form-group mt-4 text-center">
-                         <label class="text-dark mb-2">Projet privé ?</label>
-                     </div>
-
-                     <div class="form-group mb-1 text-center">
-                         <input type="checkbox" id="checkBoxConfirmOuiC" value="oui">
-                         <label class="form-check-label text-dark mr-2 mt-3" for="checkBoxConfirmOuiC">Oui</label>
-
-                         <input class="mr-2" type="checkbox" id="checkBoxConfirmNonC" value="non">
-                         <label class="form-check-label text-dark mr-2 mt-3" for="checkBoxConfirmNonC">Non</label>
-                     </div>
+                     <div class="form-group text-center">
+                        <div class="switch_box box_1">
+                            <label class="text-dark mb-2">Projet privé ?</label>
+                            <div><input type="checkbox" class="switch_1" name="isPrivate" id="isPrivate4" value="true" checked></div>
+                            <label class="text-dark mb-2" id="lab_proj2">En ligne</label>
+                        </div>
+                    </div>
 
                  </div>
 
                  <div class="modal-footer">
                      <button type="button" class="btn btn-form-reset" data-dismiss="modal">Fermer</button>
-                     <button type="button" class="btn btn-form-send">Valider</button>
+                     <button type="submit" class="btn btn-form-send">Valider</button>
                  </div>
              </form>
          </div>
@@ -218,53 +226,45 @@
      <div class="modal-dialog modal-dialog-centered" role="document">
          <div class="modal-content">
              <div class="modal-header">
-                 <h5 class="modal-title" id="ModalLabelModifArticle">Modifier l'article XXXX</h5>
+                 <h5 class="modal-title" id="ModalLabelModifArticle">Modifier l'article</h5>
                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                      <span aria-hidden="true">&times;</span>
                  </button>
              </div>
-             <form method="POST">
+             <form id="editArticleForm" method="POST" action="/admin/editArticle/{{_id}}" enctype="multipart/form-data">
                  <div class="modal-body">
                      <div class="form-group">
-                         <label for="imageArticle" class="text-dark mb-2">Image de l'article</label>
-                         <input type="text" class="form-control mb-2" name="imageArticle" id="imageArticle"
+                         <label class="text-dark mb-2">Image de l'article</label>
+                         <input type="text" class="form-control mb-2" name="image" id="imageArticle"
                              placeholder="Image de l'article">
                      </div>
 
                      <div class="form-group">
                          <label for="titreArticle" class="text-dark mb-2">Titre de l'article</label>
-                         <input type="text" class="form-control mb-2" name="titreArticle" id="titreArticle"
+                         <input type="text" class="form-control mb-2" name="title" id="titleArticle"
                              placeholder="Titre de l'article">
                      </div>
 
                      <div class="form-group">
-                         <label for="dateProjetC" class="text-dark mb-2">Date de l'article</label>
-                         <input type="date" class="form-control mb-2" name="dateProjetC" id="dateProjetC">
-                     </div>
-
-                     <div class="form-group">
                          <label for="contentProjet" class="text-dark mb-2">Description de l'article</label>
-                         <textarea rows="10" class="form-control mb-2" name="contentProjet" id="contentProjet"
+                         <textarea rows="10" class="form-control mb-2" name="content" id="contentArticle"
                              placeholder="Description de l'article"></textarea>
                      </div>
 
-                     <div class="form-group mt-4 text-center">
-                         <label class="text-dark mb-2">Article privé ?</label>
-                     </div>
-
-                     <div class="form-group mb-1 text-center">
-                         <input type="checkbox" id="checkBoxConfirmOui" value="oui">
-                         <label class="form-check-label text-dark mr-2 mt-3" for="checkBoxConfirmOui">Oui</label>
-
-                         <input class="mr-2" type="checkbox" id="checkBoxConfirmNon" value="non">
-                         <label class="form-check-label text-dark mr-2 mt-3" for="checkBoxConfirmNon">Non</label>
-                     </div>
+                    <div class="form-group text-center">
+                        <div class="switch_box box_1">
+                            <label class="text-dark mb-2">Article privé ?</label>
+                            <div><input type="checkbox" class="switch_1" name="isPrivate" id="isPrivate2" value="true" checked></div>
+                            <label class="text-dark mb-2" id="lab_priv2">En ligne</label>
+                        </div>
+                    </div>
+                     
 
                  </div>
 
                  <div class="modal-footer">
                      <button type="button" class="btn btn-form-reset" data-dismiss="modal">Fermer</button>
-                     <button type="button" class="btn btn-form-send">Valider</button>
+                     <button type="submit" class="btn btn-form-send">Valider</button>
                  </div>
              </form>
          </div>
@@ -330,33 +330,33 @@
      <div class="modal-dialog modal-dialog-centered" role="document">
          <div class="modal-content">
              <div class="modal-header">
-                 <h5 class="modal-title" id="ModalLabelLogin">Modifier une vidéo Youtube</h5>
+                 <h5 class="modal-title" id="ModalLabelEditVideo">Modifier une vidéo Youtube</h5>
                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                      <span aria-hidden="true">&times;</span>
                  </button>
              </div>
-             <form method="POST">
+             <form id="editTutoForm" method="POST">
                  <div class="modal-body">
                      <div class="form-group">
-                         <label for="lienVideo" class="text-dark mb-2">Lien de la vidéo</label>
-                         <input type="text" class="form-control mb-2" name="lienVideo" id="lienVideo"
-                             placeholder="Lien de la vidéo">
+                         <label class="text-dark mb-2">Api de la vidéo</label>
+                         <input type="text" class="form-control mb-2" name="api" id="apiVideo"
+                             placeholder="Api de la vidéo">
                      </div>
 
                      <div class="form-group">
-                         <label for="titreVideo" class="text-dark mb-2">Titre de la vidéo</label>
-                         <input type="text" class="form-control mb-2" name="titreVideo" id="titreVideo"
+                         <label class="text-dark mb-2">Titre de la vidéo</label>
+                         <input type="text" class="form-control mb-2" name="title" id="titreVideo"
                              placeholder="Titre de le vidéo">
                      </div>
 
                      <div class="form-group">
-                         <label for="dateVideo" class="text-dark mb-2">Date de la vidéo</label>
-                         <input type="date" class="form-control mb-2" name="dateVideo" id="dateVideo">
+                         <label class="text-dark mb-2">Date de la vidéo</label>
+                         <input type="text" class="form-control mb-2" name="date" id="dateVideo" placeholder="18 déc. 2015">
                      </div>
 
                      <div class="form-group">
-                         <label for="contentProjet" class="text-dark mb-2">Description de la vidéo</label>
-                         <textarea rows="10" class="form-control mb-2" name="contentVideo" id="contentVideo"
+                         <label class="text-dark mb-2">Description de la vidéo</label>
+                         <textarea rows="10" class="form-control mb-2" name="content" id="contentVideo"
                              placeholder="Description de la vidéo"></textarea>
                      </div>
 
@@ -364,7 +364,7 @@
 
                  <div class="modal-footer">
                      <button type="button" class="btn btn-form-reset" data-dismiss="modal">Fermer</button>
-                     <button type="button" class="btn btn-form-send">Valider</button>
+                     <button type="submit" class="btn btn-form-send">Valider</button>
                  </div>
              </form>
          </div>
@@ -389,7 +389,7 @@
 
              <div class="modal-footer">
                  <button type="button" class="btn btn-form-reset" data-dismiss="modal">Fermer</button>
-                 <button type="button" id="remove_user" class="btn btn-form-send">Valider</button>
+                 <button type="button" id="remove" class="btn btn-form-send">Valider</button>
              </div>
 
          </div>

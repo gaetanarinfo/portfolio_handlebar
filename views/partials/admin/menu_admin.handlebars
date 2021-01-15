@@ -20,6 +20,7 @@
             <p><i class="fas fa-user-cog ml-1" aria-hidden="true"></i>{{name}}</p>
             <p><i class="fas fa-random ml-1" aria-hidden="true"></i>{{#if rang}}Administrateur{{else}}Membre{{/if}}</p>
             <p><i class="fas fa-sign-out-alt ml-1" aria-hidden="true"></i>Inscrit le : {{generateDate dateRegister}}</p>
+            <p><i class="fas fa-sign-out-alt ml-1" aria-hidden="true"></i>Connexion le : {{generateDate dateLog}}</p>
 
             <hr>
         </div>
@@ -34,11 +35,11 @@
                         membres</a></li>
                 <li class="pb-2"><a href="/admin/articles" id="Blog"><i class="fas fa-pen-square ml-2" aria-hidden="true"></i>Mon blog
                         personnel</a></li>
-                <li class="pb-2"><a href=""><i class="fab fa-youtube ml-2" aria-hidden="true"></i>Vidéos
+                <li class="pb-2"><a href="/admin/youtubes"><i class="fab fa-youtube ml-2" aria-hidden="true"></i>Vidéos
                         youtube</a></li>
                 <li class="pb-2"><a href=""><i class="far fa-image ml-2" aria-hidden="true"></i>Ma
                         galerie</a></li>
-                <li class="pb-2"><a href=""><i class="fas fa-project-diagram ml-2"
+                <li class="pb-2"><a href="/admin/projets"><i class="fas fa-project-diagram ml-2"
                             aria-hidden="true"></i>Mes projets</a></li>
             </ul>
         </div>
@@ -57,6 +58,8 @@
                             aria-hidden="true"></i>Ajouter un article blog</a></li>
                 <li class="pb-2"><a href="" data-toggle="modal" data-target="#add_membres"><i class="fas fa-star ml-2"
                             aria-hidden="true"></i>Ajouter un nouveau membre</a></li>
+                <li class="pb-2"><a href="" data-toggle="modal" data-target="#add_video"><i class="fab fa-youtube ml-2"
+                            aria-hidden="true"></i>Ajouter un nouveau tuto</a></li>             
             </ul>
         </div>
     </div>

@@ -35,10 +35,12 @@
 
     <!-- Js perso -->
     <script src="/admin/js/index.js"></script>
-    <script src="/admin/js/edit.js"></script>
+    <script src="/admin/js/add.js"></script>
+    <script src="/admin/js/edit_delete.js"></script>
 
-    <!-- Permet de voir le membre dans le modal -->
     <script>
+
+    // Permet de voir le membre dans le modal -->
     {{#each membres}}
 
             $('#editMembre-' + '{{_id}}').click(function() {
@@ -54,26 +56,56 @@
             });
 
     {{/each}}
-    </script>
 
-    <script>
-    
-        if(document.location.href == 'http://localhost:3000/admin') {
-            document.getElementById('membres').style.display = '';
-        }else if(document.location.href == 'http://localhost:3000/admin/articles') {
-            document.getElementById('blog').style.display = '';
-            document.getElementById('membres').style.display = 'none';
-            document.getElementById('galerie').style.display = 'none';
-            document.getElementById('youtube').style.display = 'none';
-            document.getElementById('projet').style.display = 'none';
-        }else if(document.location.href == 'http://localhost:3000/admin/galeries') {
-            document.getElementById('galerie').style.display = '';
-        }else if(document.location.href == 'http://localhost:3000/admin/youtubes') {
-            document.getElementById('youtube').style.display = '';
-        }else if(document.location.href == 'http://localhost:3000/admin/projets') {
-            document.getElementById('projet').style.display = '';
-        }
+    // Permet de voir l'article dans le modal  -->
+    {{#each articles}}
 
+            $('#editArticle-' + '{{_id}}').click(function() {
+            
+                ViewArticle('{{_id}}', '{{image}}', '{{title}}', '{{content}}', '{{isPrivate}}');
+
+            });
+
+            $('#deleteArticle-' + '{{_id}}').click(function() {
+
+               DeleteArticle('{{_id}}', '{{title}}');
+
+            });
+
+    {{/each}}
+
+    // Permet de voir le projet dans le modal  -->
+    {{#each projets}}
+
+            $('#editProjet-' + '{{_id}}').click(function() {
+            
+                ViewProjet('{{_id}}', '{{image}}', '{{title}}', '{{content}}', '{{date}}', '{{isPrivate}}');
+
+            });
+
+            $('#deleteProjet-' + '{{_id}}').click(function() {
+
+               DeleteProjet('{{_id}}', '{{title}}');
+
+            });
+
+    {{/each}}
+
+    {{#each tutos}}
+
+            $('#editYoutube-' + '{{_id}}').click(function() {
+            
+                ViewYoutube('{{_id}}', '{{title}}', '{{content}}', '{{api}}', '{{date}}');
+
+            });
+
+            $('#deleteYoutube-' + '{{_id}}').click(function() {
+
+               DeleteYoutube('{{_id}}', '{{title}}');
+
+            });
+
+    {{/each}}
     </script>
 
     ​{{> notifications}}

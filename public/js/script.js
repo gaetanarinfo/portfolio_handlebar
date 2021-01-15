@@ -196,7 +196,7 @@ function updateImageDisplay() {
             if (validFileType(curFiles[i])) {
                 para.textContent = curFiles[i].name + ', taille du fichier ' + returnFileSize(curFiles[i].size) + '.';
                 var image = document.createElement('img');
-                image.setAttribute('style', 'width: 100%;')
+                image.setAttribute('style', 'width: 90px;')
                 image.src = window.URL.createObjectURL(curFiles[i]);
 
                 preview.appendChild(image);

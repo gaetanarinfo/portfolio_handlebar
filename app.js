@@ -64,7 +64,8 @@ app.engine('handlebars', exphbs({
     helpers: {
         generateDate: require('./api/helpers/hbs').generateDate,
         limit: require('./api/helpers/hbs').limit,
-        ifEquals: require('./api/helpers/hbs').ifEquals
+        ifEquals: require('./api/helpers/hbs').ifEquals,
+        trimString: require('./api/helpers/hbs').trimString
     }
 }))
 app.set('view engine', 'handlebars')

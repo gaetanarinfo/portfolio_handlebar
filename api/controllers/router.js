@@ -10,11 +10,13 @@ const express = require('express'),
 const homeController = require('./home/homeController'),
     blogController = require('./home/blogController'),
     articleController = require('./home/articleController'),
-    adminControllerUser = require('./home/adminControllerUser'),
-    adminControllerArticle = require('./home/adminControllerArticle'),
-    userController = require('./home/userController'),
-    nodemailerController = require('./home/nodemailerController'),
-    resetpasswordController = require('./home/resetpasswordController')
+    adminControllerUser = require('./admin/ControllerUser'),
+    adminControllerArticle = require('./admin/ControllerArticle'),
+    adminControllerProjet = require('./admin/ControllerProjet'),
+    adminControllerYoutube = require('./admin/ControllerYoutube'),
+    userController = require('./user/userController'),
+    nodemailerController = require('./user/nodemailerController'),
+    resetpasswordController = require('./user/resetpasswordController')
 
 // Routes Home
 router.route('/')
@@ -52,6 +54,36 @@ router.route('/admin/articles')
     .get(auth, authAdmin, adminControllerArticle.showArticle)
 router.route('/admin/addArticle')
     .post(auth, authAdmin, adminControllerArticle.addArticle)
+router.route('/admin/editArticle/:id')
+    .post(auth, authAdmin, adminControllerArticle.editArticle)
+router.route('/admin/delete_article/:id')
+    .get(auth, authAdmin, adminControllerArticle.deletetArticle)
+router.route('/admin/confirm_delete_article/:id')
+    .get(auth, authAdmin, adminControllerArticle.deleteArticleConfirm)
+
+// Routes Admin Section Projet (Projets)
+router.route('/admin/projets')
+    .get(auth, authAdmin, adminControllerProjet.showProjet)
+router.route('/admin/addProjet')
+    .post(auth, authAdmin, adminControllerProjet.addProjet)
+router.route('/admin/editProjet/:id')
+    .post(auth, authAdmin, adminControllerProjet.editProjet)
+router.route('/admin/delete_projet/:id')
+    .get(auth, authAdmin, adminControllerProjet.deletetProjet)
+router.route('/admin/confirm_delete_projet/:id')
+    .get(auth, authAdmin, adminControllerProjet.deleteProjetConfirm)
+
+// Routes Admin Section Youtube (Tutos)
+router.route('/admin/youtubes')
+    .get(auth, authAdmin, adminControllerYoutube.showTuto)
+    // router.route('/admin/addProjet')
+    //     .post(auth, authAdmin, adminControllerProjet.addProjet)
+router.route('/admin/editTuto/:id')
+    .post(auth, authAdmin, adminControllerYoutube.editTuto)
+router.route('/admin/delete_youtube/:id')
+    .get(auth, authAdmin, adminControllerYoutube.deleteTuto)
+router.route('/admin/confirm_delete_youtube/:id')
+    .get(auth, authAdmin, adminControllerYoutube.deleteTutoConfirm)
 
 // Routes User Create & Authentification & Déconnexion
 router.route('/user/register')

@@ -13030,6 +13030,20 @@ button.close {
   width: 100% !important;
 }
 
+/* Modal input file */
+.preview {
+  display: block;
+  position: relative;
+  text-align: center;
+  margin: 22px 0 22px 0;
+}
+
+.preview p {
+  display: block;
+  position: relative;
+  margin: 15px 0 0 0;
+}
+
 footer {
   background-color: #383434;
 }

@@ -8,7 +8,11 @@ const ProjetShema = new mongoose.Schema({
     image: String,
     like: String,
     date: String,
-    links: String
+    links: Number,
+    isPrivate: {
+        type: Boolean,
+        default: false
+    }
 
 });
 
