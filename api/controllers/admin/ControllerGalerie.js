@@ -161,7 +161,7 @@ module.exports = {
                         image: '/images/galerie/' + imageFile.name,
                         title: req.body.title,
                         active: false,
-                        isPrivate: req.body.isPrivate
+                        isPrivate: Boolean(req.body.isPrivate)
                     }, (err) => {
                         if (err) {
                             //console.log(err)
@@ -191,7 +191,7 @@ module.exports = {
         Galerie.findOneAndUpdate({ '_id': id }, {
             title: req.body.title,
             image: req.body.image,
-            isPrivate: req.body.isPrivate
+            isPrivate: Boolean(req.body.isPrivate)
         }, (error) => {
 
             req.flash('success', "L'image " + req.body.title + " à été modifié !")

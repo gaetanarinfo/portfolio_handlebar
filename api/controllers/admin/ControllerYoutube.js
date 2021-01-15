@@ -151,7 +151,7 @@ module.exports = {
                 title: req.body.title,
                 content: req.body.content,
                 date: req.body.date,
-                isPrivate: req.body.isPrivate
+                isPrivate: Boolean(req.body.isPrivate)
             }, (err) => {
                 if (err) {
                     //console.log(err)
@@ -180,7 +180,7 @@ module.exports = {
             api: req.body.api,
             date: req.body.date,
             links: req.body.links,
-            isPrivate: req.body.isPrivate
+            isPrivate: Boolean(req.body.isPrivate)
         }, (error) => {
 
             req.flash('success', "La vidéo " + req.body.title + " à été modifié !")

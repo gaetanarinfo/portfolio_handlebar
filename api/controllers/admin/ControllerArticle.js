@@ -171,7 +171,7 @@ module.exports = {
                         dateCreate: new Date(),
                         active: false,
                         avatar: req.session.avatar,
-                        isPrivate: false,
+                        isPrivate: Boolean(req.body.isPrivate),
                         comment: 0
                     }, (err) => {
                         if (err) {
@@ -202,7 +202,7 @@ module.exports = {
         Article.findOneAndUpdate({ '_id': id }, {
             title: req.body.title,
             content: req.body.content,
-            isPrivate: req.body.isPrivate,
+            isPrivate: Boolean(req.body.isPrivate),
         }, (error) => {
 
             req.flash('success', "L'article " + req.body.title + " à été modifié !")

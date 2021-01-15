@@ -167,7 +167,7 @@ module.exports = {
                         title: req.body.title,
                         content: req.body.content,
                         date: req.body.date,
-                        isPrivate: req.body.isPrivate,
+                        isPrivate: Boolean(req.body.isPrivate),
                         like: 0
                     }, (err) => {
                         if (err) {
@@ -199,7 +199,7 @@ module.exports = {
             title: req.body.title,
             content: req.body.content,
             date: req.body.date,
-            isPrivate: req.body.isPrivate,
+            isPrivate: Boolean(req.body.isPrivate),
         }, (error) => {
 
             req.flash('success', "Le projet " + req.body.title + " à été modifié !")

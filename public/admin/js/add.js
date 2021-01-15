@@ -1,63 +1,48 @@
-$('#isPrivate').click(function() {
+$(document).ready(function() {
+    $('input[name="isPrivate"]').click(function() {
+        if ($(this).is(":checked")) {
+            $('#lab_priv').html('Privé')
+            $('#isPrivate').attr('checked', true);
+        } else if ($(this).is(":not(:checked)")) {
+            $('#lab_priv').html('En ligne')
+            $('#isPrivate').attr('checked', false);
+        }
+    });
+});
 
-    if ($('#isPrivate').val() == '0') {
 
-        $('#isPrivate').attr('value', '1')
-        $('#lab_priv').html('En ligne')
+$(document).ready(function() {
+    $('input[id="isPrivate3"]').click(function() {
+        if ($(this).is(":checked")) {
+            $('#lab_proj').html('Privé')
+            $('#isPrivate3').attr('checked', true);
+        } else if ($(this).is(":not(:checked)")) {
+            $('#lab_proj').html('En ligne')
+            $('#isPrivate3').attr('checked', false);
+        }
+    });
+});
 
-    } else if ($('#isPrivate').val() == '1') {
+$(document).ready(function() {
+    $('input[id="isPrivate5"]').click(function() {
+        if ($(this).is(":checked")) {
+            $('#lab_vid').html('Privé')
+            $('#isPrivate5').attr('checked', true);
+        } else if ($(this).is(":not(:checked)")) {
+            $('#lab_vid').html('En ligne')
+            $('#isPrivate5').attr('checked', false);
+        }
+    });
+});
 
-        $('#isPrivate').attr('value', '0')
-        $('#lab_priv').html('Privé')
-
-    }
-
-})
-
-$('#isPrivate3').click(function() {
-
-    if ($('#isPrivate3').val() == '0') {
-
-        $('#isPrivate3').attr('value', '1')
-        $('#lab_proj').html('Privé')
-
-    } else if ($('#isPrivate3').val() == '1') {
-
-        $('#isPrivate3').attr('value', '0')
-        $('#lab_proj').html('En ligne')
-
-    }
-
-})
-
-$('#isPrivate5').click(function() {
-
-    if ($('#isPrivate5').val() == '0') {
-
-        $('#isPrivate5').attr('value', '1')
-        $('#lab_vid').html('Privé')
-
-    } else if ($('#isPrivate5').val() == '1') {
-
-        $('#isPrivate5').attr('value', '0')
-        $('#lab_vid').html('En ligne')
-
-    }
-
-})
-
-$('#isPrivate7').click(function() {
-
-    if ($('#isPrivate7').val() == '0') {
-
-        $('#isPrivate7').attr('value', '1')
-        $('#lab_img').html('Privé')
-
-    } else if ($('#isPrivate7').val() == '1') {
-
-        $('#isPrivate7').attr('value', '0')
-        $('#lab_img').html('En ligne')
-
-    }
-
-})
+$(document).ready(function() {
+    $('input[id="isPrivate7"]').click(function() {
+        if ($(this).is(":checked")) {
+            $('#lab_img').html('Privé')
+            $('#isPrivate7').attr('checked', true);
+        } else if ($(this).is(":not(:checked)")) {
+            $('#lab_img').html('En ligne')
+            $('#isPrivate7').attr('checked', false);
+        }
+    });
+});
