@@ -1,9 +1,11 @@
-const Tuto = require('../../database/models/tutos'),
+const Galerie = require('../../database/models/galeries'),
     User = require('../../database/models/users'),
     pagination = require('pagination')
 
 module.exports = {
-    showTuto: (req, res) => {
+
+    showGalerie: (req, res) => {
+
         const success = req.session.success, // Message Succes
             error = req.session.error // Message Error
 
@@ -13,13 +15,13 @@ module.exports = {
         const email = req.session.email
 
         // Nombre d'item par page
-        var perPage = 3
+        var perPage = 6
             // La page que l'on veux récupéré si il y a en pas alors page 1
         var page = req.query.page || 1
         var arrayPagesIndexes = []
 
-        // Ici on recherche nos tutos
-        Tuto.find()
+        // Ici on recherche nos galeries
+        Galerie.find()
             // Ici On viens chercher l'index qui nous interesse
             // exemple: pour la page 2 avec 5 perPage = index 5
             // donc (5 * 2) - 5 = 5
@@ -27,10 +29,10 @@ module.exports = {
             // Ici on limite le nombre de résultat
             .limit(perPage)
             .lean()
-            .exec((err, tutos) => {
+            .exec((err, galeries) => {
                 if (err) console.log(err)
                     // Ici on compte le nombre d'article total 
-                Tuto.countDocuments()
+                Galerie.countDocuments()
                     .exec((err, count) => {
                         if (err) return next(err)
                             // Ici on calcul le nombre de pages
@@ -43,7 +45,7 @@ module.exports = {
 
 
                         var boostrapPaginator3 = new pagination.TemplatePaginator({
-                            prelink: '/admin/youtubes/',
+                            prelink: '/admin/galeries/',
                             current: page,
                             rowsPerPage: perPage,
                             totalResult: count,
@@ -77,7 +79,7 @@ module.exports = {
                         });
 
                         // Render de la pagination
-                        var pagin3 = boostrapPaginator3.render()
+                        var pagin4 = boostrapPaginator3.render()
 
                         User.findOne({ email }, (erro, user) => {
                             if (success || error) {
@@ -88,13 +90,13 @@ module.exports = {
                                     pages: Math.ceil(count / perPage),
                                     // tableau avec les index des page: []
                                     arrayPage: arrayPagesIndexes,
-                                    // Les tutos : [{}]
-                                    tutos: tutos,
+                                    // Les galeries : [{}]
+                                    galeries: galeries,
                                     // Pages - 1
                                     previous: parseInt(page) - 1,
                                     // Pages + 1
                                     next: parseInt(page) + 1,
-                                    pagin3,
+                                    pagin4,
 
                                     success: success,
                                     error: error,
@@ -115,13 +117,13 @@ module.exports = {
                                     pages: Math.ceil(count / perPage),
                                     // tableau avec les index des page: []
                                     arrayPage: arrayPagesIndexes,
-                                    // Les tutos : [{}]
-                                    tutos: tutos,
+                                    // Les galeries : [{}]
+                                    galeries: galeries,
                                     // Pages - 1
                                     previous: parseInt(page) - 1,
                                     // Pages + 1
                                     next: parseInt(page) + 1,
-                                    pagin3,
+                                    pagin4,
 
                                     error: error,
 
@@ -140,61 +142,70 @@ module.exports = {
 
                     })
             })
-    },
-
-    addTuto: (req, res) => {
-
-        Tuto
-            .create({
-                api: req.body.api,
-                links: req.body.links,
-                title: req.body.title,
-                content: req.body.content,
-                date: req.body.date
-            }, (err) => {
-                if (err) {
-                    //console.log(err)
-                    req.flash('error', 'Une erreur est survenue !')
-                    req.session.error = req.flash('error')
-
-                    res.redirect('/admin/youtubes')
-                } else {
-                    req.flash('success', "La vidéo à été posté !")
-                    req.session.success = req.flash('success')
-
-                    res.redirect('/admin/youtubes')
-                }
-
-            })
 
     },
 
-    editTuto: (req, res) => {
+    addGalerie: (req, res) => {
+
+        const imageFile = req.files.image
+
+        imageFile.mv('public/images/galerie/' + imageFile.name, function(err) {
+            if (err) {
+                req.flash('error', 'Une erreur est survenue !')
+                req.session.error = req.flash('error')
+                return res.redirect('/admin/galeries')
+            } else {
+
+                Galerie
+                    .create({
+                        image: '/images/galerie/' + imageFile.name,
+                        title: req.body.title,
+                        active: false
+                    }, (err) => {
+                        if (err) {
+                            //console.log(err)
+                            req.flash('error', 'Une erreur est survenue !')
+                            req.session.error = req.flash('error')
+
+                            res.redirect('/admin/galeries')
+                        } else {
+                            req.flash('success', "L'image à été ajouté à la galerie !")
+                            req.session.success = req.flash('success')
+
+                            res.redirect('/admin/galeries')
+                        }
+
+                    })
+
+            }
+
+        })
+
+    },
+
+    editGalerie: (req, res) => {
 
         const id = req.params.id
 
-        Tuto.findOneAndUpdate({ '_id': id }, {
+        Galerie.findOneAndUpdate({ '_id': id }, {
             title: req.body.title,
-            content: req.body.content,
-            api: req.body.api,
-            date: req.body.date,
-            links: req.body.links
+            image: req.body.image,
         }, (error) => {
 
-            req.flash('success', "La vidéo " + req.body.title + " à été modifié !")
+            req.flash('success', "L'image " + req.body.title + " à été modifié !")
             req.session.success = req.flash('success')
 
-            res.redirect('/admin/youtubes')
+            res.redirect('/admin/galeries')
 
         });
 
     },
 
-    deleteTuto: (req, res) => {
+    deleteGalerie: (req, res) => {
 
         const id = req.params.id
 
-        Tuto.findById({ _id: id }, (erro, user) => {
+        Galerie.findById({ _id: id }, (erro, user) => {
 
             res.render('admin')
 
@@ -202,18 +213,19 @@ module.exports = {
 
     },
 
-    deleteTutoConfirm: (req, res) => {
+    deleteGalerieConfirm: (req, res) => {
 
         const id = req.params.id
 
-        Tuto.findOneAndDelete({ _id: id }, (erro, user) => {
+        Galerie.findOneAndDelete({ _id: id }, (erro, user) => {
 
-            req.flash('success', "La vidéo à été supprimé !")
+            req.flash('success', "L'image de la galerie à été supprimé !")
             req.session.success = req.flash('success')
 
-            res.redirect('/admin/youtubes')
+            res.redirect('/admin/galeries')
 
         })
 
     }
+
 }

@@ -14,6 +14,7 @@ const homeController = require('./home/homeController'),
     adminControllerArticle = require('./admin/ControllerArticle'),
     adminControllerProjet = require('./admin/ControllerProjet'),
     adminControllerYoutube = require('./admin/ControllerYoutube'),
+    adminControllerGalerie = require('./admin/ControllerGalerie'),
     userController = require('./user/userController'),
     nodemailerController = require('./user/nodemailerController'),
     resetpasswordController = require('./user/resetpasswordController')
@@ -76,14 +77,26 @@ router.route('/admin/confirm_delete_projet/:id')
 // Routes Admin Section Youtube (Tutos)
 router.route('/admin/youtubes')
     .get(auth, authAdmin, adminControllerYoutube.showTuto)
-    // router.route('/admin/addProjet')
-    //     .post(auth, authAdmin, adminControllerProjet.addProjet)
+router.route('/admin/addTuto')
+    .post(auth, authAdmin, adminControllerYoutube.addTuto)
 router.route('/admin/editTuto/:id')
     .post(auth, authAdmin, adminControllerYoutube.editTuto)
 router.route('/admin/delete_youtube/:id')
     .get(auth, authAdmin, adminControllerYoutube.deleteTuto)
 router.route('/admin/confirm_delete_youtube/:id')
     .get(auth, authAdmin, adminControllerYoutube.deleteTutoConfirm)
+
+// Routes Admin Section Galerie
+router.route('/admin/galeries')
+    .get(auth, authAdmin, adminControllerGalerie.showGalerie)
+router.route('/admin/addGalerie')
+    .post(auth, authAdmin, adminControllerGalerie.addGalerie)
+router.route('/admin/editGalerie/:id')
+    .post(auth, authAdmin, adminControllerGalerie.editGalerie)
+router.route('/admin/delete_galerie/:id')
+    .get(auth, authAdmin, adminControllerGalerie.deleteGalerie)
+router.route('/admin/confirm_delete_galerie/:id')
+    .get(auth, authAdmin, adminControllerGalerie.deleteGalerieConfirm)
 
 // Routes User Create & Authentification & Déconnexion
 router.route('/user/register')

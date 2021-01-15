@@ -5,7 +5,10 @@ const GalerieShema = new mongoose.Schema({
 
     title: String,
     image: String,
-    active: Boolean
+    active: {
+        type: Boolean,
+        default: false
+    }
 
 });
 

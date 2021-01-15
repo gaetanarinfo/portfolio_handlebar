@@ -159,6 +159,40 @@ function updateImageDisplay3() {
     }
 }
 
+// Upload image galerie
+var input4 = document.querySelector('#imageGaleries');
+var preview4 = document.querySelector('.preview4');
+
+function updateImageDisplay4() {
+    while (preview4.firstChild) {
+        preview4.removeChild(preview4.firstChild);
+    }
+
+    var curFiles4 = input4.files;
+    if (curFiles4.length === 0) {
+        var para = document.createElement('p');
+        para.textContent = 'Aucun fichier actuellement sélectionné pour le téléchargement';
+        preview4.appendChild(para);
+    } else {
+        for (var i = 0; i < curFiles4.length; i++) {
+            var para = document.createElement('p');
+            if (validFileType(curFiles4[i])) {
+                para.textContent = curFiles4[i].name + ', taille du fichier ' + returnFileSize(curFiles4[i].size) + '.';
+                var image = document.createElement('img');
+                image.setAttribute('style', 'width: 440px;')
+                image.src = window.URL.createObjectURL(curFiles4[i]);
+
+                preview4.appendChild(image);
+                preview4.appendChild(para);
+
+            } else {
+                para.textContent = 'Nom du fichier ' + curFiles4[i].name + ": Ce n'est pas un type de fichier valide. Mettez à jour votre image.";
+                preview4.appendChild(para);
+            }
+        }
+    }
+}
+
 // Permet de marquer les sections  -->
 if (document.location.href == 'http://localhost:3000/admin') {
     $('#membres').css('display', '');

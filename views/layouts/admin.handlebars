@@ -95,13 +95,29 @@
 
             $('#editYoutube-' + '{{_id}}').click(function() {
             
-                ViewYoutube('{{_id}}', '{{title}}', '{{content}}', '{{api}}', '{{date}}');
+                ViewYoutube('{{_id}}', '{{title}}', '{{content}}', '{{api}}', '{{date}}', '{{links}}');
 
             });
 
             $('#deleteYoutube-' + '{{_id}}').click(function() {
 
                DeleteYoutube('{{_id}}', '{{title}}');
+
+            });
+
+    {{/each}}
+
+    {{#each galeries}}
+
+            $('#editGalerie-' + '{{_id}}').click(function() {
+            
+                ViewGalerie('{{_id}}', '{{title}}', '{{image}}');
+
+            });
+
+            $('#deleteGalerie-' + '{{_id}}').click(function() {
+
+               DeleteGalerie('{{_id}}', '{{title}}');
 
             });
 

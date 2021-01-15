@@ -1,0 +1,48 @@
+<div style="display: none;" id="galerie">
+  <div>
+    <p class="text-center">
+      Galerie du site internet
+    </p>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 m-auto">
+        <table class="table table-hover table-dark text-center">
+          <thead>
+            <tr>
+              <th scope="col" style="width: 28%;">
+                Titre
+              </th>
+              <th scope="col" style="width: 25%;">
+                Image
+              </th>
+              <th scope="col" style="width: 10%;">
+                Gestion
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each galeries}}
+              <tr>
+                <td class="th-perso">
+                  {{title}}
+                </td>
+                <td class="th-perso">
+                  <img width="50%" src="{{image}}" alt="{{title}}" />
+                </td>
+              <td class="th-perso"><a id="editGalerie-{{_id}}" href="" data-toggle="modal"
+                                    data-target="#modif_galerie"><i class="fas fa-edit ml-2" data-toggle="tooltip"
+                                        data-placement="top" title="Editer l'image"></i></a>
+                                <a href="" id="deleteGalerie-{{_id}}" data-toggle="modal" data-target="#deleteModal"><i
+                                        class="fas fa-trash" data-toggle="tooltip" data-placement="top"
+                                        title="Supprimer l'image"></i></a>
+                            </td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+        {{{pagin4}}}
+      </div>
+    </div>
+  </div>
+</div>

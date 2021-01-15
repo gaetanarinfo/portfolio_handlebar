@@ -144,12 +144,13 @@ function DeleteProjet(id, title) {
     });
 }
 
-function ViewYoutube(id, title, content, api, date) {
+function ViewYoutube(id, title, content, api, date, links) {
     $.get("http://localhost:3000/admin/view_tuto/" + id, function() {
         $('#ModalLabelEditVideo').html("Modifier la vidéo " + title)
         $('#titreVideo').attr('value', title);
         $('#dateVideo').attr('value', date);
         $('#apiVideo').attr('value', api);
+        $('#linksVideo').attr('value', links);
         $('#contentVideo').html(content);
         $('#editTutoForm').attr('action', '/admin/editTuto/' + id)
     });
@@ -161,6 +162,25 @@ function DeleteYoutube(id, title) {
 
         $('#remove').click(function() {
             location.href = 'http://localhost:3000/admin/confirm_delete_youtube/' + id;
+        })
+    });
+}
+
+function ViewGalerie(id, title, image) {
+    $.get("http://localhost:3000/admin/view_tuto/" + id, function() {
+        $('#ModalLabelEditGalerie').html("Modifier l'image " + title)
+        $('#titreGalerie').attr('value', title);
+        $('#imageGalerie').attr('value', image);
+        $('#editGalerieForm').attr('action', '/admin/editGalerie/' + id)
+    });
+}
+
+function DeleteGalerie(id, title) {
+    $.get("http://localhost:3000/admin/delete_galerie/" + id, function() {
+        $('#ModalLabelDelete').html('Suppression de ' + title);
+
+        $('#remove').click(function() {
+            location.href = 'http://localhost:3000/admin/confirm_delete_galerie/' + id;
         })
     });
 }

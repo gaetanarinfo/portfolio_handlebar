@@ -270,7 +270,7 @@
          </div>
      </div>
  </div>
- <!-- Modal Admin Ajout Article Blog -->
+ <!-- Modal Admin Modifier Article Blog -->
 
  <!-- Modal Admin Modif Membres -->
  <div class="modal fade" id="modif_membre" tabindex="-1" role="dialog" aria-hidden="true">
@@ -323,7 +323,7 @@
          </div>
      </div>
  </div>
- <!-- Modal Admin Ajout Article Blog -->
+ <!-- Modal Admin Modif Membres -->
 
  <!-- Modal Admin Modifier une vidéo  -->
  <div class="modal fade" id="modif_video" tabindex="-1" role="dialog" aria-hidden="true">
@@ -337,6 +337,12 @@
              </div>
              <form id="editTutoForm" method="POST">
                  <div class="modal-body">
+                    <div class="form-group">
+                         <label class="text-dark mb-2">Lien de la vidéo</label>
+                         <input type="text" class="form-control mb-2" name="links" id="linksVideo"
+                             placeholder="Lien de la vidéo">
+                     </div>
+
                      <div class="form-group">
                          <label class="text-dark mb-2">Api de la vidéo</label>
                          <input type="text" class="form-control mb-2" name="api" id="apiVideo"
@@ -392,6 +398,136 @@
                  <button type="button" id="remove" class="btn btn-form-send">Valider</button>
              </div>
 
+         </div>
+     </div>
+ </div>
+ <!-- Modal Admin Supression -->
+
+  <!-- Modal Admin Ajout Video -->
+ <div class="modal fade" id="add_video" tabindex="-1" role="dialog" aria-hidden="true">
+     <div class="modal-dialog modal-dialog-centered" role="document">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <h5 class="modal-title" id="ModalLabelAddVideo">Ajouter une vidéo</h5>
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                 </button>
+             </div>
+             <form action="/admin/addTuto" method="POST">
+                 <div class="modal-body">
+                      <div class="form-group">
+                         <label class="text-dark mb-2">Lien de la vidéo</label>
+                         <input type="text" class="form-control mb-2" name="links"
+                             placeholder="Lien de la vidéo">
+                     </div>
+
+                     <div class="form-group">
+                         <label class="text-dark mb-2">Api de la vidéo</label>
+                         <input type="text" class="form-control mb-2" name="api"
+                             placeholder="Api de la vidéo">
+                     </div>
+
+                     <div class="form-group">
+                         <label class="text-dark mb-2">Titre de la vidéo</label>
+                         <input type="text" class="form-control mb-2" name="title"
+                             placeholder="Titre de le vidéo">
+                     </div>
+
+                     <div class="form-group">
+                         <label class="text-dark mb-2">Date de la vidéo</label>
+                         <input type="text" class="form-control mb-2" name="date" placeholder="18 déc. 2015">
+                     </div>
+
+                     <div class="form-group">
+                         <label class="text-dark mb-2">Description de la vidéo</label>
+                         <textarea rows="10" class="form-control mb-2" name="content"
+                             placeholder="Description de la vidéo"></textarea>
+                     </div>
+
+                 </div>
+
+                 <div class="modal-footer">
+                     <button type="button" class="btn btn-form-reset" data-dismiss="modal">Fermer</button>
+                     <button type="submit" class="btn btn-form-send">Valider</button>
+                 </div>
+             </form>
+         </div>
+     </div>
+ </div>
+ <!-- Modal Admin Ajout Video -->
+
+ <!-- Modal Admin Ajout Galerie -->
+ <div class="modal fade" id="add_galerie" tabindex="-1" role="dialog" aria-hidden="true">
+     <div class="modal-dialog modal-dialog-centered" role="document">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <h5 class="modal-title">Ajouter une image à la galerie</h5>
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                 </button>
+             </div>
+             <form method="POST" action="/admin/addGalerie" enctype="multipart/form-data">
+                 <div class="modal-body">
+                     <div class="form-group">
+                         <label class="text-dark mb-2">Image</label>
+                         <input type="file" id="imageGaleries" class="form-control mb-2" onchange="updateImageDisplay4()" required name="image"
+                             placeholder="Image" accept=".png, .jpg, .jpeg, .gif">
+                     </div>
+
+                     <div class="preview4">
+                            <p>Aucun fichier sélectionné pour le moment</p>
+                        </div>
+
+                     <div class="form-group">
+                         <label class="text-dark mb-2">Titre de l'image</label>
+                         <input type="text" class="form-control mb-2" required name="title"
+                             placeholder="Titre de l'image">
+                     </div>
+
+                 </div>
+
+                 <div class="modal-footer">
+                     <button type="button" class="btn btn-form-reset" data-dismiss="modal">Fermer</button>
+                     <button type="submit" class="btn btn-form-send">Valider</button>
+                 </div>
+             </form>
+         </div>
+     </div>
+ </div>
+ <!-- Modal Admin Ajout Galerie -->
+
+  <!-- Modal Admin Modifier une vidéo  -->
+ <div class="modal fade" id="modif_galerie" tabindex="-1" role="dialog" aria-hidden="true">
+     <div class="modal-dialog modal-dialog-centered" role="document">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <h5 class="modal-title" id="ModalLabelEditGalerie">Modifier une vidéo Youtube</h5>
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                 </button>
+             </div>
+             <form id="editGalerieForm" method="POST">
+                 <div class="modal-body">
+
+                     <div class="form-group">
+                         <label class="text-dark mb-2">Titre de l'image</label>
+                         <input type="text" class="form-control mb-2" name="title" id="titreGalerie"
+                             placeholder="Titre de l'image">
+                     </div>
+
+                     <div class="form-group">
+                         <label class="text-dark mb-2">Image</label>
+                         <input type="text" class="form-control mb-2" name="image" id="imageGalerie"
+                             placeholder="Image">
+                     </div>
+
+                 </div>
+
+                 <div class="modal-footer">
+                     <button type="button" class="btn btn-form-reset" data-dismiss="modal">Fermer</button>
+                     <button type="submit" class="btn btn-form-send">Valider</button>
+                 </div>
+             </form>
          </div>
      </div>
  </div>
