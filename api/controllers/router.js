@@ -118,7 +118,7 @@ router.route('/reset-password/:token')
 router.route('/mail')
     .post(nodemailerController.contact)
 
-// Routes user add like
+// Routes user add like projet
 router.route('/user/addLike/:id')
     .get(homeController.addLike)
 

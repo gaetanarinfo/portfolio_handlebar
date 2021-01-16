@@ -1,5 +1,6 @@
 const User = require('../../database/models/users'),
-    bcrypt = require('bcrypt')
+    bcrypt = require('bcrypt'),
+    extIP = require("ext-ip")();
 
 /*
  * Controller
@@ -25,9 +26,19 @@ module.exports = {
                         req.session.isAdmin = user.isAdmin
                         req.session.isLog = user.isLog
 
-                        User.findOneAndUpdate({ '_id': user.id }, {
-                            isLog: new Date()
-                        }, (error) => {});
+                        extIP.get((err, ip) => {
+                            if (err) {
+                                console.error("callback error: " + err);
+                            } else {
+
+
+                                User.findOneAndUpdate({ '_id': user.id }, {
+                                    isLog: new Date(),
+                                    ip: ip
+                                }, (error) => {});
+
+                            }
+                        })
 
                         req.flash('success', 'Connexion réussie !')
                         req.session.success = req.flash('success')

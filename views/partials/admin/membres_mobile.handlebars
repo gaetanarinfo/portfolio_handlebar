@@ -1,0 +1,33 @@
+<div class="m-auto text-center mt-3 mb-3 container-list">
+        <p class="text-center">Liste des membres du site internet</p>
+    </div>
+
+    {{#each membres}}
+    <div class="list-group m-auto mb-2">
+        <div class="list-group-item list-group-item-action flex-column align-items-start text-center">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="m-auto mt-1 mb-1">{{lastname}} {{firstname}}</h5>
+            </div>
+            <p class="mb-1 mt-1"><img class="rounded-circle" width="90px" src="../../../avatar/{{avatar}}"></p>
+            <p class="mb-1" style="overflow: hidden; text-overflow: ellipsis;">Email {{email}}</p>
+            <p class="mb-1">Rang {{#if isAdmin}}
+                    Administrateur
+                  {{else}}
+                    Membre
+                  {{/if}}</p>
+            <p class="mb-1" >Inscription {{generateDate createDate}}</p>
+            <p class="mb-1">
+                <a id="editMembreMob-{{_id}}" href="" data-toggle="modal" data-target="#modif_membre" data-original-title="Editer le membre"><i
+                        class="fas fa-user-edit ml-2" aria-hidden="true"></i></a>
+                {{#if isAdmin}}
+
+                {{else}}     
+                <a id="deleteMembreMob-{{_id}}" href="" data-toggle="modal" data-target="#deleteModal" data-original-title="Supprimer un membre"><i
+                        class="fas fa-trash" aria-hidden="true"></i></a>
+                {{/if}}      
+            </p>
+        </div>
+    </div>
+    {{/each}}
+
+    {{{pagin}}}

@@ -27,25 +27,26 @@ module.exports = {
             data4 = req.session.data4
 
         if (success || error) {
-            res.render('index', { success: success, error: error, projets, tutos, articles, commentsAll, commentCount, galeries, data1, data2, data3, data4 })
+            res.render('index', { success: success, error: error, projets, tutos, articles, commentsAll, commentCount, galeries, data1, data2, data3, data4, title: 'Portfolio de Gaëtan Seigneur', content: "Mon portfolio professionnel, retrouvé ici mes compétences, les derniers articles de mon blog, mes tutoriels et tant d autres choses." })
         } else res.render('index', { error: error, projets, tutos, articles, galeries, commentsAll, commentCount, title: 'Portfolio de Gaëtan Seigneur', content: "Mon portfolio professionnel, retrouvé ici mes compétences, les derniers articles de mon blog, mes tutoriels et tant d autres choses.", data1, data2, data3, data4 })
     },
 
     addLike: (req, res) => {
 
-        Projet.findById(req.body.articleid, function(err, count) {
+        Projet.findById(req.params.id, function(err, count) {
 
-            const likeNumber = count.like
+            const likeNumber = count.like,
+                projet = count.title
 
-            console.log(req.like);
+            console.log(count.like);
 
             Projet.findByIdAndUpdate(req.params.id, {
                     like: (likeNumber) + 1
                 },
                 (error) => {
-                    req.flash('success', 'Le commentaire est désormais en ligne !')
+                    req.flash('success', 'Vous aimez le projet ' + projet)
                     req.session.success = req.flash('success')
-                    res.redirect("/article/" + req.body.articleid)
+                    res.redirect("/")
                 });
 
         })

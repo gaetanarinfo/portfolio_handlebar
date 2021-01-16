@@ -49,7 +49,19 @@
 
             });
 
+            $('#editMembreMob-' + '{{_id}}').click(function() {
+            
+                ViewMembre('{{_id}}', '{{lastname}}', '{{firstname}}', '{{email}}', '{{isBanned}}', '{{isAdmin}}');
+
+            });
+
             $('#deleteMembre-' + '{{_id}}').click(function() {
+
+                DeleteMembre('{{_id}}', '{{lastname}}', '{{firstname}}');
+
+            });
+
+            $('#deleteMembreMob-' + '{{_id}}').click(function() {
 
                 DeleteMembre('{{_id}}', '{{lastname}}', '{{firstname}}');
 

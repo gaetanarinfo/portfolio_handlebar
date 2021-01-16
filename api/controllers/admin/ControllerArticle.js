@@ -113,6 +113,7 @@ module.exports = {
                                     rang: user.isAdmin,
                                     dateRegister: user.createDate,
                                     dateLog: user.isLog,
+                                    ip: user.ip,
                                     layout: 'admin'
                                 })
                             } else {
@@ -140,6 +141,7 @@ module.exports = {
                                     rang: user.isAdmin,
                                     dateRegister: user.createDate,
                                     dateLog: user.isLog,
+                                    ip: user.ip,
                                     layout: 'admin'
                                 })
                             }

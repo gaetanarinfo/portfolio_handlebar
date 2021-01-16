@@ -6,7 +6,7 @@ const ProjetShema = new mongoose.Schema({
     title: String,
     content: String,
     image: String,
-    like: String,
+    like: Number,
     date: String,
     links: Number,
     isPrivate: {

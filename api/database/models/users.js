@@ -46,7 +46,8 @@ const UsersShema = new mongoose.Schema({
     isLog: {
         type: Date,
         default: ''
-    }
+    },
+    ip: String
 
 });
 

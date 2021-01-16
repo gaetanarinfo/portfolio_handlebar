@@ -54,35 +54,11 @@
                   {{generateDate createDate}}
                 </td>
                 <td class="th-perso">
-                  <a
-                    id="editMembre-{{_id}}"
-                    href=""
-                    data-toggle="modal"
-                    data-target="#modif_membre"
-                  >
-                    <i
-                      class="fas fa-user-edit ml-2"
-                      data-toggle="tooltip"
-                      data-placement="left"
-                      title="Editer le membre"
-                    ></i>
-                  </a>
+                  <a id="editMembre-{{_id}}" href="" data-toggle="modal" data-target="#modif_membre"><i class="fas fa-user-edit ml-2" data-toggle="tooltip" data-placement="left" title="Editer le membre"></i></a>
                   {{#if isAdmin}}
 
                   {{else}}
-                    <a
-                      id="deleteMembre-{{_id}}"
-                      href=""
-                      data-toggle="modal"
-                      data-target="#deleteModal"
-                    >
-                      <i
-                        class="fas fa-trash"
-                        data-toggle="tooltip"
-                        data-placement="left"
-                        title="Supprimer un membre"
-                      ></i>
-                    </a>
+                    <a id="deleteMembre-{{_id}}" href="" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash" data-toggle="tooltip" data-placement="left" title="Supprimer un membre"></i></a>
                   {{/if}}
                 </td>
               </tr>

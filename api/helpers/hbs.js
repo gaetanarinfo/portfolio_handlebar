@@ -29,6 +29,20 @@ module.exports = {
     trimString: function(passedString) {
         var theString = passedString.substring(0, 200);
         return new Handlebars.SafeString(theString) + '...'
-    }
+    },
 
+    trimString2: function(passedString) {
+        var theString = passedString.substring(0, 100);
+        return new Handlebars.SafeString(theString) + '...'
+    },
+
+    ifLike: function(a, options) {
+        if (a != '0') {
+
+            return options.fn(this)
+        }
+
+        return options.inverse(this)
+
+    }
 }

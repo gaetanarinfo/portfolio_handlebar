@@ -115,6 +115,7 @@ module.exports = {
                                     name: user.firstname + ' ' + user.lastname,
                                     rang: user.isAdmin,
                                     dateLog: user.isLog,
+                                    ip: user.ip,
                                     dateRegister: user.createDate
                                 })
                             } else {
@@ -141,6 +142,7 @@ module.exports = {
                                     name: user.firstname + ' ' + user.lastname,
                                     rang: user.isAdmin,
                                     dateLog: user.isLog,
+                                    ip: user.ip,
                                     dateRegister: user.createDate
                                 })
                             }
