@@ -23,7 +23,6 @@ const homeController = require('./home/homeController'),
 router.route('/')
     .get(homeController.get)
 
-
 // Routes Blog
 router.route('/blog')
     .get(blogController.get)
@@ -118,6 +117,10 @@ router.route('/reset-password/:token')
 // Routes mail register
 router.route('/mail')
     .post(nodemailerController.contact)
+
+// Routes user add like
+router.route('/user/addLike/:id')
+    .get(homeController.addLike)
 
 // Export
 module.exports = router

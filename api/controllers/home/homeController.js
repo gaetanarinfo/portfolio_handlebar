@@ -29,5 +29,25 @@ module.exports = {
         if (success || error) {
             res.render('index', { success: success, error: error, projets, tutos, articles, commentsAll, commentCount, galeries, data1, data2, data3, data4 })
         } else res.render('index', { error: error, projets, tutos, articles, galeries, commentsAll, commentCount, title: 'Portfolio de Gaëtan Seigneur', content: "Mon portfolio professionnel, retrouvé ici mes compétences, les derniers articles de mon blog, mes tutoriels et tant d autres choses.", data1, data2, data3, data4 })
+    },
+
+    addLike: (req, res) => {
+
+        Projet.findById(req.body.articleid, function(err, count) {
+
+            const likeNumber = count.like
+
+            console.log(req.like);
+
+            Projet.findByIdAndUpdate(req.params.id, {
+                    like: (likeNumber) + 1
+                },
+                (error) => {
+                    req.flash('success', 'Le commentaire est désormais en ligne !')
+                    req.session.success = req.flash('success')
+                    res.redirect("/article/" + req.body.articleid)
+                });
+
+        })
     }
 }
