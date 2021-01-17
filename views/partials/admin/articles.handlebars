@@ -26,7 +26,7 @@
                             <td class="th-perso">{{title}}</td>
                             <td class="th-perso">{{generateDate dateCreate}}</td>
                             <td class="th-perso">{{comment}}</td>
-                            <td class="th-perso">{{isPrivate}}</td>
+                            <td class="th-perso">{{#if isPrivate}}Article privé{{else}}Article public{{/if}}</td>
                             <td class="table-content th-perso">{{trimString content}}</td>
                             <td class="th-perso"><a id="editArticle-{{_id}}" href="" data-toggle="modal"
                                     data-target="#modif_article"><i class="fas fa-edit ml-2" data-toggle="tooltip"

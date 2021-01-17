@@ -22,7 +22,7 @@
                         {{#each projets}}
                         <tr>
                             <td class="th-perso">{{title}}</td>
-                            <td class="th-perso">{{isPrivate}}</td>
+                            <td class="th-perso">{{#if isPrivate}}Projet privé{{else}}Projet public{{/if}}</td>
                             <td class="th-perso"><img src="../../../{{image}}" alt="{{title}}" width="199px"></td>
                             <td class="th-perso">{{date}}</td>
                             <td class="table-content th-perso">{{trimString content}}</td>
@@ -37,7 +37,7 @@
                     </tbody>
                 </table>
 
-                {{{pagin3}}}
+                {{{pagin5}}}
             </div>
         </div>
     </div>

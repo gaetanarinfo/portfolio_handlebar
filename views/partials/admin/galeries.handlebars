@@ -31,7 +31,7 @@
                   {{title}}
                 </td>
                 <td class="th-perso">
-                  {{isPrivate}}
+                  {{#if isPrivate}}Image privé{{else}}Image public{{/if}}
                 </td>
                 <td class="th-perso">
                   <img width="50%" src="{{image}}" alt="{{title}}" />

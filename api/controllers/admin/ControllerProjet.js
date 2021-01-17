@@ -20,7 +20,7 @@ module.exports = {
         const email = req.session.email
 
         // Nombre d'item par page
-        var perPage = 6
+        var perPage = 4
             // La page que l'on veux récupéré si il y a en pas alors page 1
         var page = req.query.page || 1
         var arrayPagesIndexes = []
@@ -84,7 +84,7 @@ module.exports = {
                         });
 
                         // Render de la pagination
-                        var pagin3 = boostrapPaginator3.render()
+                        var pagin5 = boostrapPaginator3.render()
 
                         User.findOne({ email }, (erro, user) => {
                             if (success || error) {
@@ -101,7 +101,7 @@ module.exports = {
                                     previous: parseInt(page) - 1,
                                     // Pages + 1
                                     next: parseInt(page) + 1,
-                                    pagin3,
+                                    pagin5,
 
                                     success: success,
                                     error: error,
@@ -129,7 +129,7 @@ module.exports = {
                                     previous: parseInt(page) - 1,
                                     // Pages + 1
                                     next: parseInt(page) + 1,
-                                    pagin3,
+                                    pagin5,
 
                                     error: error,
 

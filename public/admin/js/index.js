@@ -194,30 +194,83 @@ function updateImageDisplay4() {
 }
 
 // Permet de marquer les sections  -->
-if (document.location.href == 'http://localhost:3000/admin') {
+if (document.location.href == 'http://localhost:3000/admin/') {
+
+    // Section display
     $('#membres').css('display', '');
+    $('#blog').css('display', 'none');
+    $('#galerie').css('display', 'none');
+    $('#youtube').css('display', 'none');
+    $('#projet').css('display', 'none');
+
+    // Section display mobile
+    $('#blog_mobile').css('display', 'none');
+    $('#membres_mobile').css('display', '');
+    $('#youtube_mobile').css('display', 'none');
+    $('#galerie_mobile').css('display', 'none');
+    $('#projets_mobile').css('display', 'none');
+
 } else if (document.location.href == 'http://localhost:3000/admin/articles' || document.location.href == 'http://localhost:3000/admin/articles/' + document.location.search) {
+
+    // Section display
     $('#blog').css('display', '');
     $('#membres').css('display', 'none');
     $('#galerie').css('display', 'none');
     $('#youtube').css('display', 'none');
     $('#projet').css('display', 'none');
+
+    // Section display mobile
+    $('#blog_mobile').css('display', '');
+    $('#membres_mobile').css('display', 'none');
+    $('#youtube_mobile').css('display', 'none');
+    $('#galerie_mobile').css('display', 'none');
+    $('#projets_mobile').css('display', 'none');
+
 } else if (document.location.href == 'http://localhost:3000/admin/galeries' || document.location.href == 'http://localhost:3000/admin/galeries/' + document.location.search) {
+
+    // Section display
     $('#blog').css('display', 'none');
     $('#membres').css('display', 'none');
     $('#galerie').css('display', '');
     $('#youtube').css('display', 'none');
     $('#projet').css('display', 'none');
+
+    // Section display mobile
+    $('#blog_mobile').css('display', 'none');
+    $('#membres_mobile').css('display', 'none');
+    $('#youtube_mobile').css('display', 'none');
+    $('#galerie_mobile').css('display', '');
+    $('#projets_mobile').css('display', 'none');
+
 } else if (document.location.href == 'http://localhost:3000/admin/youtubes' || document.location.href == 'http://localhost:3000/admin/youtubes/' + document.location.search) {
+
+    // Section display
     $('#blog').css('display', 'none');
     $('#membres').css('display', 'none');
     $('#galerie').css('display', 'none');
     $('#youtube').css('display', '');
     $('#projet').css('display', 'none');
+
+    // Section display mobile
+    $('#blog_mobile').css('display', 'none');
+    $('#membres_mobile').css('display', 'none');
+    $('#youtube_mobile').css('display', '');
+    $('#galerie_mobile').css('display', 'none');
+    $('#projets_mobile').css('display', 'none');
+
 } else if (document.location.href == 'http://localhost:3000/admin/projets' || document.location.href == 'http://localhost:3000/admin/projets/' + document.location.search) {
+
+    // Section display
     $('#blog').css('display', 'none');
     $('#membres').css('display', 'none');
     $('#galerie').css('display', 'none');
     $('#youtube').css('display', 'none');
     $('#projet').css('display', '');
+
+    // Section display mobile
+    $('#blog_mobile').css('display', 'none');
+    $('#membres_mobile').css('display', 'none');
+    $('#youtube_mobile').css('display', 'none');
+    $('#galerie_mobile').css('display', 'none');
+    $('#projets_mobile').css('display', '');
 }

@@ -1,0 +1,25 @@
+<div class="m-auto text-center mt-1 container-list" id="youtube_mobile">
+        <p class="text-center">VIDÉOS YOUTUBE</p>
+    </div>
+
+    {{#each tutos}}
+    <div class="list-group m-auto mb-2">
+        <div class="list-group-item list-group-item-action flex-column align-items-start text-center">
+            <p class="mb-1"><iframe class="card-img-top card-yt" src="https://www.youtube.com/embed/{{api}}"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen=""></iframe></p>
+            <p class="mb-1">{{title}}</p>
+            <p class="mb-1">{{content}}</p>
+            <p class="mb-1">{{date}}</p>
+            <p class="mb-1">{{#if isPrivate}}Tutoriel privé{{else}}Tutoriel public{{/if}}</p>
+            <p class="mb-1"> <a href="" id="editYoutubeMobile-{{_id}}" data-toggle="modal" data-target="#modif_video"><i
+                        class="fas fa-edit ml-2" data-toggle="tooltip" data-placement="left"
+                        title="Editer la vidéo"></i></a>
+                <a href="" id="deleteYoutubeMobile-{{_id}}" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash"
+                        data-toggle="tooltip" data-placement="left" title="Supprimer la vidéo"></i></a>
+            </p>
+        </div>
+    </div>
+    {{/each}}
+
+    {{{pagin3}}}

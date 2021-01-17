@@ -1,0 +1,25 @@
+<div class="m-auto text-center mt-1 container-list" id="blog_mobile">
+        <p class="text-center">LISTE DES ARTICLES BLOG DU SITE INTERNET</p>
+    </div>
+
+    {{#each articles}}
+    <div class="list-group m-auto mb-2">
+        <div class="list-group-item list-group-item-action flex-column align-items-start text-center">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="m-auto mt-1 mb-1">{{title}}</h5>
+            </div>
+            <p class="mb-1 mt-1"><img width="100%" src="{{image}}"></p>
+            <p class="mb-1">Crée le {{generateDate dateCreate}}</p>
+            <p class="mb-1">{{#if isPrivate}}Article privé{{else}}Article public{{/if}}</p>
+            <p class="mb-1">{{comment}} Commentaire(s)</p>
+            <p class="mb-1">{{content}}</p>
+            <p class="mb-1"><a href="" id="editArticleMobile-{{_id}}" data-toggle="modal" data-target="#modif_article"
+                    data-original-title="Editer l'article"><i class="fas fa-edit ml-2" aria-hidden="true"></i></a>
+                <a href="" id="deleteArticleMobile-{{_id}}" data-toggle="modal" data-target="#deleteModal" data-original-title="Supprimer l'article"><i
+                        class="fas fa-trash" aria-hidden="true"></i></a>
+            </p>
+        </div>
+    </div>
+    {{/each}}
+
+    {{{pagin2}}}

@@ -1,0 +1,23 @@
+<div class="m-auto text-center mt-1 container-list" id="galerie_mobile">
+        <p class="text-center">GALERIE DU SITE INTERNET</p>
+    </div>
+
+     {{#each galeries}}
+
+    <div class="list-group m-auto mb-2">
+        <div class="list-group-item list-group-item-action flex-column align-items-start text-center">
+            <p class="mb-1"><img class="w-100" src="{{image}}" alt="{{title}}"></p>
+            <p class="mb-1">{{title}}</p>
+             <p class="mb-1">{{#if isPrivate}}Image privé{{else}}Image public{{/if}}</p>
+             <p class="mb-1"><a id="editGalerieMobile-{{_id}}" href="" data-toggle="modal"
+                                    data-target="#modif_galerie"><i class="fas fa-edit ml-2" data-toggle="tooltip"
+                                        data-placement="top" title="Editer l'image"></i></a>
+                                <a href="" id="deleteGalerieMobile-{{_id}}" data-toggle="modal" data-target="#deleteModal"><i
+                                        class="fas fa-trash" data-toggle="tooltip" data-placement="top"
+                                        title="Supprimer l'image"></i></a></p>
+        </div>
+    </div>
+
+    {{/each}}
+
+    {{{pagin4}}}

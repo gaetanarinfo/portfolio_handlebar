@@ -84,6 +84,18 @@
 
             });
 
+            $('#editArticleMobile-' + '{{_id}}').click(function() {
+            
+                ViewArticle('{{_id}}', '{{image}}', '{{title}}', '{{content}}', '{{isPrivate}}');
+
+            });
+
+            $('#deleteArticleMobile-' + '{{_id}}').click(function() {
+
+               DeleteArticle('{{_id}}', '{{title}}');
+
+            });
+
     {{/each}}
 
     // Permet de voir le projet dans le modal  -->
@@ -96,6 +108,18 @@
             });
 
             $('#deleteProjet-' + '{{_id}}').click(function() {
+
+               DeleteProjet('{{_id}}', '{{title}}');
+
+            });
+
+            $('#editProjetMobile-' + '{{_id}}').click(function() {
+            
+                ViewProjet('{{_id}}', '{{image}}', '{{title}}', '{{content}}', '{{date}}', '{{isPrivate}}');
+
+            });
+
+            $('#deleteProjetMobile-' + '{{_id}}').click(function() {
 
                DeleteProjet('{{_id}}', '{{title}}');
 
@@ -117,6 +141,18 @@
 
             });
 
+            $('#editYoutubeMobile-' + '{{_id}}').click(function() {
+            
+                ViewYoutube('{{_id}}', '{{title}}', '{{content}}', '{{api}}', '{{date}}', '{{links}}', '{{isPrivate}}');
+
+            });
+
+            $('#deleteYoutubeMobile-' + '{{_id}}').click(function() {
+
+               DeleteYoutube('{{_id}}', '{{title}}');
+
+            });
+
     {{/each}}
 
     {{#each galeries}}
@@ -128,6 +164,18 @@
             });
 
             $('#deleteGalerie-' + '{{_id}}').click(function() {
+
+               DeleteGalerie('{{_id}}', '{{title}}');
+
+            });
+
+            $('#editGalerieMobile-' + '{{_id}}').click(function() {
+            
+                ViewGalerie('{{_id}}', '{{title}}', '{{image}}', '{{isPrivate}}');
+
+            });
+
+            $('#deleteGalerieMobile-' + '{{_id}}').click(function() {
 
                DeleteGalerie('{{_id}}', '{{title}}');
 
