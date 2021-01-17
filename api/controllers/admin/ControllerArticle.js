@@ -21,7 +21,7 @@ module.exports = {
         const email = req.session.email
 
         // Nombre d'item par page
-        var perPage = 10
+        var perPage = 6
             // La page que l'on veux récupéré si il y a en pas alors page 1
         var page = req.query.page || 1
         var arrayPagesIndexes = []
