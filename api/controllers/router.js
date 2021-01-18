@@ -30,7 +30,7 @@ router.route('/blog')
 // Routes Article
 router.route('/article/:id')
     .get(articleController.get)
-router.route('/article/create')
+router.route('/article/create/:id')
     .post(articleController.post)
 
 // Routes Admin

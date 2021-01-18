@@ -173,8 +173,7 @@ module.exports = {
                         dateCreate: new Date(),
                         active: false,
                         avatar: req.session.avatar,
-                        isPrivate: Boolean(req.body.isPrivate),
-                        comment: 0
+                        isPrivate: Boolean(req.body.isPrivate)
                     }, (err) => {
                         if (err) {
                             //console.log(err)

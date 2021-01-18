@@ -1,29 +1,29 @@
 <div class="w-100 p-4">
         <div class="row justify-content-center">
-            <div class="article-head" style="background: url('{{image}}');">
+            <div class="article-head" style="background: url('{{artID.image}}');">
                 <div class="article-body">
                     <div class="article-avatar mr-20">
-                        <img src="../avatar/{{avatar}}"
-                            alt="{{author}}" class="rounded-circle ml-5">
+                        <img src="../avatar/{{artID.avatar}}"
+                            alt="{{artID.author}}" class="rounded-circle ml-5">
                     </div>
                     <div class="article-author">
-                        <div><i class="fas fa-user ml-3"></i><span>Posté par {{author}}</span></div>
+                        <div><i class="fas fa-user ml-3"></i><span>Posté par {{artID.author}}</span></div>
                         {{#if isAdmin}}<div><i class="fas fa-user-cog ml-2"></i><span>Administrateur</span></div>{{/if}}
-                        <div><i class="far fa-calendar-alt ml-3"></i><span>Le {{generateDate dateCreate}}</span></div>
-                        <div><i class="far fa-comment ml-3"></i><span>{{comment}} Commantaire(s)</span></div>
+                        <div><i class="far fa-calendar-alt ml-3"></i><span>Le {{generateDate artID.dateCreate}}</span></div>
+                        {{!-- <div><i class="far fa-comment ml-3"></i><span>{{artID.comment}} Commantaire(s)</span></div> --}}
                     </div>
                 </div>
             </div>
 
             <div class="article">
                 <div class="article-title">
-                    <p><i class="fas fa-tag ml-3"></i>{{title}}</p>
+                    <p><i class="fas fa-tag ml-3"></i>{{artID.title}}</p>
                 </div>
 
                 <hr>
 
                 <div class="article-content">
-                    <p>{{content}}</p>
+                    <p>{{artID.content}}</p>
                 </div>
 
                 <hr>
@@ -42,7 +42,7 @@
 
                 <div class="article-comment">
                 
-                    <p class="comment-count">Commentaire(s) {{comment}}</p>
+                    {{!-- <p class="comment-count">Commentaire(s) {{artID.comment}}</p> --}}
 
                     {{#each commentAll}}
                     <div class="box-comment" id="comment">    
@@ -74,9 +74,8 @@
 
                     <p class="reply-sub">Commentaire :</p>
 
-                    <form id="form_reply" action="create" method="POST">
+                    <form id="form_reply" action="create/{{artID._id}}" method="POST">
                         <textarea class="mt-n2" rows="8" required name="content"></textarea>
-                        <input type="hidden" name="articleid" value="{{id}}">
 
                         <button type="submit" class="btn btn-form-send mt-3">Poster le commentaire</button>
                     </form>
