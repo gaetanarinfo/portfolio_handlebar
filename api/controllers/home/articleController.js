@@ -20,6 +20,7 @@ module.exports = {
         const query = req.params.id,
             // Ici on recherche l'article ayant comme id le query de notre URL   
             dbArticleID = await Article.findById(query)
+        countComment = await Comment.countDocuments(query).lean();
 
         // Ici nous resortons notre constructeur
         Article
@@ -53,7 +54,8 @@ module.exports = {
                     error: error,
                     success: success,
                     artID: result,
-                    commentAll: result.comment
+                    commentAll: result.comment,
+                    countComments: countComment
                 })
             }
         })

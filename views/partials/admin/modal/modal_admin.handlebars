@@ -87,11 +87,11 @@
 
                      <div class="form-group">
                          <label class="text-dark mb-2">Description de l'article</label>
-                         <textarea rows="10" class="form-control mb-2" name="content"
+                         <textarea rows="10" class="form-control mb-2" id="contentArticleAdd" name="content"
                              placeholder="Description de l'article"></textarea>
                      </div>
 
-                     <div id="isAdmin" class="form-group text-center">
+                     <div id="isAdmin" class="form-group text-center mt-2">
                         <div class="switch_box box_1">
                             <label class="text-dark mb-2">Article privé ?</label>
                             <div><input type="checkbox" class="switch_1" name="isPrivate" id="isPrivate"  ></div>
@@ -566,3 +566,51 @@
      </div>
  </div>
  <!-- Modal Admin Modifier une image -->
+
+ <!-- Modal Admin Modifier commentaire -->
+ <div class="modal fade" id="modif_comment" tabindex="-1" role="dialog" aria-hidden="true">
+     <div class="modal-dialog modal-dialog-centered" role="document">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <h5 class="modal-title" id="ModalLabelModifComment">Modifier le commentaire</h5>
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                 </button>
+             </div>
+             <form id="editCommentForm" method="POST">
+                 <div class="modal-body">
+
+                     <div class="form-group">
+                         <label class="text-dark mb-2">Autheur du commentaire</label>
+                         <input type="text" class="form-control mb-2" name="author" id="authorComment"
+                             placeholder="Autheur du commentaire">
+                     </div>
+
+                     <div class="form-group">
+                         <label class="text-dark mb-2">Avatar du membre</label>
+                         <input type="text" class="form-control mb-2" name="image" id="avatarComment"
+                             placeholder="Avatar du membre">
+                     </div>
+
+                     <div class="form-group">
+                         <label class="text-dark mb-2">Date de création du commentaire</label>
+                         <input type="text" class="form-control mb-2" name="dateCreate" id="dateCreateComment"
+                             placeholder="Date de création du commentaire">
+                     </div>
+
+                     <div class="form-group">
+                         <label class="text-dark mb-2">Commentaire</label>
+                         <textarea class="form-control mb-2" name="content" id="contentComment"></textarea>
+                     </div>
+
+                 </div>
+
+                 <div class="modal-footer">
+                     <button type="button" class="btn btn-form-reset" data-dismiss="modal">Fermer</button>
+                     <button type="submit" class="btn btn-form-send">Valider</button>
+                 </div>
+             </form>
+         </div>
+     </div>
+ </div>
+ <!-- Modal Admin Modifier un projet -->

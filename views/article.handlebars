@@ -10,7 +10,7 @@
                         <div><i class="fas fa-user ml-3"></i><span>Posté par {{artID.author}}</span></div>
                         {{#if isAdmin}}<div><i class="fas fa-user-cog ml-2"></i><span>Administrateur</span></div>{{/if}}
                         <div><i class="far fa-calendar-alt ml-3"></i><span>Le {{generateDate artID.dateCreate}}</span></div>
-                        {{!-- <div><i class="far fa-comment ml-3"></i><span>{{artID.comment}} Commantaire(s)</span></div> --}}
+                        <div><i class="far fa-comment ml-3"></i><span>{{countComments}} Commantaire(s)</span></div>
                     </div>
                 </div>
             </div>
@@ -23,7 +23,7 @@
                 <hr>
 
                 <div class="article-content">
-                    <p>{{artID.content}}</p>
+                    <p>{{{artID.content}}}</p>
                 </div>
 
                 <hr>
@@ -42,7 +42,7 @@
 
                 <div class="article-comment">
                 
-                    {{!-- <p class="comment-count">Commentaire(s) {{artID.comment}}</p> --}}
+                    <p class="comment-count">Commentaire(s) {{countComments}}</p>
 
                     {{#each commentAll}}
                     <div class="box-comment" id="comment">    

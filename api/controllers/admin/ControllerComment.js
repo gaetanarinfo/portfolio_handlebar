@@ -1,16 +1,10 @@
-const Article = require('../../database/models/articles'),
+const Comment = require('../../database/models/comments'),
     User = require('../../database/models/users'),
-    fileupload = require("express-fileupload"),
-    express = require('express'),
-    app = express(),
     pagination = require('pagination')
-
-app.use(fileupload())
 
 module.exports = {
 
-    showArticle: (req, res) => {
-
+    showComment: (req, res) => {
 
         const success = req.session.success, // Message Succes
             error = req.session.error // Message Error
@@ -26,20 +20,19 @@ module.exports = {
         var page = req.query.page || 1
         var arrayPagesIndexes = []
 
-        // Ici on recherche nos articles
-        Article.find()
+        // Ici on recherche nos comments
+        Comment.find()
             // Ici On viens chercher l'index qui nous interesse
             // exemple: pour la page 2 avec 5 perPage = index 5
             // donc (5 * 2) - 5 = 5
             .skip((perPage * page) - perPage)
             // Ici on limite le nombre de résultat
             .limit(perPage)
-            .populate('comment')
             .lean()
-            .exec((err, articles) => {
+            .exec((err, comments) => {
                 if (err) console.log(err)
                     // Ici on compte le nombre d'article total 
-                Article.countDocuments()
+                Comment.countDocuments()
                     .exec((err, count) => {
                         if (err) return next(err)
                             // Ici on calcul le nombre de pages
@@ -49,10 +42,10 @@ module.exports = {
                             // On push nos index dans le tableau
                             arrayPagesIndexes.push(i + 1)
                         }
-                        console.log('COUNT: ', articles)
 
-                        var boostrapPaginator2 = new pagination.TemplatePaginator({
-                            prelink: '/admin/articles/',
+
+                        var boostrapPaginator3 = new pagination.TemplatePaginator({
+                            prelink: '/admin/comment/',
                             current: page,
                             rowsPerPage: perPage,
                             totalResult: count,
@@ -86,7 +79,7 @@ module.exports = {
                         });
 
                         // Render de la pagination
-                        var pagin2 = boostrapPaginator2.render()
+                        var pagin6 = boostrapPaginator3.render()
 
                         User.findOne({ email }, (erro, user) => {
                             if (success || error) {
@@ -97,13 +90,13 @@ module.exports = {
                                     pages: Math.ceil(count / perPage),
                                     // tableau avec les index des page: []
                                     arrayPage: arrayPagesIndexes,
-                                    // Les articles : [{}]
-                                    articles: articles,
+                                    // Les comments : [{}]
+                                    comments: comments,
                                     // Pages - 1
                                     previous: parseInt(page) - 1,
                                     // Pages + 1
                                     next: parseInt(page) + 1,
-                                    pagin2,
+                                    pagin6,
 
                                     success: success,
                                     error: error,
@@ -125,14 +118,13 @@ module.exports = {
                                     pages: Math.ceil(count / perPage),
                                     // tableau avec les index des page: []
                                     arrayPage: arrayPagesIndexes,
-                                    // Les articles : [{}]
-                                    articles: articles,
-                                    comments: articles,
+                                    // Les comments : [{}]
+                                    comments: comments,
                                     // Pages - 1
                                     previous: parseInt(page) - 1,
                                     // Pages + 1
                                     next: parseInt(page) + 1,
-                                    pagin2,
+                                    pagin6,
 
                                     error: error,
 
@@ -155,73 +147,31 @@ module.exports = {
 
     },
 
-    addArticle: (req, res) => {
-
-        const imageFile = req.files.image
-
-        imageFile.mv('public/article/' + imageFile.name, function(err) {
-            if (err) {
-                req.flash('error', 'Une erreur est survenue !')
-                req.session.error = req.flash('error')
-                return res.redirect('/admin/articles')
-            } else {
-
-                Article
-                    .create({
-                        image: '/article/' + imageFile.name,
-                        title: req.body.title,
-                        content: req.body.content,
-                        author: req.session.lastname + ' ' + req.session.firstname,
-                        dateCreate: new Date(),
-                        active: false,
-                        avatar: req.session.avatar,
-                        isPrivate: Boolean(req.body.isPrivate)
-                    }, (err) => {
-                        if (err) {
-                            //console.log(err)
-                            req.flash('error', 'Une erreur est survenue !')
-                            req.session.error = req.flash('error')
-
-                            res.redirect('/admin/articles')
-                        } else {
-                            req.flash('success', "L'article à été posté !")
-                            req.session.success = req.flash('success')
-
-                            res.redirect('/admin/articles')
-                        }
-
-                    })
-
-            }
-
-        })
-
-    },
-
-    editArticle: (req, res) => {
+    editComment: (req, res) => {
 
         const id = req.params.id
 
-        Article.findOneAndUpdate({ '_id': id }, {
-            title: req.body.title,
-            content: req.body.content,
-            isPrivate: Boolean(req.body.isPrivate),
+        Comment.findOneAndUpdate({ '_id': id }, {
+            author: req.body.author,
+            avatar: req.body.avatar,
+            dateCreate: req.body.dateCreate,
+            content: req.body.content
         }, (error) => {
 
-            req.flash('success', "L'article " + req.body.title + " à été modifié !")
+            req.flash('success', "Le commentaire de  " + req.body.author + " à été modifié !")
             req.session.success = req.flash('success')
 
-            res.redirect('/admin/articles')
+            res.redirect('/admin/comments')
 
         });
 
     },
 
-    deletetArticle: (req, res) => {
+    deleteComment: (req, res) => {
 
         const id = req.params.id
 
-        Article.findById({ _id: id }, (erro, user) => {
+        Comment.findById({ _id: id }, (erro, user) => {
 
             res.render('admin')
 
@@ -229,19 +179,18 @@ module.exports = {
 
     },
 
-    deleteArticleConfirm: (req, res) => {
+    deleteCommentConfirm: (req, res) => {
 
         const id = req.params.id
 
-        Article.findOneAndDelete({ _id: id }, (erro, user) => {
+        Comment.findOneAndDelete({ _id: id }, (erro, user) => {
 
-            req.flash('success', "L'actualité à été supprimé !")
+            req.flash('success', "Le commentaire à bien été supprimé !")
             req.session.success = req.flash('success')
 
-            res.redirect('/admin/articles')
+            res.redirect('/admin/comments')
 
         })
 
     }
-
 }

@@ -46,6 +46,14 @@ function ViewArticle(id, image, title, content, isPrivate) {
         $('#imageArticle').attr('value', image);
         $('#titleArticle').attr('value', title);
         $('#contentArticle').html(content);
+        tinymce.init({
+            selector: '#contentArticle',
+            setup: function(editor) {
+                editor.on('init', function(e) {
+                    editor.getContent(content);
+                });
+            }
+        });
         $('#editArticleForm').attr('action', '/admin/editArticle/' + id)
 
         if (isPrivate == 'false') {
@@ -227,28 +235,6 @@ function ViewGalerie(id, title, image, isPrivate) {
                 });
             });
         }
-
-        // if ($('input[name=isPrivate]').prop('checked')) {
-        //     $('#isPrivate8').attr('checked', true);
-        //     $('#lab_img2').html('Privé')
-
-        //     $('#isPrivate8').click(function() {
-        //         console.log('false');
-        //         $('#isPrivate8').attr('checked', false);
-        //         $('#lab_img2').html('En ligne')
-
-        //     })
-        // } else {
-        //     $('#isPrivate8').attr('checked', false);
-        //     $('#lab_img2').html('En ligne')
-
-        //     $('#isPrivate8').click(function() {
-        //         console.log('true');
-        //         $('#isPrivate8').attr('checked', true);
-        //         $('#lab_img2').html('Privé')
-
-        //     })
-        // }
     });
 }
 
@@ -258,6 +244,28 @@ function DeleteGalerie(id, title) {
 
         $('#remove').click(function() {
             location.href = 'http://localhost:3000/admin/confirm_delete_galerie/' + id;
+        })
+    });
+}
+
+function ViewComment(id, author, avatar, dateCreate, content) {
+    $.get("http://localhost:3000/admin/view_comment/" + id, function() {
+        $('#ModalLabelModifComment').html("Modifier le commentaire de " + author)
+        $('#authorComment').attr('value', author);
+        $('#avatarComment').attr('value', avatar);
+        $('#dateCreateComment').attr('value', dateCreate);
+        $('#contentComment').html(content)
+        $('#editCommentForm').attr('action', '/admin/editComment/' + id)
+
+    });
+}
+
+function DeleteComment(id, author) {
+    $.get("http://localhost:3000/admin/delete_comment/" + id, function() {
+        $('#ModalLabelDelete').html('Suppression du commentaire de ' + author);
+
+        $('#remove').click(function() {
+            location.href = 'http://localhost:3000/admin/confirm_delete_comment/' + id;
         })
     });
 }

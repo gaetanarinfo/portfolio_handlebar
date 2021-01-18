@@ -15,6 +15,7 @@ const homeController = require('./home/homeController'),
     adminControllerProjet = require('./admin/ControllerProjet'),
     adminControllerYoutube = require('./admin/ControllerYoutube'),
     adminControllerGalerie = require('./admin/ControllerGalerie'),
+    adminControllerComment = require('./admin/ControllerComment'),
     userController = require('./user/userController'),
     nodemailerController = require('./user/nodemailerController'),
     resetpasswordController = require('./user/resetpasswordController')
@@ -96,6 +97,16 @@ router.route('/admin/delete_galerie/:id')
     .get(auth, authAdmin, adminControllerGalerie.deleteGalerie)
 router.route('/admin/confirm_delete_galerie/:id')
     .get(auth, authAdmin, adminControllerGalerie.deleteGalerieConfirm)
+
+// Routes Admin Section Galerie
+router.route('/admin/comments')
+    .get(auth, authAdmin, adminControllerComment.showComment)
+router.route('/admin/editComment/:id')
+    .post(auth, authAdmin, adminControllerComment.editComment)
+router.route('/admin/delete_comment/:id')
+    .get(auth, authAdmin, adminControllerComment.deleteComment)
+router.route('/admin/confirm_delete_comment/:id')
+    .get(auth, authAdmin, adminControllerComment.deleteCommentConfirm)
 
 // Routes User Create & Authentification & Déconnexion
 router.route('/user/register')

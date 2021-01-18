@@ -44,5 +44,9 @@ module.exports = {
 
         return options.inverse(this)
 
+    },
+
+    countArray: (arr) => {
+        return arr.length
     }
 }

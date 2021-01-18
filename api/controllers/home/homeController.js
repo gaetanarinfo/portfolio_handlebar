@@ -4,7 +4,6 @@ const Projet = require('../../database/models/projets'),
     Galerie = require('../../database/models/galeries'),
     Comment = require('../../database/models/comments')
 
-
 module.exports = {
     get: async(req, res) => {
 

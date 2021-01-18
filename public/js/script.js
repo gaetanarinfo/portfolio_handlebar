@@ -112,20 +112,6 @@ $('#inscription2').click(function() {
     }, 550);
 });
 
-// Modal Inscription Connexion Mot de passe perdu
-
-// Toast Bootstrap
-//setTimeout(function() {
-//    console.log("open toast");
-//    $('#message_valide').toast('show')
-//}, 1500);
-
-//setTimeout(function() {
-//    console.log("open toast");
-//    $('#message_erreur').toast('show')
-//}, 3000);
-// Toast Bootstrap
-
 // Télécharger CV
 
 const btn_cv = document.getElementById('dev-cv');
@@ -264,4 +250,25 @@ if (sessionStorage.getItem('emailLogin') != undefined && sessionStorage.getItem(
 
     });
 
+}
+
+function searchFunction() {
+    // Declare variables
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById('inputSearch');
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("searchKey");
+    li = ul.getElementsByTagName('li');
+    ul.style.display = 'block';
+
+    // Loop through all list items, and hide those who don't match the search query
+    for (i = 0; i < li.length; i++) {
+        a = li[i].getElementsByTagName("a")[0];
+        txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
 }

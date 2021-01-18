@@ -32,8 +32,42 @@
 
                         <div class="header-search">
                             <i class="fas fa-search"></i>
-                            <input type="text" class="form-control" placeholder="Faites votre recherche" aria-label="search">
+                            <input type="text" class="form-control" placeholder="Faites votre recherche" aria-label="search" id="inputSearch" onkeyup="searchFunction()">
+                            <ul id="searchKey">
+                            {{#each articles}}
+                                <li><a href="article/{{_id}}" title="{{title}}">{{title}}</a></li>
+                            {{/each}}
+                            </ul>
                         </div>
+
+                        <style>
+                                #searchKey {
+                                    display: none;
+                                    position: absolute;
+                                    list-style-type: none;
+                                    padding: 0;
+                                    margin: 0;
+                                    width: 281px;
+                                    z-index: 9;
+                                    left: 9px;
+                                }
+
+                                #searchKey li a {
+                                        border: 1px solid #807c7c;
+                                        margin-top: -1px;
+                                        background-color: #666869;
+                                        padding: 12px;
+                                        text-decoration: none;
+                                        font-size: 17px;
+                                        color: white;
+                                        display: block;
+                                        font-family: 'Karla', sans-serif;
+                                }
+
+                                #searchKey li a:hover:not(.header) {
+                                    background-color: #57595a;
+                                }
+                        </style>
                     </div>
                 </div>
             </div>

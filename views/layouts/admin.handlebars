@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/admin.css">
 
+    <!-- TinyMCE -->
+     <script src="https://cdn.tiny.cloud/1/3v62o268mu5zxtepisq9d6ujmp8bfiu63ylvpu7d57cgdgxl/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
 </head>
 
 <body>
@@ -182,6 +185,35 @@
             });
 
     {{/each}}
+
+    {{#each comments}}
+
+            $('#editComment-' + '{{_id}}').click(function() {
+            
+                ViewComment('{{_id}}', '{{author}}', '{{avatar}}', '{{generateDate dateCreate}}', '{{content}}');
+
+            });
+
+            $('#deleteComment-' + '{{_id}}').click(function() {
+
+               DeleteComment('{{_id}}', '{{author}}');
+
+            });
+
+            $('#editCommentMobile-' + '{{_id}}').click(function() {
+            
+                ViewComment('{{_id}}', '{{author}}', '{{avatar}}', '{{generateDate dateCreate}}', '{{content}}');
+
+            });
+
+            $('#deleteCommentMobile-' + '{{_id}}').click(function() {
+
+               DeleteComment('{{_id}}', '{{author}}');
+
+            });
+
+    {{/each}}
+
     </script>
 
     ​{{> notifications}}

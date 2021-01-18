@@ -25,7 +25,7 @@
                             <th class="th-perso"><img width="97px;" src="{{image}}"></th>
                             <td class="th-perso">{{title}}</td>
                             <td class="th-perso">{{generateDate dateCreate}}</td>
-                            <td class="th-perso">{{comment}}</td>
+                            <td class="th-perso">{{countArray comment }}</td>
                             <td class="th-perso">{{#if isPrivate}}Article privé{{else}}Article public{{/if}}</td>
                             <td class="table-content th-perso">{{trimString content}}</td>
                             <td class="th-perso"><a id="editArticle-{{_id}}" href="" data-toggle="modal"
@@ -40,7 +40,7 @@
                     </tbody>
                 </table>
 
-                {{{pagin2}}}
+                {{{pagin6}}}
             </div>
         </div>
     </div>

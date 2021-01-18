@@ -202,6 +202,7 @@ if (document.location.href == 'http://localhost:3000/admin/') {
     $('#galerie').css('display', 'none');
     $('#youtube').css('display', 'none');
     $('#projet').css('display', 'none');
+    $('#comment').css('display', 'none');
 
     // Section display mobile
     $('#blog_mobile').css('display', 'none');
@@ -218,6 +219,7 @@ if (document.location.href == 'http://localhost:3000/admin/') {
     $('#galerie').css('display', 'none');
     $('#youtube').css('display', 'none');
     $('#projet').css('display', 'none');
+    $('#comment').css('display', 'none');
 
     // Section display mobile
     $('#blog_mobile').css('display', '');
@@ -234,6 +236,7 @@ if (document.location.href == 'http://localhost:3000/admin/') {
     $('#galerie').css('display', '');
     $('#youtube').css('display', 'none');
     $('#projet').css('display', 'none');
+    $('#comment').css('display', 'none');
 
     // Section display mobile
     $('#blog_mobile').css('display', 'none');
@@ -250,6 +253,7 @@ if (document.location.href == 'http://localhost:3000/admin/') {
     $('#galerie').css('display', 'none');
     $('#youtube').css('display', '');
     $('#projet').css('display', 'none');
+    $('#comment').css('display', 'none');
 
     // Section display mobile
     $('#blog_mobile').css('display', 'none');
@@ -266,6 +270,7 @@ if (document.location.href == 'http://localhost:3000/admin/') {
     $('#galerie').css('display', 'none');
     $('#youtube').css('display', 'none');
     $('#projet').css('display', '');
+    $('#comment').css('display', 'none');
 
     // Section display mobile
     $('#blog_mobile').css('display', 'none');
@@ -273,4 +278,22 @@ if (document.location.href == 'http://localhost:3000/admin/') {
     $('#youtube_mobile').css('display', 'none');
     $('#galerie_mobile').css('display', 'none');
     $('#projets_mobile').css('display', '');
+
+} else if (document.location.href == 'http://localhost:3000/admin/comments' || document.location.href == 'http://localhost:3000/admin/comments/' + document.location.search) {
+
+    // Section display
+    $('#blog').css('display', 'none');
+    $('#membres').css('display', 'none');
+    $('#galerie').css('display', 'none');
+    $('#youtube').css('display', 'none');
+    $('#projet').css('display', 'none');
+    $('#comment').css('display', '');
+
+    // Section display mobile
+    $('#blog_mobile').css('display', 'none');
+    $('#membres_mobile').css('display', 'none');
+    $('#youtube_mobile').css('display', 'none');
+    $('#galerie_mobile').css('display', 'none');
+    $('#projets_mobile').css('display', 'none');
+    $('#comment_mobile').css('display', '');
 }
