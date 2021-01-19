@@ -3,6 +3,7 @@ const Article = require('../../database/models/articles'),
     fileupload = require("express-fileupload"),
     express = require('express'),
     app = express(),
+    path = require('path'),
     pagination = require('pagination')
 
 app.use(fileupload())
@@ -158,42 +159,41 @@ module.exports = {
 
         const imageFile = req.files.image
 
-        imageFile.mv('public/article/' + imageFile.name, function(err) {
-            if (err) {
-                req.flash('error', 'Une erreur est survenue !')
-                req.session.error = req.flash('error')
-                return res.redirect('/admin/articles')
-            } else {
+        if (!imageFile) {
 
-                Article
-                    .create({
-                        image: '/article/' + imageFile.name,
-                        title: req.body.title,
-                        content: req.body.content,
-                        author: req.session.lastname + ' ' + req.session.firstname,
-                        dateCreate: new Date(),
-                        active: false,
-                        avatar: req.session.avatar,
-                        isPrivate: Boolean(req.body.isPrivate)
-                    }, (err) => {
-                        if (err) {
-                            //console.log(err)
-                            req.flash('error', 'Une erreur est survenue !')
-                            req.session.error = req.flash('error')
+            req.flash('error', 'Une erreur est survenue !')
+            req.session.error = req.flash('error')
+            return res.redirect('/admin/articles')
 
-                            res.redirect('/admin/articles')
-                        } else {
-                            req.flash('success', "L'article à été posté !")
-                            req.session.success = req.flash('success')
+        } else {
 
-                            res.redirect('/admin/articles')
-                        }
+            Article
+                .create({
+                    image: `/assets/images/${imageFile.name}`,
+                    title: req.body.title,
+                    content: req.body.content,
+                    author: req.session.lastname + ' ' + req.session.firstname,
+                    dateCreate: new Date(),
+                    active: false,
+                    avatar: req.session.avatar,
+                    isPrivate: Boolean(req.body.isPrivate)
+                }, (err) => {
+                    if (err) {
+                        //console.log(err)
+                        req.flash('error', 'Une erreur est survenue !')
+                        req.session.error = req.flash('error')
 
-                    })
+                        res.redirect('/admin/articles')
+                    } else {
+                        req.flash('success', "L'article à été posté !")
+                        req.session.success = req.flash('success')
 
-            }
+                        res.redirect('/admin/articles')
+                    }
 
-        })
+                })
+
+        }
 
     },
 

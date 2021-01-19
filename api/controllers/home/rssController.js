@@ -4,7 +4,7 @@ const RSS = require('rss'),
 var feed = new RSS({
     title: 'Mon flux rss de mon portfolio',
     description: 'Mon super flux rss de mon portfolio',
-    url: 'https://gaetan-seigneur.website/rss',
+    url: 'http://localhost:3000/rss',
     generator: 'Portfolio v1.0.0',
     webMaster: 'Gaëtan Seigneur',
     copyright: 'Gaëtan Seigneur - Portfolio 2021',
@@ -27,7 +27,7 @@ module.exports = {
                         author: article.author,
                         date: article.dateCreate,
                         description: article.content,
-                        url: 'https://gaetan-seigneur.website/images' + article.image
+                        url: 'http://localhost:3000/images' + article.image
                     })
                 })
 

@@ -19,7 +19,8 @@ const homeController = require('./home/homeController'),
     userController = require('./user/userController'),
     nodemailerController = require('./user/nodemailerController'),
     resetpasswordController = require('./user/resetpasswordController'),
-    rssController = require('./home/rssController');
+    rssController = require('./home/rssController'),
+    upload = require('../config/multer')
 
 // Routes Home
 router.route('/')
@@ -53,9 +54,9 @@ router.route('/admin/confirm_delete_membre/:id')
 
 // Routes Admin Section Blog (Articles)
 router.route('/admin/articles')
-    .get(auth, authAdmin, adminControllerArticle.showArticle)
+    .get(auth, authAdmin, upload.single('image'), adminControllerArticle.showArticle)
 router.route('/admin/addArticle')
-    .post(auth, authAdmin, adminControllerArticle.addArticle)
+    .post(auth, authAdmin, upload.single('image'), adminControllerArticle.addArticle)
 router.route('/admin/editArticle/:id')
     .post(auth, authAdmin, adminControllerArticle.editArticle)
 router.route('/admin/delete_article/:id')

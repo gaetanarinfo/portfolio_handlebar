@@ -170,7 +170,7 @@
                 <div class="row d-flex justify-content-center mt-3">
                     <div class="col-md-12">
                         {{#ifEquals commentCount 0}}
-                            {{#each commentsAll}}       
+                            {{#each (limit commentsAll 2) }}       
                             <div class="card comment">
                                 <div class="comment-widgets">
                                     
