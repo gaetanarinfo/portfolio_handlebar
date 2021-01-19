@@ -27,7 +27,7 @@ module.exports = {
                         author: article.author,
                         date: article.dateCreate,
                         description: article.content,
-                        url: 'https://gaetan-seigneur.website/images/article/' + article.image
+                        url: 'https://gaetan-seigneur.website/images' + article.image
                     })
                 })
 
