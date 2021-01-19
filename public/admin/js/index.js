@@ -194,7 +194,7 @@ function updateImageDisplay4() {
 }
 
 // Permet de marquer les sections  -->
-if (document.location.href == 'http://localhost:3000/admin/') {
+if (document.location.href == 'https://gaetan-seigneur.website/admin/') {
 
     // Section display
     $('#membres').css('display', '');
@@ -212,7 +212,7 @@ if (document.location.href == 'http://localhost:3000/admin/') {
     $('#projets_mobile').css('display', 'none');
     $('#comment_mobile').css('display', 'none');
 
-} else if (document.location.href == 'http://localhost:3000/admin/articles' || document.location.href == 'http://localhost:3000/admin/articles/' + document.location.search) {
+} else if (document.location.href == 'https://gaetan-seigneur.website/admin/articles' || document.location.href == 'https://gaetan-seigneur.website/admin/articles/' + document.location.search) {
 
     // Section display
     $('#blog').css('display', '');
@@ -230,7 +230,7 @@ if (document.location.href == 'http://localhost:3000/admin/') {
     $('#projets_mobile').css('display', 'none');
     $('#comment_mobile').css('display', 'none');
 
-} else if (document.location.href == 'http://localhost:3000/admin/galeries' || document.location.href == 'http://localhost:3000/admin/galeries/' + document.location.search) {
+} else if (document.location.href == 'https://gaetan-seigneur.website/admin/galeries' || document.location.href == 'https://gaetan-seigneur.website/admin/galeries/' + document.location.search) {
 
     // Section display
     $('#blog').css('display', 'none');
@@ -248,7 +248,7 @@ if (document.location.href == 'http://localhost:3000/admin/') {
     $('#projets_mobile').css('display', 'none');
     $('#comment_mobile').css('display', 'none');
 
-} else if (document.location.href == 'http://localhost:3000/admin/youtubes' || document.location.href == 'http://localhost:3000/admin/youtubes/' + document.location.search) {
+} else if (document.location.href == 'https://gaetan-seigneur.website/admin/youtubes' || document.location.href == 'https://gaetan-seigneur.website/admin/youtubes/' + document.location.search) {
 
     // Section display
     $('#blog').css('display', 'none');
@@ -266,7 +266,7 @@ if (document.location.href == 'http://localhost:3000/admin/') {
     $('#projets_mobile').css('display', 'none');
     $('#comment_mobile').css('display', 'none');
 
-} else if (document.location.href == 'http://localhost:3000/admin/projets' || document.location.href == 'http://localhost:3000/admin/projets/' + document.location.search) {
+} else if (document.location.href == 'https://gaetan-seigneur.website/admin/projets' || document.location.href == 'https://gaetan-seigneur.website/admin/projets/' + document.location.search) {
 
     // Section display
     $('#blog').css('display', 'none');
@@ -284,7 +284,7 @@ if (document.location.href == 'http://localhost:3000/admin/') {
     $('#projets_mobile').css('display', '');
     $('#comment_mobile').css('display', 'none');
 
-} else if (document.location.href == 'http://localhost:3000/admin/comments' || document.location.href == 'http://localhost:3000/admin/comments/' + document.location.search) {
+} else if (document.location.href == 'https://gaetan-seigneur.website/admin/comments' || document.location.href == 'https://gaetan-seigneur.website/admin/comments/' + document.location.search) {
 
     // Section display
     $('#blog').css('display', 'none');
