@@ -1,6 +1,6 @@
 <!-- Modal Admin Ajout Article Blog -->
  <div class="modal fade" id="add_article" tabindex="-1" role="dialog" aria-hidden="true">
-     <div class="modal-dialog modal-dialog-centered" role="document">
+     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
          <div class="modal-content">
              <div class="modal-header">
                  <h5 class="modal-title">Ajouter un article au blog</h5>
@@ -39,6 +39,13 @@
                             <label class="text-dark mb-2" id="lab_priv">En ligne</label>
                         </div>
                     </div>
+
+                    <script>
+                        tinymce.init({
+                            selector: '#contentArticleAdd',
+                            height : "325"
+                        });
+                    </script>
 
                  </div>
 

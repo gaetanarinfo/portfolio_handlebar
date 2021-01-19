@@ -49,7 +49,6 @@ module.exports = {
                             // On push nos index dans le tableau
                             arrayPagesIndexes.push(i + 1)
                         }
-                        console.log('COUNT: ', articles)
 
                         var boostrapPaginator2 = new pagination.TemplatePaginator({
                             prelink: '/admin/articles/',

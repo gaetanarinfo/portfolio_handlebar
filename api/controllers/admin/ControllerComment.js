@@ -45,7 +45,7 @@ module.exports = {
 
 
                         var boostrapPaginator3 = new pagination.TemplatePaginator({
-                            prelink: '/admin/comment/',
+                            prelink: '/admin/comments/',
                             current: page,
                             rowsPerPage: perPage,
                             totalResult: count,

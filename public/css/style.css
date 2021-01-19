@@ -10587,10 +10587,12 @@ textarea.form-control-lg {
 /* IMPORT SASS */  
 /* HEADER */
 header {
+  display: block;
+  position: relative;
   background-image: url(../images/background-header.jpeg);
   background-size: cover;
   background-position: center;
-  height: 100vh;
+  height: 680px;
   border-bottom: 5px solid #6e6e6e85;
 }
 
@@ -11015,7 +11017,10 @@ progress::-webkit-progress-value {
 
 @media only screen and (max-width: 1195px) {
   .home-title {
-    margin: -84px auto !important;
+    display: block;
+    position: relative;
+    top: 42px;
+    margin: 0px auto !important;
   }
 
   .header-search {
@@ -11040,10 +11045,6 @@ progress::-webkit-progress-value {
     max-width: 281px;
     height: 316px;
     font-size: 40px;
-  }
-
-  .logo-header {
-    left: -6%;
   }
 
   .logo-header img {
@@ -13061,6 +13062,37 @@ button.close {
   display: block;
   position: relative;
   margin: 15px 0 0 0;
+}
+
+.searchKey {
+  display: none;
+  position: absolute;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  width: 281px;
+  z-index: 9;
+  left: 9px;
+}
+
+.searchKey2 {
+  left: -80px !important;
+}
+
+.searchKey li a {
+  border: 1px solid #807c7c;
+  margin-top: -1px;
+  background-color: #666869;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 17px;
+  color: white;
+  display: block;
+  font-family: "Karla", sans-serif;
+}
+
+.searchKey li a:hover:not(.header) {
+  background-color: #57595a;
 }
 
 footer {

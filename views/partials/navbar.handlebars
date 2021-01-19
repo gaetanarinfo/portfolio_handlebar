@@ -95,8 +95,12 @@
                     <li>
                         <div class="header-search header-search-mob" style="display: inline-block;">
                             <i class="fas fa-search"></i>
-                            <input type="text" class="form-control" placeholder="Faites votre recherche"
-                                aria-label="search">
+                            <input type="text" class="form-control" placeholder="Faites votre recherche" aria-label="search" id="inputSearch2" onkeyup="searchFunctionMobile()">
+                            <ul class="searchKey searchKey2" id="searchKey2">
+                            {{#each articles}}
+                                <li><a href="article/{{_id}}" title="{{title}}">{{title}}</a></li>
+                            {{/each}}
+                            </ul>
                         </div>
                     </li>
                 </ul>

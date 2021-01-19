@@ -18,7 +18,8 @@ const homeController = require('./home/homeController'),
     adminControllerComment = require('./admin/ControllerComment'),
     userController = require('./user/userController'),
     nodemailerController = require('./user/nodemailerController'),
-    resetpasswordController = require('./user/resetpasswordController')
+    resetpasswordController = require('./user/resetpasswordController'),
+    rssController = require('./home/rssController');
 
 // Routes Home
 router.route('/')
@@ -132,6 +133,10 @@ router.route('/mail')
 // Routes user add like projet
 router.route('/user/addLike/:id')
     .get(homeController.addLike)
+
+// Routes flux rss
+router.route('/rss')
+    .get(rssController.getRss)
 
 // Export
 module.exports = router

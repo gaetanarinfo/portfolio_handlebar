@@ -8,7 +8,7 @@
                      <span aria-hidden="true">&times;</span>
                  </button>
              </div>
-             <form id="editArticleForm" method="POST" action="/admin/editArticle/{{article._id}}" enctype="multipart/form-data">
+             <form method="POST" action="/admin/editArticle/{{article._id}}" enctype="multipart/form-data">
                  <div class="modal-body">
                      <div class="form-group">
                          <label class="text-dark mb-2">Image de l'article</label>
@@ -24,7 +24,7 @@
 
                      <div class="form-group">
                          <label for="contentProjet" class="text-dark mb-2">Description de l'article</label>
-                         <textarea rows="10" class="form-control mb-2" name="content"
+                         <textarea rows="10" class="form-control mb-2" name="content" id="ContentArticleEdit{{article._id}}"
                              placeholder="Description de l'article">{{article.content}}</textarea>
                      </div>
 
@@ -35,6 +35,13 @@
                             <label class="text-dark mb-2" id="lab_priv2_{{article._id}}">En ligne</label>
                         </div>
                     </div>
+
+                    <script>
+                        tinymce.init({
+                            selector: '#ContentArticleEdit{{article._id}}',
+                            height : "325"
+                        });
+                    </script>
                      
 
                  </div>

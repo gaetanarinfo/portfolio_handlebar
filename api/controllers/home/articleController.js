@@ -18,9 +18,7 @@ module.exports = {
         // On viens definir nos constante
         // Ici query est égale à l'id envoyer via l'URL /article/:id
         const query = req.params.id,
-            // Ici on recherche l'article ayant comme id le query de notre URL   
-            dbArticleID = await Article.findById(query)
-        countComment = await Comment.countDocuments(query).lean();
+            countComment = await Comment.countDocuments(query);
 
         // Ici nous resortons notre constructeur
         Article
@@ -47,7 +45,8 @@ module.exports = {
                 res.render('article', {
                     success: success,
                     artID: result,
-                    commentAll: result.comment
+                    commentAll: result.comment,
+                    countComments: countComment
                 })
             } else {
                 res.render('article', {

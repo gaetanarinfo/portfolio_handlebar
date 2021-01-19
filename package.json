@@ -39,6 +39,7 @@
         "nodemailer": "^6.4.17",
         "pagination": "^0.4.6",
         "rand-token": "^1.0.1",
+        "rss": "^1.2.2",
         "striptags": "^3.1.1"
     },
     "devDependencies": {
