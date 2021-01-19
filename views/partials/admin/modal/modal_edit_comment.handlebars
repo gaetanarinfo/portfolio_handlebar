@@ -1,0 +1,47 @@
+<!-- Modal Admin Modifier commentaire -->
+<div class="modal fade" id="modif_comment_{{this._id}}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalLabelModifComment">Modifier le commentaire</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="editCommentForm" method="POST" action="/admin/editComment/{{comment._id}}">
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label class="text-dark mb-2">Autheur du commentaire</label>
+                        <input type="text" class="form-control mb-2" name="author"
+                            placeholder="Autheur du commentaire" value="{{comment.author}}">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="text-dark mb-2">Avatar du membre</label>
+                        <input type="text" class="form-control mb-2" name="image"
+                            placeholder="Avatar du membre" value="{{comment.avatar}}">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="text-dark mb-2">Date de création du commentaire</label>
+                        <input type="text" class="form-control mb-2" name="dateCreate"
+                            placeholder="Date de création du commentaire" value="{{generateDate comment.dateCreate}}">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="text-dark mb-2">Commentaire</label>
+                        <textarea class="form-control mb-2" name="content">{{comment.content}}</textarea>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-form-reset" data-dismiss="modal">Fermer</button>
+                    <button type="submit" class="btn btn-form-send">Valider</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+ <!-- Modal Admin Modifier un projet -->

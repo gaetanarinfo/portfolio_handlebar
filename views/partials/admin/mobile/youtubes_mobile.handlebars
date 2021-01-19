@@ -12,7 +12,7 @@
             <p class="mb-1">{{content}}</p>
             <p class="mb-1">{{date}}</p>
             <p class="mb-1">{{#if isPrivate}}Tutoriel privé{{else}}Tutoriel public{{/if}}</p>
-            <p class="mb-1"> <a href="" id="editYoutubeMobile-{{_id}}" data-toggle="modal" data-target="#modif_video"><i
+            <p class="mb-1"> <a href="" data-toggle="modal" data-target="#modif_video_{{_id}}"><i
                         class="fas fa-edit ml-2" data-toggle="tooltip" data-placement="left"
                         title="Editer la vidéo"></i></a>
                 <a href="" id="deleteYoutubeMobile-{{_id}}" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash"
@@ -20,6 +20,7 @@
             </p>
         </div>
     </div>
+    {{> admin/modal/modal_edit_video video=this }}
     {{/each}}
 
     {{{pagin3}}}

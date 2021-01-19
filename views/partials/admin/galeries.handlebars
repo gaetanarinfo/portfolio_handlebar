@@ -36,14 +36,16 @@
                 <td class="th-perso">
                   <img width="50%" src="{{image}}" alt="{{title}}" />
                 </td>
-              <td class="th-perso"><a id="editGalerie-{{_id}}" href="" data-toggle="modal"
-                                    data-target="#modif_galerie"><i class="fas fa-edit ml-2" data-toggle="tooltip"
+              <td class="th-perso"><a href="" data-toggle="modal"
+                                    data-target="#modif_galerie_{{_id}}"><i class="fas fa-edit ml-2" data-toggle="tooltip"
                                         data-placement="top" title="Editer l'image"></i></a>
                                 <a href="" id="deleteGalerie-{{_id}}" data-toggle="modal" data-target="#deleteModal"><i
                                         class="fas fa-trash" data-toggle="tooltip" data-placement="top"
                                         title="Supprimer l'image"></i></a>
                             </td>
               </tr>
+
+            {{> admin/modal/modal_edit_galerie galerie=this }}
             {{/each}}
           </tbody>
         </table>

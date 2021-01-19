@@ -26,13 +26,16 @@
                             <td class="th-perso"><img src="../../../{{image}}" alt="{{title}}" width="199px"></td>
                             <td class="th-perso">{{date}}</td>
                             <td class="table-content th-perso">{{trimString content}}</td>
-                            <td class="th-perso"><a href="" id="editProjet-{{_id}}" data-toggle="modal" data-target="#modif_projet"><i
+                            <td class="th-perso"><a href="" data-toggle="modal" data-target="#modif_projet_{{_id}}"><i
                                         class="fas fa-edit ml-2" data-toggle="tooltip" data-placement="left"
                                         title="Editer le projet"></i></a>
                                 <a href="" id="deleteProjet-{{_id}}" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash"
                                         data-toggle="tooltip" data-placement="left" title="Supprimer le projet"></i></a>
                             </td>
                         </tr>
+
+                        {{> admin/modal/modal_edit_projet projet=this }}
+
                         {{/each}}
                     </tbody>
                 </table>

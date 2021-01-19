@@ -210,6 +210,7 @@ if (document.location.href == 'http://localhost:3000/admin/') {
     $('#youtube_mobile').css('display', 'none');
     $('#galerie_mobile').css('display', 'none');
     $('#projets_mobile').css('display', 'none');
+    $('#comment_mobile').css('display', 'none');
 
 } else if (document.location.href == 'http://localhost:3000/admin/articles' || document.location.href == 'http://localhost:3000/admin/articles/' + document.location.search) {
 
@@ -227,6 +228,7 @@ if (document.location.href == 'http://localhost:3000/admin/') {
     $('#youtube_mobile').css('display', 'none');
     $('#galerie_mobile').css('display', 'none');
     $('#projets_mobile').css('display', 'none');
+    $('#comment_mobile').css('display', 'none');
 
 } else if (document.location.href == 'http://localhost:3000/admin/galeries' || document.location.href == 'http://localhost:3000/admin/galeries/' + document.location.search) {
 
@@ -244,6 +246,7 @@ if (document.location.href == 'http://localhost:3000/admin/') {
     $('#youtube_mobile').css('display', 'none');
     $('#galerie_mobile').css('display', '');
     $('#projets_mobile').css('display', 'none');
+    $('#comment_mobile').css('display', 'none');
 
 } else if (document.location.href == 'http://localhost:3000/admin/youtubes' || document.location.href == 'http://localhost:3000/admin/youtubes/' + document.location.search) {
 
@@ -261,6 +264,7 @@ if (document.location.href == 'http://localhost:3000/admin/') {
     $('#youtube_mobile').css('display', '');
     $('#galerie_mobile').css('display', 'none');
     $('#projets_mobile').css('display', 'none');
+    $('#comment_mobile').css('display', 'none');
 
 } else if (document.location.href == 'http://localhost:3000/admin/projets' || document.location.href == 'http://localhost:3000/admin/projets/' + document.location.search) {
 
@@ -278,6 +282,7 @@ if (document.location.href == 'http://localhost:3000/admin/') {
     $('#youtube_mobile').css('display', 'none');
     $('#galerie_mobile').css('display', 'none');
     $('#projets_mobile').css('display', '');
+    $('#comment_mobile').css('display', 'none');
 
 } else if (document.location.href == 'http://localhost:3000/admin/comments' || document.location.href == 'http://localhost:3000/admin/comments/' + document.location.search) {
 

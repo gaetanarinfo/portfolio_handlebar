@@ -17,7 +17,7 @@
                   {{/if}}</p>
             <p class="mb-1" >Inscription {{generateDate createDate}}</p>
             <p class="mb-1">
-                <a id="editMembreMob-{{_id}}" href="" data-toggle="modal" data-target="#modif_membre" data-original-title="Editer le membre"><i
+                <a href="" data-toggle="modal" data-target="#modif_membre_{{_id}}" data-original-title="Editer le membre"><i
                         class="fas fa-user-edit ml-2" aria-hidden="true"></i></a>
                 {{#if isAdmin}}
 
@@ -28,6 +28,7 @@
             </p>
         </div>
     </div>
+    {{> admin/modal/modal_edit_membre user=this }}
     {{/each}}
 
     {{{pagin}}}

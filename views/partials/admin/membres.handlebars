@@ -54,7 +54,7 @@
                   {{generateDate createDate}}
                 </td>
                 <td class="th-perso">
-                  <a id="editMembre-{{_id}}" href="" data-toggle="modal" data-target="#modif_membre"><i class="fas fa-user-edit ml-2" data-toggle="tooltip" data-placement="left" title="Editer le membre"></i></a>
+                  <a href="" data-toggle="modal" data-target="#modif_membre_{{_id}}"><i class="fas fa-user-edit ml-2" data-toggle="tooltip" data-placement="left" title="Editer le membre"></i></a>
                   {{#if isAdmin}}
 
                   {{else}}
@@ -62,6 +62,9 @@
                   {{/if}}
                 </td>
               </tr>
+
+              {{> admin/modal/modal_edit_membre user=this }}
+
             {{/each}}
           </tbody>
         </table>

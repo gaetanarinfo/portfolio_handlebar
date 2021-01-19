@@ -28,14 +28,17 @@
                             <td class="th-perso">{{countArray comment }}</td>
                             <td class="th-perso">{{#if isPrivate}}Article privé{{else}}Article public{{/if}}</td>
                             <td class="table-content th-perso">{{trimString content}}</td>
-                            <td class="th-perso"><a id="editArticle-{{_id}}" href="" data-toggle="modal"
-                                    data-target="#modif_article"><i class="fas fa-edit ml-2" data-toggle="tooltip"
+                            <td class="th-perso"><a href="" data-toggle="modal"
+                                    data-target="#modif_article_{{_id}}"><i class="fas fa-edit ml-2" data-toggle="tooltip"
                                         data-placement="left" title="Editer l'article"></i></a>
                                 <a href="" id="deleteArticle-{{_id}}" data-toggle="modal" data-target="#deleteModal"><i
                                         class="fas fa-trash" data-toggle="tooltip" data-placement="left"
                                         title="Supprimer l'article"></i></a>
                             </td>
                         </tr>
+
+                        {{> admin/modal/modal_edit_article article=this }}
+
                         {{/each}}
                     </tbody>
                 </table>

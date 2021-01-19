@@ -1,0 +1,46 @@
+<!-- Modal Admin Modifier une image  -->
+ <div class="modal fade" id="modif_galerie_{{galerie._id}}" tabindex="-1" role="dialog" aria-hidden="true">
+     <div class="modal-dialog modal-dialog-centered" role="document">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <h5 class="modal-title" id="ModalLabelEditGalerie">Modifier une vidéo Youtube</h5>
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                 </button>
+             </div>
+             <form id="editGalerieForm" method="POST" action="/admin/editGalerie/{{galerie._id}}">
+                 <div class="modal-body">
+
+                     <div class="form-group">
+                         <label class="text-dark mb-2">Titre de l'image</label>
+                         <input type="text" class="form-control mb-2" name="title" value="{{galerie.title}}"
+                             placeholder="Titre de l'image">
+                     </div>
+
+                     <div class="form-group">
+                         <label class="text-dark mb-2">Image</label>
+                         <input type="text" class="form-control mb-2" name="image" value="{{galerie.image}}"
+                             placeholder="Image">
+                     </div>
+
+                     <div class="form-group text-center">
+                        <div class="switch_box box_1">
+                            <label class="text-dark mb-2">Image privé ?</label>
+                            <div>
+                                <input type="checkbox" class="switch_1" name="isPrivate" id="isPrivate8_{{galerie._id}}">
+                            </div>
+                            <label class="text-dark mb-2" id="lab_img2_{{galerie._id}}">En ligne</label>
+                        </div>
+                    </div>
+
+                 </div>
+
+                 <div class="modal-footer">
+                     <button type="button" class="btn btn-form-reset" data-dismiss="modal">Fermer</button>
+                     <button type="submit" class="btn btn-form-send">Valider</button>
+                 </div>
+             </form>
+         </div>
+     </div>
+ </div>
+ <!-- Modal Admin Modifier une image -->

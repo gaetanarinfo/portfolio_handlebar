@@ -26,7 +26,14 @@
 
     {{> admin/admin_mobile }}
 
-    {{> admin/modal/modal_admin }}
+    {{> admin/modal/modal_admin_delete }}
+
+    <!-- Modal Add -->
+    {{> admin/modal/modal_add_article }}
+    {{> admin/modal/modal_add_galerie }}
+    {{> admin/modal/modal_add_membre }}
+    {{> admin/modal/modal_add_projet }}
+    {{> admin/modal/modal_add_video }}
 
     <!-- js icons -->
     <script src="/vendor/icons/9d1d83a1dd.js"></script>
@@ -46,18 +53,6 @@
     // Permet de voir le membre dans le modal -->
     {{#each membres}}
 
-            $('#editMembre-' + '{{_id}}').click(function() {
-            
-                ViewMembre('{{_id}}', '{{lastname}}', '{{firstname}}', '{{email}}', '{{isBanned}}', '{{isAdmin}}');
-
-            });
-
-            $('#editMembreMob-' + '{{_id}}').click(function() {
-            
-                ViewMembre('{{_id}}', '{{lastname}}', '{{firstname}}', '{{email}}', '{{isBanned}}', '{{isAdmin}}');
-
-            });
-
             $('#deleteMembre-' + '{{_id}}').click(function() {
 
                 DeleteMembre('{{_id}}', '{{lastname}}', '{{firstname}}');
@@ -70,26 +65,26 @@
 
             });
 
+            $(document).ready(function() {
+            $('input[id="isBanned_{{_id}}"]').click(function() {
+            if ($(this).is(":checked")) {
+            $('#lab_ban_{{_id}}').html('Privé')
+            $('#isBanned_{{_id}}"]').attr('checked', true);
+            } else if ($(this).is(":not(:checked)")) {
+            $('#lab_ban_{{_id}}').html('En ligne')
+            $('#isBanned_{{_id}}"]').attr('checked', false);
+            }
+            });
+            });
+
     {{/each}}
 
     // Permet de voir l'article dans le modal  -->
     {{#each articles}}
 
-            $('#editArticle-' + '{{_id}}').click(function() {
-            
-                ViewArticle('{{_id}}', '{{image}}', '{{title}}', '{{content}}', '{{isPrivate}}');
-
-            });
-
             $('#deleteArticle-' + '{{_id}}').click(function() {
 
                DeleteArticle('{{_id}}', '{{title}}');
-
-            });
-
-            $('#editArticleMobile-' + '{{_id}}').click(function() {
-            
-                ViewArticle('{{_id}}', '{{image}}', '{{title}}', '{{content}}', '{{isPrivate}}');
 
             });
 
@@ -99,26 +94,27 @@
 
             });
 
+            $(document).ready(function() {
+                $('input[id="isPrivate2_{{_id}}"]').click(function() {
+                    if ($(this).is(":checked")) {
+                        $('#lab_priv2_{{_id}}').html('Privé')
+                        $('#isPrivate2_{{_id}}').attr('checked', true);
+                    } else if ($(this).is(":not(:checked)")) {
+                        $('#lab_priv2_{{_id}}').html('En ligne')
+                        $('#isPrivate2_{{_id}}').attr('checked', false);
+                    }
+                });
+            });
+
+
     {{/each}}
 
     // Permet de voir le projet dans le modal  -->
     {{#each projets}}
 
-            $('#editProjet-' + '{{_id}}').click(function() {
-            
-                ViewProjet('{{_id}}', '{{image}}', '{{title}}', '{{content}}', '{{date}}', '{{isPrivate}}');
-
-            });
-
             $('#deleteProjet-' + '{{_id}}').click(function() {
 
                DeleteProjet('{{_id}}', '{{title}}');
-
-            });
-
-            $('#editProjetMobile-' + '{{_id}}').click(function() {
-            
-                ViewProjet('{{_id}}', '{{image}}', '{{title}}', '{{content}}', '{{date}}', '{{isPrivate}}');
 
             });
 
@@ -128,25 +124,25 @@
 
             });
 
+            $(document).ready(function() {
+                $('input[id="isPrivate4_{{_id}}"]').click(function() {
+                    if ($(this).is(":checked")) {
+                        $('#lab_proj2_{{_id}}').html('Privé')
+                        $('#isPrivate4_{{_id}}').attr('checked', true);
+                    } else if ($(this).is(":not(:checked)")) {
+                        $('#lab_proj2_{{_id}}').html('En ligne')
+                        $('#isPrivate4_{{_id}}').attr('checked', false);
+                    }
+                });
+            });
+
     {{/each}}
 
     {{#each tutos}}
 
-            $('#editYoutube-' + '{{_id}}').click(function() {
-            
-                ViewYoutube('{{_id}}', '{{title}}', '{{content}}', '{{api}}', '{{date}}', '{{links}}', '{{isPrivate}}');
-
-            });
-
             $('#deleteYoutube-' + '{{_id}}').click(function() {
 
                DeleteYoutube('{{_id}}', '{{title}}');
-
-            });
-
-            $('#editYoutubeMobile-' + '{{_id}}').click(function() {
-            
-                ViewYoutube('{{_id}}', '{{title}}', '{{content}}', '{{api}}', '{{date}}', '{{links}}', '{{isPrivate}}');
 
             });
 
@@ -156,25 +152,25 @@
 
             });
 
+            $(document).ready(function() {
+                $('input[id="isPrivate6_{{_id}}"]').click(function() {
+                    if ($(this).is(":checked")) {
+                        $('#lab_vid2_{{_id}}').html('Privé')
+                        $('#isPrivate6_{{_id}}').attr('checked', true);
+                    } else if ($(this).is(":not(:checked)")) {
+                        $('#lab_vid2_{{_id}}').html('En ligne')
+                        $('#isPrivate6_{{_id}}').attr('checked', false);
+                    }
+                });
+            });
+
     {{/each}}
 
     {{#each galeries}}
 
-            $('#editGalerie-' + '{{_id}}').click(function() {
-            
-                ViewGalerie('{{_id}}', '{{title}}', '{{image}}', '{{isPrivate}}');
-
-            });
-
             $('#deleteGalerie-' + '{{_id}}').click(function() {
 
                DeleteGalerie('{{_id}}', '{{title}}');
-
-            });
-
-            $('#editGalerieMobile-' + '{{_id}}').click(function() {
-            
-                ViewGalerie('{{_id}}', '{{title}}', '{{image}}', '{{isPrivate}}');
 
             });
 
@@ -184,25 +180,25 @@
 
             });
 
+            $(document).ready(function() {
+                $('input[id="isPrivate8_{{_id}}"]').click(function() {
+                    if ($(this).is(":checked")) {
+                        $('#lab_img2_{{_id}}').html('Privé')
+                        $('#isPrivate8_{{_id}}').attr('checked', true);
+                    } else if ($(this).is(":not(:checked)")) {
+                        $('#lab_img2_{{_id}}').html('En ligne')
+                        $('#isPrivate8_{{_id}}').attr('checked', false);
+                    }
+                });
+            });
+
     {{/each}}
 
     {{#each comments}}
 
-            $('#editComment-' + '{{_id}}').click(function() {
-            
-                ViewComment('{{_id}}', '{{author}}', '{{avatar}}', '{{generateDate dateCreate}}', '{{content}}');
-
-            });
-
             $('#deleteComment-' + '{{_id}}').click(function() {
 
                DeleteComment('{{_id}}', '{{author}}');
-
-            });
-
-            $('#editCommentMobile-' + '{{_id}}').click(function() {
-            
-                ViewComment('{{_id}}', '{{author}}', '{{avatar}}', '{{generateDate dateCreate}}', '{{content}}');
 
             });
 

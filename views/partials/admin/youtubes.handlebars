@@ -50,13 +50,15 @@
                {{trimString content}}
               </td>
               <td class="th-perso">
-                  <a href="" id="editYoutube-{{_id}}" data-toggle="modal" data-target="#modif_video"><i
+                  <a href="" data-toggle="modal" data-target="#modif_video_{{_id}}"><i
                         class="fas fa-edit ml-2" data-toggle="tooltip" data-placement="left"
                         title="Editer la vidéo"></i></a>
                 <a href="" id="deleteYoutube-{{_id}}" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash"
                         data-toggle="tooltip" data-placement="left" title="Supprimer la vidéo"></i></a>
             </td>
             </tr>
+
+            {{> admin/modal/modal_edit_video video=this }}
             {{/each}}
           </tbody>
         </table>

@@ -11,12 +11,14 @@
             <p class="mb-1 mt-1"><img width="90px" src="../../../avatar/{{avatar}}"></p>
             <p class="mb-1">Crée le {{generateDate dateCreate}}</p>
             <p class="mb-1">{{content}}</p>
-            <p class="mb-1"><a id="editCommentMobile-{{_id}}" href="" data-toggle="modal"
-                                    data-target="#modif_comment"><i class="fas fa-edit ml-2" data-toggle="tooltip"
+            <p class="mb-1"><a href="" data-toggle="modal"
+                                    data-target="#modif_comment_{{_id}}"><i class="fas fa-edit ml-2" data-toggle="tooltip"
                                         data-placement="top" title="Editer le commentaire"></i></a>
                                 <a href="" id="deleteCommentMobile-{{_id}}" data-toggle="modal" data-target="#deleteModal"><i
                                         class="fas fa-trash" data-toggle="tooltip" data-placement="top"
                                         title="Supprimer le commentaire"></i></a></p>
+
+            {{> admin/modal/modal_edit_comment comment=this }}                            
         </div>
     </div>
     {{/each}}

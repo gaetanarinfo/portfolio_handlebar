@@ -13,13 +13,14 @@
             <p class="mb-1">{{#if isPrivate}}Article privé{{else}}Article public{{/if}}</p>
             <p class="mb-1">{{comment}} Commentaire(s)</p>
             <p class="mb-1">{{content}}</p>
-            <p class="mb-1"><a href="" id="editArticleMobile-{{_id}}" data-toggle="modal" data-target="#modif_article"
+            <p class="mb-1"><a href="" data-toggle="modal" data-target="#modif_article_{{_id}}"
                     data-original-title="Editer l'article"><i class="fas fa-edit ml-2" aria-hidden="true"></i></a>
                 <a href="" id="deleteArticleMobile-{{_id}}" data-toggle="modal" data-target="#deleteModal" data-original-title="Supprimer l'article"><i
                         class="fas fa-trash" aria-hidden="true"></i></a>
             </p>
         </div>
     </div>
+    {{> admin/modal/modal_edit_article article=this }}
     {{/each}}
 
     {{{pagin2}}}
