@@ -4,6 +4,7 @@
 const express = require('express'),
     router = express.Router(),
     auth = require("../middleware/auth"),
+    multer = require('multer'),
     authAdmin = require("../middleware/authAdmin")
 
 // Import Controller <-- Require
@@ -56,7 +57,7 @@ router.route('/admin/confirm_delete_membre/:id')
 router.route('/admin/articles')
     .get(auth, authAdmin, adminControllerArticle.showArticle)
 router.route('/admin/addArticle')
-    .post(auth, authAdmin, upload.single('imgArticle'), adminControllerArticle.addArticle)
+    .post(auth, authAdmin, upload.single('image'), adminControllerArticle.addArticle)
 router.route('/admin/editArticle/:id')
     .post(auth, authAdmin, adminControllerArticle.editArticle)
 router.route('/admin/delete_article/:id')

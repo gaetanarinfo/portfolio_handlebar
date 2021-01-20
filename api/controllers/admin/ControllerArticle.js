@@ -1,12 +1,9 @@
 const Article = require('../../database/models/articles'),
     User = require('../../database/models/users'),
-    fileupload = require("express-fileupload"),
     express = require('express'),
     app = express(),
-    path = require('path'),
+    fs = require('fs'),
     pagination = require('pagination')
-
-app.use(fileupload())
 
 module.exports = {
 
@@ -157,47 +154,34 @@ module.exports = {
 
     addArticle: (req, res) => {
 
-        const imageFile = req.files.imgArticle
+        const image = req.file;
 
-        if (!imageFile) {
+        Article
+            .create({
+                image: `/article/${image}`,
+                name: image,
+                title: req.body.title,
+                content: req.body.content,
+                author: req.session.lastname + ' ' + req.session.firstname,
+                dateCreate: new Date(),
+                active: false,
+                avatar: req.session.avatar,
+                isPrivate: Boolean(req.body.isPrivate)
+            }, (err) => {
+                if (err) {
+                    //console.log(err)
+                    req.flash('error', 'Une erreur est survenue !')
+                    req.session.error = req.flash('error')
 
-            req.flash('error', 'Une erreur est survenue !')
-            req.session.error = req.flash('error')
-            return res.redirect('/admin/articles')
+                    res.redirect('/admin/articles')
+                } else {
+                    req.flash('success', "L'article à été posté !")
+                    req.session.success = req.flash('success')
 
-        } else {
+                    res.redirect('/admin/articles')
+                }
 
-            console.log(req.body);
-
-            Article
-                .create({
-                    image: `/assets/images/${req.files.imgArticle}`,
-                    // On stock aussi le nom de l'image
-                    name: req.files.imgArticle,
-                    title: req.body.title,
-                    content: req.body.content,
-                    author: req.session.lastname + ' ' + req.session.firstname,
-                    dateCreate: new Date(),
-                    active: false,
-                    avatar: req.session.avatar,
-                    isPrivate: Boolean(req.body.isPrivate)
-                }, (err) => {
-                    if (err) {
-                        //console.log(err)
-                        req.flash('error', 'Une erreur est survenue !')
-                        req.session.error = req.flash('error')
-
-                        res.redirect('/admin/articles')
-                    } else {
-                        req.flash('success', "L'article à été posté !")
-                        req.session.success = req.flash('success')
-
-                        res.redirect('/admin/articles')
-                    }
-
-                })
-
-        }
+            })
 
     },
 

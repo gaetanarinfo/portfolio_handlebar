@@ -5,7 +5,7 @@ const multer = require('multer')
 const storage = multer.diskStorage({
     // Ici la destination (ou seront stocker nos fichiers par default)
     destination: (req, file, cb) => {
-        cb(null, './public/images')
+        cb(null, './public/article')
     },
     // Ici est définit le format du nom de l'image à stocker
     filename: (req, file, cb) => {
@@ -30,7 +30,8 @@ const upload = multer({
             file.mimetype === "image/png" ||
             file.mimetype === "image/jpg" ||
             file.mimetype === "image/gif" ||
-            file.mimetype === "image/jpeg"
+            file.mimetype === "image/jpeg" ||
+            file.mimetype === "image/webp"
         ) {
             cb(null, true)
         } else {
@@ -39,8 +40,6 @@ const upload = multer({
         }
     }
 })
-
-console.log(upload);
 
 // Ici nous exportons upload afin de pouvoir l'appeler dans notre router
 module.exports = upload
