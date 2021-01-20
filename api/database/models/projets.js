@@ -1,4 +1,8 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema
+
+// Import model
+const Like = require('./like')
 
 // MongoDb Collection Projet
 const ProjetShema = new mongoose.Schema({
@@ -6,13 +10,16 @@ const ProjetShema = new mongoose.Schema({
     title: String,
     content: String,
     image: String,
-    like: Number,
     date: String,
     links: Number,
     isPrivate: {
         type: Boolean,
         default: false
-    }
+    },
+    like: [{
+        type: Schema.Types.ObjectId,
+        ref: 'likes'
+    }]
 
 });
 

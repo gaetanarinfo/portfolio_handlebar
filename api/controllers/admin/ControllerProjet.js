@@ -169,8 +169,7 @@ module.exports = {
                         title: req.body.title,
                         content: req.body.content,
                         date: req.body.date,
-                        isPrivate: Boolean(req.body.isPrivate),
-                        like: 0
+                        isPrivate: Boolean(req.body.isPrivate)
                     }, (err) => {
                         if (err) {
                             //console.log(err)

@@ -40,5 +40,7 @@ const upload = multer({
     }
 })
 
+console.log(upload);
+
 // Ici nous exportons upload afin de pouvoir l'appeler dans notre router
 module.exports = upload

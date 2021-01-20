@@ -27,7 +27,7 @@
                             <td class="th-perso">{{generateDate dateCreate}}</td>
                             <td class="th-perso">{{countArray comment }}</td>
                             <td class="th-perso">{{#if isPrivate}}Article privé{{else}}Article public{{/if}}</td>
-                            <td class="table-content th-perso">{{trimString content}}</td>
+                            <td class="table-content th-perso">{{content}}</td>
                             <td class="th-perso"><a href="" data-toggle="modal"
                                     data-target="#modif_article_{{_id}}"><i class="fas fa-edit ml-2" data-toggle="tooltip"
                                         data-placement="left" title="Editer l'article"></i></a>

@@ -157,7 +157,7 @@ module.exports = {
 
     addArticle: (req, res) => {
 
-        const imageFile = req.files.image
+        const imageFile = req.files.imgArticle
 
         if (!imageFile) {
 
@@ -167,9 +167,13 @@ module.exports = {
 
         } else {
 
+            console.log(req.body);
+
             Article
                 .create({
-                    image: `/assets/images/${imageFile.name}`,
+                    image: `/assets/images/${req.files.imgArticle}`,
+                    // On stock aussi le nom de l'image
+                    name: req.files.imgArticle,
                     title: req.body.title,
                     content: req.body.content,
                     author: req.session.lastname + ' ' + req.session.firstname,

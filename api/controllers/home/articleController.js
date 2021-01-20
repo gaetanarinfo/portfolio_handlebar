@@ -57,55 +57,9 @@ module.exports = {
                 })
             }
         })
-
-        // const article = await Article.findById(req.params.id).lean() // Récupère l'article
-        // const countComment = await Comment.countDocuments({ _articleid: req.params.id }).lean(); // Permet de compter le nombre de commentaire par article
-
-        // const success = req.session.success // Message Succes
-        // const error = req.session.error // Message Error
-        // req.session.success = ''
-        // req.session.error = ''
-
-        // if (success || error) {
-        //     res.render('article', {
-        //         success: success,
-        //         title: article.title,
-        //         content: article.content,
-        //         author: article.author,
-        //         image: article.image,
-        //         avatar: article.avatar,
-        //         dateCreate: article.dateCreate,
-        //         comment: countComment,
-        //         id: article._id,
-        //     })
-        // } else {
-        //     res.render('article', {
-        //         error: error,
-        //         title: article.title,
-        //         content: article.content,
-        //         author: article.author,
-        //         image: article.image,
-        //         avatar: article.avatar,
-        //         dateCreate: article.dateCreate,
-        //         comment: countComment,
-        //         id: article._id,
-        //     })
-        // }
     },
 
     post: async(req, res) => {
-
-
-        // Permet de compter le nombre de comentaire
-        // Article.findById(req.body.articleid, function(err, count) {
-
-        //     const countNumber = count.comment
-
-        //     Post.findByIdAndUpdate(req.body.articleid, {
-        //             comment: (countNumber) + 1,
-        //         },
-        //         (error) => {});
-        // })
 
         Comment
 

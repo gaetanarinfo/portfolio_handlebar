@@ -21,34 +21,22 @@
                                 <div class="card-body">
                                     <h5 class="card-title">{{title}}</h5>
                                     <div class="card-icon">
-                                        
+                                        {{#ifLike _id ../userId }}
                                             <a id="like_{{_id}}" href="/user/addLike/{{_id}}" title="J'aime le projet">
-                                                <i class="fas fa-heart"></i>
-                                            </a>
+                                            <i class="fas fa-heart"></i>
+                                        </a>  
+                                        {{else}}
 
-                                            <script>
+                                        {{/ifLike}}
 
-                                                var btn_like_{{_id}} = document.getElementById('like_{{_id}}');
-
-                                                btn_like_{{_id}}.addEventListener('click', function() {
-
-                                                    sessionStorage.setItem('like_{{_id}}', true);
-                                                    sessionStorage.setItem('id_{{_id}}', '{{_id}}');
-
-                                                });
-
-                                                if(sessionStorage.getItem('like_{{_id}}') == true || sessionStorage.getItem('id_{{_id}}') == '{{_id}}') {
-                                                    btn_like_{{_id}}.remove();
-                                                    console.log('ok')
-                                                }
-
-                                            </script>
-                                   
+                                        <a id="like_{{_id}}" href="/user/addLike/{{_id}}" title="J'aime le projet">
+                                            <i class="fas fa-heart"></i>
+                                
                                         <a class="mask" href="" title="Masquer le projet">
                                             <i class="fas fa-reply"></i>
                                         </a>
 
-                                        {{#ifLike like}}<a class="like"><i class="fas fa-thumbs-up"></i> <span>{{like}}</span></a>{{/ifLike}}
+                                        <a class="like"><i class="fas fa-thumbs-up"></i> <span>{{countArray like }}</span></a>
                                     </div>
                                     <p class="card-text">{{content}}</p>
                                 </div>

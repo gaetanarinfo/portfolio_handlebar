@@ -2,12 +2,13 @@ const Projet = require('../../database/models/projets'),
     Tuto = require('../../database/models/tutos'),
     Article = require('../../database/models/articles'),
     Galerie = require('../../database/models/galeries'),
-    Comment = require('../../database/models/comments')
+    Comment = require('../../database/models/comments'),
+    Like = require('../../database/models/like')
 
 module.exports = {
     get: async(req, res) => {
 
-        const projets = await Projet.find({}).lean(), // Cards Projets
+        const projets = await Projet.find({}).populate('like').lean(), // Cards Projets
             tutos = await Tuto.find({}).lean(), // Cards Tutoriels
             articles = await Article.find({}).sort('-dateCreate').lean(), // Cards Articles
             galeries = await Galerie.find({}).lean(), // Cards Galerie
@@ -26,28 +27,47 @@ module.exports = {
             data4 = req.session.data4
 
         if (success || error) {
-            res.render('index', { success: success, error: error, projets, tutos, articles, commentsAll, commentCount, galeries, data1, data2, data3, data4, title: 'Portfolio de Gaëtan Seigneur', content: "Mon portfolio professionnel, retrouvé ici mes compétences, les derniers articles de mon blog, mes tutoriels et tant d autres choses." })
-        } else res.render('index', { error: error, projets, tutos, articles, galeries, commentsAll, commentCount, title: 'Portfolio de Gaëtan Seigneur', content: "Mon portfolio professionnel, retrouvé ici mes compétences, les derniers articles de mon blog, mes tutoriels et tant d autres choses.", data1, data2, data3, data4 })
+            res.render('index', { success: success, error: error, projets, tutos, articles, commentsAll, commentCount, galeries, data1, data2, data3, data4, title: 'Portfolio de Gaëtan Seigneur', content: "Mon portfolio professionnel, retrouvé ici mes compétences, les derniers articles de mon blog, mes tutoriels et tant d autres choses.", userId: req.session.userId })
+        } else res.render('index', { error: error, projets, tutos, articles, galeries, commentsAll, commentCount, title: 'Portfolio de Gaëtan Seigneur', content: "Mon portfolio professionnel, retrouvé ici mes compétences, les derniers articles de mon blog, mes tutoriels et tant d autres choses.", data1, data2, data3, data4, userId: req.session.userId })
     },
 
-    addLike: (req, res) => {
+    addLike: async(req, res) => {
 
-        Projet.findById(req.params.id, function(err, count) {
+        Like
 
-            const likeNumber = count.like,
-                projet = count.title
+        const query = {
+            _id: req.params.id
+        }
 
-            console.log(count.like);
+        const projet = await Projet.findById(query)
 
-            Projet.findByIdAndUpdate(req.params.id, {
-                    like: (likeNumber) + 1
-                },
-                (error) => {
-                    req.flash('success', 'Vous aimez le projet ' + projet)
-                    req.session.success = req.flash('success')
-                    res.redirect("/")
-                });
+        // On définit notre construction de Projet
+        const like = new Like({
+            projetID: projet._id,
+            userID: req.session.userId
+        })
+
+        projet.like.push(like._id)
+
+        // On sauvegarde nous modification
+        like.save((err) => {
+            if (err) {
+                req.flash('error', 'Une erreur est survenue !')
+                req.session.error = req.flash('error')
+                res.redirect(`/`)
+            }
+        })
+        projet.save((err) => {
+            if (err) {
+                req.flash('error', 'Une erreur est survenue !')
+                req.session.error = req.flash('error')
+                res.redirect(`/`)
+            }
 
         })
+
+        req.flash('success', 'Vous avez aimez le projet !')
+        req.session.success = req.flash('success')
+        res.redirect(`/`)
     }
 }

@@ -10,6 +10,7 @@ const ArticleShema = new mongoose.Schema({
     title: String,
     content: String,
     image: String,
+    name: String,
     author: String,
     dateCreate: String,
     active: Boolean,
