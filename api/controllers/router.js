@@ -21,7 +21,9 @@ const homeController = require('./home/homeController'),
     nodemailerController = require('./user/nodemailerController'),
     resetpasswordController = require('./user/resetpasswordController'),
     rssController = require('./home/rssController'),
-    upload = require('../config/multer')
+    upload = require('../config/multer'),
+    uploadGalerie = require('../config/multerGalerie'),
+    uploadProjet = require('../config/multerProjet')
 
 // Routes Home
 router.route('/')
@@ -59,7 +61,7 @@ router.route('/admin/articles')
 router.route('/admin/addArticle')
     .post(auth, authAdmin, upload.single('image'), adminControllerArticle.addArticle)
 router.route('/admin/editArticle/:id')
-    .post(auth, authAdmin, adminControllerArticle.editArticle)
+    .post(auth, authAdmin, upload.single('image'), adminControllerArticle.editArticle)
 router.route('/admin/delete_article/:id')
     .get(auth, authAdmin, adminControllerArticle.deletetArticle)
 router.route('/admin/confirm_delete_article/:id')
@@ -69,9 +71,9 @@ router.route('/admin/confirm_delete_article/:id')
 router.route('/admin/projets')
     .get(auth, authAdmin, adminControllerProjet.showProjet)
 router.route('/admin/addProjet')
-    .post(auth, authAdmin, adminControllerProjet.addProjet)
+    .post(auth, authAdmin, uploadProjet.single('image'), adminControllerProjet.addProjet)
 router.route('/admin/editProjet/:id')
-    .post(auth, authAdmin, adminControllerProjet.editProjet)
+    .post(auth, authAdmin, uploadProjet.single('image'), adminControllerProjet.editProjet)
 router.route('/admin/delete_projet/:id')
     .get(auth, authAdmin, adminControllerProjet.deletetProjet)
 router.route('/admin/confirm_delete_projet/:id')
@@ -93,15 +95,15 @@ router.route('/admin/confirm_delete_youtube/:id')
 router.route('/admin/galeries')
     .get(auth, authAdmin, adminControllerGalerie.showGalerie)
 router.route('/admin/addGalerie')
-    .post(auth, authAdmin, adminControllerGalerie.addGalerie)
+    .post(auth, authAdmin, uploadGalerie.single('image'), adminControllerGalerie.addGalerie)
 router.route('/admin/editGalerie/:id')
-    .post(auth, authAdmin, adminControllerGalerie.editGalerie)
+    .post(auth, authAdmin, uploadGalerie.single('image'), adminControllerGalerie.editGalerie)
 router.route('/admin/delete_galerie/:id')
     .get(auth, authAdmin, adminControllerGalerie.deleteGalerie)
 router.route('/admin/confirm_delete_galerie/:id')
     .get(auth, authAdmin, adminControllerGalerie.deleteGalerieConfirm)
 
-// Routes Admin Section Galerie
+// Routes Admin Section Comment
 router.route('/admin/comments')
     .get(auth, authAdmin, adminControllerComment.showComment)
 router.route('/admin/editComment/:id')

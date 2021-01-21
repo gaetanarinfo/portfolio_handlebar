@@ -1,52 +1,94 @@
 <!-- Modal Admin Modifier Article Blog -->
- <div class="modal fade" id="modif_article_{{article._id}}" tabindex="-1" role="dialog" aria-hidden="true">
-     <div class="modal-dialog modal-dialog-centered" role="document">
-         <div class="modal-content">
-             <div class="modal-header">
-                 <h5 class="modal-title" id="ModalLabelModifArticle">Modifier l'article</h5>
-                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                     <span aria-hidden="true">&times;</span>
-                 </button>
-             </div>
-             <form method="POST" action="/admin/editArticle/{{article._id}}" enctype="multipart/form-data">
-                 <div class="modal-body">
-                     <div class="form-group">
-                         <label class="text-dark mb-2">Image de l'article</label>
-                         <input type="text" class="form-control mb-2" name="image"
-                             placeholder="Image de l'article" value="{{article.image}}">
-                     </div>
+<div class="modal fade" id="modif_article_{{article._id}}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalLabelModifArticle">Modifier l'article</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST" action="/admin/editArticle/{{article._id}}" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="text-dark mb-2">Image de l'article</label>
+                        <input type="file" class="form-control mb-2" name="image" id="imageArticle_{{_id}}" onchange="updateImageDisplay6_{{_id}}()" accept=".png, .jpg, .jpeg, .gif" placeholder="Image de l'article">
+                        
+                        <div class="text-center">
+                            <img src="{{article.image}}" style="width: 100%;">
+                        </div>
 
-                     <div class="form-group">
-                         <label for="titreArticle" class="text-dark mb-2">Titre de l'article</label>
-                         <input type="text" class="form-control mb-2" name="title"
-                             placeholder="Titre de l'article" value="{{article.title}}">
-                     </div>
+                    </div>
 
-                     <div class="form-group">
-                         <label for="contentProjet" class="text-dark mb-2">Description de l'article</label>
-                         <textarea rows="10" class="form-control mb-2" name="content" id="ContentArticleEdit{{article._id}}"
-                             placeholder="Description de l'article">{{article.content}}</textarea>
-                     </div>
+                    <div class="preview5" id="preview6_{{_id}}">
+                        <p>Aucun fichier sélectionné pour le moment</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="titreArticle" class="text-dark mb-2">Titre de l'article</label>
+                        <input type="text" class="form-control mb-2" name="title" placeholder="Titre de l'article"
+                            value="{{article.title}}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contentProjet" class="text-dark mb-2">Description de l'article</label>
+                        <textarea rows="10" class="form-control mb-2" name="content" id="articleEdit_{{article._id}}" placeholder="Description de l'article">{{article.content}}</textarea>
+                        
+                    </div>
 
                     <div class="form-group text-center">
                         <div class="switch_box box_1">
                             <label class="text-dark mb-2">Article privé ?</label>
-                            <div><input type="checkbox" class="switch_1" name="isPrivate" id="isPrivate2_{{article._id}}" ></div>
+                            <div><input type="checkbox" class="switch_1" name="isPrivate"
+                                    id="isPrivate2_{{article._id}}"></div>
                             <label class="text-dark mb-2" id="lab_priv2_{{article._id}}">En ligne</label>
                         </div>
                     </div>
 
-                    
-                     
+                <script>
+                     // Upload image edit projet
+                    var input6_{{_id}} = document.querySelector('#imageArticle_{{_id}}');
+                    var preview6_{{_id}} = document.querySelector('#preview6_{{_id}}');
 
-                 </div>
+                    function updateImageDisplay6_{{_id}}() {
+                        while (preview6_{{_id}}.firstChild) {
+                            preview6_{{_id}}.removeChild(preview6_{{_id}}.firstChild);
+                        }
 
-                 <div class="modal-footer">
-                     <button type="button" class="btn btn-form-reset" data-dismiss="modal">Fermer</button>
-                     <button type="submit" class="btn btn-form-send">Valider</button>
-                 </div>
-             </form>
-         </div>
-     </div>
- </div>
- <!-- Modal Admin Modifier Article Blog -->
+                        var curFiles6_{{_id}} = input6_{{_id}}.files;
+                        if (curFiles6_{{_id}}.length === 0) {
+                            var para = document.createElement('p');
+                            para.textContent = 'Aucun fichier actuellement sélectionné pour le téléchargement';
+                            preview6.appendChild(para);
+                        } else {
+                            for (var i = 0; i < curFiles6_{{_id}}.length; i++) {
+                                var para = document.createElement('p');
+                                if (validFileType(curFiles6_{{_id}}[i])) {
+                                    para.textContent = curFiles6_{{_id}}[i].name + ', taille du fichier ' + returnFileSize(curFiles6_{{_id}}[i].size) + '.';
+                                    var image_{{_id}} = document.createElement('img');
+                                    image_{{_id}}.setAttribute('style', 'width: 100%;')
+                                    image_{{_id}}.src = window.URL.createObjectURL(curFiles6_{{_id}}[i]);
+
+                                    preview6_{{_id}}.appendChild(image_{{_id}});
+                                    preview6_{{_id}}.appendChild(para);
+
+                                } else {
+                                    para.textContent = 'Nom du fichier ' + curFiles6_{{_id}}[i].name + ": Ce n'est pas un type de fichier valide. Mettez à jour votre image.";
+                                    preview6_{{_id}}.appendChild(para);
+                                }
+                            }
+                        }
+                    }
+                 </script>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-form-reset" data-dismiss="modal">Fermer</button>
+                    <button type="submit" class="btn btn-form-send">Valider</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Modal Admin Modifier Article Blog -->

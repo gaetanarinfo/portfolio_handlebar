@@ -25,7 +25,7 @@
                                             <span><i class="far fa-user ml-2" aria-hidden="true"></i>{{author}}</span>
                                             <span class="d-block"><i class="far fa-calendar-alt ml-2"
                                                     aria-hidden="true"></i>Le {{generateDate dateCreate}}</span>
-                                            <span class="d-block"><i class="far fa-comment ml-1"></i> {{comment}}
+                                            <span class="d-block"><i class="far fa-comment ml-1"></i> {{countArray comment}}
                                                 commentaire(s)</span>
                                         </div>
                                     </div>
@@ -35,7 +35,7 @@
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title">{{title}}</h5>
-                                        <p class="card-text">{{content}}</p>
+                                        <p class="card-text">{{{content}}}</p>
                                     </div>
                                     <div class="card-footer">
                                         <div class="card-btn"><a href="/article/{{_id}}" class="btn btn-cards">Lire la suite</a></div>

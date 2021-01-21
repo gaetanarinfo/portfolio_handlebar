@@ -23,9 +23,9 @@
                     <div class="tab-pane fade show {{#if active}}active{{/if}}" id="article{{_id}}" role="tabpanel" style="{{#if isPrivate }}display: none;{{else}}{{/if}}">
                         <div class="tab-title">{{title}}</div>
                         <div class="tab-img" style="background: url('{{image}}');"></div>
-                        <p class="p-2">
-                            {{content}}
-                        </p>
+                        <div class="p-2">
+                            {{{content}}}
+                        </div>
                         <div class="tab-icon p-2">
                             <div><i class="fas fa-edit"></i> <span>Mise en ligne : Le {{generateDate dateCreate}}</span></div>
                             <div class="mt-1"><i class="fas fa-user"></i> <span class="tab-user">Posté par {{author}}</span>

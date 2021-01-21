@@ -38,33 +38,47 @@ module.exports = {
         return new Handlebars.SafeString(theString) + '...'
     },
 
-    ifLike: function(a, b, option) {
+    ifLike: function(idProjet, emailUser, option) {
 
-        Projet
-        // Nous recherchons une article ayant le meme ID que notre req.params.id
-            .findById(a)
-            // Nous utilisons populate afin de ressortir les datas des models en relation avec notre constructeur principal
-            .populate('like userID')
-            .lean()
+        if (emailUser) {
 
-        // Nous executons nous recherche
-        .exec((err, result) => {
+            Projet
+            // Nous recherchons une article ayant le meme ID que notre req.params.id
+                .findById(idProjet)
+                // Nous utilisons populate afin de ressortir les datas des models en relation avec notre constructeur principal
+                .populate('like userID')
+                .lean()
 
-            if (result.like.length == 0 || result.like == b) {
+            // Nous executons nous recherche
+            .exec((err, result) => {
 
-                console.log('Pas liké');
+                if (result.like.length == 0) {
 
-            } else {
+                    console.log('Pas liké');
 
-                console.log('Liké');
+                    return option.fn('test')
 
-            }
+                } else {
 
-        })
+                    console.log('liké');
+                    return option.inverse('test2')
+
+                }
+
+            })
+        } else {
+
+        }
 
     },
 
-    countArray: (arr) => {
-        return arr.length
+    countArray: function(arr, option) {
+
+        if (arr.length > 0) {
+            return arr.length
+        } else {
+            return '0'
+        }
+
     }
 }

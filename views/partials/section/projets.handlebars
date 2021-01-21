@@ -22,14 +22,12 @@
                                     <h5 class="card-title">{{title}}</h5>
                                     <div class="card-icon">
                                         {{#ifLike _id ../userId }}
-                                            
-                                        {{else}}
-
-                                        {{/ifLike}}
 
                                         <a id="like_{{_id}}" href="/user/addLike/{{_id}}" title="J'aime le projet">
                                             <i class="fas fa-heart"></i>
-                                
+
+                                        {{/ifLike}}
+
                                         <a class="mask" href="" title="Masquer le projet">
                                             <i class="fas fa-reply"></i>
                                         </a>

@@ -5,7 +5,7 @@ const multer = require('multer')
 const storage = multer.diskStorage({
     // Ici la destination (ou seront stocker nos fichiers par default)
     destination: (req, file, cb) => {
-        cb(null, './public/images/article')
+        cb(null, './public/images/projets')
     },
     // Ici est définit le format du nom de l'image à stocker
     filename: (req, file, cb) => {

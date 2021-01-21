@@ -12,9 +12,16 @@
                  <div class="modal-body">
                      <div class="form-group">
                          <label class="text-dark mb-2">Image du projet</label>
-                         <input type="text" class="form-control mb-2" name="image" value="{{projet.image}}"
-                             placeholder="Image du projet">
+                         <input type="file" class="form-control mb-2" id="imageProjets_{{_id}}" name="image" onchange="updateImageDisplay5_{{_id}}()" accept=".png, .jpg, .jpeg, .gif" placeholder="Image du projet">
+
+                        <div class="text-center">
+                            <img src="{{projet.image}}" style="width: 440px;">
+                        </div>
                      </div>
+
+                    <div class="preview5" id="preview5_{{_id}}">
+                        <p>Aucun fichier sélectionné pour le moment</p>
+                    </div>
 
                      <div class="form-group">
                          <label class="text-dark mb-2">Titre du projet</label>
@@ -47,6 +54,42 @@
                      <button type="button" class="btn btn-form-reset" data-dismiss="modal">Fermer</button>
                      <button type="submit" class="btn btn-form-send">Valider</button>
                  </div>
+
+                 <script>
+                     // Upload image edit projet
+                    var input5_{{_id}} = document.querySelector('#imageProjets_{{_id}}');
+                    var preview5_{{_id}} = document.querySelector('#preview5_{{_id}}');
+
+                    function updateImageDisplay5_{{_id}}() {
+                        while (preview5_{{_id}}.firstChild) {
+                            preview5_{{_id}}.removeChild(preview5_{{_id}}.firstChild);
+                        }
+
+                        var curFiles5_{{_id}} = input5_{{_id}}.files;
+                        if (curFiles5_{{_id}}.length === 0) {
+                            var para = document.createElement('p');
+                            para.textContent = 'Aucun fichier actuellement sélectionné pour le téléchargement';
+                            preview5.appendChild(para);
+                        } else {
+                            for (var i = 0; i < curFiles5_{{_id}}.length; i++) {
+                                var para = document.createElement('p');
+                                if (validFileType(curFiles5_{{_id}}[i])) {
+                                    para.textContent = curFiles5_{{_id}}[i].name + ', taille du fichier ' + returnFileSize(curFiles5_{{_id}}[i].size) + '.';
+                                    var image_{{_id}} = document.createElement('img');
+                                    image_{{_id}}.setAttribute('style', 'width: 440px;')
+                                    image_{{_id}}.src = window.URL.createObjectURL(curFiles5_{{_id}}[i]);
+
+                                    preview5_{{_id}}.appendChild(image_{{_id}});
+                                    preview5_{{_id}}.appendChild(para);
+
+                                } else {
+                                    para.textContent = 'Nom du fichier ' + curFiles5_{{_id}}[i].name + ": Ce n'est pas un type de fichier valide. Mettez à jour votre image.";
+                                    preview5_{{_id}}.appendChild(para);
+                                }
+                            }
+                        }
+                    }
+                 </script>
              </form>
          </div>
      </div>

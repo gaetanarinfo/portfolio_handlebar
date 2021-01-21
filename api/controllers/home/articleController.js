@@ -19,6 +19,8 @@ module.exports = {
         // Ici query est égale à l'id envoyer via l'URL /article/:id
         const query = req.params.id
 
+        if (!query) res.redirect('/')
+
         // Ici nous resortons notre constructeur
         Article
         // Nous recherchons une article ayant le meme ID que notre req.params.id
@@ -29,33 +31,31 @@ module.exports = {
 
         // Nous executons nous recherche
         .exec((err, result) => {
-            // Si il y une erreur on la log grace à handleError
-            if (err) {
-                req.flash('error', 'Une erreur est survenue !')
-                req.session.error = req.flash('error')
-                res.redirect("/article/" + req.body.articleid)
-            };
-
-            // Petit check
-            //console.log('Populate Exec')
-
-            // Et on renvoie notre page avec les data
-            if (success || error) {
-                res.render('article', {
-                    success: success,
-                    artID: result,
-                    commentAll: result.comment,
-                    countComments: result.comment
-                })
+            if (!result) {
+                res.redirect("/")
             } else {
-                res.render('article', {
-                    error: error,
-                    success: success,
-                    artID: result,
-                    commentAll: result.comment,
-                    countComments: result.comment
-                })
+
+                if (err) {
+                    req.flash('error', 'Une erreur est survenue !')
+                    req.session.error = req.flash('error')
+                    res.redirect("/article/" + req.body.articleid)
+                };
+
+                if (success || error) {
+                    res.render('article', {
+                        success: success,
+                        artID: result
+                    })
+                } else {
+                    res.render('article', {
+                        error: error,
+                        success: success,
+                        artID: result
+                    })
+                }
+
             }
+
         })
     },
 

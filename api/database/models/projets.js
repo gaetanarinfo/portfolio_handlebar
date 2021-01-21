@@ -10,6 +10,7 @@ const ProjetShema = new mongoose.Schema({
     title: String,
     content: String,
     image: String,
+    name: String,
     date: String,
     links: Number,
     isPrivate: {

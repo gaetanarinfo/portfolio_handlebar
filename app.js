@@ -7,12 +7,10 @@ reload.watch(__dirname + "/app.js")
 const express = require('express')
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
-const fileupload = require('express-fileupload')
 const expressSession = require('express-session')
 const MongoStore = require('connect-mongo')
 const mongoose = require('mongoose')
 const flash = require('express-flash');
-const fileUpload = require('express-fileupload');
 
 const mongoStore = MongoStore(expressSession)
 
@@ -39,10 +37,6 @@ app.use(bodyParser.urlencoded({
     extended: true
 }))
 app.use(bodyParser.json())
-app.use(fileUpload({
-    limits: { fileSize: 10 * 1024 * 1024 },
-    abortOnLimit: false
-}));
 
 // Dossier des ressources
 const path = require('path')

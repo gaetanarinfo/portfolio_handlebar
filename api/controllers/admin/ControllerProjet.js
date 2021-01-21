@@ -1,11 +1,8 @@
 const Projet = require('../../database/models/projets'),
     User = require('../../database/models/users'),
-    fileupload = require("express-fileupload"),
-    express = require('express'),
-    app = express(),
-    pagination = require('pagination')
-
-app.use(fileupload())
+    pagination = require('pagination'),
+    path = require('path'),
+    fs = require('fs')
 
 module.exports = {
 
@@ -154,61 +151,113 @@ module.exports = {
 
     addProjet: (req, res) => {
 
-        const imageFile = req.files.image
+        const image = req.file.originalname;
 
-        imageFile.mv('public/images/projets/' + imageFile.name, function(err) {
-            if (err) {
-                req.flash('error', 'Une erreur est survenue !')
-                req.session.error = req.flash('error')
-                return res.redirect('/admin/projets')
-            } else {
+        Projet
+            .create({
+                image: `/images/projets/${image}`,
+                name: image,
+                title: req.body.title,
+                content: req.body.content,
+                date: req.body.date,
+                isPrivate: Boolean(req.body.isPrivate)
+            }, (err) => {
+                if (err) {
+                    //console.log(err)
+                    req.flash('error', 'Une erreur est survenue !')
+                    req.session.error = req.flash('error')
 
-                Projet
-                    .create({
-                        image: '/images/projets/' + imageFile.name,
-                        title: req.body.title,
-                        content: req.body.content,
-                        date: req.body.date,
-                        isPrivate: Boolean(req.body.isPrivate)
-                    }, (err) => {
-                        if (err) {
-                            //console.log(err)
-                            req.flash('error', 'Une erreur est survenue !')
-                            req.session.error = req.flash('error')
+                    res.redirect('/admin/projets')
+                } else {
+                    req.flash('success', "Le projet à été posté !")
+                    req.session.success = req.flash('success')
 
-                            res.redirect('/admin/projets')
-                        } else {
-                            req.flash('success', "Le projet à été posté !")
-                            req.session.success = req.flash('success')
+                    res.redirect('/admin/projets')
+                }
 
-                            res.redirect('/admin/projets')
-                        }
-
-                    })
-
-            }
-
-        })
+            })
 
     },
 
-    editProjet: (req, res) => {
+    editProjet: async(req, res) => {
 
-        const id = req.params.id
+        // On declare notre projetID (Objet à éditer)
+        const projetID = await Projet.findById(req.params.id),
+            // Query qui est l'id de notre objet à éditer
+            query = { _id: req.params.id },
+            // pathImg sera le chemin de notre fichier à supprimer
+            pathImg = path.resolve("./public/images/projets/" + projetID.name)
 
-        Projet.findOneAndUpdate({ '_id': id }, {
-            title: req.body.title,
-            content: req.body.content,
-            date: req.body.date,
-            isPrivate: Boolean(req.body.isPrivate),
-        }, (error) => {
+        // Condition pour verifier qu'il n'y a pas de fichier dans notre formulaire
+        if (!req.file) {
 
-            req.flash('success', "Le projet " + req.body.title + " à été modifié !")
-            req.session.success = req.flash('success')
+            // condition pour verifier que nous avons un title dans le formulaire
+            if (req.body.title) {
+                // Ici nous éditons le titre de notre Article selectionner grace à query
+                Projet.updateOne(query, {
+                    title: req.body.title,
+                    content: req.body.content,
+                    date: req.body.date,
+                    isPrivate: Boolean(req.body.isPrivate),
+                    // et notre callback d'error
+                }, (err) => {
+                    if (err) {
+                        res.redirect('/admin/projets')
+                    } else {
+                        req.flash('success', "Le projet " + req.body.title + " à été modifié !")
+                        req.session.success = req.flash('success')
 
-            res.redirect('/admin/projets')
+                        res.redirect('/admin/projets')
+                    }
+                })
+            } else {
 
-        });
+                req.flash('success', "Le projet " + req.body.title + " à été modifié !")
+                req.session.success = req.flash('success')
+
+                res.redirect('/admin/projets')
+
+            }
+
+            // Sinon (Donc si nous avont un fichier (image) dans notre formulaire)
+        } else {
+            // Ici nous éditons notre article selectionner grâce à query
+            Projet.updateOne(query, {
+                // on récupère tout notre req.body
+                title: req.body.title,
+                content: req.body.content,
+                date: req.body.date,
+                isPrivate: Boolean(req.body.isPrivate),
+                // ici on viens stocker le chemin de l'image dans la DB
+                image: `/images/projets/${req.file.originalname}`,
+                // Ici on stock le nom de l'image dans notre DB
+                name: req.file.originalname
+                    // Notre callback d'error
+            }, (err) => {
+                if (err) {
+
+                    //console.log(err)
+                    req.flash('error', 'Une erreur est survenue !')
+                    req.session.error = req.flash('error')
+
+                } else {
+
+                    // Si notre callback nous donne pas d'erreur alors note fonction de suppression de l'image de lance avec un callback d'err
+                    fs.unlink(pathImg, (err) => {
+                        if (err) console.log(err)
+
+
+                    })
+
+                    req.flash('success', "Le projet " + req.body.title + " à été modifié !")
+                    req.session.success = req.flash('success')
+
+                    res.redirect('/admin/projets')
+
+                }
+
+            })
+        }
 
     },
 
@@ -224,17 +273,33 @@ module.exports = {
 
     },
 
-    deleteProjetConfirm: (req, res) => {
+    deleteProjetConfirm: async(req, res) => {
 
-        const id = req.params.id
+        // Ici on déclare la récupération de notre projetID grace à notre recherche asynchrone filtrer avec notre req.params.id
+        const dbProjet = await Projet.findById(req.params.id),
+            // Ici on déclare le chemin de l'image qui devra etre supprimer
+            pathImg = path.resolve("./public/images/projets/" + dbProjet.name)
 
-        Projet.findOneAndDelete({ _id: id }, (erro, user) => {
+        // Ici nous avons une fonction de suppression de notre article filtrer grace à req.params.id (objet dans la DB)
+        Projet.deleteOne({ _id: req.params.id }, (err) => {
+            // Ici notre callback verifie bien que notre fonction c'est passer sans erreur
+            if (err) console.log(err)
+                // Et si nous n'avons aucune erreur alors on execute ça
+            else {
+                // Ici est notre fonction de suppression du fichier (image) avec son callback
+                fs.unlink(pathImg, (err) => {
+                    if (err) {
+                        //console.log(err)
+                        req.flash('error', 'Une erreur est survenue !')
+                        req.session.error = req.flash('error')
+                    } else {
+                        req.flash('success', "Le projet à été supprimé !")
+                        req.session.success = req.flash('success')
 
-            req.flash('success', "Le projet à été supprimé !")
-            req.session.success = req.flash('success')
-
-            res.redirect('/admin/projets')
-
+                        res.redirect('/admin/projets')
+                    }
+                })
+            }
         })
 
     }

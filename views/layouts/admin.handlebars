@@ -17,6 +17,19 @@
     <!-- ckeditor -->
     <script src="//cdn.ckeditor.com/4.15.1/full/ckeditor.js"></script>
 
+    <script>
+            var editor_config = {
+        toolbar: [
+            {name: 'basicstyles', items: ['Bold','Italic','Underline','Strike','-','RemoveFormat']},
+            {name: 'format', items: ['Format']},
+            {name: 'paragraph', items: ['Indent','Outdent','-','BulletedList','NumberedList']},
+            {name: 'link', items: ['Link','Unlink']},
+        {name: 'undo', items: ['Undo','Redo']}
+        ],
+
+    };
+    </script>
+
 </head>
 
 <body>
@@ -49,6 +62,12 @@
     <script src="/admin/js/add.js"></script>
     <script src="/admin/js/edit_delete.js"></script>
     <script src="/admin/js/jquery.mCustomScrollbar.concat.min.js"></script>
+
+    <script>
+
+    CKEDITOR.replace('articleAdd', editor_config );
+
+    </script>
 
     <script>
         (function($){
@@ -117,6 +136,8 @@
                     }
                 });
             });
+
+            CKEDITOR.replace('articleEdit_{{_id}}', editor_config );
 
 
     {{/each}}
