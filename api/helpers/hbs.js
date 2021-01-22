@@ -1,8 +1,6 @@
 // Module date en fr
 const dateFr = require('../helpers/dateFr'),
-    Handlebars = require('handlebars'),
-    Like = require('../database/models/like'),
-    Projet = require('../database/models/projets')
+    Handlebars = require('handlebars')
 
 module.exports = {
 
@@ -38,41 +36,22 @@ module.exports = {
         return new Handlebars.SafeString(theString) + '...'
     },
 
-    ifLike: function(idProjet, emailUser, option) {
+    ifLike: function(arr, user, options) {
 
-        if (emailUser) {
+        //console.log(user);
+        //console.log(arr);
 
-            Projet
-            // Nous recherchons une article ayant le meme ID que notre req.params.id
-                .findById(idProjet)
-                // Nous utilisons populate afin de ressortir les datas des models en relation avec notre constructeur principal
-                .populate('like userID')
-                .lean()
+        arr.forEach(i => {
 
-            // Nous executons nous recherche
-            .exec((err, result) => {
+            console.log(i);
 
-                if (result.like.length == 0) {
+            if (i === user) return userss;
 
-                    console.log('Pas liké');
-
-                    return option.fn('test')
-
-                } else {
-
-                    console.log('liké');
-                    return option.inverse('test2')
-
-                }
-
-            })
-        } else {
-
-        }
+        })
 
     },
 
-    countArray: function(arr, option) {
+    countArray: function(arr, user) {
 
         if (arr.length > 0) {
             return arr.length

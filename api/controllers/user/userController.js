@@ -26,6 +26,8 @@ module.exports = {
                         req.session.isAdmin = user.isAdmin
                         req.session.isLog = user.isLog
 
+                        req.session.gaet = user
+
                         extIP.get((err, ip) => {
                             if (err) {
                                 console.error("callback error: " + err);

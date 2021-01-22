@@ -10,7 +10,6 @@ const User = require('../../database/models/users'),
 require('dotenv').config()
 
 
-
 // Récupere et transforme le fichier html
 const readHTMLFile = function(path, callback) {
     fs.readFile(path, { encoding: 'utf-8' }, function(err, html) {
@@ -61,105 +60,87 @@ module.exports = {
 
     register: (req, res) => {
 
-        //Upload File
-        if (!req.files || Object.keys(req.files).length === 0) {
-            return res.status(400).res.flash('error', 'Le fichier ne doit pas être vide !'), res.session.error = req.flash('error')
+        const image = req.file.originalname
 
-        }
+        // if (image.size < 1048576) {
 
-        const avatarFile = req.files.avatar
+        if (req.body.password.length > 9) {
 
-        if (avatarFile.size < 1048576) {
-
-            if (req.body.password.length > 9) {
-
-                avatarFile.mv('public/avatar/' + avatarFile.name, function(err) {
+            User
+                .create({
+                    firstname: req.body.firstname,
+                    lastname: req.body.lastname,
+                    email: req.body.email,
+                    password: req.body.password,
+                    avatar: `/avatar/${image}`,
+                    name: image,
+                }, (err) => {
                     if (err) {
+                        //console.log(err)
+                        req.flash('error', 'Une erreur est survenue !')
                         req.session.error = req.flash('error')
                         req.session.data1 = req.body.email
                         req.session.data2 = req.body.lastname
                         req.session.data3 = req.body.firstname
                         req.session.data4 = avatarFile.name
-                        return res.redirect('/')
+
+                        res.redirect('/')
                     } else {
-
-                        User
-                            .create({
-                                firstname: req.body.firstname,
-                                lastname: req.body.lastname,
-                                email: req.body.email,
-                                password: req.body.password,
-                                avatar: avatarFile.name
-                            }, (err) => {
-                                if (err) {
-                                    //console.log(err)
-                                    req.flash('error', 'Une erreur est survenue !')
-                                    req.session.error = req.flash('error')
-                                    req.session.data1 = req.body.email
-                                    req.session.data2 = req.body.lastname
-                                    req.session.data3 = req.body.firstname
-                                    req.session.data4 = avatarFile.name
-
-                                    res.redirect('/')
-                                } else {
-                                    req.flash('success', 'Merci de votre inscription !')
-                                    req.session.success = req.flash('success')
+                        req.flash('success', 'Merci de votre inscription !')
+                        req.session.success = req.flash('success')
 
 
-                                    readHTMLFile('email.html', function(err, html) {
+                        readHTMLFile('email.html', function(err, html) {
 
-                                        async function main() {
+                            async function main() {
 
-                                            var template = handlebars.compile(html)
+                                var template = handlebars.compile(html)
 
-                                            let transporter = nodemailer.createTransport({
-                                                host: "smtp.gmail.com",
-                                                port: 587,
-                                                secure: false,
-                                                auth: {
-                                                    user: process.env.USER_MAILER, // Env utilisateur
-                                                    pass: process.env.PASSWORD_MAILER, // Env password
-                                                },
-                                            })
+                                let transporter = nodemailer.createTransport({
+                                    host: "smtp.gmail.com",
+                                    port: 587,
+                                    secure: false,
+                                    auth: {
+                                        user: process.env.USER_MAILER, // Env utilisateur
+                                        pass: process.env.PASSWORD_MAILER, // Env password
+                                    },
+                                })
 
-                                            // Envoyer du courrier avec l'objet de transport défini (Soit req.body)
-                                            let info = await transporter.sendMail({
-                                                from: '"Seigneur Gaëtan Portfolio - " <gaetanarinfo@gmail.com>',
-                                                to: req.body.email,
-                                                subject: "Inscription sur mon Portfolio",
-                                                html: html,
-                                            })
+                                // Envoyer du courrier avec l'objet de transport défini (Soit req.body)
+                                let info = await transporter.sendMail({
+                                    from: '"Seigneur Gaëtan Portfolio - " <gaetanarinfo@gmail.com>',
+                                    to: req.body.email,
+                                    subject: "Inscription sur mon Portfolio",
+                                    html: html,
+                                })
 
-                                            //console.log("Message envoyer: %s", info.messageId)
+                                //console.log("Message envoyer: %s", info.messageId)
 
-                                        }
+                            }
 
-                                        main().catch(console.error)
+                            main().catch(console.error)
 
-                                    })
+                        })
 
-                                    res.redirect('/')
-                                }
-
-                            })
+                        res.redirect('/')
                     }
                 })
 
-            } else {
-                req.flash('error', 'Le mot de passe doit contenir minimums 8 caractères !')
-                req.session.error = req.flash('error')
-                req.session.data1 = req.body.email
-                req.session.data2 = req.body.lastname
-                req.session.data3 = req.body.firstname
-                req.session.data4 = avatarFile.name
-                res.redirect('/')
-            }
-
         } else {
-            req.flash('error', 'Désolé le fichier est trop volumineux !')
+            req.flash('error', 'Le mot de passe doit contenir minimums 8 caractères !')
             req.session.error = req.flash('error')
+            req.session.data1 = req.body.email
+            req.session.data2 = req.body.lastname
+            req.session.data3 = req.body.firstname
+            req.session.data4 = avatarFile.name
             res.redirect('/')
         }
+
+        // } else {
+        //     req.flash('error', 'Désolé le fichier est trop volumineux !')
+        //     req.session.error = req.flash('error')
+        //     res.redirect('/')
+        // }
 
     },
 

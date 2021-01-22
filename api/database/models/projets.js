@@ -1,9 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema
 
-// Import model
-const Like = require('./like')
-
 // MongoDb Collection Projet
 const ProjetShema = new mongoose.Schema({
 
@@ -18,8 +15,7 @@ const ProjetShema = new mongoose.Schema({
         default: false
     },
     like: [{
-        type: Schema.Types.ObjectId,
-        ref: 'likes'
+        type: Schema.Types.ObjectId
     }]
 
 });

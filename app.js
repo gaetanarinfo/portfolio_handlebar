@@ -48,6 +48,8 @@ const port = process.env.PORT || 3000
 app.use('*', (req, res, next) => {
     res.locals.users = req.session.userId
     res.locals.admin = req.session.isAdmin
+    res.locals.gaet = req.session.gaet
+        // console.log('Gaet: ', res.locals.gaet);
     next()
 })
 

@@ -23,7 +23,8 @@ const homeController = require('./home/homeController'),
     rssController = require('./home/rssController'),
     upload = require('../config/multer'),
     uploadGalerie = require('../config/multerGalerie'),
-    uploadProjet = require('../config/multerProjet')
+    uploadProjet = require('../config/multerProjet'),
+    uploadUser = require('../config/multerUser')
 
 // Routes Home
 router.route('/')
@@ -115,7 +116,7 @@ router.route('/admin/confirm_delete_comment/:id')
 
 // Routes User Create & Authentification & Déconnexion
 router.route('/user/register')
-    .post(nodemailerController.register)
+    .post(uploadUser.single('avatar'), nodemailerController.register)
 router.route('/user/auth')
     .post(userController.auth)
 router.route('/user/logout')
@@ -137,6 +138,8 @@ router.route('/mail')
 // Routes user add like projet
 router.route('/user/addLike/:id')
     .get(homeController.addLike)
+router.route('/user/removeLike/:id')
+    .get(homeController.removeLike)
 
 // Routes flux rss
 router.route('/rss')

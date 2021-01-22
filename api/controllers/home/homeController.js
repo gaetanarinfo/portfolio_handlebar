@@ -2,13 +2,12 @@ const Projet = require('../../database/models/projets'),
     Tuto = require('../../database/models/tutos'),
     Article = require('../../database/models/articles'),
     Galerie = require('../../database/models/galeries'),
-    Comment = require('../../database/models/comments'),
-    Like = require('../../database/models/like')
+    Comment = require('../../database/models/comments')
 
 module.exports = {
     get: async(req, res) => {
 
-        const projets = await Projet.find({}).populate('like').lean(), // Cards Projets
+        const projets = await Projet.find({}).lean(), // Cards Projets
             tutos = await Tuto.find({}).lean(), // Cards Tutoriels
             articles = await Article.find({}).sort('-dateCreate').lean(), // Cards Articles
             galeries = await Galerie.find({}).lean(), // Cards Galerie
@@ -27,36 +26,24 @@ module.exports = {
             data4 = req.session.data4
 
         if (success || error) {
-            res.render('index', { success: success, error: error, projets, tutos, articles, commentsAll, commentCount, galeries, data1, data2, data3, data4, title: 'Portfolio de Gaëtan Seigneur', content: "Mon portfolio professionnel, retrouvé ici mes compétences, les derniers articles de mon blog, mes tutoriels et tant d autres choses.", userId: req.session.userId })
-        } else res.render('index', { error: error, projets, tutos, articles, galeries, commentsAll, commentCount, title: 'Portfolio de Gaëtan Seigneur', content: "Mon portfolio professionnel, retrouvé ici mes compétences, les derniers articles de mon blog, mes tutoriels et tant d autres choses.", data1, data2, data3, data4, userId: req.session.userId })
+            res.render('index', { success: success, error: error, projets, tutos, articles, commentsAll, commentCount, galeries, data1, data2, data3, data4, title: 'Portfolio de Gaëtan Seigneur', content: "Mon portfolio professionnel, retrouvé ici mes compétences, les derniers articles de mon blog, mes tutoriels et tant d autres choses." })
+        } else res.render('index', { error: error, projets, tutos, articles, galeries, commentsAll, commentCount, title: 'Portfolio de Gaëtan Seigneur', content: "Mon portfolio professionnel, retrouvé ici mes compétences, les derniers articles de mon blog, mes tutoriels et tant d autres choses.", data1, data2, data3, data4 })
     },
 
     addLike: async(req, res) => {
 
-        Like
+        const query = req.params.id,
+            iduser = req.session.userId,
+            projet = await Projet.findById(query),
+            likeArr = projet.like
 
-        const query = {
-            _id: req.params.id
-        }
+        likeArr.push(iduser)
 
-        const projet = await Projet.findById(query)
-
-        // On définit notre construction de Projet
-        const like = new Like({
-            projetID: projet._id,
-            userID: req.session.userId
+        Projet.findByIdAndUpdate(query, {
+            like: likeArr
         })
-
-        projet.like.push(like._id)
 
         // On sauvegarde nous modification
-        like.save((err) => {
-            if (err) {
-                req.flash('error', 'Une erreur est survenue !')
-                req.session.error = req.flash('error')
-                res.redirect(`/`)
-            }
-        })
         projet.save((err) => {
             if (err) {
                 req.flash('error', 'Une erreur est survenue !')
@@ -67,6 +54,30 @@ module.exports = {
         })
 
         req.flash('success', 'Vous avez aimez le projet !')
+        req.session.success = req.flash('success')
+        res.redirect(`/`)
+    },
+
+    removeLike: async(req, res) => {
+
+        const query = req.params.id,
+            iduser = req.session.userId,
+            projet = await Projet.findById(query),
+            likeArr = projet.like
+
+        likeArr.remove(iduser)
+
+        // On sauvegarde nous modification
+        projet.save((err) => {
+            if (err) {
+                req.flash('error', 'Une erreur est survenue !')
+                req.session.error = req.flash('error')
+                res.redirect(`/`)
+            }
+
+        })
+
+        req.flash('success', "Vous n'aimez plus le projet !")
         req.session.success = req.flash('success')
         res.redirect(`/`)
     }

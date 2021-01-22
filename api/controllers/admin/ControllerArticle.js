@@ -344,7 +344,7 @@ module.exports = {
         // Ici on déclare la récupération de notre articleID grace à notre recherche asynchrone filtrer avec notre req.params.id
         const dbArticle = await Article.findById(req.params.id),
             // Ici on déclare le chemin de l'image qui devra etre supprimer
-            pathImg = path.resolve("./public/article/" + dbArticle.name)
+            pathImg = path.resolve("./public/images/article/" + dbArticle.name)
 
         // Ici nous avons une fonction de suppression de notre article filtrer grace à req.params.id (objet dans la DB)
         Article.deleteOne({ _id: req.params.id }, (err) => {
