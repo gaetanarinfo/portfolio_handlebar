@@ -32,30 +32,41 @@ module.exports = {
 
     addLike: async(req, res) => {
 
+
         const query = req.params.id,
             iduser = req.session.userId,
             projet = await Projet.findById(query),
-            likeArr = projet.like
+            like = projet.like
 
-        likeArr.push(iduser)
+        if (like != iduser) {
 
-        Projet.findByIdAndUpdate(query, {
-            like: likeArr
-        })
+            like.push(iduser)
 
-        // On sauvegarde nous modification
-        projet.save((err) => {
-            if (err) {
-                req.flash('error', 'Une erreur est survenue !')
-                req.session.error = req.flash('error')
-                res.redirect(`/`)
-            }
+            Projet.findByIdAndUpdate(query, {
+                like: like
+            })
 
-        })
+            // On sauvegarde nous modification
+            projet.save((err) => {
+                if (err) {
+                    req.flash('error', 'Une erreur est survenue !')
+                    req.session.error = req.flash('error')
+                    res.redirect(`/`)
+                }
 
-        req.flash('success', 'Vous avez aimez le projet !')
-        req.session.success = req.flash('success')
-        res.redirect(`/`)
+            })
+
+            req.flash('success', 'Vous aimez ce projet !')
+            req.session.success = req.flash('success')
+            res.redirect(`/`)
+
+        } else {
+
+            req.flash('error', 'Vous avez déjà voté pour ce projet !')
+            req.session.error = req.flash('error')
+            res.redirect(`/`)
+        }
+
     },
 
     removeLike: async(req, res) => {

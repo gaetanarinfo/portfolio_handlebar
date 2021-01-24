@@ -36,18 +36,24 @@ module.exports = {
         return new Handlebars.SafeString(theString) + '...'
     },
 
-    ifLike: function(arr, user, options) {
+    ifLike: async function(arr, user, options) {
 
-        //console.log(user);
-        //console.log(arr);
 
-        arr.forEach(i => {
+        // const Projet = require('../database/models/projets'),
+        //     query = arr,
+        //     iduser = user,
+        //     projet = await Projet.findById(query),
+        //     like = projet.like
 
-            console.log(i);
+        // console.log(like);
 
-            if (i === user) return userss;
+        // if (like != iduser) {
 
-        })
+        //     return options.fn(this.limit)
+        // }
+
+        // return options.inverse(this.limit)
+
 
     },
 
