@@ -22,37 +22,18 @@
                                     <h5 class="card-title">{{title}}</h5>
                                     <div class="card-icon">
 
-                                        <a class="" id="like_{{ _id }}" title="Supprimer ce projet" href="/user/removeLike/{{_id}}"><i class="fas fa-heart-broken"></i></a>
+                                        {{#ifLike like ../users}}
 
                                          <a id="like_{{ _id }}_2" class="" title="Voté pour ce projet" href="/user/addLike/{{_id}}"><i class="fas fa-heart"></i></a>
-                                        {{ projetId }}
-                                        <script>
 
+                                        {{else}}
 
-                                            const likeBtn_{{ _id }} = document.getElementById('like_{{ _id }}'),
-                                            likeBtn_{{ _id }}_2 = document.getElementById('like_{{ _id }}_2'),
-                                            userId_{{_id}} = '{{ ../users }}'
+                                        <a class="" id="like_{{ _id }}" title="Supprimer ce projet" href="/user/removeLike/{{_id}}"><i class="fas fa-heart-broken"></i></a>
 
-                                            
-                                                  if('{{ like }}' == '{{ _id }}' && userId_{{_id}} == '{{ ../users }}') {
+                                        {{/ifLike}}
 
-                                                    
-                                                    
-                                                    likeBtn_{{ _id }}.style.display = '';
-                                                    likeBtn_{{ _id }}_2.style.display = 'none';
-                                                }else{
-                                                        
-                                                    likeBtn_{{ _id }}.style.display = 'none';
-                                                    likeBtn_{{ _id }}_2.style.display = '';
-                                                }
-
-
-
-
-                                        </script>
-
-                                    
-
+                                        {{!-- <a id="like_{{ _id }}_2" class="" title="Voté pour ce projet" href="/user/addLike/{{_id}}"><i class="fas fa-heart"></i></a> --}}
+                         
                                         <a class="mask" href="" title="Masquer le projet">
                                             <i class="fas fa-reply"></i>
                                         </a>
