@@ -12,14 +12,14 @@
                  <div class="modal-body">
                      <div class="form-group">
                          <label class="text-dark mb-2">Image du projet</label>
-                         <input type="file" class="form-control mb-2" id="imageProjets_{{_id}}" name="image" onchange="updateImageDisplay5_{{_id}}()" accept=".png, .jpg, .jpeg, .gif" placeholder="Image du projet">
+                         <input type="file" class="form-control mb-2" id="imageProjets_{{projet._id}}" name="image" onchange="updateImageDisplay5_{{projet._id}}()" accept=".png, .jpg, .jpeg, .gif" placeholder="Image du projet">
 
                         <div class="text-center">
                             <img src="{{projet.image}}" style="width: 440px;">
                         </div>
                      </div>
 
-                    <div class="preview5" id="preview5_{{_id}}">
+                    <div class="preview5" id="preview5_{{projet._id}}">
                         <p>Aucun fichier sélectionné pour le moment</p>
                     </div>
 

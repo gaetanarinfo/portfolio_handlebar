@@ -1,5 +1,5 @@
 <!-- Modal Admin Modif Membres -->
- <div class="modal fade" id="modif_membre_{{_id}}" tabindex="-1" role="dialog" aria-hidden="true">
+ <div class="modal fade" id="modif_membre_{{user._id}}" tabindex="-1" role="dialog" aria-hidden="true">
      <div class="modal-dialog modal-dialog-centered" role="document">
          <div class="modal-content">
              <div class="modal-header">
@@ -28,8 +28,16 @@
 
                      <div class="form-group">
                          <label class="text-dark mb-2">Avatar du membre</label>
-                         <input type="text" class="form-control mb-2" name="avatar" value="{{user.avatar}}">
+                         <input type="file" class="form-control mb-2" id="avatarMembre_{{user._id}}" onchange="updateImageDisplay6_{{user._id}}()" accept=".png, .jpg, .jpeg, .gif" name="avatar">
+
+                                <div class="text-center">
+                            <img src="../{{user.avatar}}" style="width: 90px;">
+                        </div>
                      </div>
+
+                     <div class="preview5" id="preview6_{{user._id}}">
+                        <p>Aucun fichier sélectionné pour le moment</p>
+                    </div>
 
                     <div id="isAdmin" class="form-group text-center">
                         <div class="switch_box box_1">
@@ -45,6 +53,42 @@
                      <button type="button" class="btn btn-form-reset" data-dismiss="modal">Fermer</button>
                      <button type="submit" class="btn btn-form-send">Valider</button>
                  </div>
+
+                 <script>
+                     // Upload image edit membre
+                    var input6_{{user._id}} = document.querySelector('#avatarMembre_{{user._id}}');
+                    var preview6_{{user._id}} = document.querySelector('#preview6_{{user._id}}');
+
+                    function updateImageDisplay6_{{user._id}}() {
+                        while (preview6_{{user._id}}.firstChild) {
+                            preview6_{{user._id}}.removeChild(preview6_{{user._id}}.firstChild);
+                        }
+
+                        var curFiles6_{{user._id}} = input6_{{user._id}}.files;
+                        if (curFiles6_{{user._id}}.length === 0) {
+                            var para = document.createElement('p');
+                            para.textContent = 'Aucun fichier actuellement sélectionné pour le téléchargement';
+                            preview6.appendChild(para);
+                        } else {
+                            for (var i = 0; i < curFiles6_{{user._id}}.length; i++) {
+                                var para = document.createElement('p');
+                                if (validFileType(curFiles6_{{user._id}}[i])) {
+                                    para.textContent = curFiles6_{{user._id}}[i].name + ', taille du fichier ' + returnFileSize(curFiles6_{{user._id}}[i].size) + '.';
+                                    var image_{{user._id}} = document.createElement('img');
+                                    image_{{user._id}}.setAttribute('style', 'width: 90px;')
+                                    image_{{user._id}}.src = window.URL.createObjectURL(curFiles6_{{user._id}}[i]);
+
+                                    preview6_{{user._id}}.appendChild(image_{{user._id}});
+                                    preview6_{{user._id}}.appendChild(para);
+
+                                } else {
+                                    para.textContent = 'Nom du fichier ' + curFiles6_{{user._id}}[i].name + ": Ce n'est pas un type de fichier valide. Mettez à jour votre avatar.";
+                                    preview6_{{user._id}}.appendChild(para);
+                                }
+                            }
+                        }
+                    }
+                 </script>
              </form>
          </div>
      </div>

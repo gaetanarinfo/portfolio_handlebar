@@ -15,8 +15,6 @@ module.exports = {
         req.session.success = ''
         req.session.error = ''
 
-        const email = req.session.email
-
         // Nombre d'item par page
         var perPage = 6
             // La page que l'on veux récupéré si il y a en pas alors page 1
@@ -86,128 +84,104 @@ module.exports = {
 
                         if (articles.comment == undefined) {
 
-                            User.findOne({ email }, (erro, user) => {
-                                if (success || error) {
-                                    res.render('admin', {
-                                        // Page sur la quel on est : Number
-                                        current: page,
-                                        // Nombre de pages : Number
-                                        pages: Math.ceil(count / perPage),
-                                        // tableau avec les index des page: []
-                                        arrayPage: arrayPagesIndexes,
-                                        // Les articles : [{}]
-                                        articles: articles,
-                                        // Pages - 1
-                                        previous: parseInt(page) - 1,
-                                        // Pages + 1
-                                        next: parseInt(page) + 1,
-                                        pagin2,
-                                        success: success,
-                                        error: error,
-                                        title: 'Administration de mon blog',
-                                        content: "Partie administration de mon portfolio",
-                                        avatar: user.avatar,
-                                        name: user.firstname + ' ' + user.lastname,
-                                        rang: user.isAdmin,
-                                        dateRegister: user.createDate,
-                                        dateLog: user.isLog,
-                                        ip: user.ip,
-                                        layout: 'admin'
-                                    })
-                                } else {
-                                    res.render('admin', {
-                                        // Page sur la quel on est : Number
-                                        current: page,
-                                        // Nombre de pages : Number
-                                        pages: Math.ceil(count / perPage),
-                                        // tableau avec les index des page: []
-                                        arrayPage: arrayPagesIndexes,
-                                        // Les articles : [{}]
-                                        articles: articles,
-                                        // Pages - 1
-                                        previous: parseInt(page) - 1,
-                                        // Pages + 1
-                                        next: parseInt(page) + 1,
-                                        pagin2,
+                            if (success || error) {
+                                res.render('admin', {
+                                    // Page sur la quel on est : Number
+                                    current: page,
+                                    // Nombre de pages : Number
+                                    pages: Math.ceil(count / perPage),
+                                    // tableau avec les index des page: []
+                                    arrayPage: arrayPagesIndexes,
+                                    // Les articles : [{}]
+                                    articles: articles,
+                                    // Pages - 1
+                                    previous: parseInt(page) - 1,
+                                    // Pages + 1
+                                    next: parseInt(page) + 1,
+                                    pagin2,
+                                    success: success,
+                                    error: error,
+                                    title: 'Administration de mon blog',
+                                    content: "Partie administration de mon portfolio",
+                                    layout: 'admin'
+                                })
+                            } else {
+                                res.render('admin', {
+                                    // Page sur la quel on est : Number
+                                    current: page,
+                                    // Nombre de pages : Number
+                                    pages: Math.ceil(count / perPage),
+                                    // tableau avec les index des page: []
+                                    arrayPage: arrayPagesIndexes,
+                                    // Les articles : [{}]
+                                    articles: articles,
+                                    // Pages - 1
+                                    previous: parseInt(page) - 1,
+                                    // Pages + 1
+                                    next: parseInt(page) + 1,
+                                    pagin2,
 
-                                        error: error,
+                                    error: error,
 
-                                        title: 'Administration de mon blog',
-                                        content: "Partie administration de mon portfolio",
-                                        avatar: user.avatar,
-                                        name: user.firstname + ' ' + user.lastname,
-                                        rang: user.isAdmin,
-                                        dateRegister: user.createDate,
-                                        dateLog: user.isLog,
-                                        ip: user.ip,
-                                        layout: 'admin'
-                                    })
-                                }
-
-                            })
+                                    title: 'Administration de mon blog',
+                                    content: "Partie administration de mon portfolio",
+                                    layout: 'admin'
+                                })
+                            }
 
                         } else {
-                            User.findOne({ email }, (erro, user) => {
-                                if (success || error) {
-                                    res.render('admin', {
-                                        // Page sur la quel on est : Number
-                                        current: page,
-                                        // Nombre de pages : Number
-                                        pages: Math.ceil(count / perPage),
-                                        // tableau avec les index des page: []
-                                        arrayPage: arrayPagesIndexes,
-                                        // Les articles : [{}]
-                                        articles: articles,
-                                        // Pages - 1
-                                        previous: parseInt(page) - 1,
-                                        // Pages + 1
-                                        next: parseInt(page) + 1,
-                                        pagin2,
-                                        comments: articles.comment,
-                                        success: success,
-                                        error: error,
-                                        title: 'Administration de mon blog',
-                                        content: "Partie administration de mon portfolio",
-                                        avatar: user.avatar,
-                                        name: user.firstname + ' ' + user.lastname,
-                                        rang: user.isAdmin,
-                                        dateRegister: user.createDate,
-                                        dateLog: user.isLog,
-                                        ip: user.ip,
-                                        layout: 'admin'
-                                    })
-                                } else {
-                                    res.render('admin', {
-                                        // Page sur la quel on est : Number
-                                        current: page,
-                                        // Nombre de pages : Number
-                                        pages: Math.ceil(count / perPage),
-                                        // tableau avec les index des page: []
-                                        arrayPage: arrayPagesIndexes,
-                                        // Les articles : [{}]
-                                        articles: articles,
-                                        comments: articles.comment,
-                                        // Pages - 1
-                                        previous: parseInt(page) - 1,
-                                        // Pages + 1
-                                        next: parseInt(page) + 1,
-                                        pagin2,
+                            if (success || error) {
+                                res.render('admin', {
+                                    // Page sur la quel on est : Number
+                                    current: page,
+                                    // Nombre de pages : Number
+                                    pages: Math.ceil(count / perPage),
+                                    // tableau avec les index des page: []
+                                    arrayPage: arrayPagesIndexes,
+                                    // Les articles : [{}]
+                                    articles: articles,
+                                    // Pages - 1
+                                    previous: parseInt(page) - 1,
+                                    // Pages + 1
+                                    next: parseInt(page) + 1,
+                                    pagin2,
+                                    comments: articles.comment,
+                                    success: success,
+                                    error: error,
+                                    title: 'Administration de mon blog',
+                                    content: "Partie administration de mon portfolio",
+                                    layout: 'admin'
+                                })
+                            } else {
+                                res.render('admin', {
+                                    // Page sur la quel on est : Number
+                                    current: page,
+                                    // Nombre de pages : Number
+                                    pages: Math.ceil(count / perPage),
+                                    // tableau avec les index des page: []
+                                    arrayPage: arrayPagesIndexes,
+                                    // Les articles : [{}]
+                                    articles: articles,
+                                    comments: articles.comment,
+                                    // Pages - 1
+                                    previous: parseInt(page) - 1,
+                                    // Pages + 1
+                                    next: parseInt(page) + 1,
+                                    pagin2,
 
-                                        error: error,
+                                    error: error,
 
-                                        title: 'Administration de mon blog',
-                                        content: "Partie administration de mon portfolio",
-                                        avatar: user.avatar,
-                                        name: user.firstname + ' ' + user.lastname,
-                                        rang: user.isAdmin,
-                                        dateRegister: user.createDate,
-                                        dateLog: user.isLog,
-                                        ip: user.ip,
-                                        layout: 'admin'
-                                    })
-                                }
-
-                            })
+                                    title: 'Administration de mon blog',
+                                    content: "Partie administration de mon portfolio",
+                                    avatar: user.avatar,
+                                    name: user.firstname + ' ' + user.lastname,
+                                    rang: user.isAdmin,
+                                    dateRegister: user.createDate,
+                                    dateLog: user.isLog,
+                                    ip: user.ip,
+                                    layout: 'admin'
+                                })
+                            }
                         }
 
                     })

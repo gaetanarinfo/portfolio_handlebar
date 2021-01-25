@@ -62,12 +62,12 @@ module.exports = {
 
         const image = req.file.originalname
 
-        // if (image.size < 1048576) {
-
         if (req.body.password.length > 9) {
 
             User
                 .create({
+                    image: `/images/avatar/${image}`,
+                    name: image,
                     firstname: req.body.firstname,
                     lastname: req.body.lastname,
                     email: req.body.email,
@@ -76,7 +76,6 @@ module.exports = {
                     name: image,
                 }, (err) => {
                     if (err) {
-                        //console.log(err)
                         req.flash('error', 'Une erreur est survenue !')
                         req.session.error = req.flash('error')
                         req.session.data1 = req.body.email
@@ -114,8 +113,6 @@ module.exports = {
                                     html: html,
                                 })
 
-                                //console.log("Message envoyer: %s", info.messageId)
-
                             }
 
                             main().catch(console.error)
@@ -135,12 +132,6 @@ module.exports = {
             req.session.data4 = avatarFile.name
             res.redirect('/')
         }
-
-        // } else {
-        //     req.flash('error', 'Désolé le fichier est trop volumineux !')
-        //     req.session.error = req.flash('error')
-        //     res.redirect('/')
-        // }
 
     },
 

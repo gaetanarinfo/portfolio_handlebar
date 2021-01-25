@@ -14,8 +14,6 @@ module.exports = {
         req.session.success = ''
         req.session.error = ''
 
-        const email = req.session.email
-
         // Nombre d'item par page
         var perPage = 4
             // La page que l'on veux récupéré si il y a en pas alors page 1
@@ -83,66 +81,51 @@ module.exports = {
                         // Render de la pagination
                         var pagin5 = boostrapPaginator3.render()
 
-                        User.findOne({ email }, (erro, user) => {
-                            if (success || error) {
-                                res.render('admin', {
-                                    // Page sur la quel on est : Number
-                                    current: page,
-                                    // Nombre de pages : Number
-                                    pages: Math.ceil(count / perPage),
-                                    // tableau avec les index des page: []
-                                    arrayPage: arrayPagesIndexes,
-                                    // Les projets : [{}]
-                                    projets: projets,
-                                    // Pages - 1
-                                    previous: parseInt(page) - 1,
-                                    // Pages + 1
-                                    next: parseInt(page) + 1,
-                                    pagin5,
+                        if (success || error) {
+                            res.render('admin', {
+                                // Page sur la quel on est : Number
+                                current: page,
+                                // Nombre de pages : Number
+                                pages: Math.ceil(count / perPage),
+                                // tableau avec les index des page: []
+                                arrayPage: arrayPagesIndexes,
+                                // Les projets : [{}]
+                                projets: projets,
+                                // Pages - 1
+                                previous: parseInt(page) - 1,
+                                // Pages + 1
+                                next: parseInt(page) + 1,
+                                pagin5,
 
-                                    success: success,
-                                    error: error,
-                                    title: 'Administration de mon blog',
-                                    content: "Partie administration de mon portfolio",
-                                    avatar: user.avatar,
-                                    name: user.firstname + ' ' + user.lastname,
-                                    rang: user.isAdmin,
-                                    dateRegister: user.createDate,
-                                    dateLog: user.isLog,
-                                    ip: user.ip,
-                                    layout: 'admin'
-                                })
-                            } else {
-                                res.render('admin', {
-                                    // Page sur la quel on est : Number
-                                    current: page,
-                                    // Nombre de pages : Number
-                                    pages: Math.ceil(count / perPage),
-                                    // tableau avec les index des page: []
-                                    arrayPage: arrayPagesIndexes,
-                                    // Les projets : [{}]
-                                    projets: projets,
-                                    // Pages - 1
-                                    previous: parseInt(page) - 1,
-                                    // Pages + 1
-                                    next: parseInt(page) + 1,
-                                    pagin5,
+                                success: success,
+                                error: error,
+                                title: 'Administration de mon blog',
+                                content: "Partie administration de mon portfolio",
+                                layout: 'admin'
+                            })
+                        } else {
+                            res.render('admin', {
+                                // Page sur la quel on est : Number
+                                current: page,
+                                // Nombre de pages : Number
+                                pages: Math.ceil(count / perPage),
+                                // tableau avec les index des page: []
+                                arrayPage: arrayPagesIndexes,
+                                // Les projets : [{}]
+                                projets: projets,
+                                // Pages - 1
+                                previous: parseInt(page) - 1,
+                                // Pages + 1
+                                next: parseInt(page) + 1,
+                                pagin5,
 
-                                    error: error,
+                                error: error,
 
-                                    title: 'Administration de mon blog',
-                                    content: "Partie administration de mon portfolio",
-                                    avatar: user.avatar,
-                                    name: user.firstname + ' ' + user.lastname,
-                                    rang: user.isAdmin,
-                                    dateRegister: user.createDate,
-                                    dateLog: user.isLog,
-                                    ip: user.ip,
-                                    layout: 'admin'
-                                })
-                            }
-
-                        })
+                                title: 'Administration de mon blog',
+                                content: "Partie administration de mon portfolio",
+                                layout: 'admin'
+                            })
+                        }
 
                     })
             })

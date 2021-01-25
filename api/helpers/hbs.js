@@ -40,8 +40,6 @@ module.exports = {
 
         for (let i = 0; i < arr.length; i++) {
 
-            console.log(arr[i]);
-
             if (arr[i] == user) {
                 return options.inverse(this)
             }

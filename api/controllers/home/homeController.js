@@ -2,7 +2,8 @@ const Projet = require('../../database/models/projets'),
     Tuto = require('../../database/models/tutos'),
     Article = require('../../database/models/articles'),
     Galerie = require('../../database/models/galeries'),
-    Comment = require('../../database/models/comments')
+    Comment = require('../../database/models/comments'),
+    pagination = require('pagination')
 
 module.exports = {
     get: async(req, res) => {
@@ -19,6 +20,7 @@ module.exports = {
         req.session.success = ''
         req.session.error = ''
 
+
         // Si inscription erreur alors on save pour retourner dans le formulaire inscription
         const data1 = req.session.data1,
             data2 = req.session.data2,
@@ -26,8 +28,40 @@ module.exports = {
             data4 = req.session.data4
 
         if (success || error) {
-            res.render('index', { success: success, error: error, projets, tutos, articles, commentsAll, commentCount, galeries, data1, data2, data3, data4, title: 'Portfolio de Gaëtan Seigneur', content: "Mon portfolio professionnel, retrouvé ici mes compétences, les derniers articles de mon blog, mes tutoriels et tant d autres choses." })
-        } else res.render('index', { error: error, projets, tutos, articles, galeries, commentsAll, commentCount, title: 'Portfolio de Gaëtan Seigneur', content: "Mon portfolio professionnel, retrouvé ici mes compétences, les derniers articles de mon blog, mes tutoriels et tant d autres choses.", data1, data2, data3, data4 })
+            res.render('index', {
+                success: success,
+                error: error,
+                projets,
+                tutos,
+                articles,
+                commentsAll,
+                commentCount,
+                galeries,
+                data1,
+                data2,
+                data3,
+                data4,
+                title: 'Portfolio de Gaëtan Seigneur',
+                content: "Mon portfolio professionnel, retrouvé ici mes compétences, les derniers articles de mon blog, mes tutoriels et tant d autres choses."
+            })
+        } else
+            res.render('index', {
+                error: error,
+                projets,
+                tutos,
+                articles,
+                galeries,
+                commentsAll,
+                commentCount,
+                data1,
+                data2,
+                data3,
+                data4,
+                title: 'Portfolio de Gaëtan Seigneur',
+                content: "Mon portfolio professionnel, retrouvé ici mes compétences, les derniers articles de mon blog, mes tutoriels et tant d autres choses."
+            })
+
+
     },
 
     addLike: async(req, res) => {

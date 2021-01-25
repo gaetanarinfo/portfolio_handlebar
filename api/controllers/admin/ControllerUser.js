@@ -1,13 +1,7 @@
 const User = require('../../database/models/users'),
-    fileupload = require("express-fileupload"),
-    express = require('express'),
-    app = express(),
-    pagination = require('pagination')
-
-app.use(fileupload({
-    limits: { fileSize: 10 * 1024 * 1024 },
-    abortOnLimit: false
-}))
+    pagination = require('pagination'),
+    path = require('path'),
+    fs = require('fs')
 
 module.exports = {
 
@@ -89,64 +83,51 @@ module.exports = {
                         // Render de la pagination
                         var pagin = boostrapPaginator.render()
 
-                        User.findOne({ email }, (erro, user) => {
-                            if (success || error) {
-                                res.render('admin', {
-                                    // Page sur la quel on est : Number
-                                    current: page,
-                                    // Nombre de pages : Number
-                                    pages: Math.ceil(count / perPage),
-                                    // tableau avec les index des page: []
-                                    arrayPage: arrayPagesIndexes,
-                                    // Les membres : [{}]
-                                    membres: membres,
-                                    // Pages - 1
-                                    previous: parseInt(page) - 1,
-                                    // Pages + 1
-                                    next: parseInt(page) + 1,
-                                    pagin,
+                        if (success || error) {
+                            res.render('admin', {
+                                // Page sur la quel on est : Number
+                                current: page,
+                                // Nombre de pages : Number
+                                pages: Math.ceil(count / perPage),
+                                // tableau avec les index des page: []
+                                arrayPage: arrayPagesIndexes,
+                                // Les membres : [{}]
+                                membres: membres,
+                                // Pages - 1
+                                previous: parseInt(page) - 1,
+                                // Pages + 1
+                                next: parseInt(page) + 1,
+                                pagin,
 
-                                    success: success,
-                                    error: error,
-                                    layout: 'admin',
-                                    title: 'Administration de mon blog',
-                                    content: "Partie administration de mon portfolio",
-                                    avatar: user.avatar,
-                                    name: user.firstname + ' ' + user.lastname,
-                                    rang: user.isAdmin,
-                                    dateLog: user.isLog,
-                                    ip: user.ip,
-                                    dateRegister: user.createDate
-                                })
-                            } else {
-                                res.render('admin', {
-                                    // Page sur la quel on est : Number
-                                    current: page,
-                                    // Nombre de pages : Number
-                                    pages: Math.ceil(count / perPage),
-                                    // tableau avec les index des page: []
-                                    arrayPage: arrayPagesIndexes,
-                                    // Les membres : [{}]
-                                    membres: membres,
-                                    // Pages - 1
-                                    previous: parseInt(page) - 1,
-                                    // Pages + 1
-                                    next: parseInt(page) + 1,
-                                    pagin,
+                                success: success,
+                                error: error,
+                                layout: 'admin',
+                                title: 'Administration de mon blog',
+                                content: "Partie administration de mon portfolio",
+                            })
+                        } else {
+                            res.render('admin', {
+                                // Page sur la quel on est : Number
+                                current: page,
+                                // Nombre de pages : Number
+                                pages: Math.ceil(count / perPage),
+                                // tableau avec les index des page: []
+                                arrayPage: arrayPagesIndexes,
+                                // Les membres : [{}]
+                                membres: membres,
+                                // Pages - 1
+                                previous: parseInt(page) - 1,
+                                // Pages + 1
+                                next: parseInt(page) + 1,
+                                pagin,
 
-                                    error: error,
-                                    layout: 'admin',
-                                    title: 'Administration de mon blog',
-                                    content: "Partie administration de mon portfolio",
-                                    avatar: user.avatar,
-                                    name: user.firstname + ' ' + user.lastname,
-                                    rang: user.isAdmin,
-                                    dateLog: user.isLog,
-                                    ip: user.ip,
-                                    dateRegister: user.createDate
-                                })
-                            }
-                        })
+                                error: error,
+                                layout: 'admin',
+                                title: 'Administration de mon blog',
+                                content: "Partie administration de mon portfolio",
+                            })
+                        }
+
                     })
             })
     },
@@ -154,75 +135,111 @@ module.exports = {
 
     addUser: (req, res) => {
 
-        const avatarFile = req.files.avatar
+        if (req.body.password.length > 9) {
 
-        if (avatarFile.size < 1048576) {
-
-            if (req.body.password.length > 9) {
-
-                avatarFile.mv('public/avatar/' + avatarFile.name, function(err) {
+            User
+                .create({
+                    image: `/images/avatar/${image}`,
+                    name: image,
+                    firstname: req.body.firstname,
+                    lastname: req.body.lastname,
+                    email: req.body.email,
+                    password: req.body.password,
+                    avatar: avatarFile.name
+                }, (err) => {
                     if (err) {
+                        //console.log(err)
                         req.flash('error', 'Une erreur est survenue !')
                         req.session.error = req.flash('error')
-                        return res.redirect('/admin')
+
+                        res.redirect('/admin')
                     } else {
+                        req.flash('success', 'Membres inscrits !')
+                        req.session.success = req.flash('success')
 
-                        User
-                            .create({
-                                firstname: req.body.firstname,
-                                lastname: req.body.lastname,
-                                email: req.body.email,
-                                password: req.body.password,
-                                avatar: avatarFile.name
-                            }, (err) => {
-                                if (err) {
-                                    //console.log(err)
-                                    req.flash('error', 'Une erreur est survenue !')
-                                    req.session.error = req.flash('error')
-
-                                    res.redirect('/admin')
-                                } else {
-                                    req.flash('success', 'Membres inscrits !')
-                                    req.session.success = req.flash('success')
-
-                                    res.redirect('/admin')
-                                }
-
-                            })
+                        res.redirect('/admin')
                     }
+
                 })
 
-            } else {
-                req.flash('error', 'Le mot de passe doit contenir minimums 8 caractères !')
-                req.session.error = req.flash('error')
-                res.redirect('/admin')
-            }
-
         } else {
-            req.flash('error', 'Désolé le fichier est trop volumineux !')
+            req.flash('error', 'Le mot de passe doit contenir minimums 8 caractères !')
             req.session.error = req.flash('error')
             res.redirect('/admin')
         }
 
     },
 
-    editUser: (req, res) => {
+    editUser: async(req, res) => {
 
-        const id = req.params.id
+        console.log(req.body);
 
-        User.findOneAndUpdate({ '_id': id }, {
-            lastname: req.body.lastname,
-            firstname: req.body.firstname,
-            email: req.body.email,
-            isBanned: req.body.isBanned,
-        }, (error) => {
+        // On declare notre userID (Objet à éditer)
+        const userID = await User.findById(req.params.id),
+            // Query qui est l'id de notre objet à éditer
+            query = { _id: req.params.id },
+            // pathImg sera le chemin de notre fichier à supprimer
+            pathImg = path.resolve("./public/images/avatar/" + userID.name)
 
-            req.flash('success', 'Le membre ' + req.body.lastname + ' ' + req.body.firstname + ' à été modifié !')
-            req.session.success = req.flash('success')
+        // Condition pour verifier qu'il n'y a pas de fichier dans notre formulaire
+        if (!req.file) {
 
-            res.redirect('/admin')
+            User.updateOne(query, {
+                lastname: req.body.lastname,
+                firstname: req.body.firstname,
+                email: req.body.email,
+                isBanned: Boolean(req.body.isBanned)
+                    // et notre callback d'error
+            }, (err) => {
+                if (err) {
+                    res.redirect('/admin')
+                } else {
+                    req.flash('success', 'Le membre ' + req.body.lastname + ' ' + req.body.firstname + ' à été modifié !')
+                    req.session.success = req.flash('success')
 
-        });
+                    res.redirect('/admin')
+                }
+            })
+
+
+            // Sinon (Donc si nous avont un fichier (image) dans notre formulaire)
+        } else {
+            // Ici nous éditons notre article selectionner grâce à query
+            User.updateOne(query, {
+                // on récupère tout notre req.body
+                lastname: req.body.lastname,
+                firstname: req.body.firstname,
+                email: req.body.email,
+                isBanned: Boolean(req.body.isBanned),
+                // ici on viens stocker le chemin de l'image dans la DB
+                avatar: `./public/images/avatar/${req.file.originalname}`,
+                // Ici on stock le nom de l'image dans notre DB
+                name: req.file.originalname
+                    // Notre callback d'error
+            }, (err) => {
+                if (err) {
+
+                    //console.log(err)
+                    req.flash('error', 'Une erreur est survenue !')
+                    req.session.error = req.flash('error')
+
+                } else {
+
+                    // Si notre callback nous donne pas d'erreur alors note fonction de suppression de l'image de lance avec un callback d'err
+                    fs.unlink(pathImg, (err) => {
+                        if (err) console.log(err)
+
+                    })
+
+                    req.flash('success', 'Le membre ' + req.body.lastname + ' ' + req.body.firstname + ' à été modifié !')
+                    req.session.success = req.flash('success')
+
+                    res.redirect('/admin')
+
+                }
+
+            })
+        }
 
     },
 
@@ -250,17 +267,33 @@ module.exports = {
 
     },
 
-    deleteUserConfirm: (req, res) => {
+    deleteUserConfirm: async(req, res) => {
 
-        const id = req.params.id
+        // Ici on déclare la récupération de notre projetID grace à notre recherche asynchrone filtrer avec notre req.params.id
+        const dbUser = await User.findById(req.params.id),
+            // Ici on déclare le chemin de l'image qui devra etre supprimer
+            pathImg = path.resolve("./public/images/avatar/" + dbUser.name)
 
-        User.findOneAndDelete({ _id: id }, (erro, user) => {
+        // User nous avons une fonction de suppression de notre article filtrer grace à req.params.id (objet dans la DB)
+        Projet.deleteOne({ _id: req.params.id }, (err) => {
+            // Ici notre callback verifie bien que notre fonction c'est passer sans erreur
+            if (err) console.log(err)
+                // Et si nous n'avons aucune erreur alors on execute ça
+            else {
+                // Ici est notre fonction de suppression du fichier (image) avec son callback
+                fs.unlink(pathImg, (err) => {
+                    if (err) {
+                        //console.log(err)
+                        req.flash('error', 'Une erreur est survenue !')
+                        req.session.error = req.flash('error')
+                    } else {
+                        req.flash('success', 'Le membre à été supprimé !')
+                        req.session.success = req.flash('success')
 
-            req.flash('success', 'Le membre à été supprimé !')
-            req.session.success = req.flash('success')
-
-            res.redirect('/admin')
-
+                        res.redirect('/admin/projets')
+                    }
+                })
+            }
         })
 
     }

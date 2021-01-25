@@ -24,10 +24,11 @@ const homeController = require('./home/homeController'),
     upload = require('../config/multer'),
     uploadGalerie = require('../config/multerGalerie'),
     uploadProjet = require('../config/multerProjet'),
-    uploadUser = require('../config/multerUser')
+    uploadUser = require('../config/multerUser'),
+    preloaderController = require('./home/preloaderController')
 
 // Routes Home
-router.route('/')
+router.route('/home')
     .get(homeController.get)
 
 // Routes Blog
@@ -46,9 +47,9 @@ router.route('/admin')
 
 // Routes Admin Section User
 router.route('/admin/addUser')
-    .post(auth, authAdmin, adminControllerUser.addUser)
-router.route('/admin/editUser/:id')
-    .post(auth, authAdmin, adminControllerUser.editUser)
+    .post(auth, authAdmin, uploadUser.single('avatar'), adminControllerUser.addUser)
+router.route('/admin/editMembre/:id')
+    .post(auth, authAdmin, uploadUser.single('avatar'), adminControllerUser.editUser)
 router.route('/admin/view_membre/:id')
     .get(auth, authAdmin, adminControllerUser.viewUser)
 router.route('/admin/delete_membre/:id')
@@ -144,6 +145,10 @@ router.route('/user/removeLike/:id')
 // Routes flux rss
 router.route('/rss')
     .get(rssController.getRss)
+
+// Routes flux rss
+router.route('/')
+    .get(preloaderController.getPreloader)
 
 // Export
 module.exports = router

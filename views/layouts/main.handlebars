@@ -11,9 +11,22 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/css/style.css">
 
+    {{!-- <script>
+            jQuery(window).on('load', function () {
+    (function ($) {
+        $.get( "/", function( data ) {
+    $( "#loader" ).html( data );
+
+    });
+    })(jQuery);
+    });
+    </script> --}}
+
 </head>
 
 <body>
+
+<div id="loader"></div>    
 
 {{> header}}
 
@@ -24,5 +37,24 @@
 ​{{> notifications}}
 
 ​{{> footer}}
+
+<!-- Loader -->
+<script>
+
+    function preloaderFadeOutInit(){
+        $('#tuto_cards').delay(500).fadeIn(500);
+        $('#connaissances').delay(1000).fadeIn(500);
+        $('#projet').delay(1500).fadeIn(500);
+        $('#widget_1').delay(2000).fadeIn(500);
+        $('#widget_2').delay(2500).fadeIn(500);
+    }
+
+    jQuery(window).on('load', function () {
+    (function ($) {
+        preloaderFadeOutInit();
+    })(jQuery);
+    });
+
+</script>
 
 </body>

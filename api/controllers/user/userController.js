@@ -25,6 +25,7 @@ module.exports = {
                         req.session.avatar = user.avatar
                         req.session.isAdmin = user.isAdmin
                         req.session.isLog = user.isLog
+                        req.session.ip = user.ip
 
                         req.session.gaet = user
 

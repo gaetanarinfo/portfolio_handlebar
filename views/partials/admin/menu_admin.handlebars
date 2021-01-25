@@ -12,16 +12,16 @@
 
     <div class="card-profil">
         <div class="m-auto text-center">
-            <img src="../../../avatar/{{avatar}}"
+            <img src="../../..{{userAdmin.avatar}}"
                 alt="Gaëtan Seigneur" width="117" class="rounded-circle mt-4">
         </div>
 
         <div class="m-auto text-center mt-3">
-            <p><i class="fas fa-user-cog ml-1" aria-hidden="true"></i>{{name}}</p>
-            <p><i class="fas fa-random ml-1" aria-hidden="true"></i>{{#if rang}}Administrateur{{else}}Membre{{/if}}</p>
-            <p><i class="fas fa-sign-out-alt ml-1" aria-hidden="true"></i>Inscrit le : {{generateDate dateRegister}}</p>
-            <p><i class="fas fa-sign-out-alt ml-1" aria-hidden="true"></i>Connexion le : {{generateDate dateLog}}</p>
-            <p><i class="fas fa-map-marker-alt ml-1" aria-hidden="true"></i>Ip : {{ip}}</p>
+            <p><i class="fas fa-user-cog ml-1" aria-hidden="true"></i>{{userAdmin.lastname}} {{userAdmin.firstname}}</p>
+            <p><i class="fas fa-random ml-1" aria-hidden="true"></i>{{#if userAdmin.isAdmin}}Administrateur{{else}}Membre{{/if}}</p>
+            <p><i class="fas fa-sign-out-alt ml-1" aria-hidden="true"></i>Inscrit le : {{generateDate userAdmin.createDate}}</p>
+            <p><i class="fas fa-sign-out-alt ml-1" aria-hidden="true"></i>Connexion le : {{generateDate userAdmin.isLog}}</p>
+            <p><i class="fas fa-map-marker-alt ml-1" aria-hidden="true"></i>Ip : {{userAdmin.ip}}</p>
             <hr>
         </div>
 
