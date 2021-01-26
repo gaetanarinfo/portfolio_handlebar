@@ -10965,6 +10965,29 @@ progress::-webkit-progress-value {
   color: white;
 }
 
+.btn-cards-yt-all {
+  display: block;
+  margin: 0px auto;
+  padding: 8px 10px;
+  width: 175px;
+  height: 38px;
+  font-family: "Arimo", sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  color: white;
+  text-decoration: none !important;
+  background: #691515;
+  border-radius: 4px;
+  box-shadow: 0 0 5px #69151567;
+  transition: all 500ms;
+}
+.btn-cards-yt-all:hover {
+  background-color: #861616;
+  box-shadow: 0 0 5px #86161680;
+  border-radius: 10px !important;
+  color: white;
+}
+
 /* BUTTON SECTION 5 */
 .btn-tab {
   display: block;
@@ -11013,6 +11036,30 @@ progress::-webkit-progress-value {
   background-color: #b3aeae34;
   color: #2b2a2a !important;
   box-shadow: 0 0 4px 0px #b3aeae34;
+}
+
+/* BTN DROPDOWN TUTO */
+.btn-dropcat {
+  display: block;
+  margin: 0px auto;
+  padding: 8px 10px;
+  width: 175px;
+  height: 38px;
+  font-family: "Arimo", sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  color: white;
+  text-decoration: none !important;
+  background: #1f6725;
+  border-radius: 4px;
+  box-shadow: 0 0 5px #1a4c1e;
+  transition: all 500ms;
+}
+.btn-dropcat:hover {
+  background-color: #10580f;
+  box-shadow: 0 0 5px #176b168c;
+  border-radius: 10px !important;
+  color: white;
 }
 
 @media only screen and (max-width: 1195px) {

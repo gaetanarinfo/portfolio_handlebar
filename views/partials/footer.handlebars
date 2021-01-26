@@ -78,8 +78,8 @@
                     </div>
 
                     <div class="mt-4">
-                        <button type="submit" class="btn btn-form-send ml-5">Envoyer le message</button> <button type="reset"
-                            class="btn btn-form-reset">Effacer</button>
+                        <button type="submit" class="btn btn-form-send ml-5">Envoyer le message</button> <button
+                            type="reset" class="btn btn-form-reset">Effacer</button>
                     </div>
                 </form>
             </div>
@@ -154,7 +154,8 @@
                         <a href="#tuto" class="a-f"><i class="fab fa-youtube ml-1" aria-hidden="true"></i> Tuto</a>
                     </li>
                     <li class="mb-3">
-                        <a href="/blog?page=1" class="a-f"><i class="far fa-newspaper ml-1" aria-hidden="true"></i> Actu & Dev</a>
+                        <a href="/blog?page=1" class="a-f"><i class="far fa-newspaper ml-1" aria-hidden="true"></i> Actu
+                            & Dev</a>
                     </li>
                     <li class="mb-3">
                         <a href="#contact" class="a-f"><i class="fas fa-reply ml-1" aria-hidden="true"></i> Contact</a>
@@ -170,34 +171,35 @@
                 <div class="row d-flex justify-content-center mt-3">
                     <div class="col-md-12">
                         {{#ifEquals commentCount 0}}
-                            {{#each (limit commentsAll 2) }}       
-                            <div class="card comment">
-                                <div class="comment-widgets">
-                                    
-                                        <!-- Commentaire -->
-                                        <div class="d-flex flex-row comment-row m-t-0">
-                                            <div class="p-2">
-                                                <img src="/avatar/{{avatar}}"
-                                                    alt="{{author}}" width="50" class="rounded-circle">
-                                            </div>
-                                            <div class="comment-text w-100">
-                                                <h6>{{author}}</h6>
-                                                <span class="m-b-15 d-block">{{content}}</span>
-                                                <div class="comment-footer mt-1">
-                                                    <span class="text-muted float-right"><i
-                                                            class="fas fa-pencil-alt ml-2"></i>Posté le {{generateDate dateCreate}}</span>
-                                                </div>
-                                            </div>
-                                        </div>              
-                                </div>
-                                {{/each}} 
-                                    
-                        {{else}}
+                        {{#each (limit commentsAll 2) }}
+                        <div class="card comment">
+                            <div class="comment-widgets">
 
-                            <p class="error-comment">Désolé aucun commentaire à afficher pour le moment !</p>     
-                            
+                                <!-- Commentaire -->
+                                <div class="d-flex flex-row comment-row m-t-0">
+                                    <div class="p-2">
+                                        <img src="/avatar/{{avatar}}" alt="{{author}}" width="50"
+                                            class="rounded-circle">
+                                    </div>
+                                    <div class="comment-text w-100">
+                                        <h6>{{author}}</h6>
+                                        <span class="m-b-15 d-block">{{content}}</span>
+                                        <div class="comment-footer mt-1">
+                                            <span class="text-muted float-right"><i
+                                                    class="fas fa-pencil-alt ml-2"></i>Posté le {{generateDate
+                                                dateCreate}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{/each}}
+
+                            {{else}}
+
+                            <p class="error-comment">Désolé aucun commentaire à afficher pour le moment !</p>
+
                             {{/ifEquals}}
-                           
+
                             <!-- Card -->
                         </div>
                     </div>
@@ -221,11 +223,39 @@
 </footer>
 <!-- Footer -->
 
+<!-- Bootstrap JS -->
+<script src="/vendor/jquery/jquery-3.5.1.slim.min.js"></script>
+<script src="/js/script.js"></script>
+<script src="/vendor/bootstrap/js/popper.min.js"></script>
+<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
 <!-- js icons -->
 <script src="/vendor/icons/9d1d83a1dd.js"></script>
 
-<!-- Bootstrap JS -->
-<script src="/vendor/jquery/jquery-3.5.1.slim.min.js"></script>
-<script src="/vendor/bootstrap/js/popper.min.js"></script>
-<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
-<script src="/js/script.js"></script>
+<!-- Preloader -->
+<script>
+    function preloaderFadeOutInit() {
+        $('#tuto_cards').fadeIn(1000);
+        $('#connaissances').fadeIn(1000);
+        $('#projet').fadeIn(1000);
+        $('#widget_1').fadeIn(1000);
+        $('#widget_2').fadeIn(1000);
+    }
+
+    jQuery(window).on('load', function () {
+        (function ($) {
+            preloaderFadeOutInit();
+
+            setTimeout(function () {
+                $('#init').fadeIn();
+                $('body').css('overflow', 'visible')
+            }, 600)
+
+            setTimeout(function () {
+                $('#loader').fadeToggle();
+                //$('#loader').remove();
+            }, 1100)
+        })(jQuery);
+    });
+</script>
+
+<script src="/js/preloader.js"></script>

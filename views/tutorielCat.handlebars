@@ -1,0 +1,20 @@
+ <div class="row" id="allCat">
+                    {{#each (limit tutosCat 12)}}
+                    <div class="col-md-4 mt-2" style="{{#if isPrivate }}display: none;{{else}}{{/if}}">
+                        <div class="card">
+                            <iframe class="card-img-top card-yt" src="https://www.youtube.com/embed/{{api}}"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                            <div class="card-body">
+                                <h5 class="card-title">{{title}}</h5>
+                                <p class="card-text">{{content}}</p>
+                            </div>
+                            <div class="card-footer">
+                                <div class="card-date"><i class="far fa-calendar-alt"></i> <span>{{date}}</span></div>
+                                <div class="card-btn"><a href="{{links}}" class="btn btn-cards-yt">Voir la vidéo</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>

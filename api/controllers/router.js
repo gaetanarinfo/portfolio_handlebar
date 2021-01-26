@@ -25,10 +25,11 @@ const homeController = require('./home/homeController'),
     uploadGalerie = require('../config/multerGalerie'),
     uploadProjet = require('../config/multerProjet'),
     uploadUser = require('../config/multerUser'),
-    preloaderController = require('./home/preloaderController')
+    tutoController = require('./home/tutoController'),
+    tutoCatController = require('./home/tutoCatController')
 
 // Routes Home
-router.route('/home')
+router.route('/')
     .get(homeController.get)
 
 // Routes Blog
@@ -146,9 +147,12 @@ router.route('/user/removeLike/:id')
 router.route('/rss')
     .get(rssController.getRss)
 
-// Routes flux rss
-router.route('/')
-    .get(preloaderController.getPreloader)
+// Routes Tutoriel
+router.route('/tutoriel')
+    .get(tutoController.getTuto)
+router.route('/tutorielCat/:category')
+    .get(tutoCatController.getCat)
+
 
 // Export
 module.exports = router

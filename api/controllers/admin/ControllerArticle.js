@@ -1,5 +1,4 @@
 const Article = require('../../database/models/articles'),
-    User = require('../../database/models/users'),
     path = require('path'),
     pagination = require('pagination'),
     fs = require('fs')
@@ -7,7 +6,6 @@ const Article = require('../../database/models/articles'),
 module.exports = {
 
     showArticle: (req, res) => {
-
 
         const success = req.session.success, // Message Succes
             error = req.session.error // Message Error
@@ -173,12 +171,6 @@ module.exports = {
 
                                     title: 'Administration de mon blog',
                                     content: "Partie administration de mon portfolio",
-                                    avatar: user.avatar,
-                                    name: user.firstname + ' ' + user.lastname,
-                                    rang: user.isAdmin,
-                                    dateRegister: user.createDate,
-                                    dateLog: user.isLog,
-                                    ip: user.ip,
                                     layout: 'admin'
                                 })
                             }

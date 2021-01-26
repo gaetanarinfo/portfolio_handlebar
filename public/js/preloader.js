@@ -1,4 +1,4 @@
-setTimeout(function() { location.href = "/home" }, 2500);
+// setTimeout(function() { location.href = "/home" }, 2500);
 
 /*!
  * Particleground

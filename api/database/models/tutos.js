@@ -11,7 +11,8 @@ const TutoShema = new mongoose.Schema({
     isPrivate: {
         type: Boolean,
         default: false
-    }
+    },
+    category: String
 
 });
 
