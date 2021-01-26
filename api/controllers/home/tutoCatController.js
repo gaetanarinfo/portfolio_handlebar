@@ -1,3 +1,6 @@
+const Tuto = require('../../database/models/tutos'),
+    pagination = require('pagination')
+
 /*
  * Controller
  *************/
