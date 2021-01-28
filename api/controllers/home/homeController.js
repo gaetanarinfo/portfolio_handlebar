@@ -16,11 +16,8 @@ module.exports = {
             success = req.session.success, // Message Succes
             error = req.session.error // Message Error
 
-
-        console.log(success);
-
-        // req.session.success = ''
-        // req.session.error = ''
+        req.session.success = undefined
+        req.session.error = undefined
 
         // Nombre d'item par page
         var perPage = 6
@@ -155,7 +152,7 @@ module.exports = {
                                             data3 = req.session.data3,
                                             data4 = req.session.data4
 
-                                        if (success || error === "") {
+                                        if (success || error) {
                                             res.render('index', {
                                                 success: success,
                                                 error: error,

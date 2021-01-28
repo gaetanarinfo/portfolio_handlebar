@@ -103,7 +103,7 @@ app.use(helmet.noSniff());
 app.use(helmet.permittedCrossDomainPolicies());
 app.use(helmet.referrerPolicy());
 app.use(helmet.xssFilter());
-d
+
 app.disable('x-powered-by');
 
 reload.watch(__dirname + "/public")

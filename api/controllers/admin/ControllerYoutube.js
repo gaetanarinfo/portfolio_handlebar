@@ -7,8 +7,8 @@ module.exports = {
         const success = req.session.success, // Message Succes
             error = req.session.error // Message Error
 
-        req.session.success = ''
-        req.session.error = ''
+        req.session.success = undefined
+        req.session.error = undefined
 
         const email = req.session.email
 
