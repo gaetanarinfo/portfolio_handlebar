@@ -22,6 +22,7 @@
         "express-flash": "0.0.2",
         "express-handlebars": "^5.2.0",
         "express-handlebars-paginate": "^1.0.3",
+        "express-oas-generator": "^1.0.30",
         "express-paginatorjs": "^1.0.1",
         "express-session": "^1.17.1",
         "express-validator": "^6.9.2",
@@ -30,8 +31,10 @@
         "handlebars-helpers": "^0.10.0",
         "handlebars-utils": "^1.0.6",
         "handlebars.moment": "^1.0.4",
+        "helmet": "^4.4.1",
         "is-regex": "^1.1.1",
         "jsonwebtoken": "^8.5.1",
+        "keygrip": "^1.1.0",
         "moment": "^2.29.1",
         "moment-timezone": "^0.5.32",
         "mongodb": "^3.6.3",
@@ -42,11 +45,12 @@
         "preloader": "^4.0.3",
         "rand-token": "^1.0.1",
         "rss": "^1.2.2",
-        "striptags": "^3.1.1"
+        "striptags": "^3.1.1",
+        "swagger-ui-express": "^4.1.6"
     },
     "devDependencies": {
         "handlebars": "^4.7.6",
         "livereload": "^0.9.1",
-        "nodemon": "^2.0.6"
+        "nodemon": "^2.0.7"
     }
 }

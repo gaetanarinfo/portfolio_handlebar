@@ -8,7 +8,10 @@ const Article = require('./articles')
 const CommentShema = new mongoose.Schema({
 
     author: String,
-    dateCreate: String,
+    dateCreate: {
+        type: Date,
+        default: new Date()
+    },
     avatar: String,
     content: {
         type: String,

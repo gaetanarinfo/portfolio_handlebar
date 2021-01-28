@@ -80,100 +80,49 @@ module.exports = {
                         // Render de la pagination
                         var pagin2 = boostrapPaginator2.render()
 
-                        if (articles.comment == undefined) {
-
-                            if (success || error) {
-                                res.render('admin', {
-                                    // Page sur la quel on est : Number
-                                    current: page,
-                                    // Nombre de pages : Number
-                                    pages: Math.ceil(count / perPage),
-                                    // tableau avec les index des page: []
-                                    arrayPage: arrayPagesIndexes,
-                                    // Les articles : [{}]
-                                    articles: articles,
-                                    // Pages - 1
-                                    previous: parseInt(page) - 1,
-                                    // Pages + 1
-                                    next: parseInt(page) + 1,
-                                    pagin2,
-                                    success: success,
-                                    error: error,
-                                    title: 'Administration de mon blog',
-                                    content: "Partie administration de mon portfolio",
-                                    layout: 'admin'
-                                })
-                            } else {
-                                res.render('admin', {
-                                    // Page sur la quel on est : Number
-                                    current: page,
-                                    // Nombre de pages : Number
-                                    pages: Math.ceil(count / perPage),
-                                    // tableau avec les index des page: []
-                                    arrayPage: arrayPagesIndexes,
-                                    // Les articles : [{}]
-                                    articles: articles,
-                                    // Pages - 1
-                                    previous: parseInt(page) - 1,
-                                    // Pages + 1
-                                    next: parseInt(page) + 1,
-                                    pagin2,
-
-                                    error: error,
-
-                                    title: 'Administration de mon blog',
-                                    content: "Partie administration de mon portfolio",
-                                    layout: 'admin'
-                                })
-                            }
-
+                        if (success || error) {
+                            res.render('admin', {
+                                // Page sur la quel on est : Number
+                                current: page,
+                                // Nombre de pages : Number
+                                pages: Math.ceil(count / perPage),
+                                // tableau avec les index des page: []
+                                arrayPage: arrayPagesIndexes,
+                                // Les articles : [{}]
+                                articles: articles,
+                                // Pages - 1
+                                previous: parseInt(page) - 1,
+                                // Pages + 1
+                                next: parseInt(page) + 1,
+                                pagin2,
+                                success: success,
+                                error: error,
+                                title: 'Administration de mon blog',
+                                content: "Partie administration de mon portfolio",
+                                layout: 'admin'
+                            })
                         } else {
-                            if (success || error) {
-                                res.render('admin', {
-                                    // Page sur la quel on est : Number
-                                    current: page,
-                                    // Nombre de pages : Number
-                                    pages: Math.ceil(count / perPage),
-                                    // tableau avec les index des page: []
-                                    arrayPage: arrayPagesIndexes,
-                                    // Les articles : [{}]
-                                    articles: articles,
-                                    // Pages - 1
-                                    previous: parseInt(page) - 1,
-                                    // Pages + 1
-                                    next: parseInt(page) + 1,
-                                    pagin2,
-                                    comments: articles.comment,
-                                    success: success,
-                                    error: error,
-                                    title: 'Administration de mon blog',
-                                    content: "Partie administration de mon portfolio",
-                                    layout: 'admin'
-                                })
-                            } else {
-                                res.render('admin', {
-                                    // Page sur la quel on est : Number
-                                    current: page,
-                                    // Nombre de pages : Number
-                                    pages: Math.ceil(count / perPage),
-                                    // tableau avec les index des page: []
-                                    arrayPage: arrayPagesIndexes,
-                                    // Les articles : [{}]
-                                    articles: articles,
-                                    comments: articles.comment,
-                                    // Pages - 1
-                                    previous: parseInt(page) - 1,
-                                    // Pages + 1
-                                    next: parseInt(page) + 1,
-                                    pagin2,
+                            res.render('admin', {
+                                // Page sur la quel on est : Number
+                                current: page,
+                                // Nombre de pages : Number
+                                pages: Math.ceil(count / perPage),
+                                // tableau avec les index des page: []
+                                arrayPage: arrayPagesIndexes,
+                                // Les articles : [{}]
+                                articles: articles,
+                                // Pages - 1
+                                previous: parseInt(page) - 1,
+                                // Pages + 1
+                                next: parseInt(page) + 1,
+                                pagin2,
 
-                                    error: error,
+                                error: error,
 
-                                    title: 'Administration de mon blog',
-                                    content: "Partie administration de mon portfolio",
-                                    layout: 'admin'
-                                })
-                            }
+                                title: 'Administration de mon blog',
+                                content: "Partie administration de mon portfolio",
+                                layout: 'admin'
+                            })
                         }
 
                     })

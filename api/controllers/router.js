@@ -129,7 +129,6 @@ router.route('/user/forgot_password')
 // Routes Password Reset
 router.route('/reset-password/:token')
     .get(resetpasswordController.get)
-
 router.route('/reset-password/:token')
     .post(resetpasswordController.post)
 

@@ -16,8 +16,11 @@ module.exports = {
             success = req.session.success, // Message Succes
             error = req.session.error // Message Error
 
-        req.session.success = ''
-        req.session.error = ''
+
+        console.log(success);
+
+        // req.session.success = ''
+        // req.session.error = ''
 
         // Nombre d'item par page
         var perPage = 6
@@ -128,6 +131,7 @@ module.exports = {
                                                             html += '<li class="active page-item"><a class="page-link" href="' + prelink + result.range[i] + '">' + result.range[i] + '</a></li>';
                                                         } else {
                                                             html += '<li class="page-item"><a class="page-link" href="' + prelink + result.range[i] + '">' + result.range[i] + '</a></li>';
+                                                            true
                                                         }
                                                     }
                                                 }
@@ -151,7 +155,7 @@ module.exports = {
                                             data3 = req.session.data3,
                                             data4 = req.session.data4
 
-                                        if (success || error) {
+                                        if (success || error === "") {
                                             res.render('index', {
                                                 success: success,
                                                 error: error,

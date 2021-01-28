@@ -1,0 +1,399 @@
+{
+    "info": {
+        "title": "Portfolio Gaëtan",
+        "version": "1.1.1",
+        "license": {
+            "name": "ISC"
+        },
+        "description": "Specification JSONs: [v2](/api-spec/v2), [v3](/api-spec/v3).\n\nMon portfolio"
+    },
+    "paths": {
+        "/": {
+            "get": {
+                "summary": "home page",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "home response",
+                        "schema": {
+                            "type": "object",
+                            "items": {
+                                "$ref": "/"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "error",
+                        "schema": {
+                            "$ref": "/"
+                        }
+                    }
+                },
+                "tags": ["home"]
+            }
+        },
+        "/blog": {
+            "get": {
+                "summary": "Blog page",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "article response",
+                        "schema": {
+                            "type": "object",
+                            "items": {
+                                "$ref": "/blog"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "error",
+                        "schema": {
+                            "$ref": "/blog"
+                        }
+                    }
+                },
+                "tags": ["blog"]
+            }
+        },
+        "/article/{id}": {
+            "get": {
+                "summary": "get one article",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "name": "id",
+                    "in": "path",
+                    "required": true
+                }],
+                "responses": {
+                    "200": {
+                        "description": "get one article response",
+                        "schema": {
+                            "type": "object",
+                            "items": {
+                                "$ref": "/article/:id"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "error",
+                        "schema": {
+                            "$ref": "/article/:id"
+                        }
+                    }
+                },
+                "tags": ["article"]
+            }
+        },
+        "/create/{id}": {
+            "post": {
+                "summary": "get one article post comment",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "name": "id",
+                    "in": "path",
+                    "required": true
+                }],
+                "responses": {
+                    "200": {
+                        "description": "get one article response post comment",
+                        "schema": {
+                            "type": "object",
+                            "items": {
+                                "$ref": "/create/:id"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "error",
+                        "schema": {
+                            "$ref": "/create/:id"
+                        }
+                    }
+                },
+                "tags": ["comment"]
+            }
+        },
+        "/tutoriel": {
+            "get": {
+                "summary": "Tutoriel page",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "tutoriel response",
+                        "schema": {
+                            "type": "object",
+                            "items": {
+                                "$ref": "/tutoriel"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "error",
+                        "schema": {
+                            "$ref": "/tutoriel"
+                        }
+                    }
+                },
+                "tags": ["tutoriel"]
+            }
+        },
+        "/admin/": {
+            "get": {
+                "summary": "Admin page",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Admin response",
+                        "schema": {
+                            "type": "object",
+                            "items": {
+                                "$ref": "/admin/"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "error",
+                        "schema": {
+                            "$ref": "/admin/"
+                        }
+                    }
+                },
+                "tags": ["admin"]
+            }
+        }
+    },
+    "definitions": {
+        "Users": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "firtsname": {
+                    "type": "string"
+                },
+                "lastname": {
+                    "type": "string"
+                },
+                "avatar": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string",
+                    "format": "password"
+                },
+                "createDate": {
+                    "type": "date",
+                    "default": "new Date()"
+                },
+                "isBanned": {
+                    "type": "boolean",
+                    "default": "false"
+                },
+                "isAdmin": {
+                    "type": "boolean",
+                    "default": "false"
+                },
+                "token": {
+                    "type": "string"
+                },
+                "isLog": {
+                    "type": "date",
+                    "default": "new Date()"
+                },
+                "ip": {
+                    "type": "string"
+                }
+            }
+        },
+        "Articles": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "content": {
+                    "type": "string"
+                },
+                "image": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "author": {
+                    "type": "string"
+                },
+                "dateCreate": {
+                    "type": "string"
+                },
+                "active": {
+                    "type": "boolean"
+                },
+                "isAdmin": {
+                    "type": "boolean"
+                },
+                "avatar": {
+                    "type": "string"
+                },
+                "isPrivate": {
+                    "type": "boolean",
+                    "default": "false"
+                },
+                "comment": {
+                    "type": "integer",
+                    "format": "int64",
+                    "ref": "comments"
+                }
+            }
+        },
+        "Comments": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "author": {
+                    "type": "string"
+                },
+                "dateCreate": {
+                    "type": "string"
+                },
+                "content": {
+                    "type": "string"
+                },
+                "articleID": {
+                    "type": "integer",
+                    "format": "int64",
+                    "ref": "articles"
+                }
+            }
+        },
+        "Projets": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "content": {
+                    "type": "string"
+                },
+                "image": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "date": {
+                    "type": "string"
+                },
+                "links": {
+                    "type": "number"
+                },
+                "isPrivate": {
+                    "type": "boolean",
+                    "default": false
+                },
+                "like": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "Tutoriels": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "content": {
+                    "type": "string"
+                },
+                "image": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "date": {
+                    "type": "string"
+                },
+                "links": {
+                    "type": "number"
+                },
+                "isPrivate": {
+                    "type": "boolean",
+                    "default": false
+                },
+                "category": {
+                    "type": "string"
+                }
+            }
+        },
+        "Galeries": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "image": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "active": {
+                    "type": "boolean",
+                    "default": false
+                },
+                "isPrivate": {
+                    "type": "boolean",
+                    "default": false
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "tags": []
+}

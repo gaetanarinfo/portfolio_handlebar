@@ -1,31 +1,39 @@
 // Reload Server
 
-const livereload = require('livereload')
-const reload = livereload.createServer()
-reload.watch(__dirname + "/app.js")
-
-const express = require('express')
-const exphbs = require('express-handlebars')
-const bodyParser = require('body-parser')
-const expressSession = require('express-session')
-const MongoStore = require('connect-mongo')
-const mongoose = require('mongoose')
-const flash = require('express-flash');
-
-const mongoStore = MongoStore(expressSession)
+const livereload = require('livereload'),
+    reload = livereload.createServer(),
+    express = require('express'),
+    exphbs = require('express-handlebars'),
+    bodyParser = require('body-parser'),
+    expressSession = require('express-session'),
+    MongoStore = require('connect-mongo'),
+    mongoose = require('mongoose'),
+    flash = require('express-flash'),
+    mongoStore = MongoStore(expressSession),
+    // Swagger
+    swaggerUi = require('swagger-ui-express'),
+    swaggerDocument = require('./api/config/swagger.json'),
+    // Helmet security
+    helmet = require("helmet");
 
 //ENV
 require('dotenv').config()
 require('./api/database/db')
 
+reload.watch(__dirname + "/app.js")
+
 const app = express()
 
+app.set('trust proxy', 1) // trust first proxy
 app.use(expressSession({
     secret: 'labelleauboisdormanssursonarbreperché',
     name: 'portfolio',
-    saveUninitialized: true,
+    saveUninitialized: false,
     resave: false,
-
+    cookie: {
+        path: '/',
+        maxAge: 1000000
+    },
     store: new mongoStore({
         mongooseConnection: mongoose.connection
     })
@@ -72,10 +80,31 @@ app.set('view engine', 'handlebars')
 const ROUTER = require('./api/controllers/router')
 app.use('/', ROUTER);
 
+// Route Swagger
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 // Page 404
 app.use((req, res) => {
     res.render('404', { layout: false })
 })
+
+// This...
+app.use(helmet());
+
+// ...is equivalent to this:
+app.use(helmet.contentSecurityPolicy());
+app.use(helmet.dnsPrefetchControl());
+app.use(helmet.expectCt());
+app.use(helmet.frameguard());
+app.use(helmet.hidePoweredBy());
+app.use(helmet.hsts());
+app.use(helmet.ieNoOpen());
+app.use(helmet.noSniff());
+app.use(helmet.permittedCrossDomainPolicies());
+app.use(helmet.referrerPolicy());
+app.use(helmet.xssFilter());
+
+app.disable('x-powered-by');
 
 reload.watch(__dirname + "/public")
 

@@ -239,21 +239,23 @@
         $('#projet').fadeIn(1000);
         $('#widget_1').fadeIn(1000);
         $('#widget_2').fadeIn(1000);
+
+        setTimeout(function () {
+            $('#loader').hide();
+
+
+        }, 1500)
+
+        setTimeout(function () {
+            $('#init').show();
+            $('body').css('overflow', 'visible')
+        }, 1000)
     }
 
     jQuery(window).on('load', function () {
         (function ($) {
             preloaderFadeOutInit();
 
-            setTimeout(function () {
-                $('#init').fadeIn();
-                $('body').css('overflow', 'visible')
-            }, 600)
-
-            setTimeout(function () {
-                $('#loader').fadeToggle();
-                //$('#loader').remove();
-            }, 1100)
         })(jQuery);
     });
 </script>

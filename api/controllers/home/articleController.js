@@ -104,8 +104,5 @@ module.exports = {
         req.session.success = req.flash('success')
         res.redirect(`/article/${article._id}`)
 
-        // Et on redirige sur notre article parent
-        res.redirect(`/article/${article._id}`)
-
     }
 }

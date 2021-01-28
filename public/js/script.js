@@ -309,6 +309,7 @@ $('#htmlCat').click(function() {
         $("#allCat").css('display', 'none');
         $("#resuCat").css('display', '');
         $("#resuCat").html(data);
+        console.log(data)
     });
 
     return false;
