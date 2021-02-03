@@ -1,5 +1,8 @@
+/*
+ * Import Module
+ ****************/
 const Tuto = require('../../database/models/tutos'),
-    pagination = require('pagination')
+    pagination = require('pagination') // Pour la pagination des pages
 
 /*
  * Controller

@@ -1,3 +1,6 @@
+/*
+ * Import Module
+ ****************/
 const Article = require('../../database/models/articles');
 const Comment = require('../../database/models/comments');
 

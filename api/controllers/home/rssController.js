@@ -1,3 +1,6 @@
+/*
+ * Import Module
+ ****************/
 const RSS = require('rss'),
     Article = require('../../database/models/articles')
 

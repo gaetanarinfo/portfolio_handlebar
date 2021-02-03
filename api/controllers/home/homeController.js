@@ -1,26 +1,32 @@
+/*
+ * Import Module
+ ****************/
 const Projet = require('../../database/models/projets'),
     Tuto = require('../../database/models/tutos'),
     Article = require('../../database/models/articles'),
     Galerie = require('../../database/models/galeries'),
     Comment = require('../../database/models/comments'),
-    pagination = require('pagination')
+    renderHome = require('./render/renderHome')
 
+/*
+ * Controller
+ *************/
 module.exports = {
     get: async(req, res) => {
 
         const tutos = await Tuto.find({}).lean(), // Cards Tutoriels
             articles = await Article.find({}).sort('-dateCreate').lean(), // Cards Articles
             galeries = await Galerie.find({}).lean(), // Cards Galerie
-            commentCount = await Comment.countDocuments(),
-            commentsAll = await Comment.find({}).sort('-dateCreate').lean(),
+            commentCount = await Comment.countDocuments(), // Compter le nombre de commantaire
+            commentsAll = await Comment.find({}).sort('-dateCreate').lean(), // Affiche les commentaires dansd le footer
             success = req.session.success, // Message Succes
             error = req.session.error // Message Error
 
-        req.session.success = undefined
-        req.session.error = undefined
+        req.session.success = undefined // Définie le cookie de message success
+        req.session.error = undefined // Définie le cookie de message error
 
         // Nombre d'item par page
-        var perPage = 6
+        var perPage = 5
             // La page que l'on veux récupéré si il y a en pas alors page 1
         var page = req.query.page || 1
         var arrayPagesIndexes = []
@@ -70,147 +76,8 @@ module.exports = {
                                             arrayPagesIndexes.push(i + 1)
                                         }
 
-
-                                        var boostrapPaginator1 = new pagination.TemplatePaginator({
-                                            prelink: '/',
-                                            current: page,
-                                            rowsPerPage: perPage,
-                                            totalResult: count,
-                                            slashSeparator: false,
-                                            template: function(result) {
-                                                var i, len, prelink;
-                                                var html = '<div class="mt-4"><ul class="pagination justify-content-center mt-1">';
-                                                if (result.pageCount < 2) {
-                                                    html += '</ul></div>';
-                                                    return html;
-                                                }
-                                                prelink = this.preparePreLink(result.prelink);
-                                                if (result.previous) {
-                                                    html += '<li class="page-item"><a class="page-link" href="' + prelink + result.previous + '">' + '<i class="fas fa-angle-left"></i></a></li>';
-                                                }
-                                                if (result.range.length) {
-                                                    for (i = 0, len = result.range.length; i < len; i++) {
-                                                        if (result.range[i] === result.current) {
-                                                            html += '<li class="active page-item"><a class="page-link" href="' + prelink + result.range[i] + '">' + result.range[i] + '</a></li>';
-                                                        } else {
-                                                            html += '<li class="page-item"><a class="page-link" href="' + prelink + result.range[i] + '">' + result.range[i] + '</a></li>';
-                                                        }
-                                                    }
-                                                }
-                                                if (result.next) {
-                                                    html += '<li class="page-item"><a class="page-link" href="' + prelink + result.next + '" class="paginator-next">' + '<i class="fas fa-angle-right"></i></a></li>';
-                                                }
-                                                html += '</ul></div>';
-                                                return html;
-                                            }
-                                        });
-
-                                        var boostrapPaginator2 = new pagination.TemplatePaginator({
-                                            prelink: '/',
-                                            current: page,
-                                            rowsPerPage: perPage,
-                                            totalResult: count,
-                                            slashSeparator: false,
-                                            template: function(result) {
-                                                var i, len, prelink;
-                                                var html = '<div class="mt-4"><ul class="pagination justify-content-center mt-1">';
-                                                if (result.pageCount < 2) {
-                                                    html += '</ul></div>';
-                                                    return html;
-                                                }
-                                                prelink = this.preparePreLink(result.prelink);
-                                                if (result.previous) {
-                                                    html += '<li class="page-item"><a class="page-link" href="' + prelink + result.previous + '">' + '<i class="fas fa-angle-left"></i></a></li>';
-                                                }
-                                                if (result.range.length) {
-                                                    for (i = 0, len = result.range.length; i < len; i++) {
-                                                        if (result.range[i] === result.current) {
-                                                            html += '<li class="active page-item"><a class="page-link" href="' + prelink + result.range[i] + '">' + result.range[i] + '</a></li>';
-                                                        } else {
-                                                            html += '<li class="page-item"><a class="page-link" href="' + prelink + result.range[i] + '">' + result.range[i] + '</a></li>';
-                                                            true
-                                                        }
-                                                    }
-                                                }
-                                                if (result.next) {
-                                                    html += '<li class="page-item"><a class="page-link" href="' + prelink + result.next + '" class="paginator-next">' + '<i class="fas fa-angle-right"></i></a></li>';
-                                                }
-                                                html += '</ul></div>';
-                                                return html;
-                                            }
-                                        });
-
-                                        // Render de la pagination
-                                        var paginProjet = boostrapPaginator1.render()
-
-                                        var paginTuto = boostrapPaginator2.render()
-
-
-                                        // Si inscription erreur alors on save pour retourner dans le formulaire inscription
-                                        const data1 = req.session.data1,
-                                            data2 = req.session.data2,
-                                            data3 = req.session.data3,
-                                            data4 = req.session.data4
-
-                                        if (success || error) {
-                                            res.render('index', {
-                                                success: success,
-                                                error: error,
-                                                // Page sur la quel on est : Number
-                                                current: page,
-                                                // Nombre de pages : Number
-                                                pages: Math.ceil(count / perPage),
-                                                // tableau avec les index des page: []
-                                                arrayPage: arrayPagesIndexes,
-                                                // Les projets : [{}]
-                                                projets: projets,
-                                                // Pages - 1
-                                                previous: parseInt(page) - 1,
-                                                // Pages + 1
-                                                next: parseInt(page) + 1,
-                                                paginProjet,
-                                                paginTuto,
-                                                tutos,
-                                                articles,
-                                                commentsAll,
-                                                commentCount,
-                                                galeries,
-                                                data1,
-                                                data2,
-                                                data3,
-                                                data4,
-                                                title: 'Portfolio de Gaëtan Seigneur',
-                                                content: "Mon portfolio professionnel, retrouvé ici mes compétences, les derniers articles de mon blog, mes tutoriels et tant d autres choses."
-                                            })
-                                        } else
-                                            res.render('index', {
-                                                error: error,
-                                                // Page sur la quel on est : Number
-                                                current: page,
-                                                // Nombre de pages : Number
-                                                pages: Math.ceil(count / perPage),
-                                                // tableau avec les index des page: []
-                                                arrayPage: arrayPagesIndexes,
-                                                // Les projets : [{}]
-                                                projets: projets,
-                                                // Pages - 1
-                                                previous: parseInt(page) - 1,
-                                                // Pages + 1
-                                                next: parseInt(page) + 1,
-                                                paginProjet,
-                                                paginTuto,
-                                                tutos,
-                                                articles,
-                                                galeries,
-                                                commentsAll,
-                                                commentCount,
-                                                data1,
-                                                data2,
-                                                data3,
-                                                data4,
-                                                title: 'Portfolio de Gaëtan Seigneur',
-                                                content: "Mon portfolio professionnel, retrouvé ici mes compétences, les derniers articles de mon blog, mes tutoriels et tant d autres choses."
-                                            })
+                                        // Module pour le render Home
+                                        renderHome(req, res, success, error, page, count, perPage, projets, arrayPagesIndexes, tutos, articles, galeries, commentsAll, commentCount)
 
                                     })
                             })
