@@ -1,29 +1,38 @@
-// Reload Server
+// Déclaration des packages npm ---->
 
+// Package nodemon pour le relancement des fichiers views et js avec npm start
 const livereload = require('livereload'),
-    reload = livereload.createServer(),
-    express = require('express'),
-    exphbs = require('express-handlebars'),
-    bodyParser = require('body-parser'),
-    expressSession = require('express-session'),
-    MongoStore = require('connect-mongo'),
-    mongoose = require('mongoose'),
-    flash = require('express-flash'),
-    mongoStore = MongoStore(expressSession),
-    // Swagger
-    swaggerUi = require('swagger-ui-express'),
-    swaggerDocument = require('./api/config/swagger.json'),
-    // Helmet security
-    helmet = require("helmet");
+    reload = livereload.createServer()
 
-//ENV
+const express = require('express'), // Package express
+    exphbs = require('express-handlebars'), // Package handlebar Moustache pour les fichiers .hbs
+    bodyParser = require('body-parser'), // Package permettant de parser les urls avec id
+    expressSession = require('express-session') // Package permettant de crée des session avec express
+
+// Package de BDD gerer avec mongodb et atlas cloud et gestion des sessions
+const MongoStore = require('connect-mongo'),
+    mongoose = require('mongoose'),
+    mongoStore = MongoStore(expressSession)
+
+// Package des message d'érreur et de succès    
+const flash = require('express-flash')
+
+// Helmet aide à sécuriser les applications Express.js en définissant divers en-têtes HTTP. Ce n'est pas un argent
+const helmet = require("helmet")
+
+// Package de configuration sécurisé pour le portfolio
 require('dotenv').config()
+
+// Module pour le lancement de la BDD
 require('./api/database/db')
 
+// Module LiveReload pour recharger le fichier App.js
 reload.watch(__dirname + "/app.js")
 
+// Module express pour faire fonctionné l'aplication
 const app = express()
 
+// Module App gestion des cookies
 app.set('trust proxy', 1) // trust first proxy
 app.use(expressSession({
     secret: 'labelleauboisdormanssursonarbreperché',
@@ -39,20 +48,23 @@ app.use(expressSession({
     })
 }))
 
+// Permet d'afficher les messages d'erreur et de succès
 app.use(flash());
 
+// Module permettant de parser les urls du type :id
 app.use(bodyParser.urlencoded({
     extended: true
 }))
 app.use(bodyParser.json())
 
-// Dossier des ressources
+// Dossier des ressources 
 const path = require('path')
 app.use(express.static(path.join(__dirname, 'public')))
 
 // Port du serveur
 const port = process.env.PORT || 3000
 
+// App.use * est un middleware pour proteger la partie Administration ou bien cacher un bouton pour le visiteur
 app.use('*', (req, res, next) => {
     res.locals.users = req.session.userId
     res.locals.admin = req.session.isAdmin
@@ -60,38 +72,34 @@ app.use('*', (req, res, next) => {
     next()
 })
 
-app.engine('handlebars', exphbs({
-    extname: 'handlebars',
+// Moteur de templating 
+app.engine('hbs', exphbs({
+    extname: 'hbs',
     defaultLayout: 'main',
     layoutsDir: __dirname + '/views/layouts/',
     helpers: {
-        generateDate: require('./api/helpers/hbs').generateDate,
-        limit: require('./api/helpers/hbs').limit,
-        countArray: require('./api/helpers/hbs').countArray,
-        ifEquals: require('./api/helpers/hbs').ifEquals,
-        trimString: require('./api/helpers/hbs').trimString,
-        ifLike: require('./api/helpers/hbs').ifLike,
-        trimString2: require('./api/helpers/hbs').trimString2
+        generateDate: require('./api/helpers/hbs').generateDate, // Permet de convertir des dates
+        limit: require('./api/helpers/hbs').limit, // Limit d'article
+        countArray: require('./api/helpers/hbs').countArray, // Condition pour le nombre des likes ou commentaire
+        ifEquals: require('./api/helpers/hbs').ifEquals, // Condition si a est plus grand que b
+        trimString: require('./api/helpers/hbs').trimString, // Condition pour réduire le nombre de caractère
+        ifLike: require('./api/helpers/hbs').ifLike, // Condition pour les likes
+        trimString2: require('./api/helpers/hbs').trimString2 // Condition pour réduire le nombre de caractère
     }
 }))
-app.set('view engine', 'handlebars')
+app.set('view engine', 'hbs')
 
-// Rooter
+// Les différentes route et controller
 const ROUTER = require('./api/controllers/router')
-app.use('/', ROUTER);
+app.use('/', ROUTER); // (/ = home) :)
 
-// Route Swagger
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Page 404
 app.use((req, res) => {
     res.render('404', { layout: false })
 })
 
-// This...
-app.use(helmet());
-
-// ...is equivalent to this:
+// Helmet security pour les failles XSS etc...
 app.use(helmet.contentSecurityPolicy());
 app.use(helmet.dnsPrefetchControl());
 app.use(helmet.expectCt());
@@ -103,11 +111,12 @@ app.use(helmet.noSniff());
 app.use(helmet.permittedCrossDomainPolicies());
 app.use(helmet.referrerPolicy());
 app.use(helmet.xssFilter());
-
 app.disable('x-powered-by');
 
+// Permet de reload le dossier public des ressources
 reload.watch(__dirname + "/public")
 
+// Lancement de l'application avec le port et la date de lancement
 app.listen(port, '', function() {
     console.log(`Ecoute le port ${port}, lancé le : ${new Date().toLocaleString()}`)
 })
