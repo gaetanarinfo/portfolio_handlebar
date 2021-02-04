@@ -3,16 +3,16 @@
  ****************/
 const paginator = require('../pagination/paginator')
 
-module.exports = function(req, res, success, error, page, count, perPage, projets, arrayPagesIndexes, tutos, articles, galeries, commentsAll, commentCount) {
+module.exports = function(req, res, success, error, page, perPage, count, projets, arrayPagesIndexes, tutos, articles, galeries, commentsAll, commentCount) {
 
     // Si inscription erreur alors on sauvegarde pour retourner les datas dans le formulaire
     const data1 = req.session.data1,
         data2 = req.session.data2,
         data3 = req.session.data3,
         data4 = req.session.data4,
-        pagin = paginator(page, perPage, count)
+        prelinks = "/"
 
-        console.log(pagin);
+    const pagination = paginator(page, perPage, count, prelinks) // Function de pagination de page
 
     if (success || error) {
         res.render('index', {
@@ -30,7 +30,7 @@ module.exports = function(req, res, success, error, page, count, perPage, projet
             previous: parseInt(page) - 1,
             // Pages + 1
             next: parseInt(page) + 1,
-            pagin,
+            pagination,
             tutos,
             articles,
             commentsAll,
@@ -58,7 +58,7 @@ module.exports = function(req, res, success, error, page, count, perPage, projet
             previous: parseInt(page) - 1,
             // Pages + 1
             next: parseInt(page) + 1,
-            pagin,
+            pagination,
             tutos,
             articles,
             galeries,

@@ -12,6 +12,8 @@ const Projet = require('../../database/models/projets'),
  * Controller
  *************/
 module.exports = {
+
+    // Method Get pour envoyer les datas
     get: async(req, res) => {
 
         const tutos = await Tuto.find({}).lean(), // Cards Tutoriels
@@ -26,7 +28,7 @@ module.exports = {
         req.session.error = undefined // Définie le cookie de message error
 
         // Nombre d'item par page
-        var perPage = 5
+        var perPage = 6
             // La page que l'on veux récupéré si il y a en pas alors page 1
         var page = req.query.page || 1
         var arrayPagesIndexes = []
@@ -38,8 +40,8 @@ module.exports = {
             // donc (5 * 2) - 5 = 5
             .skip((perPage * page) - perPage)
             // Ici on limite le nombre de résultat
-            .limit(perPage)
-            .lean()
+            .limit(perPage) // Limitattion des résultat par page
+            .lean() // Permet de lire les datas
             .exec((err, projets) => {
                 if (err) console.log(err)
                     // Ici on compte le nombre d'article total 
@@ -77,7 +79,7 @@ module.exports = {
                                         }
 
                                         // Module pour le render Home
-                                        renderHome(req, res, success, error, page, count, perPage, projets, arrayPagesIndexes, tutos, articles, galeries, commentsAll, commentCount)
+                                        renderHome(req, res, success, error, page, perPage, count, projets, arrayPagesIndexes, tutos, articles, galeries, commentsAll, commentCount)
 
                                     })
                             })
@@ -88,23 +90,28 @@ module.exports = {
 
     },
 
+    // Création d'un like user sur projet
     addLike: async(req, res) => {
 
 
+        // Déclaration des constantes
         const query = req.params.id,
             iduser = req.session.userId,
             projet = await Projet.findById(query),
             like = projet.like
 
+        // On vérifie si l'user à déjà liké
         if (like != iduser) {
 
+            // On push dans la colletion Projet l'id de l'utilistateur
             like.push(iduser)
 
+            // On met à jour la collection projet
             Projet.findByIdAndUpdate(query, {
                 like: like
             })
 
-            // On sauvegarde nous modification
+            // On sauvegarde les modifications
             projet.save((err) => {
                 if (err) {
                     req.flash('error', 'Une erreur est survenue !')
@@ -114,12 +121,14 @@ module.exports = {
 
             })
 
+            // Message en cas de success
             req.flash('success', 'Vous aimez ce projet !')
             req.session.success = req.flash('success')
             res.redirect(`/`)
 
         } else {
 
+            // Message en cas de error
             req.flash('error', 'Vous avez déjà voté pour ce projet !')
             req.session.error = req.flash('error')
             res.redirect(`/`)
@@ -127,8 +136,10 @@ module.exports = {
 
     },
 
+    // Suppression des likes
     removeLike: async(req, res) => {
 
+        // Déclaration des constantes
         const query = req.params.id,
             iduser = req.session.userId,
             projet = await Projet.findById(query),
@@ -136,9 +147,10 @@ module.exports = {
 
         likeArr.remove(iduser)
 
-        // On sauvegarde nous modification
+        // On sauvegarde les modifications
         projet.save((err) => {
             if (err) {
+                // Message en cas de error
                 req.flash('error', 'Une erreur est survenue !')
                 req.session.error = req.flash('error')
                 res.redirect(`/`)
@@ -146,6 +158,7 @@ module.exports = {
 
         })
 
+        // Message en cas de success
         req.flash('success', "Vous n'aimez plus le projet !")
         req.session.success = req.flash('success')
         res.redirect(`/`)

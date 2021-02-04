@@ -2,21 +2,21 @@
  * Import Module
  ****************/
 const Tuto = require('../../database/models/tutos'),
-    pagination = require('pagination') // Pour la pagination des pages
+paginator = require('./pagination/paginator') // Pour la pagination des pages
 
 /*
  * Controller
  *************/
 module.exports = {
 
-    // Method Get
+    // Method Get pour envoyer les datas vers la page
     getTuto: async(req, res) => {
 
-        const success = req.session.success, // Message Succes
-            error = req.session.error // Message Error
+        const success = req.session.success, // Message en cas de success
+            error = req.session.error // Message en cas d'erreur
 
-        req.session.success = undefined
-        req.session.error = undefined
+        req.session.success = undefined // Définie le cookie de message success
+        req.session.error = undefined // Définie le cookie de message success
 
         // Nombre d'item par page
         var perPage = 12
@@ -47,42 +47,9 @@ module.exports = {
                             arrayPagesIndexes.push(i + 1)
                         }
 
-                        var boostrapPaginator1 = new pagination.TemplatePaginator({
-                            prelink: '/tutoriel',
-                            current: page,
-                            rowsPerPage: perPage,
-                            totalResult: count,
-                            slashSeparator: false,
-                            template: function(result) {
-                                var i, len, prelink;
-                                var html = '<div class="mt-4"><ul class="pagination justify-content-center mt-1">';
-                                if (result.pageCount < 2) {
-                                    html += '</ul></div>';
-                                    return html;
-                                }
-                                prelink = this.preparePreLink(result.prelink);
-                                if (result.previous) {
-                                    html += '<li class="page-item"><a class="page-link" href="' + prelink + result.previous + '">' + '<i class="fas fa-angle-left"></i></a></li>';
-                                }
-                                if (result.range.length) {
-                                    for (i = 0, len = result.range.length; i < len; i++) {
-                                        if (result.range[i] === result.current) {
-                                            html += '<li class="active page-item"><a class="page-link" href="' + prelink + result.range[i] + '">' + result.range[i] + '</a></li>';
-                                        } else {
-                                            html += '<li class="page-item"><a class="page-link" href="' + prelink + result.range[i] + '">' + result.range[i] + '</a></li>';
-                                        }
-                                    }
-                                }
-                                if (result.next) {
-                                    html += '<li class="page-item"><a class="page-link" href="' + prelink + result.next + '" class="paginator-next">' + '<i class="fas fa-angle-right"></i></a></li>';
-                                }
-                                html += '</ul></div>';
-                                return html;
-                            }
-                        });
-
-                        // Render de la pagination
-                        var paginTutoriel = boostrapPaginator1.render()
+                        // Function de pagination de page
+                        const prelinks = "/tutoriel",
+                        pagination = paginator(page, perPage, count, prelinks) // Function paginator
 
                         if (success || error) {
                             res.render('tutoriel', {
@@ -98,7 +65,7 @@ module.exports = {
                                 previous: parseInt(page) - 1,
                                 // Pages + 1
                                 next: parseInt(page) + 1,
-                                paginTutoriel,
+                                pagination,
                                 success: success,
                                 error: error,
                                 title: 'Les tutoriels de mon portfolio',
@@ -118,10 +85,8 @@ module.exports = {
                                 previous: parseInt(page) - 1,
                                 // Pages + 1
                                 next: parseInt(page) + 1,
-                                paginTutoriel,
-
+                                pagination,
                                 error: error,
-
                                 title: 'Les tutoriels de mon portfolio',
                                 content: "Les tutoriels de mon portfolio"
                             })
@@ -129,7 +94,6 @@ module.exports = {
 
                     })
             })
-
     }
 
 }
