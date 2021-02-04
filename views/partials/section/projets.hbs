@@ -1,0 +1,83 @@
+<!-- Section 2 -->
+<section>
+        <div class="w-100 mt-2 p-4">
+            <div class="row justify-content-center">
+                <div class="col-md-7">
+                    <p class="title-h">Mes projets personnels</p>
+                    <hr class="h-2 bg-light">
+                </div>
+            </div>
+        </div>
+
+        <div class="container" id="projet" style="display: none;">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        {{#if users}}
+                        {{#each (limit projets 6)}}
+                        <div class="col-md-4 mt-3" style="{{#if isPrivate }}display: none;{{else}}{{/if}}">
+                            <div class="card">
+                                <img class="card-img-top" src="{{image}}" alt="{{title}}">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{title}}</h5>
+                                    <div class="card-icon">
+
+                                        {{#ifLike like ../users}}
+
+                                         <a id="like_{{ _id }}_2" class="" title="Voté pour ce projet" href="/user/addLike/{{_id}}"><i class="fas fa-heart"></i></a>
+
+                                        {{else}}
+
+                                        <a class="" id="like_{{ _id }}" title="Supprimer ce projet" href="/user/removeLike/{{_id}}"><i class="fas fa-heart-broken"></i></a>
+
+                                        {{/ifLike}}
+
+                                        {{!-- <a id="like_{{ _id }}_2" class="" title="Voté pour ce projet" href="/user/addLike/{{_id}}"><i class="fas fa-heart"></i></a> --}}
+                         
+                                        <a class="mask" href="" title="Masquer le projet">
+                                            <i class="fas fa-reply"></i>
+                                        </a>
+
+                                        <a class="like"><i class="fas fa-thumbs-up"></i> <span>{{countArray like }}</span></a>
+                                    </div>
+                                    <p class="card-text">{{content}}</p>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="card-date"><i class="far fa-calendar-alt"></i> <span>{{date}}</span></div>
+                                    <div class="card-btn"><a href="{{links}}" class="btn btn-cards">Voir le projet</a></div>
+                                </div>
+                            </div>
+                        </div>
+                        {{/each}}
+                        {{else}}
+                        {{#each (limit projets 6)}}
+                        <div class="col-md-4 mt-3" style="{{#if isPrivate }}display: none;{{else}}{{/if}}">
+                            <div class="card">
+                                <img class="card-img-top" src="{{image}}" alt="{{title}}">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{title}}</h5>
+                                    <div class="card-icon">                         
+                                        <a class="mask" href="" title="Masquer le projet">
+                                            <i class="fas fa-reply"></i>
+                                        </a>
+
+                                        <a class="like"><i class="fas fa-thumbs-up"></i> <span>{{countArray like }}</span></a>
+                                    </div>
+                                    <p class="card-text">{{content}}</p>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="card-date"><i class="far fa-calendar-alt"></i> <span>{{date}}</span></div>
+                                    <div class="card-btn"><a href="{{links}}" class="btn btn-cards">Voir le projet</a></div>
+                                </div>
+                            </div>
+                        </div>
+                        {{/each}}
+                        {{/if}}
+                    </div>
+
+                    {{{pagin}}}
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Section 2 -->

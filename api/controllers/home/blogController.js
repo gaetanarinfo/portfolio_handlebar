@@ -1,6 +1,9 @@
+/*
+ * Import Module
+ ****************/
 const Article = require('../../database/models/articles'),
     Comment = require('../../database/models/comments'),
-    pagination = require('pagination')
+    pagination = require('pagination') // Pour la pagination des pages
 
 /*
  * Controller
@@ -12,8 +15,8 @@ module.exports = {
         const success = req.session.success, // Message Succes
             error = req.session.error // Message Error
 
-        req.session.success = ''
-        req.session.error = ''
+        req.session.success = undefined
+        req.session.error = undefined
 
         // Nombre d'item par page
         var perPage = 12

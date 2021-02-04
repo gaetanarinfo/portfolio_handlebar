@@ -1,0 +1,25 @@
+<div class="m-auto text-center mt-5 container-list" id="projets_mobile">
+        <p class="text-center">PROJET REALISER</p>
+    </div>
+
+    {{#each projets}}
+    <div class="list-group m-auto mb-2">
+        <div class="list-group-item list-group-item-action flex-column align-items-start text-center">
+            <p class="mb-1"><img class="w-100" src="../../../{{image}}" alt="{{title}}"></p>
+            <p class="mb-1">{{title}}</p>
+            <p class="mb-1">{{#if isPrivate}}Projet privé{{else}}Projet public{{/if}}</p>
+            <p class="mb-1">{{generateDate dateCreate}}</p>
+            <p class="mb-1">{{like}} like(s)</p>
+            <p class="mb-1">{{content}}</p>
+            <p class="mb-1"><a href="" data-toggle="modal" data-target="#modif_projet_{{_id}}"><i
+                                        class="fas fa-edit ml-2" data-toggle="tooltip" data-placement="left"
+                                        title="Editer le projet"></i></a>
+                                <a href="" id="deleteProjetMobile-{{_id}}" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash"
+                                        data-toggle="tooltip" data-placement="left" title="Supprimer le projet"></i></a>
+            </p>
+        </div>
+    </div>
+    {{> admin/modal/modal_edit_projet projet=this }}
+    {{/each}}
+
+    {{{pagin5}}}

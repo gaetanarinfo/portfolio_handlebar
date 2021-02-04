@@ -1,0 +1,47 @@
+<div style="display: none;" id="projet">
+
+    <div>
+        <p class="text-center">Projet réaliser</p>
+    </div>
+
+    <div style="margin: 0 0px 0px 23px;">
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-hover table-dark text-center">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="width: 18%;">Titre</th>
+                            <th scope="col" style="width: 15%;">Projet privé</th>
+                            <th scope="col" style="width: 11%;">Image du projet</th>
+                            <th scope="col" style="width: 11%;">Date du projet</th>
+                            <th scope="col" style="width: 30%">Description du projet</th>
+                            <th scope="col" style="width: 10%;">Gestion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each projets}}
+                        <tr>
+                            <td class="th-perso">{{title}}</td>
+                            <td class="th-perso">{{#if isPrivate}}Projet privé{{else}}Projet public{{/if}}</td>
+                            <td class="th-perso"><img src="../../../{{image}}" alt="{{title}}" width="199px"></td>
+                            <td class="th-perso">{{date}}</td>
+                            <td class="table-content th-perso">{{trimString content}}</td>
+                            <td class="th-perso"><a href="" data-toggle="modal" data-target="#modif_projet_{{_id}}"><i
+                                        class="fas fa-edit ml-2" data-toggle="tooltip" data-placement="left"
+                                        title="Editer le projet"></i></a>
+                                <a href="" id="deleteProjet-{{_id}}" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash"
+                                        data-toggle="tooltip" data-placement="left" title="Supprimer le projet"></i></a>
+                            </td>
+                        </tr>
+
+                        {{> admin/modal/modal_edit_projet projet=this }}
+
+                        {{/each}}
+                    </tbody>
+                </table>
+
+                {{{pagin5}}}
+            </div>
+        </div>
+    </div>
+</div>

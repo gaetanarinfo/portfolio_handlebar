@@ -12,8 +12,8 @@ module.exports = {
 
         const success = req.session.success // Message Succes
         const error = req.session.error // Message Error
-        req.session.success = ''
-        req.session.error = ''
+        req.session.success = undefined
+        req.session.error = undefined
 
         if (token == '' || email == '') {
 

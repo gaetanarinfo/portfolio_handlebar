@@ -1,48 +1,67 @@
 /*
  * Import Module
  ****************/
-const express = require('express'),
-    router = express.Router(),
-    auth = require("../middleware/auth"),
-    multer = require('multer'),
-    authAdmin = require("../middleware/authAdmin")
+const express = require('express'), // Package express
+    router = express.Router(), // Constante pour les routes
+    auth = require("../middleware/auth"), // Midlewares auth users
+    multer = require('multer'), // Multer Gestion d'image
+    authAdmin = require("../middleware/authAdmin") // Middleware auth admin
 
-// Import Controller <-- Require
-const homeController = require('./home/homeController'),
-    blogController = require('./home/blogController'),
-    articleController = require('./home/articleController'),
+// Swagger est un langage de description d'interface pour décrire les API RESTful exprimées à l'aide de JSON.
+const swaggerUi = require('swagger-ui-express'),
+    swaggerDocument = require('../config/swagger.json')
+
+// Import Controller
+const homeController = require('./home/homeController'), // Controller home
+    blogController = require('./home/blogController'), // Controller Blog
+    articleController = require('./home/articleController'), // Controller Article Id
+    // Controller Administration du site internet
     adminControllerUser = require('./admin/ControllerUser'),
     adminControllerArticle = require('./admin/ControllerArticle'),
     adminControllerProjet = require('./admin/ControllerProjet'),
     adminControllerYoutube = require('./admin/ControllerYoutube'),
     adminControllerGalerie = require('./admin/ControllerGalerie'),
     adminControllerComment = require('./admin/ControllerComment'),
+    //
+    // Controller user
     userController = require('./user/userController'),
     nodemailerController = require('./user/nodemailerController'),
     resetpasswordController = require('./user/resetpasswordController'),
+    //
+    // Controller flux rss
     rssController = require('./home/rssController'),
+    //
+    // Multer gestion image
     upload = require('../config/multer'),
     uploadGalerie = require('../config/multerGalerie'),
     uploadProjet = require('../config/multerProjet'),
     uploadUser = require('../config/multerUser'),
     tutoController = require('./home/tutoController'),
     tutoCatController = require('./home/tutoCatController')
+    //
+
+// Module express pour faire fonctionné l'aplication
+const app = express()
 
 // Routes Home
 router.route('/')
     .get(homeController.get)
 
-// Routes Blog
+// Routes mail section contact ---> Home 
+router.route('/mail')
+    .post(nodemailerController.contact)
+
+// Routes page Blog
 router.route('/blog')
     .get(blogController.get)
 
-// Routes Article
+// Routes page Article
 router.route('/article/:id')
     .get(articleController.get)
 router.route('/article/create/:id')
     .post(articleController.post)
 
-// Routes Admin
+// Routes page Admin
 router.route('/admin')
     .get(auth, authAdmin, adminControllerUser.showArticle)
 
@@ -70,7 +89,7 @@ router.route('/admin/delete_article/:id')
 router.route('/admin/confirm_delete_article/:id')
     .get(auth, authAdmin, adminControllerArticle.deleteArticleConfirm)
 
-// Routes Admin Section Projet (Projets)
+// Routes Admin Section Projet
 router.route('/admin/projets')
     .get(auth, authAdmin, adminControllerProjet.showProjet)
 router.route('/admin/addProjet')
@@ -82,7 +101,7 @@ router.route('/admin/delete_projet/:id')
 router.route('/admin/confirm_delete_projet/:id')
     .get(auth, authAdmin, adminControllerProjet.deleteProjetConfirm)
 
-// Routes Admin Section Youtube (Tutos)
+// Routes Admin Section Tutoriel
 router.route('/admin/youtubes')
     .get(auth, authAdmin, adminControllerYoutube.showTuto)
 router.route('/admin/addTuto')
@@ -106,7 +125,7 @@ router.route('/admin/delete_galerie/:id')
 router.route('/admin/confirm_delete_galerie/:id')
     .get(auth, authAdmin, adminControllerGalerie.deleteGalerieConfirm)
 
-// Routes Admin Section Comment
+// Routes Admin Section Commentaire
 router.route('/admin/comments')
     .get(auth, authAdmin, adminControllerComment.showComment)
 router.route('/admin/editComment/:id')
@@ -116,7 +135,7 @@ router.route('/admin/delete_comment/:id')
 router.route('/admin/confirm_delete_comment/:id')
     .get(auth, authAdmin, adminControllerComment.deleteCommentConfirm)
 
-// Routes User Create & Authentification & Déconnexion
+// Routes User Create & Auth & Logout
 router.route('/user/register')
     .post(uploadUser.single('avatar'), nodemailerController.register)
 router.route('/user/auth')
@@ -126,15 +145,11 @@ router.route('/user/logout')
 router.route('/user/forgot_password')
     .post(nodemailerController.forgot_password);
 
-// Routes Password Reset
+// Routes reset password
 router.route('/reset-password/:token')
     .get(resetpasswordController.get)
 router.route('/reset-password/:token')
     .post(resetpasswordController.post)
-
-// Routes mail register
-router.route('/mail')
-    .post(nodemailerController.contact)
 
 // Routes user add like projet
 router.route('/user/addLike/:id')
@@ -143,7 +158,7 @@ router.route('/user/removeLike/:id')
     .get(homeController.removeLike)
 
 // Routes flux rss
-router.route('/rss')
+router.route('/feed')
     .get(rssController.getRss)
 
 // Routes Tutoriel
@@ -152,6 +167,8 @@ router.route('/tutoriel')
 router.route('/tutorielCat/:category')
     .get(tutoCatController.getCat)
 
+// Route Swagger
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Export
 module.exports = router
