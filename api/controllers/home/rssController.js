@@ -4,10 +4,14 @@
 const RSS = require('rss'),
     Article = require('../../database/models/articles')
 
+
+require('dotenv').config()
+
+// Function feed rss 
 var feed = new RSS({
     title: 'Mon flux rss de mon portfolio',
     description: 'Mon super flux rss de mon portfolio',
-    url: 'http://localhost:3000/rss',
+    url: process.env.URL + 'rss',
     generator: 'Portfolio v1.0.0',
     webMaster: 'Gaëtan Seigneur',
     copyright: 'Gaëtan Seigneur - Portfolio 2021',
@@ -20,6 +24,7 @@ var feed = new RSS({
  *************/
 module.exports = {
 
+    // Get on envoie les datas sur la page feed
     getRss: async(req, res) => {
         Article
             .find({})
@@ -30,7 +35,7 @@ module.exports = {
                         author: article.author,
                         date: article.dateCreate,
                         description: article.content,
-                        url: 'http://localhost:3000/images' + article.image
+                        url: process.env.URL + article.image
                     })
                 })
 

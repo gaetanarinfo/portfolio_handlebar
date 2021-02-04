@@ -519,7 +519,7 @@ module.exports = {
                                                                                                                     votre mot de passe :
                                                                                                                     <br><br>
                                                                                                                     <a style="padding: 7px 16px;background-color: #317b13;color: #fff;border-radius: 6px;display: inline-block;text-decoration: none;font-size: 13px;font-weight: 600;letter-spacing: 1px;"
-                                                                                                                        href="http://localhost:3000/reset-password/${user.token}">Confirmer</a>
+                                                                                                                        href="${process.env.URL}reset-password/${user.token}">Confirmer</a>
                                                                                                         </td>
                                                                                                     </tr>
                                                                                                 </tbody>
