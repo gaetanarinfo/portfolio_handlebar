@@ -2,13 +2,13 @@
  * Import Module
  ****************/
 const Article = require('../../database/models/articles'),
-Comment = require('../../database/models/comments')
+    Comment = require('../../database/models/comments')
 
 /*
  * Controller
  *************/
 module.exports = {
-    
+
     // Method Get pour envoyer les datas vers la page
     get: async(req, res) => {
 
@@ -46,6 +46,7 @@ module.exports = {
                     res.redirect("/article/" + req.body.articleid)
                 };
 
+                // Render page
                 if (success || error) {
                     res.render('article', {
                         success: success,

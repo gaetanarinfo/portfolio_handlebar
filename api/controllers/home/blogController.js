@@ -52,8 +52,9 @@ module.exports = {
 
                         // Function de pagination de page
                         const prelinks = "/blog",
-                        pagination = paginator(page, perPage, count, prelinks) // Function paginator
+                            pagination = paginator(page, perPage, count, prelinks) // Function paginator
 
+                        // Render page
                         if (success || error) {
                             res.render('blog', {
                                 // Page sur la quel on est : Number

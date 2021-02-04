@@ -2,7 +2,7 @@
  * Import Module
  ****************/
 const Tuto = require('../../database/models/tutos'),
-paginator = require('./pagination/paginator') // Pour la pagination des pages
+    paginator = require('./pagination/paginator') // Pour la pagination des pages
 
 /*
  * Controller
@@ -51,8 +51,9 @@ module.exports = {
 
                         // Function de pagination de page
                         const prelinks = "/tutoriel",
-                        paginationCat = paginator(page, perPage, count, prelinks) // Function paginator
+                            paginationCat = paginator(page, perPage, count, prelinks) // Function paginator
 
+                        // Render page
                         if (success || error) {
                             res.render('tutorielCat', {
                                 tutosCat: tutosCat,
