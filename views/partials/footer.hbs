@@ -88,7 +88,13 @@
 </div>
 <!-- Contact -->
 
+<!-- button remonter en haut -->
 <a onclick="topFunction()" class="btn_top" title="Retour en haut"><i class="fas fa-angle-up"></i></a>
+
+<!-- button flottant modifier le profil -->
+{{#if users}}
+    <a href="" class="btn_user" data-toggle="modal" data-target="#userModal" title="Modifier mon profil"><i class="fas fa-user-edit"></i></a>
+{{/if}}
 
 <!-- Footer -->
 <footer class="page-footer mt-15 pt-4">
@@ -138,23 +144,23 @@
 
                 <ul class="list-unstyled mt-14 widget-link">
                     <li class="mb-3">
-                        <a href="#accueil" class="a-f"><i class="fas fa-home ml-1" aria-hidden="true"></i> Accueil</a>
+                        <a href="/#accueil" class="a-f"><i class="fas fa-home ml-1" aria-hidden="true"></i> Accueil</a>
                     </li>
                     <li class="mb-3">
-                        <a href="#projet" class="a-f"><i class="fas fa-tag ml-1" aria-hidden="true"></i> Projet</a>
+                        <a href="/#projet" class="a-f"><i class="fas fa-tag ml-1" aria-hidden="true"></i> Projet</a>
                     </li>
                     <li class="mb-3">
-                        <a href="#language" class="a-f"><i class="fab fa-html5 ml-1" aria-hidden="true"></i>
+                        <a href="/#language" class="a-f"><i class="fab fa-html5 ml-1" aria-hidden="true"></i>
                             Language</a>
                     </li>
                     <li class="mb-3">
-                        <a href="#galerie" class="a-f"><i class="far fa-image ml-1" aria-hidden="true"></i> Galerie</a>
+                        <a href="/#galerie" class="a-f"><i class="far fa-image ml-1" aria-hidden="true"></i> Galerie</a>
                     </li>
                     <li class="mb-3">
-                        <a href="#tuto" class="a-f"><i class="fab fa-youtube ml-1" aria-hidden="true"></i> Tuto</a>
+                        <a href="/#tuto" class="a-f"><i class="fab fa-youtube ml-1" aria-hidden="true"></i> Tuto</a>
                     </li>
                     <li class="mb-3">
-                        <a href="/blog?page=1" class="a-f"><i class="far fa-newspaper ml-1" aria-hidden="true"></i> Actu
+                        <a href="/blog" class="a-f"><i class="far fa-newspaper ml-1" aria-hidden="true"></i> Actu
                             & Dev</a>
                     </li>
                     <li class="mb-3">
@@ -171,25 +177,28 @@
                 <div class="row d-flex justify-content-center mt-3">
                     <div class="col-md-12">
                         {{#ifEquals commentCount 0}}
-                        {{#each (limit commentsAll 2) }}
+                        {{#each (limit commentsAll 3) }}
                         <div class="card comment">
                             <div class="comment-widgets">
 
                                 <!-- Commentaire -->
                                 <div class="d-flex flex-row comment-row m-t-0">
-                                    <div class="p-2">
-                                        <img src="/avatar/{{avatar}}" alt="{{author}}" width="50"
-                                            class="rounded-circle">
-                                    </div>
-                                    <div class="comment-text w-100">
-                                        <h6>{{author}}</h6>
-                                        <span class="m-b-15 d-block">{{content}}</span>
-                                        <div class="comment-footer mt-1">
-                                            <span class="text-muted float-right"><i
-                                                    class="fas fa-pencil-alt ml-2"></i>Posté le {{generateDate
-                                                dateCreate}}</span>
+                                    <a href="/article/{{articleID}}/#comment" title="{{content}}">
+                                        <div class="p-2">
+                                            <img src="{{avatar}}" alt="{{author}}" width="50" class="rounded-circle">
                                         </div>
-                                    </div>
+                                    </a>
+                                        <div class="comment-text w-100">
+                                            <h6>{{author}}</h6>
+                                            <a href="/article/{{articleID}}/#comment" title="{{content}}">
+                                                <span class="m-b-15 d-block">{{trimString3 content}}</span>
+                                            </a>
+                                            <div class="comment-footer mt-1">
+                                                <span class="text-muted float-right"><i
+                                                        class="fas fa-pencil-alt ml-2"></i>Posté le {{generateDate
+                                                    dateCreate}}</span>
+                                            </div>
+                                        </div> 
                                 </div>
                             </div>
                             {{/each}}

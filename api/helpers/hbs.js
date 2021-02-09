@@ -45,6 +45,12 @@ module.exports = {
         return new Handlebars.SafeString(theString) + '...'
     },
 
+    // Function de limitation de caractére dans un texte
+    trimString3: function(passedString) {
+        var theString = passedString.substring(0, 30);
+        return new Handlebars.SafeString(theString) + '...'
+    },
+
     // Function like qui permet de retourner si l'utilisateur à liké ou pas
     ifLike: function(arr, user, options) {
 

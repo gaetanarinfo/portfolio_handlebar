@@ -12,6 +12,9 @@ module.exports = {
     // Method Get pour envoyer les datas vers la page
     get: async(req, res) => {
 
+        const commentCount = await Comment.countDocuments(), // Compter le nombre de commantaire
+            commentsAll = await Comment.find({}).sort('-dateCreate').lean() // Affiche les commentaires dansd le footer
+
         const success = req.session.success // Message Succes
         const error = req.session.error // Message Error
 
@@ -50,13 +53,17 @@ module.exports = {
                 if (success || error) {
                     res.render('article', {
                         success: success,
-                        artID: result
+                        artID: result,
+                        commentsAll,
+                        commentCount
                     })
                 } else {
                     res.render('article', {
                         error: error,
                         success: success,
-                        artID: result
+                        artID: result,
+                        commentsAll,
+                        commentCount
                     })
                 }
 

@@ -69,6 +69,7 @@ app.use('*', (req, res, next) => {
     res.locals.users = req.session.userId
     res.locals.admin = req.session.isAdmin
     res.locals.userAdmin = req.session
+    res.locals.user = req.session
     next()
 })
 
@@ -84,7 +85,8 @@ app.engine('hbs', exphbs({
         ifEquals: require('./api/helpers/hbs').ifEquals, // Condition si a est plus grand que b
         trimString: require('./api/helpers/hbs').trimString, // Condition pour réduire le nombre de caractère
         ifLike: require('./api/helpers/hbs').ifLike, // Condition pour les likes
-        trimString2: require('./api/helpers/hbs').trimString2 // Condition pour réduire le nombre de caractère
+        trimString2: require('./api/helpers/hbs').trimString2, // Condition pour réduire le nombre de caractère
+        trimString3: require('./api/helpers/hbs').trimString3 // Condition pour réduire le nombre de caractère
     }
 }))
 app.set('view engine', 'hbs')

@@ -35,7 +35,7 @@
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title">{{title}}</h5>
-                                        <p class="card-text">{{{content}}}</p>
+                                        <p class="card-text">{{{trimString content}}}</p>
                                     </div>
                                     <div class="card-footer">
                                         <div class="card-btn"><a href="/article/{{_id}}" class="btn btn-cards">Lire la suite</a></div>
@@ -53,3 +53,7 @@
     </section>
 
     {{> modal/modal}}
+
+    {{#if users}}
+        {{> modal/modal_user}}
+    {{/if}}

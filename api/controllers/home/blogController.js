@@ -2,6 +2,7 @@
  * Import Module
  ****************/
 const Article = require('../../database/models/articles'),
+    Comment = require('../../database/models/comments'),
     paginator = require('./pagination/paginator')
 
 /*
@@ -13,7 +14,9 @@ module.exports = {
     get: async(req, res) => {
 
         const success = req.session.success, // Message en cas de success
-            error = req.session.error // Message en cas d'erreur
+            error = req.session.error, // Message en cas d'erreur
+            commentCount = await Comment.countDocuments(), // Compter le nombre de commantaire
+            commentsAll = await Comment.find({}).sort('-dateCreate').lean() // Affiche les commentaires dansd le footer
 
         req.session.success = undefined // Définie le cookie de message success
         req.session.error = undefined // Définie le cookie de message error
@@ -73,7 +76,9 @@ module.exports = {
                                 success: success,
                                 error: error,
                                 title: 'Mon blog personnel',
-                                content: 'Portfolio de Gaëtan Seigneur'
+                                content: 'Portfolio de Gaëtan Seigneur',
+                                commentsAll,
+                                commentCount
                             })
                         } else {
                             res.render('blog', {
@@ -92,7 +97,9 @@ module.exports = {
                                 pagination,
                                 error: error,
                                 title: 'Mon blog personnel',
-                                content: 'Portfolio de Gaëtan Seigneur'
+                                content: 'Portfolio de Gaëtan Seigneur',
+                                commentsAll,
+                                commentCount
                             })
                         }
 

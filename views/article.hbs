@@ -3,7 +3,7 @@
             <div class="article-head" style="background: url('{{artID.image}}');">
                 <div class="article-body">
                     <div class="article-avatar mr-20">
-                        <img src="../{{artID.avatar}}"
+                        <img src="{{artID.avatar}}"
                             alt="{{artID.author}}" class="rounded-circle ml-5">
                     </div>
                     <div class="article-author">
@@ -41,10 +41,10 @@
 
                 <div class="article-comment">
                 
-                    <p class="comment-count">Commentaire(s) {{countArray artID.comment }}</p>
+                    <p id="comment" class="comment-count">Commentaire(s) {{countArray artID.comment }}</p>
 
                     {{#each artID.comment }}
-                    <div class="box-comment" id="comment">    
+                    <div class="box-comment">    
                         <div class="comment-profil">
                             <img src="{{avatar}}"
                                 alt="{{author}}" class="rounded-circle ml-3">
@@ -91,3 +91,7 @@
     </div>
 
     {{> modal/modal}}
+
+    {{#if users}}
+        {{> modal/modal_user}}
+    {{/if}}

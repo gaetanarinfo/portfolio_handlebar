@@ -4,9 +4,9 @@
 window.onscroll = function() { scrollFunction() };
 
 // Déclaration des constantes
-var btn_top = document.querySelector(".btn_top");
-var nav_top_1 = document.getElementById("navbar_1");
-var nav_top_2 = document.getElementById("navbar_2");
+var btn_top = document.querySelector(".btn_top"),
+    nav_top_1 = document.getElementById("navbar_1"),
+    nav_top_2 = document.getElementById("navbar_2")
 
 // Function Scrollable
 function scrollFunction() {
