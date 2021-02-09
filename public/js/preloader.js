@@ -1,5 +1,3 @@
-// setTimeout(function() { location.href = "/home" }, 2500);
-
 /*!
  * Particleground
  *

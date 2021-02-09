@@ -1,4 +1,6 @@
-// Déclaration des constantes
+/*
+ * Import Module
+ ****************/
 const User = require('../../database/models/users'),
     bcrypt = require('bcrypt'),
     randtoken = require('rand-token')
@@ -41,7 +43,6 @@ module.exports = {
                 } else {
 
                     res.render('reset-password', { token: token, success: success, error: error })
-
 
                 }
 

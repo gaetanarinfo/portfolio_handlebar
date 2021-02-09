@@ -6,7 +6,7 @@ const Projet = require('../../database/models/projets'),
     Article = require('../../database/models/articles'),
     Galerie = require('../../database/models/galeries'),
     Comment = require('../../database/models/comments'),
-    renderHome = require('./render/renderHome')
+    paginator = require('./pagination/paginator')
 
 /*
  * Controller
@@ -78,8 +78,73 @@ module.exports = {
                                             arrayPagesIndexes.push(i + 1)
                                         }
 
-                                        // Module pour le render Home
-                                        renderHome(req, res, success, error, page, perPage, count, projets, arrayPagesIndexes, tutos, articles, galeries, commentsAll, commentCount)
+                                        // Si inscription erreur alors on sauvegarde pour retourner les datas dans le formulaire
+                                        const data1 = req.session.data1,
+                                            data2 = req.session.data2,
+                                            data3 = req.session.data3,
+                                            data4 = req.session.data4
+
+                                        // Function de pagination de page
+                                        const prelinks = "/",
+                                            paginationProjet = paginator(page, perPage, count, prelinks) // Function paginator
+
+                                        if (success || error) {
+                                            res.render('index', {
+                                                success: success,
+                                                error: error,
+                                                // Page sur la quel on est : Number
+                                                current: page,
+                                                // Nombre de pages : Number
+                                                pages: Math.ceil(count / perPage),
+                                                // tableau avec les index des page: []
+                                                arrayPage: arrayPagesIndexes,
+                                                // Les projets : [{}]
+                                                projets: projets,
+                                                // Pages - 1
+                                                previous: parseInt(page) - 1,
+                                                // Pages + 1
+                                                next: parseInt(page) + 1,
+                                                paginationProjet,
+                                                tutos,
+                                                articles,
+                                                commentsAll,
+                                                commentCount,
+                                                galeries,
+                                                data1,
+                                                data2,
+                                                data3,
+                                                data4,
+                                                title: 'Portfolio de Gaëtan Seigneur',
+                                                content: "Mon portfolio professionnel, retrouvé ici mes compétences, les derniers articles de mon blog, mes tutoriels et tant d autres choses."
+                                            })
+                                        } else
+                                            res.render('index', {
+                                                error: error,
+                                                // Page sur la quel on est : Number
+                                                current: page,
+                                                // Nombre de pages : Number
+                                                pages: Math.ceil(count / perPage),
+                                                // tableau avec les index des page: []
+                                                arrayPage: arrayPagesIndexes,
+                                                // Les projets : [{}]
+                                                projets: projets,
+                                                // Pages - 1
+                                                previous: parseInt(page) - 1,
+                                                // Pages + 1
+                                                next: parseInt(page) + 1,
+                                                paginationProjet,
+                                                tutos,
+                                                articles,
+                                                galeries,
+                                                commentsAll,
+                                                commentCount,
+                                                data1,
+                                                data2,
+                                                data3,
+                                                data4,
+                                                title: 'Portfolio de Gaëtan Seigneur',
+                                                content: "Mon portfolio professionnel, retrouvé ici mes compétences, les derniers articles de mon blog, mes tutoriels et tant d autres choses."
+                                            })
 
                                     })
                             })

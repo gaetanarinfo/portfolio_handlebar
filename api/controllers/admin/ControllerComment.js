@@ -1,9 +1,15 @@
+/*
+ * Import Module
+ ****************/
 const Comment = require('../../database/models/comments'),
-    User = require('../../database/models/users'),
-    pagination = require('pagination')
+    paginator = require('../../controllers/home/pagination/paginator')
 
+/*
+ * Controller
+ *************/
 module.exports = {
 
+    // Method Get pour recevoir les datas dans la page comment
     showComment: (req, res) => {
 
         const success = req.session.success, // Message Succes
@@ -11,8 +17,6 @@ module.exports = {
 
         req.session.success = undefined
         req.session.error = undefined
-
-        const email = req.session.email
 
         // Nombre d'item par page
         var perPage = 6
@@ -43,43 +47,9 @@ module.exports = {
                             arrayPagesIndexes.push(i + 1)
                         }
 
-
-                        var boostrapPaginator3 = new pagination.TemplatePaginator({
-                            prelink: '/admin/comments/',
-                            current: page,
-                            rowsPerPage: perPage,
-                            totalResult: count,
-                            slashSeparator: false,
-                            template: function(result) {
-                                var i, len, prelink;
-                                var html = '<div class="mt-4"><ul class="pagination justify-content-center mt-1">';
-                                if (result.pageCount < 2) {
-                                    html += '</ul></div>';
-                                    return html;
-                                }
-                                prelink = this.preparePreLink(result.prelink);
-                                if (result.previous) {
-                                    html += '<li class="page-item"><a class="page-link" href="' + prelink + result.previous + '">' + '<i class="fas fa-angle-left"></i></a></li>';
-                                }
-                                if (result.range.length) {
-                                    for (i = 0, len = result.range.length; i < len; i++) {
-                                        if (result.range[i] === result.current) {
-                                            html += '<li class="active page-item"><a class="page-link" href="' + prelink + result.range[i] + '">' + result.range[i] + '</a></li>';
-                                        } else {
-                                            html += '<li class="page-item"><a class="page-link" href="' + prelink + result.range[i] + '">' + result.range[i] + '</a></li>';
-                                        }
-                                    }
-                                }
-                                if (result.next) {
-                                    html += '<li class="page-item"><a class="page-link" href="' + prelink + result.next + '" class="paginator-next">' + '<i class="fas fa-angle-right"></i></a></li>';
-                                }
-                                html += '</ul></div>';
-                                return html;
-                            }
-                        });
-
-                        // Render de la pagination
-                        var pagin6 = boostrapPaginator3.render()
+                        // Function de pagination de page
+                        const prelinks = "/admin/comments/",
+                            paginationComment = paginator(page, perPage, count, prelinks) // Function paginator
 
                         if (success || error) {
                             res.render('admin', {
@@ -95,8 +65,7 @@ module.exports = {
                                 previous: parseInt(page) - 1,
                                 // Pages + 1
                                 next: parseInt(page) + 1,
-                                pagin6,
-
+                                paginationComment,
                                 success: success,
                                 error: error,
                                 title: 'Administration de mon blog',
@@ -117,10 +86,8 @@ module.exports = {
                                 previous: parseInt(page) - 1,
                                 // Pages + 1
                                 next: parseInt(page) + 1,
-                                pagin6,
-
+                                paginationComment,
                                 error: error,
-
                                 title: 'Administration de mon blog',
                                 content: "Partie administration de mon portfolio",
                                 layout: 'admin'
@@ -132,6 +99,7 @@ module.exports = {
 
     },
 
+    // Method Post pour editer les datas
     editComment: (req, res) => {
 
         const id = req.params.id
@@ -152,6 +120,7 @@ module.exports = {
 
     },
 
+    // Method Get pour recevoir les datas dans le modal
     deleteComment: (req, res) => {
 
         const id = req.params.id
@@ -164,6 +133,7 @@ module.exports = {
 
     },
 
+    // Method Get pour recevoir les datas dans le modal et comfirmer la suppression
     deleteCommentConfirm: (req, res) => {
 
         const id = req.params.id

@@ -1,3 +1,8 @@
+// Section Admin ---! Seulement !---
+// Multi Function pour les modal admin
+// Celà permet de mettre un article en privé ou en public par exemple
+// Sans celà le checkbox ne changera pas d'état
+
 $(document).ready(function() {
     $('input[name="isPrivate"]').click(function() {
         if ($(this).is(":checked")) {

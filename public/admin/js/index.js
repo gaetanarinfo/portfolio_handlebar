@@ -1,4 +1,5 @@
-// Condition du masquage du menu admin
+// Section Admin ---! Seulement !---
+// Condition qui permet de masquer le bouton selon le choix de l'utilisateur
 if (sessionStorage.getItem('menu_admin') == 'true') {
     $('#menu').css('display', 'none')
     $('.mask-menu2').css('display', 'block')
@@ -9,11 +10,12 @@ if (sessionStorage.getItem('menu_admin') == 'true') {
     $('.mask-menu2').css('display', 'none')
 }
 
+// Function qui permet d'afficher un tooltip au dessus du button : Modifier Supprimer Ajouter
 $(function() {
     $('[data-toggle="tooltip"]').tooltip()
 })
 
-// Bouton du masquage du menu admin
+// Condition qui permet de masquer le bouton selon le choix de l'utilisateur
 $('#btn_menu').click(function() {
     $('#menu').hide(500)
     $('.mask-menu2').css('display', 'block')
@@ -22,7 +24,7 @@ $('#btn_menu').click(function() {
     return false
 })
 
-// Bouton du démasquage du menu admin
+// Condition qui permet de masquer le bouton selon le choix de l'utilisateur
 $('#btn_menu2').click(function() {
     $('#menu').show(500)
     $('.mask-menu').css('display', 'block')
@@ -31,7 +33,7 @@ $('#btn_menu2').click(function() {
     return false
 })
 
-// Upload image
+// Function qui permet d'upload une image et de l'afficher dans une div !! Image !!
 var input = document.querySelector('#image');
 var preview = document.querySelector('.preview');
 
@@ -91,7 +93,7 @@ function returnFileSize(number) {
     }
 }
 
-// Upload avatar
+// Function qui permet d'upload une image et de l'afficher dans une div !! Avatar !!
 var input2 = document.querySelector('#avatar');
 var preview2 = document.querySelector('.preview2');
 
@@ -125,7 +127,7 @@ function updateImageDisplay2() {
     }
 }
 
-// Upload image projets
+// Function qui permet d'upload une image et de l'afficher dans une div !! Projet !!
 var input3 = document.querySelector('#imageProjets');
 var preview3 = document.querySelector('.preview3');
 
@@ -159,7 +161,7 @@ function updateImageDisplay3() {
     }
 }
 
-// Upload image galerie
+// Function qui permet d'upload une image et de l'afficher dans une div !! Galerie !!
 var input4 = document.querySelector('#imageGaleries');
 var preview4 = document.querySelector('.preview4');
 
@@ -193,7 +195,7 @@ function updateImageDisplay4() {
     }
 }
 
-// Permet de marquer les sections  -->
+// Permet de marquer les sections selon l'url désirer par l'utilisateur
 if (document.location.href == 'http://localhost:3000/admin/') {
 
     // Section display
@@ -204,7 +206,7 @@ if (document.location.href == 'http://localhost:3000/admin/') {
     $('#projet').css('display', 'none');
     $('#comment').css('display', 'none');
 
-    // Section display mobile
+    // Section mobile
     $('#blog_mobile').css('display', 'none');
     $('#membres_mobile').css('display', '');
     $('#youtube_mobile').css('display', 'none');
@@ -222,7 +224,7 @@ if (document.location.href == 'http://localhost:3000/admin/') {
     $('#projet').css('display', 'none');
     $('#comment').css('display', 'none');
 
-    // Section display mobile
+    // Section mobile
     $('#blog_mobile').css('display', '');
     $('#membres_mobile').css('display', 'none');
     $('#youtube_mobile').css('display', 'none');
@@ -240,7 +242,7 @@ if (document.location.href == 'http://localhost:3000/admin/') {
     $('#projet').css('display', 'none');
     $('#comment').css('display', 'none');
 
-    // Section display mobile
+    // Section mobile
     $('#blog_mobile').css('display', 'none');
     $('#membres_mobile').css('display', 'none');
     $('#youtube_mobile').css('display', 'none');
@@ -258,7 +260,7 @@ if (document.location.href == 'http://localhost:3000/admin/') {
     $('#projet').css('display', 'none');
     $('#comment').css('display', 'none');
 
-    // Section display mobile
+    // Section mobile
     $('#blog_mobile').css('display', 'none');
     $('#membres_mobile').css('display', 'none');
     $('#youtube_mobile').css('display', '');
@@ -276,7 +278,7 @@ if (document.location.href == 'http://localhost:3000/admin/') {
     $('#projet').css('display', '');
     $('#comment').css('display', 'none');
 
-    // Section display mobile
+    // Section mobile
     $('#blog_mobile').css('display', 'none');
     $('#membres_mobile').css('display', 'none');
     $('#youtube_mobile').css('display', 'none');
@@ -294,7 +296,7 @@ if (document.location.href == 'http://localhost:3000/admin/') {
     $('#projet').css('display', 'none');
     $('#comment').css('display', '');
 
-    // Section display mobile
+    // Section mobile
     $('#blog_mobile').css('display', 'none');
     $('#membres_mobile').css('display', 'none');
     $('#youtube_mobile').css('display', 'none');
@@ -302,3 +304,12 @@ if (document.location.href == 'http://localhost:3000/admin/') {
     $('#projets_mobile').css('display', 'none');
     $('#comment_mobile').css('display', '');
 }
+
+// Function qui permet d'afficher la scroll bar du menu admin quand il et trop grand !
+(function($) {
+    $(window).on("load", function() {
+        $(".content").mCustomScrollbar({
+            axis: "y" // horizontal scrollbar
+        });
+    });
+})(jQuery);

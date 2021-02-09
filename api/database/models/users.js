@@ -1,9 +1,12 @@
+/*
+ * Import Module
+ ****************/
 const mongoose = require('mongoose'),
     bcrypt = require('bcrypt'),
     jwt = require('jsonwebtoken'),
     randtoken = require('rand-token')
 
-// MongoDb Collection Tuto Youtube
+// MongoDb Collection Model Users
 const UsersShema = new mongoose.Schema({
 
     firstname: {
@@ -56,6 +59,7 @@ UsersShema.pre('save', function(next) {
 
     const users = this
 
+    // On hash le mot de passe avec un force 10 pour mieux sécuriser le mot de passe
     bcrypt.hash(users.password, 10, (error, encrypted) => {
         users.password = encrypted
         next()
@@ -63,4 +67,7 @@ UsersShema.pre('save', function(next) {
 
 })
 
+/*
+ * Export Module
+ ****************/
 module.exports = mongoose.model('users', UsersShema);

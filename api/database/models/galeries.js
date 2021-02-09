@@ -1,6 +1,9 @@
+/*
+ * Import Module
+ ****************/
 const mongoose = require('mongoose');
 
-// MongoDb Collection Projet
+// MongoDb Collection Model Galerie
 const GalerieShema = new mongoose.Schema({
 
     title: String,
@@ -17,6 +20,10 @@ const GalerieShema = new mongoose.Schema({
 
 });
 
+// Déclaration du model galerie dans mongodb
 const Galerie = mongoose.model('galeries', GalerieShema);
 
+/*
+ * Export Module
+ ****************/
 module.exports = Galerie;

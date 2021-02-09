@@ -1,10 +1,11 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema
+/*
+ * Import Module
+ ****************/
+const mongoose = require('mongoose'),
+    Schema = mongoose.Schema,
+    Article = require('./articles')
 
-// Import model
-const Article = require('./articles')
-
-// MongoDb Collection Projet
+// MongoDb Collection Model Comment
 const CommentShema = new mongoose.Schema({
 
     author: String,
@@ -24,6 +25,10 @@ const CommentShema = new mongoose.Schema({
 
 });
 
+// Déclaration du model comment dans mongodb
 const Comment = mongoose.model('comments', CommentShema);
 
+/*
+ * Export Module
+ ****************/
 module.exports = Comment;

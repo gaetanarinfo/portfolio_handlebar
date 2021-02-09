@@ -1,6 +1,9 @@
+/*
+ * Import Module
+ ****************/
 const mongoose = require('mongoose');
 
-// MongoDb Collection Tuto Youtube
+// MongoDb Collection Model Youtube
 const TutoShema = new mongoose.Schema({
 
     title: String,
@@ -16,6 +19,10 @@ const TutoShema = new mongoose.Schema({
 
 });
 
+// Déclaration du model galerie dans projet
 const Tutos = mongoose.model('tutos', TutoShema);
 
+/*
+ * Export Module
+ ****************/
 module.exports = Tutos;

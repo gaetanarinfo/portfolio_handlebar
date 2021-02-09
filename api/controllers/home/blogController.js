@@ -9,7 +9,7 @@ const Article = require('../../database/models/articles'),
  *************/
 module.exports = {
 
-    // Method Get pour envoyer les datas vers la page
+    // Method Get pour envoyer les datas vers la page blog
     get: async(req, res) => {
 
         const success = req.session.success, // Message en cas de success

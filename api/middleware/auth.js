@@ -1,8 +1,14 @@
+/*
+ * Import Module
+ ****************/
 const User = require('../database/models/users');
 
+/*
+ * Controller
+ *************/
 module.exports = (req, res, next) => {
 
-    // Connexion base de donnée
+    // On recupere l'utilisateur dans le model users
     User.findById(req.session.userId, (error, user) => {
 
         if (error || !user) {

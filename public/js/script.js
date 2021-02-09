@@ -1,5 +1,4 @@
-// Les conditions d'écrans
-
+// Les conditions d'écrans //
 
 // Lancement de la function
 window.onscroll = function() { scrollFunction() };
@@ -29,12 +28,13 @@ function scrollFunction() {
 
 }
 
+// Button pour remonter en haut de la page
 function topFunction() {
     document.body.scrollTop = 0; // Pour Safari
     document.documentElement.scrollTop = 0; // Pour Chrome, Firefox, IE and Opera
 }
 
-// Galerie
+// Galerie ---> //
 function switchStyle() {
     if ($('#styleSwitch ').checked) {
         $('#gallery ').classList.add("custom");
@@ -45,6 +45,7 @@ function switchStyle() {
     }
 }
 
+// Function pour les transitions et le zoom des images de la galerie
 $(document).ready(function() {
     $(".zoom").hover(function() {
         $(this).addClass('transition ');
@@ -52,7 +53,7 @@ $(document).ready(function() {
         $(this).removeClass('transition ');
     });
 });
-// Galerie
+// <--- Galerie //
 
 // Modal Inscription Connexion Mot de passe perdu
 $('#recover').click(function() {
@@ -112,7 +113,7 @@ $('#inscription2').click(function() {
     }, 550);
 });
 
-// Télécharger CV
+// function pour faire télécharger le CV au visiteur
 
 const btn_cv = document.getElementById('dev-cv');
 
@@ -163,6 +164,7 @@ btn_cv.addEventListener('click', function(e) {
     progress()
 })
 
+// Function pour la création de l'user qui permet de voir l'avatar avant de l'envoyer sur le serveur
 var input = document.querySelector('#avatar');
 var preview = document.querySelector('.preview');
 
@@ -202,6 +204,7 @@ var fileTypes = [
     'image/png'
 ]
 
+// function qui permet de comparer le fichier pour lui dire si tu n'est pas une image tu renvoie une erreur
 function validFileType(file) {
     for (var i = 0; i < fileTypes.length; i++) {
         if (file.type === fileTypes[i]) {
@@ -212,6 +215,7 @@ function validFileType(file) {
     return false;
 }
 
+// Si le fichier dépasse une certaine largeur ou poid on renvoie un message d'érreur
 function returnFileSize(number) {
     if (number < 1024) {
         return number + ' octets';
@@ -222,8 +226,9 @@ function returnFileSize(number) {
     }
 }
 
-var email = document.getElementById('email');
-var password = document.getElementById('password');
+// Modal connexion se souvenir de moi
+var email = document.getElementById('email'),
+    password = document.getElementById('password');
 
 const checkBoxLogin = document.getElementById('checkBoxConfirmLogin');
 
@@ -251,7 +256,9 @@ if (sessionStorage.getItem('emailLogin') != undefined && sessionStorage.getItem(
     });
 
 }
+// Modal connexion se souvenir de moi //
 
+// Function pour la recherche d'un article qui se trouve dans le header du portfolio
 function searchFunction() {
     // Declare variables
     var input, filter, ul, li, a, i, txtValue;
@@ -261,7 +268,7 @@ function searchFunction() {
     li = ul.getElementsByTagName('li');
     ul.style.display = 'block';
 
-    // Loop through all list items, and hide those who don't match the search query
+    // Boucle sur tous les éléments de la liste et masque ceux qui ne correspondent pas à la requête de recherche 
     for (i = 0; i < li.length; i++) {
         a = li[i].getElementsByTagName("a")[0];
         txtValue = a.textContent || a.innerText;
@@ -282,7 +289,7 @@ function searchFunctionMobile() {
     li = ul.getElementsByTagName('li');
     ul.style.display = 'block';
 
-    // Loop through all list items, and hide those who don't match the search query
+    // Boucle sur tous les éléments de la liste et masque ceux qui ne correspondent pas à la requête de recherche 
     for (i = 0; i < li.length; i++) {
         a = li[i].getElementsByTagName("a")[0];
         txtValue = a.textContent || a.innerText;
@@ -293,84 +300,3 @@ function searchFunctionMobile() {
         }
     }
 }
-
-$('#phpCat').click(function() {
-    $.get("/tutorielCat/PHP", function(data) {
-        $("#allCat").css('display', 'none');
-        $("#resuCat").css('display', '');
-        $("#resuCat").html(data);
-    });
-
-    return false;
-});
-
-$('#htmlCat').click(function() {
-    $.get("/tutorielCat/HTML", function(data) {
-        $("#allCat").css('display', 'none');
-        $("#resuCat").css('display', '');
-        $("#resuCat").html(data);
-        console.log(data)
-    });
-
-    return false;
-});
-
-$('#cssCat').click(function() {
-    $.get("/tutorielCat/CSS", function(data) {
-        $("#allCat").css('display', 'none');
-        $("#resuCat").css('display', '');
-        $("#resuCat").html(data);
-    });
-
-    return false;
-});
-
-$('#sassCat').click(function() {
-    $.get("/tutorielCat/SASS", function(data) {
-        $("#allCat").css('display', 'none');
-        $("#resuCat").css('display', '');
-        $("#resuCat").html(data);
-    });
-
-    return false;
-});
-
-$('#nodejsCat').click(function() {
-    $.get("/tutorielCat/NODEJS", function(data) {
-        $("#allCat").css('display', 'none');
-        $("#resuCat").css('display', '');
-        $("#resuCat").html(data);
-    });
-
-    return false;
-});
-
-$('#jsCat').click(function() {
-    $.get("/tutorielCat/JS", function(data) {
-        $("#allCat").css('display', 'none');
-        $("#resuCat").css('display', '');
-        $("#resuCat").html(data);
-    });
-
-    return false;
-});
-
-$('#mongodbCat').click(function() {
-    $.get("/tutorielCat/MONGODB", function(data) {
-        $("#allCat").css('display', 'none');
-        $("#resuCat").css('display', '');
-        $("#resuCat").html(data);
-    });
-
-    return false;
-});
-
-$('#mysqlCat').click(function() {
-    $.get("/tutorielCat/MONGODB", function(data) {
-        $("#allCat").css('display', 'none');
-        $("#resuCat").css('display', '');
-        $("#resuCat").html(data);
-    });
-
-    return false;
-});

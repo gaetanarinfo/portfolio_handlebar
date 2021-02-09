@@ -1,7 +1,10 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema
+/*
+ * Import Module
+ ****************/
+const mongoose = require('mongoose'),
+    Schema = mongoose.Schema
 
-// MongoDb Collection Projet
+// MongoDb Collection Model Projet
 const ProjetShema = new mongoose.Schema({
 
     title: String,
@@ -20,6 +23,10 @@ const ProjetShema = new mongoose.Schema({
 
 });
 
+// Déclaration du model galerie dans projet
 const Projet = mongoose.model('projets', ProjetShema);
 
+/*
+ * Export Module
+ ****************/
 module.exports = Projet;

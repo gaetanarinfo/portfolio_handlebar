@@ -1,4 +1,7 @@
-var dateFormat = require("dateformat")
+/*
+ * Import Module
+ ****************/
+const dateFormat = require("dateformat")
 
 dateFormat.i18n = {
     monthNames: [
@@ -30,13 +33,19 @@ dateFormat.i18n = {
     timeNames: ["a", "p", "am", "pm", "A", "P", "AM", "PM"],
 };
 
+/*
+ * Controller
+ *************/
 module.exports = {
 
+    // Function Qui return la date
     date: function(date, format) {
 
         return dateFormat(date, format)
     }
 }
 
-// Export
+/*
+ * Export module
+ *************/
 module.exports = dateFormat

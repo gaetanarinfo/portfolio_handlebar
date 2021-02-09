@@ -1,3 +1,6 @@
+/*
+ * Import Module
+ ****************/
 const User = require('../../database/models/users'),
     bcrypt = require('bcrypt'),
     extIP = require("ext-ip")();
@@ -29,7 +32,6 @@ module.exports = {
                         req.session.isAdmin = user.isAdmin
                         req.session.isLog = user.isLog
                         req.session.ip = user.ip
-                        req.session.gaet = user
 
                         // On récupere l'ip de l'utilisateur pour la stocker
                         extIP.get((err, ip) => {
@@ -73,7 +75,6 @@ module.exports = {
 
     // Method logout pour la déconnexion
     logout: (req, res) => {
-
         req.session.destroy()
         res.redirect('/')
     }

@@ -1,12 +1,18 @@
+/*
+ * Import Module
+ ****************/
 const User = require('../../database/models/users'),
-    pagination = require('pagination'),
     path = require('path'),
-    fs = require('fs')
+    fs = require('fs'),
+    paginator = require('../../controllers/home/pagination/paginator')
 
+/*
+ * Controller
+ *************/
 module.exports = {
 
-    // Method Get
-    showArticle: async(req, res) => {
+    // Method Get pour recevoir les datas dans la page users
+    showUser: async(req, res) => {
 
         const success = req.session.success, // Message Succes
             error = req.session.error // Message Error
@@ -18,7 +24,8 @@ module.exports = {
 
         // Nombre d'item par page
         var perPage = 10
-            // La page que l'on veux récupéré si il y a en pas alors page 1
+
+        // La page que l'on veux récupéré si il y a en pas alors page 1
         var page = req.query.page || 1
         var arrayPagesIndexes = []
 
@@ -45,43 +52,9 @@ module.exports = {
                             arrayPagesIndexes.push(i + 1)
                         }
 
-
-                        var boostrapPaginator = new pagination.TemplatePaginator({
-                            prelink: '/admin',
-                            current: page,
-                            rowsPerPage: perPage,
-                            totalResult: count,
-                            slashSeparator: false,
-                            template: function(result) {
-                                var i, len, prelink;
-                                var html = '<div class="mt-4"><ul class="pagination justify-content-center mt-1">';
-                                if (result.pageCount < 2) {
-                                    html += '</ul></div>';
-                                    return html;
-                                }
-                                prelink = this.preparePreLink(result.prelink);
-                                if (result.previous) {
-                                    html += '<li class="page-item"><a class="page-link" href="' + prelink + result.previous + '">' + '<i class="fas fa-angle-left"></i></a></li>';
-                                }
-                                if (result.range.length) {
-                                    for (i = 0, len = result.range.length; i < len; i++) {
-                                        if (result.range[i] === result.current) {
-                                            html += '<li class="active page-item"><a class="page-link" href="' + prelink + result.range[i] + '">' + result.range[i] + '</a></li>';
-                                        } else {
-                                            html += '<li class="page-item"><a class="page-link" href="' + prelink + result.range[i] + '">' + result.range[i] + '</a></li>';
-                                        }
-                                    }
-                                }
-                                if (result.next) {
-                                    html += '<li class="page-item"><a class="page-link" href="' + prelink + result.next + '" class="paginator-next">' + '<i class="fas fa-angle-right"></i></a></li>';
-                                }
-                                html += '</ul></div>';
-                                return html;
-                            }
-                        });
-
-                        // Render de la pagination
-                        var pagin = boostrapPaginator.render()
+                        // Function de pagination de page
+                        const prelinks = "/admin",
+                            paginationUser = paginator(page, perPage, count, prelinks) // Function paginator
 
                         if (success || error) {
                             res.render('admin', {
@@ -97,7 +70,7 @@ module.exports = {
                                 previous: parseInt(page) - 1,
                                 // Pages + 1
                                 next: parseInt(page) + 1,
-                                pagin,
+                                paginationUser,
 
                                 success: success,
                                 error: error,
@@ -119,7 +92,7 @@ module.exports = {
                                 previous: parseInt(page) - 1,
                                 // Pages + 1
                                 next: parseInt(page) + 1,
-                                pagin,
+                                paginationUser,
 
                                 error: error,
                                 layout: 'admin',
@@ -132,7 +105,7 @@ module.exports = {
             })
     },
 
-
+    // Method Post pour envoyer les datas users pour ajouter un utilisateur
     addUser: (req, res) => {
 
         if (req.body.password.length > 9) {
@@ -170,6 +143,7 @@ module.exports = {
 
     },
 
+    // Method Post pour envoyer les datas users pour édition
     editUser: async(req, res) => {
 
         console.log(req.body);
@@ -231,6 +205,7 @@ module.exports = {
 
                     })
 
+                    // Renvoie un message de success
                     req.flash('success', 'Le membre ' + req.body.lastname + ' ' + req.body.firstname + ' à été modifié !')
                     req.session.success = req.flash('success')
 
@@ -243,6 +218,7 @@ module.exports = {
 
     },
 
+    // Method get pour voir l'utilisateur dans le modal
     viewUser: (req, res) => {
 
         const id = req.params.id
@@ -255,6 +231,7 @@ module.exports = {
 
     },
 
+    // Method del pour voir l'utilisateur à supprimer dans le modal
     deletetUser: (req, res) => {
 
         const id = req.params.id
@@ -267,6 +244,7 @@ module.exports = {
 
     },
 
+    // Method del pour comfirmer la suppression de l'utilisateur dans le modal
     deleteUserConfirm: async(req, res) => {
 
         // Ici on déclare la récupération de notre projetID grace à notre recherche asynchrone filtrer avec notre req.params.id
@@ -290,7 +268,7 @@ module.exports = {
                         req.flash('success', 'Le membre à été supprimé !')
                         req.session.success = req.flash('success')
 
-                        res.redirect('/admin/projets')
+                        res.redirect('/admin')
                     }
                 })
             }

@@ -14,9 +14,8 @@
     <link rel="stylesheet" href="/css/admin.css">
     <link rel="stylesheet" href="/css/jquery.mCustomScrollbar.min.css" />
 
-    <!-- ckeditor -->
+    <!-- ckeditor + configuration du ck editor -->
     <script src="//cdn.ckeditor.com/4.15.1/full/ckeditor.js"></script>
-
     <script>
             var editor_config = {
         toolbar: [
@@ -34,15 +33,19 @@
 
 <body>
 
+    <!-- Affiche les différentes section de la partie administration -->
     {{> admin/display_admin }}
 
+    <!-- Menu admin -->
     {{> admin/menu_admin }}
 
+    <!-- Menu mobile admin -->
     {{> admin/admin_mobile }}
 
+    <!-- Modal admin de suppression --> 
     {{> admin/modal/modal_admin_delete }}
 
-    <!-- Modal Add -->
+    <!-- Modal admin pour l'ajout de contenue -->
     {{> admin/modal/modal_add_article }}
     {{> admin/modal/modal_add_galerie }}
     {{> admin/modal/modal_add_membre }}
@@ -57,55 +60,47 @@
     <script src="/vendor/bootstrap/js/popper.min.js"></script>
     <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
 
+    <!-- Scrollbar pour le menu admin -->
+    <script src="/admin/js/jquery.mCustomScrollbar.concat.min.js"></script>
+
     <!-- Js perso -->
     <script src="/admin/js/index.js"></script>
     <script src="/admin/js/add.js"></script>
     <script src="/admin/js/edit_delete.js"></script>
-    <script src="/admin/js/jquery.mCustomScrollbar.concat.min.js"></script>
 
-    <script>
-
-    CKEDITOR.replace('articleAdd', editor_config );
-
-    </script>
-
-    <script>
-        (function($){
-            $(window).on("load",function(){
-                $(".content").mCustomScrollbar({
-                    axis:"y" // horizontal scrollbar
-                });
-            });
-        })(jQuery);
-    </script>
+    <!-- Render du ckeditor (Editeur de text) -->
+    <script>CKEDITOR.replace('articleAdd', editor_config );</script>
 
     <script>
 
     // Permet de voir le membre dans le modal -->
     {{#each membres}}
 
+            // Format écran display
             $('#deleteMembre-' + '{{_id}}').click(function() {
 
                 DeleteMembre('{{_id}}', '{{lastname}}', '{{firstname}}');
 
             });
 
+            // Format écran mobile
             $('#deleteMembreMob-' + '{{_id}}').click(function() {
 
                 DeleteMembre('{{_id}}', '{{lastname}}', '{{firstname}}');
 
             });
 
+            // Function pour la checkbox qui renvoie si c'est privé ou public
             $(document).ready(function() {
-            $('input[id="isBanned_{{_id}}"]').click(function() {
-            if ($(this).is(":checked")) {
-            $('#lab_ban_{{_id}}').html('Privé')
-            $('#isBanned_{{_id}}"]').attr('checked', true);
-            } else if ($(this).is(":not(:checked)")) {
-            $('#lab_ban_{{_id}}').html('En ligne')
-            $('#isBanned_{{_id}}"]').attr('checked', false);
-            }
-            });
+                $('input[id="isBanned_{{_id}}"]').click(function() {
+                    if ($(this).is(":checked")) {
+                        $('#lab_ban_{{_id}}').html('Privé')
+                        $('#isBanned_{{_id}}"]').attr('checked', true);
+                    } else if ($(this).is(":not(:checked)")) {
+                        $('#lab_ban_{{_id}}').html('En ligne')
+                        $('#isBanned_{{_id}}"]').attr('checked', false);
+                    }
+                });
             });
 
     {{/each}}
@@ -113,18 +108,21 @@
     // Permet de voir l'article dans le modal  -->
     {{#each articles}}
 
+            // Format écran display modal
             $('#deleteArticle-' + '{{_id}}').click(function() {
 
                DeleteArticle('{{_id}}', '{{title}}');
 
             });
 
+            // Format écran mobile modal
             $('#deleteArticleMobile-' + '{{_id}}').click(function() {
 
                DeleteArticle('{{_id}}', '{{title}}');
 
             });
 
+            // Function pour la checkbox qui renvoie si c'est privé ou public
             $(document).ready(function() {
                 $('input[id="isPrivate2_{{_id}}"]').click(function() {
                     if ($(this).is(":checked")) {
@@ -145,18 +143,21 @@
     // Permet de voir le projet dans le modal  -->
     {{#each projets}}
 
+            // Format écran display modal
             $('#deleteProjet-' + '{{_id}}').click(function() {
 
                DeleteProjet('{{_id}}', '{{title}}');
 
             });
 
+            // Format écran mobile modal
             $('#deleteProjetMobile-' + '{{_id}}').click(function() {
 
                DeleteProjet('{{_id}}', '{{title}}');
 
             });
 
+            // Function pour la checkbox qui renvoie si c'est privé ou public
             $(document).ready(function() {
                 $('input[id="isPrivate4_{{_id}}"]').click(function() {
                     if ($(this).is(":checked")) {
@@ -171,20 +172,24 @@
 
     {{/each}}
 
+    // Permet de voir le tutoriel dans le modal  -->
     {{#each tutos}}
 
+            // Format écran display modal
             $('#deleteYoutube-' + '{{_id}}').click(function() {
 
                DeleteYoutube('{{_id}}', '{{title}}');
 
             });
 
+            // Format écran mobile modal
             $('#deleteYoutubeMobile-' + '{{_id}}').click(function() {
 
                DeleteYoutube('{{_id}}', '{{title}}');
 
             });
 
+            // Function pour la checkbox qui renvoie si c'est privé ou public
             $(document).ready(function() {
                 $('input[id="isPrivate6_{{_id}}"]').click(function() {
                     if ($(this).is(":checked")) {
@@ -199,20 +204,24 @@
 
     {{/each}}
 
+    // Permet de voir l'image de la galerie dans le modal  -->
     {{#each galeries}}
 
+            // Format écran display modal
             $('#deleteGalerie-' + '{{_id}}').click(function() {
 
                DeleteGalerie('{{_id}}', '{{title}}');
 
             });
 
+            // Format écran mobile modal
             $('#deleteGalerieMobile-' + '{{_id}}').click(function() {
 
                DeleteGalerie('{{_id}}', '{{title}}');
 
             });
 
+            // Function pour la checkbox qui renvoie si c'est privé ou public
             $(document).ready(function() {
                 $('input[id="isPrivate8_{{_id}}"]').click(function() {
                     if ($(this).is(":checked")) {
@@ -227,14 +236,17 @@
 
     {{/each}}
 
+    // Permet de voir le commentaire dans le modal  -->
     {{#each comments}}
 
+            // Format écran display modal
             $('#deleteComment-' + '{{_id}}').click(function() {
 
                DeleteComment('{{_id}}', '{{author}}');
 
             });
 
+            // Format écran mobile modal
             $('#deleteCommentMobile-' + '{{_id}}').click(function() {
 
                DeleteComment('{{_id}}', '{{author}}');
@@ -245,6 +257,7 @@
 
     </script>
 
+    <!-- Import des notifications -->
     ​{{> notifications}}
 
 </body>

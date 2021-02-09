@@ -1,10 +1,17 @@
+/*
+ * Import Module
+ ****************/
 const Article = require('../../database/models/articles'),
+    paginator = require('../../controllers/home/pagination/paginator'),
     path = require('path'),
-    pagination = require('pagination'),
     fs = require('fs')
 
+/*
+ * Controller
+ *************/
 module.exports = {
 
+    // Method Get pour recevoir les datas dans la page blog
     showArticle: (req, res) => {
 
         const success = req.session.success, // Message Succes
@@ -43,42 +50,9 @@ module.exports = {
                             arrayPagesIndexes.push(i + 1)
                         }
 
-                        var boostrapPaginator2 = new pagination.TemplatePaginator({
-                            prelink: '/admin/articles/',
-                            current: page,
-                            rowsPerPage: perPage,
-                            totalResult: count,
-                            slashSeparator: false,
-                            template: function(result) {
-                                var i, len, prelink;
-                                var html = '<div class="mt-4"><ul class="pagination justify-content-center mt-1">';
-                                if (result.pageCount < 2) {
-                                    html += '</ul></div>';
-                                    return html;
-                                }
-                                prelink = this.preparePreLink(result.prelink);
-                                if (result.previous) {
-                                    html += '<li class="page-item"><a class="page-link" href="' + prelink + result.previous + '">' + '<i class="fas fa-angle-left"></i></a></li>';
-                                }
-                                if (result.range.length) {
-                                    for (i = 0, len = result.range.length; i < len; i++) {
-                                        if (result.range[i] === result.current) {
-                                            html += '<li class="active page-item"><a class="page-link" href="' + prelink + result.range[i] + '">' + result.range[i] + '</a></li>';
-                                        } else {
-                                            html += '<li class="page-item"><a class="page-link" href="' + prelink + result.range[i] + '">' + result.range[i] + '</a></li>';
-                                        }
-                                    }
-                                }
-                                if (result.next) {
-                                    html += '<li class="page-item"><a class="page-link" href="' + prelink + result.next + '" class="paginator-next">' + '<i class="fas fa-angle-right"></i></a></li>';
-                                }
-                                html += '</ul></div>';
-                                return html;
-                            }
-                        });
-
-                        // Render de la pagination
-                        var pagin2 = boostrapPaginator2.render()
+                        // Function de pagination de page
+                        const prelinks = "/admin/articles/",
+                            paginationComment = paginator(page, perPage, count, prelinks) // Function paginator
 
                         if (success || error) {
                             res.render('admin', {
@@ -94,7 +68,7 @@ module.exports = {
                                 previous: parseInt(page) - 1,
                                 // Pages + 1
                                 next: parseInt(page) + 1,
-                                pagin2,
+                                paginationComment,
                                 success: success,
                                 error: error,
                                 title: 'Administration de mon blog',
@@ -115,10 +89,8 @@ module.exports = {
                                 previous: parseInt(page) - 1,
                                 // Pages + 1
                                 next: parseInt(page) + 1,
-                                pagin2,
-
+                                paginationComment,
                                 error: error,
-
                                 title: 'Administration de mon blog',
                                 content: "Partie administration de mon portfolio",
                                 layout: 'admin'
@@ -130,6 +102,7 @@ module.exports = {
 
     },
 
+    // Method Post pour ajouter les datas
     addArticle: (req, res) => {
 
         const image = req.file.originalname;
@@ -163,6 +136,7 @@ module.exports = {
 
     },
 
+    // Method Post pour editer les datas
     editArticle: async(req, res) => {
 
         // On declare notre articleID (Objet à éditer)
@@ -242,6 +216,7 @@ module.exports = {
 
     },
 
+    // Method Get pour recevoir les datas dans le modal
     deletetArticle: (req, res) => {
 
         const id = req.params.id
@@ -254,6 +229,7 @@ module.exports = {
 
     },
 
+    // Method Get pour recevoir les datas dans le modal et comfirmer la suppression
     deleteArticleConfirm: async(req, res) => {
 
         // Ici on déclare la récupération de notre articleID grace à notre recherche asynchrone filtrer avec notre req.params.id

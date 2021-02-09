@@ -1,6 +1,9 @@
-// Module Template de l'email
+/*
+ * Controller
+ ****************/
 module.exports = function(user) {
 
+    // Model de template email mot de passe oublié
     const mailOptions = {
         to: `${user.email}`,
         from: 'Seigneur Gaëtan <gaetanarinfo@gmail.com>',
@@ -507,5 +510,6 @@ module.exports = function(user) {
     </html>`,
     };
 
+    // On retourne le résultat
     return mailOptions
 }

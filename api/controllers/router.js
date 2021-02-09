@@ -63,7 +63,7 @@ router.route('/article/create/:id')
 
 // Routes page Admin
 router.route('/admin')
-    .get(auth, authAdmin, adminControllerUser.showArticle)
+    .get(auth, authAdmin, adminControllerUser.showUser)
 
 // Routes Admin Section User
 router.route('/admin/addUser')
@@ -170,5 +170,7 @@ router.route('/tutorielCat/:category')
 // Route Swagger
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-// Export
+/*
+ * Export Module
+ ****************/
 module.exports = router

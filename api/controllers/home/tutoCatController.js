@@ -22,7 +22,8 @@ module.exports = {
 
         // Nombre d'item par page
         var perPage = 12
-            // La page que l'on veux récupéré si il y a en pas alors page 1
+
+        // La page que l'on veux récupéré si il y a en pas alors page 1
         var page = req.query.page || 1
         var arrayPagesIndexes = []
 

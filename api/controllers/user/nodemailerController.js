@@ -1,4 +1,6 @@
-// Déclaration des constantes et des modules
+/*
+ * Import Module
+ ****************/
 const User = require('../../database/models/users'),
     nodemailer = require('nodemailer'),
     fs = require('fs'),
