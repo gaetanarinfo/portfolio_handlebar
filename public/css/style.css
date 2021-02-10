@@ -10797,6 +10797,26 @@ progress::-webkit-progress-value {
   color: white;
 }
 
+.btn-form-del {
+  padding: 7px 12px;
+  width: auto;
+  height: 36px;
+  font-family: "Arimo", sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  color: white;
+  text-decoration: none !important;
+  background: #8c0e0e;
+  border-radius: 4px;
+  box-shadow: 0 0 5px #8c0e0e8c;
+  transition: all 500ms;
+}
+.btn-form-del:hover {
+  background-color: #fd9843;
+  box-shadow: 0 0 5px #feb272;
+  color: white;
+}
+
 .btn-form-reset {
   padding: 7px;
   width: 96px;

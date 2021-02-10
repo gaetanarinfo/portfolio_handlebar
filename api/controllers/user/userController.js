@@ -104,7 +104,7 @@ module.exports = {
                 // et notre callback d'error
             }, (err) => {
                 if (err) {
-                    res.redirect('/admin/articles')
+                    res.redirect('/')
                 } else {
 
                     req.session.lastname = req.body.lastname
@@ -155,4 +155,40 @@ module.exports = {
         }
 
     },
+
+    // Method Get pour recevoir les datas dans le modal et comfirmer la suppression
+    deleteUser: async(req, res) => {
+
+        // Ici on déclare la récupération de notre articleID grace à notre recherche asynchrone filtrer avec notre req.params.id
+        const dbUser = await User.findById(req.params.id),
+            // Ici on déclare le chemin de l'image qui devra etre supprimer
+            pathImg = path.resolve("./public/images/avatar/" + dbUser.name)
+
+        // Ici nous avons une fonction de suppression de notre article filtrer grace à req.params.id (objet dans la DB)
+        User.deleteOne({ _id: req.params.id }, (err) => {
+            // Ici notre callback verifie bien que notre fonction c'est passer sans erreur
+            if (err) {
+                //console.log(err)
+                req.flash('error', 'Une erreur est survenue !')
+                req.session.error = req.flash('error')
+
+                // Et si nous n'avons aucune erreur alors on execute ça
+            } else {
+                // Ici est notre fonction de suppression du fichier (image) avec son callback
+                fs.unlink(pathImg, (err) => {
+                    if (err) {
+                        //console.log(err)
+                        req.flash('error', 'Une erreur est survenue !')
+                        req.session.error = req.flash('error')
+                    } else {
+                        req.flash('success', "Votre compte a été supprimé !")
+                        req.session.success = req.flash('success')
+
+                        res.redirect('/')
+                    }
+                })
+            }
+        })
+
+    }
 }

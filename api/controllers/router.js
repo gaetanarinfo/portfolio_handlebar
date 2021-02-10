@@ -146,6 +146,8 @@ router.route('/user/forgot_password')
     .post(nodemailerController.forgot_password);
 router.route('/user/edit')
     .post(userController.editUser)
+router.route('/user/delete')
+    .get(userController.deleteUser)
 
 // Routes reset password
 router.route('/reset-password/:token')
