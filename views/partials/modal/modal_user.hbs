@@ -58,7 +58,7 @@
                 </div>
             </div>
 
-            <form method="POST" action="/user/edit" enctype="multipart/form-data">
+            <form method="POST" action="/user/edit" enctype="application/x-www-form-urlencoded">
                 <div class="modal-body">
         
                        <div class="form-row text-center">
@@ -81,8 +81,14 @@
         
                             <div class="form-group col-md-5 d-inline-block">
                                 <label class="text-dark mb-2">Avatar</label>
-                                <input type="file" class="form-control mb-2" name="avatar" id="avatar" onchange="updateImageDisplay()" accept=".png, .jpg, .jpeg, .gif">
+                                <input type="file" class="form-control mb-2" name="avatar" id="avatarEdit" onchange="updateAvatarEditDisplay()" accept=".png, .jpg, .jpeg, .gif">
                             </div>
+
+                            <div class="previewEdit">
+                                <p>Aucun fichier sélectionné pour le moment</p>
+                            </div>
+
+
                         </div>   
 
                 <div class="modal-footer">

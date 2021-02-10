@@ -198,6 +198,40 @@ function updateImageDisplay() {
     }
 }
 
+// Function pour la modification de l'user qui permet de voir l'avatar avant de l'envoyer sur le serveur
+var input2 = document.querySelector('#avatarEdit');
+var preview2 = document.querySelector('.previewEdit');
+
+function updateAvatarEditDisplay() {
+    while (preview2.firstChild) {
+        preview2.removeChild(preview2.firstChild);
+    }
+
+    var curFiles2 = input2.files;
+    if (curFiles2.length === 0) {
+        var para2 = document.createElement('p');
+        para2.textContent = 'Aucun fichier actuellement sélectionné pour le téléchargement';
+        preview2.appendChild(para2);
+    } else {
+        for (var i = 0; i < curFiles2.length; i++) {
+            var para2 = document.createElement('p');
+            if (validFileType(curFiles2[i])) {
+                para2.textContent = curFiles2[i].name + ', taille du fichier ' + returnFileSize(curFiles2[i].size) + '.';
+                var image = document.createElement('img');
+                image.setAttribute('style', 'width: 90px;')
+                image.src = window.URL.createObjectURL(curFiles2[i]);
+
+                preview2.appendChild(image);
+                preview2.appendChild(para2);
+
+            } else {
+                para2.textContent = 'Nom du fichier ' + curFiles2[i].name + ": Ce n'est pas un type de fichier valide. Mettez à jour votre avatar.";
+                preview2.appendChild(para2);
+            }
+        }
+    }
+}
+
 var fileTypes = [
     'image/jpeg',
     'image/pjpeg',

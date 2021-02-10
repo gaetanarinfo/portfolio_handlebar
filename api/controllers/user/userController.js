@@ -4,7 +4,8 @@
 const User = require('../../database/models/users'),
     bcrypt = require('bcrypt'),
     extIP = require("ext-ip")(),
-    path = require('path')
+    path = require('path'),
+    fs = require('fs')
 
 /*
  * Controller
@@ -84,18 +85,19 @@ module.exports = {
     editUser: async(req, res) => {
 
         // On declare notre userID (Objet à éditer)
-        const userID = await User.findById(req.params.id),
+        const userID = await User.findById(req.session.userId),
             // Query qui est l'id de notre objet à éditer
-            query = { _id: req.params.id },
+            query = { _id: query },
             // pathImg sera le chemin de notre fichier à supprimer
             pathImg = path.resolve("./public/images/avatar/" + userID.name)
+
+        console.log(userID);
 
         // Condition pour verifier qu'il n'y a pas de fichier dans notre formulaire
         if (!req.file) {
 
-
             // Ici nous éditons le titre de notre Article selectionner grace à query
-            Article.updateOne(query, {
+            User.updateOne(query, {
                 lastname: req.body.lastname,
                 firstname: req.body.firstname,
                 email: req.body.email,
@@ -104,6 +106,11 @@ module.exports = {
                 if (err) {
                     res.redirect('/admin/articles')
                 } else {
+
+                    req.session.lastname = req.body.lastname
+                    req.session.firstname = req.body.firstname
+                    req.session.email = req.body.email
+
                     req.flash('success', "Votre profil à été mis à jour !")
                     req.session.success = req.flash('success')
                     res.redirect('/')
@@ -113,7 +120,7 @@ module.exports = {
             // Sinon (Donc si nous avont un fichier (image) dans notre formulaire)
         } else {
             // Ici nous éditons notre article selectionner grâce à query
-            Article.updateOne(query, {
+            User.updateOne(query, {
                 // on récupère tout notre req.body
                 lastname: req.body.lastname,
                 firstname: req.body.firstname,
