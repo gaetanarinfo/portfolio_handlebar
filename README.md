@@ -2,7 +2,7 @@
 
 ![GitHub Logo](https://gaetan-seigneur.website/images/logo.jpeg)
 
-<h2>Module et technologie utilisé pour la production</h2>
+<h2>Module et technologie utilisé pour la production côté BACK-END</h2>
 
 * Nodejs 
 * Mongoose
@@ -12,7 +12,7 @@
 * Express et Express-Session et Express-Flash
 * Body-Parser
 
-<h2>Module et technologie utilisé pour le développement</h2>
+<h2>Module et technologie utilisé pour le développement côté BACK-END</h2>
 
 * Nodejs 
 * Mongoose
@@ -22,3 +22,14 @@
 * Express et Express-Session et Express-Flash
 * Body-Parser
 * -- Nodemon --
+
+<h2>Modèle de templating et template côté FRONT-END</h2>
+
+* Handlebars
+* Bootstrap
+
+<h2>Ce qui et fait et qui fonctionne côté BACK-END</h2>
+
+* Côté utilisateur
+
+[x]Inscirption
