@@ -75,7 +75,7 @@ module.exports = {
                     lastname: req.body.lastname,
                     email: req.body.email,
                     password: req.body.password,
-                    avatar: `/avatar/${image}`,
+                    avatar: `/images/avatar/${image}`,
                     name: image,
                 }, (err) => {
                     if (err) {
