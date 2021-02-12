@@ -11831,6 +11831,11 @@ img.zoom {
   max-height: 688px;
 }
 
+.card-body > p {
+  overflow: hidden;
+  max-height: 97px;
+}
+
 /* Color Boostrap */
 .bg-purple {
   background-color: #8c68cd;
