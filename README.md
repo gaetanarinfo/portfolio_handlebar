@@ -30,6 +30,14 @@
 
 <h2>Ce qui et fait et qui fonctionne côté BACK-END</h2>
 
-* Côté utilisateur
+* Côté visuel utilisateur
 
-[x]Inscirption
+- [x] **Inscirption sur le portfolio**
+- [x] **Connexion sur le portfolio**
+- [x] **Mot de passe oublié**
+
+* Côté visuel administrateur
+
+- [x] **Inscirption sur le portfolio**
+- [x] **Connexion sur le portfolio**
+- [x] **Mot de passe oublié**
