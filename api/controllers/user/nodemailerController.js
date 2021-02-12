@@ -62,7 +62,7 @@ module.exports = {
     },
 
     // Methode Register users
-    register: (req, res) => {
+    register: async(req, res) => {
 
         const image = req.file.originalname // Déclaration constante image
 
@@ -71,8 +71,6 @@ module.exports = {
 
             User
                 .create({
-                    image: `/images/avatar/${image}`,
-                    name: image,
                     firstname: req.body.firstname,
                     lastname: req.body.lastname,
                     email: req.body.email,
@@ -81,13 +79,11 @@ module.exports = {
                     name: image,
                 }, (err) => {
                     if (err) {
-                        req.flash('error', 'Une erreur est survenue !')
+                        req.flash('error', 'L\'adresse email éxiste déjà ! Ou une erreur est survenue !')
                         req.session.error = req.flash('error')
                         req.session.data1 = req.body.email
                         req.session.data2 = req.body.lastname
                         req.session.data3 = req.body.firstname
-                        req.session.data4 = avatarFile.name
-
                         res.redirect('/') // Rediriger si erreur
                     } else {
                         // Message de success
@@ -138,9 +134,10 @@ module.exports = {
             req.session.data1 = req.body.email
             req.session.data2 = req.body.lastname
             req.session.data3 = req.body.firstname
-            req.session.data4 = avatarFile.name
             res.redirect('/') // Et on redirige sur l'accueil
         }
+
+
 
     },
 
