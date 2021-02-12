@@ -11833,7 +11833,7 @@ img.zoom {
 
 .card-body > p {
   overflow: hidden;
-  max-height: 97px;
+  max-height: 75px;
 }
 
 /* Color Boostrap */
