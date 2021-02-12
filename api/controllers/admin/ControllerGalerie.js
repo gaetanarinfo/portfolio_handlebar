@@ -19,6 +19,11 @@ module.exports = {
 
         req.session.success = undefined
         req.session.error = undefined
+<<<<<<< HEAD
+=======
+
+        const email = req.session.email
+>>>>>>> origin/dev
 
         // Nombre d'item par page
         var perPage = 6

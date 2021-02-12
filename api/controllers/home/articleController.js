@@ -1,8 +1,13 @@
 /*
  * Import Module
  ****************/
+<<<<<<< HEAD
 const Article = require('../../database/models/articles'),
     Comment = require('../../database/models/comments')
+=======
+const Article = require('../../database/models/articles');
+const Comment = require('../../database/models/comments');
+>>>>>>> origin/dev
 
 /*
  * Controller
@@ -18,8 +23,13 @@ module.exports = {
         const success = req.session.success // Message Succes
         const error = req.session.error // Message Error
 
+<<<<<<< HEAD
         req.session.success = undefined // Message Succes
         req.session.error = undefined // Message Error
+=======
+        req.session.success = undefined
+        req.session.error = undefined
+>>>>>>> origin/dev
 
         // On viens definir nos constante
         // Ici query est égale à l'id envoyer via l'URL /article/:id

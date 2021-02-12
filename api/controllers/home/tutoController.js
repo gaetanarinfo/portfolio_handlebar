@@ -2,7 +2,11 @@
  * Import Module
  ****************/
 const Tuto = require('../../database/models/tutos'),
+<<<<<<< HEAD
     paginator = require('./pagination/paginator') // Pour la pagination des pages
+=======
+    pagination = require('pagination') // Pour la pagination des pages
+>>>>>>> origin/dev
 
 /*
  * Controller
@@ -15,8 +19,13 @@ module.exports = {
         const success = req.session.success, // Message en cas de success
             error = req.session.error // Message en cas d'erreur
 
+<<<<<<< HEAD
         req.session.success = undefined // Définie le cookie de message success
         req.session.error = undefined // Définie le cookie de message success
+=======
+        req.session.success = undefined
+        req.session.error = undefined
+>>>>>>> origin/dev
 
         // Nombre d'item par page
         var perPage = 12

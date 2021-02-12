@@ -6,11 +6,19 @@ const pagination = require('pagination') // Pour la pagination des pages
 /*
  * Controller
  *************/
+<<<<<<< HEAD
 module.exports = function(page, perPage, count, prelinks) {
 
     // Function pour la pagination
     const boostrapPaginator = new pagination.TemplatePaginator({
         prelink: prelinks,
+=======
+module.exports = function(perPage, page, count) {
+
+    // Function pour la pagination
+    const boostrapPaginator = new pagination.TemplatePaginator({
+        prelink: '/',
+>>>>>>> origin/dev
         current: page,
         rowsPerPage: perPage,
         totalResult: count,

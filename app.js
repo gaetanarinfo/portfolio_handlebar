@@ -85,8 +85,12 @@ app.engine('hbs', exphbs({
         ifEquals: require('./api/helpers/hbs').ifEquals, // Condition si a est plus grand que b
         trimString: require('./api/helpers/hbs').trimString, // Condition pour réduire le nombre de caractère
         ifLike: require('./api/helpers/hbs').ifLike, // Condition pour les likes
+<<<<<<< HEAD
         trimString2: require('./api/helpers/hbs').trimString2, // Condition pour réduire le nombre de caractère
         trimString3: require('./api/helpers/hbs').trimString3 // Condition pour réduire le nombre de caractère
+=======
+        trimString2: require('./api/helpers/hbs').trimString2 // Condition pour réduire le nombre de caractère
+>>>>>>> origin/dev
     }
 }))
 app.set('view engine', 'hbs')

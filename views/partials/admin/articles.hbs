@@ -6,16 +6,29 @@
 
     <div style="margin: 0 0px 0px 23px;">
         <div class="row">
+<<<<<<< HEAD
             <div class="col-md-8 m-auto">
+=======
+            <div class="col-md-12">
+>>>>>>> origin/dev
                 <table class="table table-hover table-dark text-center">
                     <thead>
                         <tr>
                             <th scope="col">Image</th>
+<<<<<<< HEAD
                             <th scope="col">Titre</th>
                             <th scope="col">Date de création</th>
                             <th scope="col">Commentaire</th>
                             <th scope="col">Article Privé</th>
                             <th scope="col">Gestion</th>
+=======
+                            <th scope="col" style="width: 28%;">Titre</th>
+                            <th scope="col" style="width: 15%;">Date de création</th>
+                            <th scope="col" style="width: 11%;">Commentaire</th>
+                            <th scope="col" style="width: 11%;">Article Privé</th>
+                            <th scope="col" style="width: 29%">Description de l'article</th>
+                            <th scope="col" style="width: 10%;">Gestion</th>
+>>>>>>> origin/dev
                         </tr>
                     </thead>
                     <tbody>
@@ -26,6 +39,10 @@
                             <td class="th-perso">{{generateDate dateCreate}}</td>
                             <td class="th-perso">{{countArray comment }}</td>
                             <td class="th-perso">{{#if isPrivate}}Article privé{{else}}Article public{{/if}}</td>
+<<<<<<< HEAD
+=======
+                            <td class="table-content th-perso">{{trimString content}}</td>
+>>>>>>> origin/dev
                             <td class="th-perso"><a href="" data-toggle="modal"
                                     data-target="#modif_article_{{_id}}"><i class="fas fa-edit ml-2" data-toggle="tooltip"
                                         data-placement="left" title="Editer l'article"></i></a>
@@ -41,7 +58,11 @@
                     </tbody>
                 </table>
 
+<<<<<<< HEAD
                 {{{paginationComment}}}
+=======
+                {{{pagin6}}}
+>>>>>>> origin/dev
             </div>
         </div>
     </div>

@@ -18,6 +18,11 @@ module.exports = {
 
         const success = req.session.success // Message Succes
         const error = req.session.error // Message Error
+<<<<<<< HEAD
+=======
+        req.session.success = undefined
+        req.session.error = undefined
+>>>>>>> origin/dev
 
         req.session.success = undefined // Définie le cookie de message success
         req.session.error = undefined // Définie le cookie de message error

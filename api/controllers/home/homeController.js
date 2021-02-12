@@ -6,7 +6,11 @@ const Projet = require('../../database/models/projets'),
     Article = require('../../database/models/articles'),
     Galerie = require('../../database/models/galeries'),
     Comment = require('../../database/models/comments'),
+<<<<<<< HEAD
     paginator = require('./pagination/paginator')
+=======
+    renderHome = require('./render/renderHome')
+>>>>>>> origin/dev
 
 /*
  * Controller
@@ -21,14 +25,18 @@ module.exports = {
             galeries = await Galerie.find({}).lean(), // Cards Galerie
             commentCount = await Comment.countDocuments(), // Compter le nombre de commantaire
             commentsAll = await Comment.find({}).sort('-dateCreate').lean(), // Affiche les commentaires dansd le footer
+<<<<<<< HEAD
             success = req.session.success, // Message Success
+=======
+            success = req.session.success, // Message Succes
+>>>>>>> origin/dev
             error = req.session.error // Message Error
 
         req.session.success = undefined // Définie le cookie de message success
         req.session.error = undefined // Définie le cookie de message error
 
         // Nombre d'item par page
-        var perPage = 6
+        var perPage = 5
             // La page que l'on veux récupéré si il y a en pas alors page 1
         var page = req.query.page || 1
         var arrayPagesIndexes = []
@@ -78,6 +86,7 @@ module.exports = {
                                             arrayPagesIndexes.push(i + 1)
                                         }
 
+<<<<<<< HEAD
                                         // Si inscription erreur alors on sauvegarde pour retourner les datas dans le formulaire
                                         const data1 = req.session.data1,
                                             data2 = req.session.data2,
@@ -145,6 +154,10 @@ module.exports = {
                                                 title: 'Portfolio de Gaëtan Seigneur',
                                                 content: "Mon portfolio professionnel, retrouvé ici mes compétences, les derniers articles de mon blog, mes tutoriels et tant d autres choses."
                                             })
+=======
+                                        // Module pour le render Home
+                                        renderHome(req, res, success, error, page, count, perPage, projets, arrayPagesIndexes, tutos, articles, galeries, commentsAll, commentCount)
+>>>>>>> origin/dev
 
                                     })
                             })
