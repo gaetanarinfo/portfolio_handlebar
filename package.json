@@ -24,6 +24,7 @@
         "express-handlebars-paginate": "^1.0.3",
         "express-oas-generator": "^1.0.30",
         "express-paginatorjs": "^1.0.1",
+        "express-recaptcha": "^5.0.2",
         "express-session": "^1.17.1",
         "express-validator": "^6.9.2",
         "ext-ip": "^0.3.9",

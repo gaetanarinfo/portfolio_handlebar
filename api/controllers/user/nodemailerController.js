@@ -7,7 +7,9 @@ const User = require('../../database/models/users'),
     handlebars = require('handlebars'),
     templateRecoverPass = require('../../template/templateRecoverPassword')
 
+
 require('dotenv').config() // Package de configuration sécurisé pour le portfolio
+
 
 // Récupere et on parse le fichier html
 const readHTMLFile = function(path, callback) {
