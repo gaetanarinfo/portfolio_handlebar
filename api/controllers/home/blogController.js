@@ -3,11 +3,7 @@
  ****************/
 const Article = require('../../database/models/articles'),
     Comment = require('../../database/models/comments'),
-<<<<<<< HEAD
     paginator = require('./pagination/paginator')
-=======
-    pagination = require('pagination') // Pour la pagination des pages
->>>>>>> origin/dev
 
 /*
  * Controller
@@ -22,13 +18,8 @@ module.exports = {
             commentCount = await Comment.countDocuments(), // Compter le nombre de commantaire
             commentsAll = await Comment.find({}).sort('-dateCreate').lean() // Affiche les commentaires dansd le footer
 
-<<<<<<< HEAD
         req.session.success = undefined // Définie le cookie de message success
         req.session.error = undefined // Définie le cookie de message error
-=======
-        req.session.success = undefined
-        req.session.error = undefined
->>>>>>> origin/dev
 
         // Nombre d'item par page
         var perPage = 12

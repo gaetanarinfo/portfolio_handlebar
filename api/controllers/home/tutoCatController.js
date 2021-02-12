@@ -2,11 +2,7 @@
  * Import Module
  ****************/
 const Tuto = require('../../database/models/tutos'),
-<<<<<<< HEAD
     paginator = require('./pagination/paginator') // Pour la pagination des pages
-=======
-    pagination = require('pagination') // Pour la pagination des pages
->>>>>>> origin/dev
 
 /*
  * Controller
