@@ -32,17 +32,32 @@
 
 <h2>Ce qui et fait et qui fonctionne côté BACK-END</h2>
 
-* Côté Utilisateur
+* Côté Utilisateur Page
 
 - [x] **Inscirption sur le portfolio**
 - [x] **Connexion sur le portfolio**
+- [x] **Ajouter un commentaire**
+- [x] **Liker un projet**
 - [x] **Mot de passe oublié**
 - [x] **Modifier son compte**
 - [x] **Supprimer le compte**
 
-* Côté Administrateur
+* Côté Administrateur Page
 
 - [x] **Liste des membres**
 - [x] **Blog personnel**
 - [x] **Les tutoriels YouTube**
 - [x] **Les tutoriels YouTube**
+- [x] **La galerie d'image**
+- [x] **Les projets**
+- [x] **Les commentaires**
+
+* Côté Administrateur Modal : Ajout, Modification, Supression
+
+- [x] **Liste des membres**
+- [x] **Blog personnel**
+- [x] **Les tutoriels YouTube**
+- [x] **Les tutoriels YouTube**
+- [x] **La galerie d'image**
+- [x] **Les projets**
+- [x] **Les commentaires**
