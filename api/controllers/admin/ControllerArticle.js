@@ -112,6 +112,7 @@ module.exports = {
                 image: `/images/article/${image}`,
                 name: image,
                 title: req.body.title,
+                courtContent: req.body.courtContent,
                 content: req.body.content,
                 author: req.session.lastname + ' ' + req.session.firstname,
                 dateCreate: new Date(),
@@ -154,6 +155,7 @@ module.exports = {
                 // Ici nous éditons le titre de notre Article selectionner grace à query
                 Article.updateOne(query, {
                     title: req.body.title,
+                    courtContent: req.body.courtContent,
                     content: req.body.content,
                     isPrivate: Boolean(req.body.isPrivate),
                     // et notre callback d'error
@@ -182,6 +184,7 @@ module.exports = {
             Article.updateOne(query, {
                 // on récupère tout notre req.body
                 title: req.body.title,
+                courtContent: req.body.courtContent,
                 content: req.body.content,
                 isPrivate: Boolean(req.body.isPrivate),
                 // ici on viens stocker le chemin de l'image dans la DB
