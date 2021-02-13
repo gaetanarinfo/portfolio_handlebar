@@ -51,6 +51,7 @@ router.route('/')
 router.route('/mail')
     .post(nodemailerController.contact)
 
+// Protection contre les robots google
 router.route('/recaptcha')
     .post(nodemailerController.captcha)
 
