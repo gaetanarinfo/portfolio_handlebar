@@ -45,7 +45,7 @@ const app = express()
 
 //import Recaptcha from 'express-recaptcha'
 const Recaptcha = require('express-recaptcha').RecaptchaV3,
-    recaptcha = new Recaptcha('6LcCC1UaAAAAAKYiMBx_B6lnS4RmR0vkVcQWtTlr', process.env.KEY_RECAPTCHA)
+    recaptcha = new Recaptcha(process.env.KEY_PUBLIC_RECAPTCHA, process.env.KEY_RECAPTCHA)
 
 app.get('/', recaptcha.middleware.render, function(req, res) {
     res.render('login', { captcha: res.recaptcha });

@@ -48,7 +48,6 @@
         <div class="col-md-12">
             <div class="mt-4">
                 <form class="text-center" method="POST" action="/mail">
-                    <div class="g-recaptcha" data-sitekey="6LcCC1UaAAAAAKYiMBx_B6lnS4RmR0vkVcQWtTlr"></div>
                     <div class="form-row">
                         <div class="form-group col-md-3 d-inline-block ml-3">
                             <label for="email" class="mb-3">Votre adresse email</label>
@@ -75,6 +74,10 @@
                             <label for="inputMessage" class="mb-3">Votre message</label>
                             <textarea name="content" class="form-control" rows="12"
                                 placeholder="Ici commence le message"></textarea>
+                        </div>
+
+                        <div class="form-group col-md-8 m-auto mt-4">
+                            <div class="g-recaptcha" align="center" data-sitekey="6LcCC1UaAAAAAKYiMBx_B6lnS4RmR0vkVcQWtTlr"></div>
                         </div>
                     </div>
 
@@ -272,3 +275,8 @@
 </script>
 
 <script src="/js/preloader.js"></script>
+
+<!-- RECAPTCHA V2 -->
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+    async defer>
+</script>
