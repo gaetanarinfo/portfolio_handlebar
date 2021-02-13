@@ -43,16 +43,8 @@ const homeController = require('./home/homeController'), // Controller home
 // Module express pour faire fonctionné l'aplication
 const app = express()
 
-//import Recaptcha from 'express-recaptcha'
-const Recaptcha = require('express-recaptcha').RecaptchaV3,
-    recaptcha = new Recaptcha(process.env.KEY_PUBLIC_RECAPTCHA, process.env.KEY_RECAPTCHA)
-
-app.get('/', recaptcha.middleware.render, function(req, res) {
-    res.render('login', { captcha: res.recaptcha });
-});
-
 // Routes Home
-router.route('/', recaptcha.middleware.render, function(req, res) { captcha: res.recaptcha })
+router.route('/')
     .get(homeController.get)
 
 // Routes mail section contact ---> Home 
