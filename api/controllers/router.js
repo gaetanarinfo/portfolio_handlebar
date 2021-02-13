@@ -51,6 +51,9 @@ router.route('/')
 router.route('/mail')
     .post(nodemailerController.contact)
 
+router.route('/recaptcha')
+    .post(nodemailerController.captcha)
+
 // Routes page Blog
 router.route('/blog')
     .get(blogController.get)

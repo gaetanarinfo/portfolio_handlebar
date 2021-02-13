@@ -41,6 +41,14 @@ transporter = nodemailer.createTransport({
  *************/
 module.exports = {
 
+    captcha: (req, res) => {
+
+        req.flash('error', 'Merci de valider le captcha !')
+        req.session.error = req.flash('error')
+        res.redirect('/')
+
+    },
+
     // Action test boite mail > nodemailer
     contact: (req, res) => {
         //console.log(req.body)

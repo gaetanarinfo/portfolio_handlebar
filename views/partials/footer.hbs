@@ -47,7 +47,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="mt-4">
-                <form id="message" class="text-center" method="POST" action="/mail">
+                <form id="message_submit" class="text-center" method="POST" action="/recaptcha">
                     <div class="form-row">
                         <div class="form-group col-md-3 d-inline-block ml-3">
                             <label for="email" class="mb-3">Votre adresse email</label>
@@ -60,7 +60,7 @@
                         <div class="form-group col-md-3 d-inline-block mt-3">
                             <label for="sujet" class="mb-3">Votre sujet</label>
                             <select name="sujet" required class="form-control">
-                                <option selected="">Choissisez un sujet...</option>
+                                <option selected="" disabled>Choissisez un sujet...</option>
                                 <option disabled>---------</option>
                                 <option value="Bug sur le site">Bug sur le site</option>
                                 <option disabled>---------</option>
@@ -76,13 +76,18 @@
                                 placeholder="Ici commence le message"></textarea>
                         </div>
 
+                        <div class="form-check mt-4 col-md-3 m-auto">
+                            <label class="form-check-label">Confirmer l'envoi du message</label>
+                            <input class="form-check-input" onchange="onReCaptchaValid()" type="checkbox" value="" style="margin: 4px -16px 0px 0px;">                   
+                        </div>
+
                         <div class="form-group col-md-8 m-auto mt-4">
                             <div class="g-recaptcha" align="center" data-sitekey="6LcCC1UaAAAAAKYiMBx_B6lnS4RmR0vkVcQWtTlr"></div>
                         </div>
                     </div>
 
                     <div class="mt-4">
-                        <button type="submit" data-sitekey="6LcCC1UaAAAAAKYiMBx_B6lnS4RmR0vkVcQWtTlr" data-callback='onReCaptchaValid' class="btn btn-form-send ml-5">Envoyer le message</button> <button
+                        <button id="button_submit" style="display: none;" type="submit" onchange="onReCaptchaValid()" data-sitekey="6LcCC1UaAAAAAKYiMBx_B6lnS4RmR0vkVcQWtTlr" data-callback='onReCaptchaValid' class="btn btn-form-send ml-5">Envoyer le message</button> <button
                             type="reset" class="btn btn-form-reset">Effacer</button>
                     </div>
                 </form>
@@ -279,10 +284,9 @@
 <!-- RECAPTCHA V2 -->
 <script type="text/javascript">
   function onReCaptchaValid(token) {
-    document.getElementById('message').submit();
-  }
-</script>
+    document.getElementById('button_submit').style.display = 'inline-block';
+    document.getElementById('message_submit').setAttribute('action', '/mail');
 
-<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
-    async defer>
+    return false;
+  }
 </script>
