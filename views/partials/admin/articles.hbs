@@ -1,3 +1,4 @@
+<!-- Affichage de la section article qui et masqué pour une raison d'affichage de card sur mobile  -->
 <div style="display: none;" id="blog">
 
     <div>
@@ -6,19 +7,22 @@
 
     <div style="margin: 0 0px 0px 23px;">
         <div class="row">
-            <div class="col-md-8 m-auto">
+            <div class="col-md-12">
                 <table class="table table-hover table-dark text-center">
                     <thead>
                         <tr>
                             <th scope="col">Image</th>
-                            <th scope="col">Titre</th>
-                            <th scope="col">Date de création</th>
-                            <th scope="col">Commentaire</th>
-                            <th scope="col">Article Privé</th>
-                            <th scope="col">Gestion</th>
+                            <th scope="col" style="width: 28%;">Titre</th>
+                            <th scope="col" style="width: 15%;">Date de création</th>
+                            <th scope="col" style="width: 11%;">Commentaire</th>
+                            <th scope="col" style="width: 11%;">Article Privé</th>
+                            <th scope="col" style="width: 29%">Description de l'article</th>
+                            <th scope="col" style="width: 10%;">Gestion</th>
                         </tr>
                     </thead>
                     <tbody>
+
+                        <!-- Boucle pour afficher les articles  -->
                         {{#each articles}}
                         <tr>
                             <th class="th-perso"><img width="97px;" src="{{image}}"></th>
@@ -26,22 +30,26 @@
                             <td class="th-perso">{{generateDate dateCreate}}</td>
                             <td class="th-perso">{{countArray comment }}</td>
                             <td class="th-perso">{{#if isPrivate}}Article privé{{else}}Article public{{/if}}</td>
-                            <td class="th-perso"><a href="" data-toggle="modal"
-                                    data-target="#modif_article_{{_id}}"><i class="fas fa-edit ml-2" data-toggle="tooltip"
-                                        data-placement="left" title="Editer l'article"></i></a>
+                            <td class="table-content th-perso">{{trimString content}}</td>
+                            <td class="th-perso"><a href="" data-toggle="modal" data-target="#modif_article_{{_id}}"><i
+                                        class="fas fa-edit ml-2" data-toggle="tooltip" data-placement="left"
+                                        title="Editer l'article"></i></a>
                                 <a href="" id="deleteArticle-{{_id}}" data-toggle="modal" data-target="#deleteModal"><i
                                         class="fas fa-trash" data-toggle="tooltip" data-placement="left"
                                         title="Supprimer l'article"></i></a>
                             </td>
                         </tr>
 
+                        <!-- Affichage du modal correspondant pour l'édition -->
                         {{> admin/modal/modal_edit_article article=this }}
 
                         {{/each}}
                     </tbody>
                 </table>
 
-                {{{paginationComment}}}
+                <!-- Pagination -->
+                {{{paginationArticle}}}
+                
             </div>
         </div>
     </div>

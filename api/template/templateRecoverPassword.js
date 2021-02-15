@@ -391,6 +391,7 @@ module.exports = function(user) {
                                     </tr>
                                 </tbody>
                             </table>
+                            
                             <table cellpadding="0" cellspacing="0" class="es-footer" align="center"
                                 style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%;background-color:transparent;background-repeat:repeat;background-position:center top">
                                 <tbody>

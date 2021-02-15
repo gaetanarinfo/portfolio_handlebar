@@ -5,7 +5,8 @@ const User = require('../../database/models/users'),
     nodemailer = require('nodemailer'),
     fs = require('fs'),
     handlebars = require('handlebars'),
-    templateRecoverPass = require('../../template/templateRecoverPassword')
+    templateRecoverPass = require('../../template/templateRecoverPassword'),
+    templateNewUser = require('../../template/templateNewUser')
 
 
 require('dotenv').config() // Package de configuration sécurisé pour le portfolio
@@ -51,7 +52,7 @@ module.exports = {
 
     // Action test boite mail > nodemailer
     contact: (req, res) => {
-        //console.log(req.body)
+
         // On configure notre mail à envoyer par nodemailer
         const mailOptions = {
             from: req.body.name + '" " <gaetanarinfo@gmail.com>',
@@ -100,40 +101,21 @@ module.exports = {
                         req.flash('success', 'Merci de votre inscription !')
                         req.session.success = req.flash('success')
 
-                        // On lie le fichier email
-                        readHTMLFile('email.html', function(err, html) {
+                        const user = req.body.email
 
-                            // Methode asyncrone function main
-                            async function main() {
+                        // On déclare une constante (Template de l'email)
+                        templateNewUser(user)
+                        const mailOptions = templateNewUser(user)
 
-                                var template = handlebars.compile(html) // On compile la template email
-
-                                // On crée une constante transporter
-                                let transporter = nodemailer.createTransport({
-                                    host: "smtp.gmail.com",
-                                    port: 587,
-                                    secure: false,
-                                    auth: {
-                                        user: process.env.USER_MAILER, // Config Env users
-                                        pass: process.env.PASSWORD_MAILER, // Config Env password
-                                    },
-                                })
-
-                                // Envoyer du courrier avec l'objet de transport défini (Soit req.body)
-                                let info = await transporter.sendMail({
-                                    from: '"Seigneur Gaëtan Portfolio - " <gaetanarinfo@gmail.com>',
-                                    to: req.body.email,
-                                    subject: "Inscription sur mon Portfolio",
-                                    html: html,
-                                })
-
+                        // On demande à notre transporter d'envoyer notre mail
+                        transporter.sendMail(mailOptions, (err, info) => {
+                            if (err) console.log(err)
+                            else {
+                                req.flash('success', 'Un e-mail vient de vous être envoyé sur ' + user + ' !')
+                                req.session.success = req.flash('success')
+                                res.redirect('/')
                             }
-
-                            main().catch() // On vérifie si il n'y à pas d'erreur
-
                         })
-
-                        res.redirect('/') // On redirige vers l'accueil
                     }
                 })
 

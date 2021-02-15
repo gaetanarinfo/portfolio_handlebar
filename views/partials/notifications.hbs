@@ -1,8 +1,9 @@
+<!-- Module SweetAlert avec le CDN -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 <script>
 
-// Toast Success
+// Toast Message de success
 {{#if success}}
 
 const Toast = Swal.mixin({
@@ -24,7 +25,7 @@ title: '{{success}}'
 
 {{/if}}
 
-// Toast Error
+// Toast Message d'erreur
 {{#if error}}
 
 const Toast = Swal.mixin({

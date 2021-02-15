@@ -52,7 +52,7 @@ module.exports = {
 
                         // Function de pagination de page
                         const prelinks = "/admin/articles/",
-                            paginationComment = paginator(page, perPage, count, prelinks) // Function paginator
+                            paginationArticle = paginator(page, perPage, count, prelinks) // Function paginator
 
                         if (success || error) {
                             res.render('admin', {
@@ -68,7 +68,7 @@ module.exports = {
                                 previous: parseInt(page) - 1,
                                 // Pages + 1
                                 next: parseInt(page) + 1,
-                                paginationComment,
+                                paginationArticle,
                                 success: success,
                                 error: error,
                                 title: 'Administration de mon blog',
@@ -89,7 +89,7 @@ module.exports = {
                                 previous: parseInt(page) - 1,
                                 // Pages + 1
                                 next: parseInt(page) + 1,
-                                paginationComment,
+                                paginationArticle,
                                 error: error,
                                 title: 'Administration de mon blog',
                                 content: "Partie administration de mon portfolio",

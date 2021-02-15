@@ -17,6 +17,8 @@
                         aria-haspopup="true" aria-expanded="false">
                         Trier par catégorie
                     </button>
+
+                    <!-- Liste JQUERY Trie par Catégorie -->
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="" id="phpCat">PHP</a>
                         <div class="dropdown-divider"></div>
@@ -34,9 +36,12 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="" id="mysqlCat">MYSQL</a>
                     </div>
+
                 </div>
 
                 <div class="row" id="allCat">
+
+                    <!-- Boucle pour afficher les tutoriels youtube sous forme de card -->
                     {{#each (limit tutos 12)}}
                     <div class="col-md-4 mt-2" style="{{#if isPrivate }}display: none;{{else}}{{/if}}">
                         <div class="card">
@@ -56,17 +61,21 @@
                     </div>
                     {{/each}}
 
+                    <!-- Pagination -->
                     {{{pagination}}}
                 </div>
 
+                <!-- Permet d'afficher les résultats une foit le trie fait avec la liste JQUERY -->
                 <div class="row" id="resuCat" style="display: none;">{{tutosCat}}</div>
             </div>
         </div>
     </div>
 </section>
 
+<!-- Modal utilisateur INSCRIPTION, CONNEXION, MOT DE PASSE PERDU -->
 {{> modal/modal}}
 
+<!-- Modal qui permet de modifier les informations de l'utilisateur à tout moment -->
 {{#if users}}
-    {{> modal/modal_user}}
+{{> modal/modal_user}}
 {{/if}}
