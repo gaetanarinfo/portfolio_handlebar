@@ -11,6 +11,9 @@ const express = require('express'), // Package express
 const swaggerUi = require('swagger-ui-express'),
     swaggerDocument = require('../config/swagger.json')
 
+// Module express pour faire fonctionné l'aplication
+const app = express()
+
 // Import Controller
 const homeController = require('./home/homeController'), // Controller home
     blogController = require('./home/blogController'), // Controller Blog
@@ -39,9 +42,6 @@ const homeController = require('./home/homeController'), // Controller home
     tutoController = require('./home/tutoController'),
     tutoCatController = require('./home/tutoCatController')
     //
-
-// Module express pour faire fonctionné l'aplication
-const app = express()
 
 // Routes Home
 router.route('/')
@@ -176,7 +176,7 @@ router.route('/tutorielCat/:category')
     .get(tutoCatController.getCat)
 
 // Route Swagger
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+router.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 /*
  * Export Module
