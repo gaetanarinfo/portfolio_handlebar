@@ -57,7 +57,7 @@ module.exports = {
                         if (success || error) {
                             res.render('admin', {
                                 // Page sur la quel on est : Number
-                                current: page,
+                                current: Number(page),
                                 // Nombre de pages : Number
                                 pages: Math.ceil(count / perPage),
                                 // tableau avec les index des page: []
