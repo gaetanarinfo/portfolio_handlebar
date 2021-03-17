@@ -7,7 +7,8 @@ const livereload = require('livereload'),
 const express = require('express'), // Package express
     exphbs = require('express-handlebars'), // Package handlebar Moustache pour les fichiers .hbs
     bodyParser = require('body-parser'), // Package permettant de parser les urls avec id
-    expressSession = require('express-session') // Package permettant de crée des session avec express
+    expressSession = require('express-session'), // Package permettant de crée des session avec express
+    methodOverride = require('method-override') // Package permettant de faire un Put et un Delete
 
 // Package de BDD gerer avec mongodb et atlas cloud et gestion des sessions
 const MongoStore = require('connect-mongo'),
@@ -47,6 +48,9 @@ app.use(expressSession({
         mongooseConnection: mongoose.connection
     })
 }))
+
+// Method Override
+app.use(methodOverride('_method'))
 
 // Permet d'afficher les messages d'erreur et de succès
 app.use(flash());
@@ -122,3 +126,5 @@ reload.watch(__dirname + "/public")
 app.listen(port, '', function() {
     console.log(`Ecoute le port ${port}, lancé le : ${new Date().toLocaleString()}`)
 })
+
+module.exports = app
