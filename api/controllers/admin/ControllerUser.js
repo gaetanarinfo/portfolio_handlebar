@@ -146,8 +146,6 @@ module.exports = {
     // Method Post pour envoyer les datas users pour édition
     editUser: async(req, res) => {
 
-        console.log(req.body);
-
         // On declare notre userID (Objet à éditer)
         const userID = await User.findById(req.params.id),
             // Query qui est l'id de notre objet à éditer
@@ -162,6 +160,7 @@ module.exports = {
                 lastname: req.body.lastname,
                 firstname: req.body.firstname,
                 email: req.body.email,
+                isAdmin: Boolean(req.body.isAdmin),
                 isBanned: Boolean(req.body.isBanned)
                     // et notre callback d'error
             }, (err) => {
@@ -185,6 +184,7 @@ module.exports = {
                 firstname: req.body.firstname,
                 email: req.body.email,
                 isBanned: Boolean(req.body.isBanned),
+                isAdmin: Boolean(req.body.isAdmin),
                 // ici on viens stocker le chemin de l'image dans la DB
                 avatar: `./public/images/avatar/${req.file.originalname}`,
                 // Ici on stock le nom de l'image dans notre DB

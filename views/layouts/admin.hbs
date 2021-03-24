@@ -90,18 +90,78 @@
 
             });
 
-            // Function pour la checkbox qui renvoie si c'est privé ou public
-            $(document).ready(function() {
-                $('input[id="isBanned_{{_id}}"]').click(function() {
-                    if ($(this).is(":checked")) {
-                        $('#lab_ban_{{_id}}').html('Privé')
-                        $('#isBanned_{{_id}}"]').attr('checked', true);
-                    } else if ($(this).is(":not(:checked)")) {
-                        $('#lab_ban_{{_id}}').html('En ligne')
-                        $('#isBanned_{{_id}}"]').attr('checked', false);
-                    }
+            {{#if this.isAdmin}}
+
+                $('#lab_ban_1_{{_id}}').html('Administrateur')
+                $('#isAdmin_1_{{_id}}').attr('checked', true);
+
+                // Function pour la checkbox qui renvoie si c'est privé ou public
+                $(document).ready(function() {
+                    $('#isAdmin_1_{{_id}}').click(function() {
+                        if ($(this).is(":checked")) {
+                            $('#lab_ban_1_{{_id}}').html('Administrateur')
+                            $('#isAdmin_1_{{_id}}').attr('checked', true);
+                        } else if ($(this).is(":not(:checked)")) {
+                            $('#lab_ban_1_{{_id}}').html('Membre')
+                            $('#isAdmin_1_{{_id}}').attr('checked', false);
+                        }
+                    });
                 });
-            });
+
+            {{else}}
+
+                $('#lab_ban_1_{{_id}}').html('Membre')
+                $('#isAdmin_1_{{_id}}').attr('checked', true);
+
+                // Function pour la checkbox qui renvoie si c'est privé ou public
+                $(document).ready(function() {
+                    $('#isAdmin_1_{{_id}}').click(function() {
+                        if ($(this).is(":checked")) {
+                            $('#lab_ban_1_{{_id}}').html('Membre')
+                            $('#isAdmin_1_{{_id}}').attr('checked', true);
+                        } else if ($(this).is(":not(:checked)")) {
+                            $('#lab_ban_1_{{_id}}').html('Administrateur')
+                            $('#isAdmin_1_{{_id}}').attr('checked', false);
+                        }
+                    });
+                });
+
+            {{/if}}
+
+            {{#if this.isBanned}}
+
+                $('#lab_ban_{{_id}}').html('Bannis')
+                $('#isBanned_{{_id}}').attr('checked', true);
+
+                // Function pour la checkbox qui renvoie si c'est privé ou public
+                $(document).ready(function() {
+                    $('#isBanned_{{_id}}').click(function() {
+                        if ($(this).is(":checked")) {
+                            $('#lab_ban_{{_id}}').html('Bannis')
+                            $('#isBanned_{{_id}}').attr('checked', true);
+                        } else if ($(this).is(":not(:checked)")) {
+                            $('#lab_ban_{{_id}}').html('En ligne')
+                            $('#isBanned_{{_id}}').attr('checked', false);
+                        }
+                    });
+                });
+
+            {{else}}
+
+                // Function pour la checkbox qui renvoie si c'est privé ou public
+                $(document).ready(function() {
+                    $('#isBanned_{{_id}}').click(function() {
+                        if ($(this).is(":checked")) {
+                            $('#lab_ban_{{_id}}').html('Bannis')
+                            $('#isBanned_{{_id}}').attr('checked', true);
+                        } else if ($(this).is(":not(:checked)")) {
+                            $('#lab_ban_{{_id}}').html('En ligne')
+                            $('#isBanned_{{_id}}').attr('checked', false);
+                        }
+                    });
+                });
+
+            {{/if}}
 
     {{/each}}
 
