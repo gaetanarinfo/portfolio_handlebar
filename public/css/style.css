@@ -10812,8 +10812,8 @@ progress::-webkit-progress-value {
   transition: all 500ms;
 }
 .btn-form-del:hover {
-  background-color: #fd9843;
-  box-shadow: 0 0 5px #feb272;
+  background-color: #b11515;
+  box-shadow: 0 0 5px #c40c0c8c;
   color: white;
 }
 

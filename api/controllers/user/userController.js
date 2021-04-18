@@ -20,16 +20,16 @@ module.exports = {
         // On recherche l'utilisateur
         User.findOne({ email }, (error, user) => {
 
-            if (user.isBanned) {
+            if (user) {
 
-                // Message en cas d'erreur
-                req.flash('error', "Votre compte à été bannis !")
-                req.session.error = req.flash('error')
-                res.redirect('/')
+                if (user.isBanned) {
 
-            } else {
+                    // Message en cas d'erreur
+                    req.flash('error', "Votre compte à été bannis !")
+                    req.session.error = req.flash('error')
+                    res.redirect('/')
 
-                if (user) {
+                } else {
 
                     // On décrypte le mot de passe et on le compare avec l'utilisateur
                     bcrypt.compare(password, user.password, (error, same) => {
@@ -75,15 +75,16 @@ module.exports = {
                         }
                     })
 
-                } else {
-
-                    // Message en cas d'erreur
-                    req.flash('error', "Erreur l'email ou le mot de passe n'est pas correct !")
-                    req.session.error = req.flash('error')
-                    res.redirect('/')
                 }
 
+            } else {
+
+                // Message en cas d'erreur
+                req.flash('error', "Erreur l'email ou le mot de passe n'est pas correct !")
+                req.session.error = req.flash('error')
+                res.redirect('/')
             }
+
 
         })
     },
@@ -173,12 +174,12 @@ module.exports = {
     deleteUser: async(req, res) => {
 
         // Ici on déclare la récupération de notre articleID grace à notre recherche asynchrone filtrer avec notre req.params.id
-        const dbUser = await User.findById(req.params.id),
+        const dbUser = await User.findById(req.session.userId),
             // Ici on déclare le chemin de l'image qui devra etre supprimer
             pathImg = path.resolve("./public/images/avatar/" + dbUser.name)
 
         // Ici nous avons une fonction de suppression de notre article filtrer grace à req.params.id (objet dans la DB)
-        User.deleteOne({ _id: req.params.id }, (err) => {
+        User.deleteOne({ _id: req.session.userId }, (err) => {
             // Ici notre callback verifie bien que notre fonction c'est passer sans erreur
             if (err) {
                 //console.log(err)
@@ -197,7 +198,7 @@ module.exports = {
                         req.flash('success', "Votre compte a été supprimé !")
                         req.session.success = req.flash('success')
 
-                        res.redirect('/')
+                        res.redirect('/logout')
                     }
                 })
             }
