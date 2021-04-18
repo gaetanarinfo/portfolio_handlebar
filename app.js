@@ -1,9 +1,5 @@
 // Déclaration des packages npm ---->
 
-// Package nodemon pour le relancement des fichiers views et js avec npm start
-const livereload = require('livereload'),
-    reload = livereload.createServer()
-
 const express = require('express'), // Package express
     exphbs = require('express-handlebars'), // Package handlebar Moustache pour les fichiers .hbs
     bodyParser = require('body-parser'), // Package permettant de parser les urls avec id
@@ -26,9 +22,6 @@ require('dotenv').config()
 
 // Module pour le lancement de la BDD
 require('./api/database/db')
-
-// Module LiveReload pour recharger le fichier App.js
-reload.watch(__dirname + "/app.js")
 
 // Module express pour faire fonctionné l'aplication
 const app = express()
@@ -118,9 +111,6 @@ app.use(helmet.permittedCrossDomainPolicies());
 app.use(helmet.referrerPolicy());
 app.use(helmet.xssFilter());
 app.disable('x-powered-by');
-
-// Permet de reload le dossier public des ressources
-reload.watch(__dirname + "/public")
 
 // Lancement de l'application avec le port et la date de lancement
 app.listen(port, '', function() {

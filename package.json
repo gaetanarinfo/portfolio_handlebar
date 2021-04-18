@@ -4,9 +4,7 @@
     "description": "Site internet sur mon portolio",
     "main": "app.js",
     "scripts": {
-        "tu": "nodemon --exec 'mocha ./tests/*.js'",
-        "test": "nodemon app.js --- \"Démarrage de l'application\"",
-        "start": "nodemon app.js --- \"Démarrage de l'application\""
+
     },
     "author": "Seigneur Gaëtan",
     "license": "ISC",
