@@ -4,7 +4,7 @@
 module.exports = function(user) {
     const mailOptions = {
         to: `${user}`,
-        from: 'Seigneur Gaëtan Portfolio - <gaetanarinfo@gmail.com>',
+        from: 'Seigneur Gaëtan Portfolio - <no-reply@gaetan.store>',
         subject: 'Inscription sur mon Portfolio',
         html: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
         <html style="width:100%;font-family:arial, 'helvetica neue', helvetica, sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;padding:0;Margin:0">

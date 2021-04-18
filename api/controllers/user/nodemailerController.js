@@ -27,9 +27,9 @@ const readHTMLFile = function(path, callback) {
 // Déclaration de notre transporter
 // C'est en quelque sorte notre connexion à notre boite mail
 transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 587,
-    secure: false,
+    host: "smtp-fr.securemail.pro",
+    port: 465,
+    secure: true,
     auth: {
         user: process.env.USER_MAILER, // Env utilisateur
         pass: process.env.PASSWORD_MAILER, // Env password
@@ -55,7 +55,7 @@ module.exports = {
 
         // On configure notre mail à envoyer par nodemailer
         const mailOptions = {
-            from: req.body.name + '" " <gaetanarinfo@gmail.com>',
+            from: req.body.name + '" " <no-reply@gaetan.store>',
             to: req.body.email,
             subject: req.body.sujet,
             html: req.body.content

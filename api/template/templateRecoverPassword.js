@@ -6,7 +6,7 @@ module.exports = function(user) {
     // Model de template email mot de passe oublié
     const mailOptions = {
         to: `${user.email}`,
-        from: 'Seigneur Gaëtan <gaetanarinfo@gmail.com>',
+        from: 'Seigneur Gaëtan <no-reply@gaetan.store>',
         subject: 'Portfolio Mot de passe oublié',
         html: `<html
         style="width:100%;font-family:arial, 'helvetica neue', helvetica, sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;padding:0;Margin:0">
