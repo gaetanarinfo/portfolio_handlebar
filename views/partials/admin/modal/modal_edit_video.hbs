@@ -10,6 +10,25 @@
              </div>
              <form method="POST" action="/admin/editVideo/{{video._id}}">
                  <div class="modal-body">
+
+                     <div class="form-group">
+                         <label class="text-dark mb-2">Catégorie de la vidéo</label>
+                         <select class="form-control mb-2" name="category">
+                             <option disabled selected>{{video.category}}</option>
+                             <option disabled>----------</option>
+                             <option value="PHP">PHP</option>
+                             <option value="HTML">HTML</option>
+                             <option value="CSS">CSS</option>
+                             <option value="SASS">SASS</option>
+                             <option value="JS">JS</option>
+                             <option value="NODEJS">NODEJS</option>
+                             <option value="MONGODB">MONGODB</option>
+                             <option value="MYSQL">MYSQL</option>
+                             <option value="VUEJS">VUEJS</option>
+                             <option value="SYMFONY">SYMFONY</option>
+                         </select>
+                     </div>
+
                     <div class="form-group">
                          <label class="text-dark mb-2">Lien de la vidéo</label>
                          <input type="text" class="form-control mb-2" name="links"
