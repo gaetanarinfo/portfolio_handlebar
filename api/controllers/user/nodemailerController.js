@@ -6,7 +6,8 @@ const User = require('../../database/models/users'),
     fs = require('fs'),
     handlebars = require('handlebars'),
     templateRecoverPass = require('../../template/templateRecoverPassword'),
-    templateNewUser = require('../../template/templateNewUser')
+    templateNewUser = require('../../template/templateNewUser'),
+    templateContact = require('../../template/templateContact')
 
 
 require('dotenv').config() // Package de configuration sécurisé pour le portfolio
@@ -53,19 +54,23 @@ module.exports = {
     // Action test boite mail > nodemailer
     contact: (req, res) => {
 
-        // On configure notre mail à envoyer par nodemailer
-        const mailOptions = {
-            from: req.body.name + '" " <no-reply@gaetan.store>',
-            to: req.body.email,
-            subject: req.body.sujet,
-            html: req.body.content
+        const mail = {
+            'email': req.body.email,
+            'sujet': req.body.sujet,
+            'content': req.body.content
         }
+
+        // On déclare une constante (Template de l'email)
+        templateContact(mail)
+
+        // On configure notre mail à envoyer par nodemailer
+        const mailOptions = templateContact(mail)
 
         // On demande à notre transporter d'envoyer notre mail
         transporter.sendMail(mailOptions, (err, info) => {
             if (err) console.log(err)
             else {
-                req.flash('success', 'Votre message a bien été envoyer sur ' + req.body.email + ' !')
+                req.flash('success', 'Votre message a bien été envoyer')
                 req.session.success = req.flash('success')
                 res.redirect('/')
             }
