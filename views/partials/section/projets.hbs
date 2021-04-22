@@ -20,7 +20,7 @@
                         <!-- Boucle pour afficher les projets -->
                         {{#each (limit projets 6)}}
                         <div class="col-md-4 mt-3" style="{{#if isPrivate }}display: none;{{else}}{{/if}}">
-                            <div class="card">
+                            <div class="card" style="min-height: 523px;">
                                 <img class="card-img-top" src="{{image}}" alt="{{title}}">
                                 <div class="card-body">
                                     <h5 class="card-title">{{title}}</h5>
@@ -55,7 +55,7 @@
                         <!-- Boucle pour afficher les projets -->
                         {{#each (limit projets 6)}}
                         <div class="col-md-4 mt-3" style="{{#if isPrivate }}display: none;{{else}}{{/if}}">
-                            <div class="card">
+                            <div class="card" style="min-height: 523px;">
                                 <img class="card-img-top" src="{{image}}" alt="{{title}}">
                                 <div class="card-body">
                                     <h5 class="card-title">{{title}}</h5>
