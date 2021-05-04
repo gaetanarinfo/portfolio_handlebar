@@ -2,6 +2,7 @@ body {
   background-image: url("../admin/images/M1ba416c54e556d3bbfdfe12af78e2af11606749178037.jpeg");
   background-repeat: no-repeat;
   background-size: cover;
+  background-attachment: fixed;
 }
 
 .separateur {

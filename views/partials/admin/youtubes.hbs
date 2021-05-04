@@ -1,3 +1,4 @@
+<!-- Affichage de la section projet qui est masqué car c'est la première section de la page admin  -->
 <div id="youtube" style="display: none;">
   <div>
     <p class="text-center">
@@ -32,37 +33,45 @@
           </thead>
           <tbody>
 
+            <!-- Boucle pour afficher les projets  -->
             {{#each tutos}}
+
             <tr>
               <td class="th-perso">
                 {{title}}
               </td>
-               <td class="th-perso">
+              <td class="th-perso">
                 {{date}}
               </td>
               <td class="th-perso">
-                {{#if isPrivate}}Article privé{{else}}Article public{{/if}}
+                {{#if isPrivate}}Tutoriel privé{{else}}Tutoriel public{{/if}}
               </td>
               <td class="th-perso">
-                <iframe width="374" height="206" src="https://www.youtube.com/embed/{{api}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe width="374" height="206" src="https://www.youtube.com/embed/{{api}}" frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
               </td>
               <td class="table-content th-perso">
-               {{trimString content}}
+                <!-- On réduit la taille du texte avec la fonction trimString -->
+                {{trimString content}}
               </td>
               <td class="th-perso">
-                  <a href="" data-toggle="modal" data-target="#modif_video_{{_id}}"><i
-                        class="fas fa-edit ml-2" data-toggle="tooltip" data-placement="left"
-                        title="Editer la vidéo"></i></a>
-                <a href="" id="deleteYoutube-{{_id}}" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash"
-                        data-toggle="tooltip" data-placement="left" title="Supprimer la vidéo"></i></a>
-            </td>
+                <a href="" data-toggle="modal" data-target="#modif_video_{{_id}}"><i class="fas fa-edit ml-2"
+                    data-toggle="tooltip" data-placement="left" title="Editer la vidéo"></i></a>
+                <a href="" id="deleteYoutube-{{_id}}" data-toggle="modal" data-target="#deleteModal"><i
+                    class="fas fa-trash" data-toggle="tooltip" data-placement="left" title="Supprimer la vidéo"></i></a>
+              </td>
             </tr>
 
+            <!-- Boucle pour afficher les projets  -->
             {{> admin/modal/modal_edit_video video=this }}
+
             {{/each}}
+
           </tbody>
         </table>
 
+        <!-- Pagination -->
         {{{paginationYoutube}}}
       </div>
     </div>

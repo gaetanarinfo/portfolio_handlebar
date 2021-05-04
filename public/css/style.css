@@ -10643,14 +10643,14 @@ header {
   color: #ddd0d0;
   font-size: 35px;
   font-style: italic;
-  font-family: "Lobster", cursive;
+  font-family: "Lobster", sans-serif, cursive;
   letter-spacing: 13px;
 }
 
 .home-title p {
   color: #ddd0d0;
   font-size: 29px;
-  font-family: "Lobster", cursive;
+  font-family: "Lobster", sans-serif, cursive;
   letter-spacing: 5px;
 }
 
@@ -10715,7 +10715,7 @@ header {
 }
 
 .dropdown-item {
-  font-family: "Lobster";
+  font-family: "Lobster", sans-serif;
   letter-spacing: 2px;
 }
 
@@ -10812,8 +10812,8 @@ progress::-webkit-progress-value {
   transition: all 500ms;
 }
 .btn-form-del:hover {
-  background-color: #fd9843;
-  box-shadow: 0 0 5px #feb272;
+  background-color: #b11515;
+  box-shadow: 0 0 5px #c40c0c8c;
   color: white;
 }
 
@@ -11479,7 +11479,7 @@ progress::-webkit-progress-value {
 
 .card-text {
   font-size: 14px;
-  font-family: "Source Sans Pro";
+  font-family: "Source Sans Pro", sans-serif;
   color: #333333;
   font-weight: normal;
 }
@@ -11515,7 +11515,7 @@ progress::-webkit-progress-value {
 
 .card-icon .like span {
   font-size: 20px;
-  font-family: "Martel", serif;
+  font-family: "Martel", sans-serif;
   font-weight: 600;
   margin: 0 0 0 2px;
   color: #5d1313;
@@ -11639,7 +11639,7 @@ img.zoom {
   display: block;
   position: relative;
   text-align: center;
-  font-family: "Lobster";
+  font-family: "Lobster", sans-serif;
   letter-spacing: 1px;
 }
 
@@ -11656,7 +11656,7 @@ img.zoom {
   margin: 0 auto 28px auto;
   font-size: 22px;
   text-transform: uppercase;
-  font-family: "Kanit";
+  font-family: "Kanit", sans-serif;
   color: #e0e0e0;
   letter-spacing: 1px;
   width: auto;
@@ -11695,7 +11695,7 @@ img.zoom {
   margin: 6px auto 0px auto;
   font-size: 15px;
   color: #e0e0e0;
-  font-family: "Arimo";
+  font-family: "Arimo", sans-serif;
 }
 .tab-content p::after {
   display: block;
@@ -11718,7 +11718,7 @@ img.zoom {
   top: -2px;
   left: 6px;
   font-size: 14px;
-  font-family: "Source Sans Pro";
+  font-family: "Source Sans Pro", sans-serif;
   font-weight: 600;
   color: #e0e0c7;
 }
@@ -12655,7 +12655,7 @@ img.zoom {
 label {
   display: inline-block;
   position: relative;
-  font-family: "Lobster";
+  font-family: "Lobster", sans-serif;
   font-size: 15px;
   font-weight: 500;
   letter-spacing: 2px;
@@ -12669,7 +12669,7 @@ label {
 
 /* Quote */ 
 .blockquote {
-  font-family: "Martel";
+  font-family: "Martel", sans-serif;
   letter-spacing: 1px;
   color: #e0e0e0;
   font-weight: 600;
@@ -12737,12 +12737,12 @@ button.close {
   line-height: 1.5;
   text-transform: uppercase;
   letter-spacing: 1px;
-  font-family: "Arimo";
+  font-family: "Arimo", sans-serif;
   font-weight: 700;
 }
 
 .modal-body a {
-  font-family: "Lobster";
+  font-family: "Lobster", sans-serif;
   font-size: 15px;
   font-weight: 500;
   letter-spacing: 2px;
@@ -13201,6 +13201,38 @@ button.close {
   background-color: #57595a;
 }
 
+.banner > img {
+  width: 100%;
+}
+
+.banner_avat {
+  display: block;
+  position: absolute;
+  top: 76px;
+  left: 12px;
+}
+
+.banner_avat > img {
+  width: 96px;
+  box-shadow: 0 0 11px 1px #0e0d0dd1;
+  opacity: 0.8;
+}
+
+.banner_title {
+  display: block;
+  position: absolute;
+  top: 290px;
+  left: 12px;
+}
+
+.banner_title > p {
+  font-size: 25px;
+  font-weight: 500;
+  font-family: "Arimo";
+  letter-spacing: 3px;
+  color: white;
+}
+
 footer {
   background-color: #383434;
 }
@@ -13301,7 +13333,7 @@ footer {
   font-weight: 500;
   color: #d81616;
   letter-spacing: 1px;
-  font-family: "Arimo", serif;
+  font-family: "Arimo", sans-serif;
 }
 
 /* IMPORT SASS PAGE ID */   
@@ -13574,7 +13606,7 @@ textarea:focus {
 .card-profil {
   top: 23px;
   font-size: 15px;
-  font-family: "Roboto";
+  font-family: "Roboto", sans-serif;
   font-weight: 500;
   color: #404040;
 }

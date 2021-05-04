@@ -3,13 +3,18 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> 
     <title>{{#if title}}{{title}}{{else}}Portfolio de Gaëtan Seigneur{{/if}}</title>
 
-    <meta name="title" content="{{#if title}}{{title}}{{else}}Portfolio de Gaëtan Seigneur{{/if}}">
-
-    <meta name="description" content="{{#if content}}{{content}}{{else}}Mon portfolio professionnel, retrouvé ici mes compétences, les derniers articles de mon blog, mes tutoriels et tant d'autres choses.{{/if}}">
+    <!-- Balise méta de référencement -->
+    <meta name="title" content="{{#if title}}{{title}}{{else}}Portfolio de Gaëtan Seigneur{{/if}}"/>
+    <meta name="description" content="{{#if content}}{{content}}{{else}}Mon portfolio professionnel, retrouvé ici mes compétences, les derniers articles de mon blog, mes tutoriels et tant d'autres choses.{{/if}}"/>
+    <meta name="keywords" content="portfolio Gaëtan, portfolio Seigneur, nodejs, mongodb, html, meilleur portfolio, dev"/>
+    <meta name="author" content="Seigneur Gaëtan" />
+    <meta name="copyright" content="Seigneur Gaëtan" />
+    <meta name="robots" content="index,follow"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta http-equiv="expires" content="43200"/>
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
@@ -32,6 +37,19 @@
 
     <!-- Css perso -->
     <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Recaptcha v2 -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-S0V9W7KQYE"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-S0V9W7KQYE');
+    </script>
 
 </head>
 
@@ -73,6 +91,9 @@
 
         <!-- Import des notifications -->
         ​{{> notifications}}
+
+        <!-- Import modal cookie -->
+        {{> modal/cookie}}
 
         <!-- Footer du site -->
         ​{{> footer}}

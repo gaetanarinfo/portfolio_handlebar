@@ -1,3 +1,4 @@
+<!-- Affichage de la section article qui n'est pas masqué car c'est la première section de la page admin  -->
 <div id="membres">
   <div>
     <p class="text-center">
@@ -31,44 +32,54 @@
             </tr>
           </thead>
           <tbody>
+            
+            <!-- Boucle pour afficher les membres  -->
             {{#each membres}}
-              <tr>
-                <th class="th-perso">
-                  {{_id}}
-                </th>
-                <td class="th-perso">
-                  {{lastname}}
-                  {{firstname}}
-                </td>
-                <td class="th-perso">
-                  {{email}}
-                </td>
-                <td class="th-perso">
-                  {{#if isAdmin}}
-                    Administrateur
-                  {{else}}
-                    Membre
-                  {{/if}}
-                </td>
-                <td class="th-perso">
-                  {{generateDate createDate}}
-                </td>
-                <td class="th-perso">
-                  <a href="" data-toggle="modal" data-target="#modif_membre_{{_id}}"><i class="fas fa-user-edit ml-2" data-toggle="tooltip" data-placement="left" title="Editer le membre"></i></a>
-                  {{#if isAdmin}}
+            <tr>
+              <th class="th-perso">
+                {{_id}}
+              </th>
+              <td class="th-perso">
+                {{lastname}}
+                {{firstname}}
+              </td>
+              <td class="th-perso">
+                {{email}}
+              </td>
+              <td class="th-perso">
+                {{#if isAdmin}}
+                Administrateur
+                {{else}}
+                Membre
+                {{/if}}
+              </td>
+              <td class="th-perso">
+                {{generateDate createDate}}
+              </td>
+              <td class="th-perso">
+                <a href="" data-toggle="modal" data-target="#modif_membre_{{_id}}"><i class="fas fa-user-edit ml-2"
+                    data-toggle="tooltip" data-placement="left" title="Editer le membre"></i></a>
+                {{#if isAdmin}}
 
-                  {{else}}
-                    <a id="deleteMembre-{{_id}}" href="" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash" data-toggle="tooltip" data-placement="left" title="Supprimer un membre"></i></a>
-                  {{/if}}
-                </td>
-              </tr>
+                {{else}}
+                <a id="deleteMembre-{{_id}}" href="" data-toggle="modal" data-target="#deleteModal"><i
+                    class="fas fa-trash" data-toggle="tooltip" data-placement="left"
+                    title="Supprimer un membre"></i></a>
+                {{/if}}
+              </td>
+            </tr>
 
-              {{> admin/modal/modal_edit_membre user=this }}
+            <!-- Affichage du modal correspondant pour l'édition -->
+            {{> admin/modal/modal_edit_membre user=this }}
 
             {{/each}}
+
           </tbody>
         </table>
+
+        <!-- Pagination -->
         {{{paginationUser}}}
+        
       </div>
     </div>
   </div>

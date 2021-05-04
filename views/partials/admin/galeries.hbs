@@ -1,3 +1,4 @@
+<!-- Affichage de la section galerie qui et masqué pour une raison d'affichage de card sur mobile  -->
 <div style="display: none;" id="galerie">
   <div>
     <p class="text-center">
@@ -25,31 +26,36 @@
             </tr>
           </thead>
           <tbody>
-            {{#each galeries}}
-              <tr>
-                <td class="th-perso">
-                  {{title}}
-                </td>
-                <td class="th-perso">
-                  {{#if isPrivate}}Image privé{{else}}Image public{{/if}}
-                </td>
-                <td class="th-perso">
-                  <img width="50%" src="{{image}}" alt="{{title}}" />
-                </td>
-              <td class="th-perso"><a href="" data-toggle="modal"
-                                    data-target="#modif_galerie_{{_id}}"><i class="fas fa-edit ml-2" data-toggle="tooltip"
-                                        data-placement="top" title="Editer l'image"></i></a>
-                                <a href="" id="deleteGalerie-{{_id}}" data-toggle="modal" data-target="#deleteModal"><i
-                                        class="fas fa-trash" data-toggle="tooltip" data-placement="top"
-                                        title="Supprimer l'image"></i></a>
-                            </td>
-              </tr>
 
+            <!-- Boucle pour afficher la galerie  -->
+            {{#each galeries}}
+            <tr>
+              <td class="th-perso">
+                {{title}}
+              </td>
+              <td class="th-perso">
+                {{#if isPrivate}}Image privé{{else}}Image public{{/if}}
+              </td>
+              <td class="th-perso">
+                <img width="50%" src="{{image}}" alt="{{title}}" />
+              </td>
+              <td class="th-perso"><a href="" data-toggle="modal" data-target="#modif_galerie_{{_id}}"><i
+                    class="fas fa-edit ml-2" data-toggle="tooltip" data-placement="top" title="Editer l'image"></i></a>
+                <a href="" id="deleteGalerie-{{_id}}" data-toggle="modal" data-target="#deleteModal"><i
+                    class="fas fa-trash" data-toggle="tooltip" data-placement="top" title="Supprimer l'image"></i></a>
+              </td>
+            </tr>
+
+            <!-- Affichage du modal correspondant pour l'édition -->
             {{> admin/modal/modal_edit_galerie galerie=this }}
+            
             {{/each}}
           </tbody>
         </table>
+
+        <!-- Pagination -->
         {{{paginationGalerie}}}
+
       </div>
     </div>
   </div>

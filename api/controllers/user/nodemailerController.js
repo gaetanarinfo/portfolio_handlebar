@@ -5,9 +5,13 @@ const User = require('../../database/models/users'),
     nodemailer = require('nodemailer'),
     fs = require('fs'),
     handlebars = require('handlebars'),
-    templateRecoverPass = require('../../template/templateRecoverPassword')
+    templateRecoverPass = require('../../template/templateRecoverPassword'),
+    templateNewUser = require('../../template/templateNewUser'),
+    templateContact = require('../../template/templateContact')
+
 
 require('dotenv').config() // Package de configuration sécurisé pour le portfolio
+
 
 // Récupere et on parse le fichier html
 const readHTMLFile = function(path, callback) {
@@ -24,9 +28,9 @@ const readHTMLFile = function(path, callback) {
 // Déclaration de notre transporter
 // C'est en quelque sorte notre connexion à notre boite mail
 transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 587,
-    secure: false,
+    host: "smtp-fr.securemail.pro",
+    port: 465,
+    secure: true,
     auth: {
         user: process.env.USER_MAILER, // Env utilisateur
         pass: process.env.PASSWORD_MAILER, // Env password
@@ -39,22 +43,34 @@ transporter = nodemailer.createTransport({
  *************/
 module.exports = {
 
+    captcha: (req, res) => {
+
+        req.flash('error', 'Merci de valider le captcha !')
+        req.session.error = req.flash('error')
+        res.redirect('/')
+
+    },
+
     // Action test boite mail > nodemailer
     contact: (req, res) => {
-        //console.log(req.body)
-        // On configure notre mail à envoyer par nodemailer
-        const mailOptions = {
-            from: req.body.name + '" " <gaetanarinfo@gmail.com>',
-            to: req.body.email,
-            subject: req.body.sujet,
-            html: req.body.content
+
+        const mail = {
+            'email': req.body.email,
+            'sujet': req.body.sujet,
+            'content': req.body.content
         }
+
+        // On déclare une constante (Template de l'email)
+        templateContact(mail)
+
+        // On configure notre mail à envoyer par nodemailer
+        const mailOptions = templateContact(mail)
 
         // On demande à notre transporter d'envoyer notre mail
         transporter.sendMail(mailOptions, (err, info) => {
             if (err) console.log(err)
             else {
-                req.flash('success', 'Votre message a bien été envoyer sur ' + req.body.email + ' !')
+                req.flash('success', 'Votre message a bien été envoyer')
                 req.session.success = req.flash('success')
                 res.redirect('/')
             }
@@ -90,40 +106,21 @@ module.exports = {
                         req.flash('success', 'Merci de votre inscription !')
                         req.session.success = req.flash('success')
 
-                        // On lie le fichier email
-                        readHTMLFile('email.html', function(err, html) {
+                        const user = req.body.email
 
-                            // Methode asyncrone function main
-                            async function main() {
+                        // On déclare une constante (Template de l'email)
+                        templateNewUser(user)
+                        const mailOptions = templateNewUser(user)
 
-                                var template = handlebars.compile(html) // On compile la template email
-
-                                // On crée une constante transporter
-                                let transporter = nodemailer.createTransport({
-                                    host: "smtp.gmail.com",
-                                    port: 587,
-                                    secure: false,
-                                    auth: {
-                                        user: process.env.USER_MAILER, // Config Env users
-                                        pass: process.env.PASSWORD_MAILER, // Config Env password
-                                    },
-                                })
-
-                                // Envoyer du courrier avec l'objet de transport défini (Soit req.body)
-                                let info = await transporter.sendMail({
-                                    from: '"Seigneur Gaëtan Portfolio - " <gaetanarinfo@gmail.com>',
-                                    to: req.body.email,
-                                    subject: "Inscription sur mon Portfolio",
-                                    html: html,
-                                })
-
+                        // On demande à notre transporter d'envoyer notre mail
+                        transporter.sendMail(mailOptions, (err, info) => {
+                            if (err) console.log(err)
+                            else {
+                                req.flash('success', 'Un e-mail vient de vous être envoyé sur ' + user + ' !')
+                                req.session.success = req.flash('success')
+                                res.redirect('/')
                             }
-
-                            main().catch() // On vérifie si il n'y à pas d'erreur
-
                         })
-
-                        res.redirect('/') // On redirige vers l'accueil
                     }
                 })
 

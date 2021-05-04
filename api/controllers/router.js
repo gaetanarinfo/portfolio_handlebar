@@ -11,10 +11,14 @@ const express = require('express'), // Package express
 const swaggerUi = require('swagger-ui-express'),
     swaggerDocument = require('../config/swagger.json')
 
+// Module express pour faire fonctionné l'aplication
+const app = express()
+
 // Import Controller
 const homeController = require('./home/homeController'), // Controller home
     blogController = require('./home/blogController'), // Controller Blog
     articleController = require('./home/articleController'), // Controller Article Id
+    cguController = require('./home/cguController'), // Controller Cgu
     // Controller Administration du site internet
     adminControllerUser = require('./admin/ControllerUser'),
     adminControllerArticle = require('./admin/ControllerArticle'),
@@ -40,9 +44,6 @@ const homeController = require('./home/homeController'), // Controller home
     tutoCatController = require('./home/tutoCatController')
     //
 
-// Module express pour faire fonctionné l'aplication
-const app = express()
-
 // Routes Home
 router.route('/')
     .get(homeController.get)
@@ -50,6 +51,10 @@ router.route('/')
 // Routes mail section contact ---> Home 
 router.route('/mail')
     .post(nodemailerController.contact)
+
+// Protection contre les robots google
+router.route('/recaptcha')
+    .post(nodemailerController.captcha)
 
 // Routes page Blog
 router.route('/blog')
@@ -171,8 +176,12 @@ router.route('/tutoriel')
 router.route('/tutorielCat/:category')
     .get(tutoCatController.getCat)
 
+// Routes CGU
+router.route('/cgu')
+    .get(cguController.get)
+
 // Route Swagger
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+router.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 /*
  * Export Module

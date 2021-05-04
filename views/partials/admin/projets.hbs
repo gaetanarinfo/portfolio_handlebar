@@ -1,3 +1,4 @@
+<!-- Affichage de la section projet qui est masqué car c'est la première section de la page admin  -->
 <div style="display: none;" id="projet">
 
     <div>
@@ -19,7 +20,10 @@
                         </tr>
                     </thead>
                     <tbody>
+
+                        <!-- Boucle pour afficher les projets  -->
                         {{#each projets}}
+
                         <tr>
                             <td class="th-perso">{{title}}</td>
                             <td class="th-perso">{{#if isPrivate}}Projet privé{{else}}Projet public{{/if}}</td>
@@ -29,18 +33,22 @@
                             <td class="th-perso"><a href="" data-toggle="modal" data-target="#modif_projet_{{_id}}"><i
                                         class="fas fa-edit ml-2" data-toggle="tooltip" data-placement="left"
                                         title="Editer le projet"></i></a>
-                                <a href="" id="deleteProjet-{{_id}}" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash"
-                                        data-toggle="tooltip" data-placement="left" title="Supprimer le projet"></i></a>
+                                <a href="" id="deleteProjet-{{_id}}" data-toggle="modal" data-target="#deleteModal"><i
+                                        class="fas fa-trash" data-toggle="tooltip" data-placement="left"
+                                        title="Supprimer le projet"></i></a>
                             </td>
                         </tr>
 
+                        <!-- Affichage du modal correspondant pour l'édition -->
                         {{> admin/modal/modal_edit_projet projet=this }}
 
                         {{/each}}
                     </tbody>
                 </table>
 
+                <!-- Pagination -->
                 {{{paginationProjet}}}
+
             </div>
         </div>
     </div>

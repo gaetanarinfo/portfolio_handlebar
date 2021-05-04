@@ -1,4 +1,4 @@
-<!-- Section 2 -->
+<!-- Section 2 Projet personnel -->
 <section>
         <div class="w-100 mt-2 p-4">
             <div class="row justify-content-center">
@@ -13,15 +13,20 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="row">
+
+                        <!-- Condition pour le like user si connecter on peut liké sinon non -->
                         {{#if users}}
+
+                        <!-- Boucle pour afficher les projets -->
                         {{#each (limit projets 6)}}
                         <div class="col-md-4 mt-3" style="{{#if isPrivate }}display: none;{{else}}{{/if}}">
-                            <div class="card">
+                            <div class="card" style="min-height: 523px;">
                                 <img class="card-img-top" src="{{image}}" alt="{{title}}">
                                 <div class="card-body">
                                     <h5 class="card-title">{{title}}</h5>
                                     <div class="card-icon">
 
+                                        <!-- HELPERS Condition pour le like ou le dislike -->
                                         {{#ifLike like ../users}}
 
                                          <a id="like_{{ _id }}_2" class="" title="Voté pour ce projet" href="/user/addLike/{{_id}}"><i class="fas fa-heart"></i></a>
@@ -32,12 +37,7 @@
 
                                         {{/ifLike}}
 
-                                        {{!-- <a id="like_{{ _id }}_2" class="" title="Voté pour ce projet" href="/user/addLike/{{_id}}"><i class="fas fa-heart"></i></a> --}}
-                         
-                                        <a class="mask" href="" title="Masquer le projet">
-                                            <i class="fas fa-reply"></i>
-                                        </a>
-
+                                        <!-- Function qui permet de compter le nombre de like -->
                                         <a class="like"><i class="fas fa-thumbs-up"></i> <span>{{countArray like }}</span></a>
                                     </div>
                                     <p class="card-text">{{content}}</p>
@@ -49,10 +49,13 @@
                             </div>
                         </div>
                         {{/each}}
+
                         {{else}}
+
+                        <!-- Boucle pour afficher les projets -->
                         {{#each (limit projets 6)}}
                         <div class="col-md-4 mt-3" style="{{#if isPrivate }}display: none;{{else}}{{/if}}">
-                            <div class="card">
+                            <div class="card" style="min-height: 523px;">
                                 <img class="card-img-top" src="{{image}}" alt="{{title}}">
                                 <div class="card-body">
                                     <h5 class="card-title">{{title}}</h5>
@@ -71,10 +74,14 @@
                                 </div>
                             </div>
                         </div>
+
                         {{/each}}
+
                         {{/if}}
+
                     </div>
 
+                    <!-- Pagination -->
                     {{{paginationProjet}}}
                 </div>
             </div>

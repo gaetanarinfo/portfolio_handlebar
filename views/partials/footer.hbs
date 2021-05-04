@@ -6,7 +6,7 @@
     </div>
 </div>
 
-<!-- Section 7 -->
+<!-- Section 7 Contact -->
 <div class="w-100 p-4" id="contact">
     <div class="row justify-content-center">
         <div class="col-md-7">
@@ -15,7 +15,6 @@
         </div>
     </div>
 </div>
-<!-- Section 7 -->
 
 <!-- Réseaux sociaux -->
 <div class="container mt-n4">
@@ -25,14 +24,13 @@
 
             <div class="text-center mt-4">
                 <a class="social-icon-1 ml-3" href="#" target="_blank" title="Facebook"></a>
-                <a class="social-icon-2 ml-3" href="#" target="_blank" title="Twitter"></a>
+                <a class="social-icon-2 ml-3" href="https://twitter.com/OverGames72" target="_blank" title="Twitter"></a>
                 <a class="social-icon-3 ml-3" href="#" target="_blank" title="Instagram"></a>
                 <a class="social-icon-4" href="#" target="_blank" title="Snapchat"></a>
             </div>
         </div>
     </div>
 </div>
-<!-- Réseaux sociaux -->
 
 <div class="w-100 p-4">
     <div class="row justify-content-center">
@@ -47,20 +45,20 @@
     <div class="row">
         <div class="col-md-12">
             <div class="mt-4">
-                <form class="text-center" method="POST" action="/mail">
+                <form id="message_submit" class="text-center" method="POST" action="/recaptcha">
                     <div class="form-row">
                         <div class="form-group col-md-3 d-inline-block ml-3">
                             <label for="email" class="mb-3">Votre adresse email</label>
-                            <input type="email" class="form-control" name="email" placeholder="Adresse email">
+                            <input type="email" required class="form-control" name="email" placeholder="Adresse email">
                         </div>
                         <div class="form-group col-md-3 d-inline-block ml-3 mt-3">
                             <label for="name" class="mb-3">Votre nom et prénom</label>
-                            <input type="text" class="form-control" name="name" placeholder="Nom et Prénom">
+                            <input type="text" required class="form-control" name="name" placeholder="Nom et Prénom">
                         </div>
                         <div class="form-group col-md-3 d-inline-block mt-3">
                             <label for="sujet" class="mb-3">Votre sujet</label>
-                            <select name="sujet" class="form-control">
-                                <option selected="">Choissisez un sujet...</option>
+                            <select name="sujet" required class="form-control">
+                                <option selected="" disabled>Choissisez un sujet...</option>
                                 <option disabled>---------</option>
                                 <option value="Bug sur le site">Bug sur le site</option>
                                 <option disabled>---------</option>
@@ -72,13 +70,22 @@
 
                         <div class="form-group col-md-8 m-auto mt-4">
                             <label for="inputMessage" class="mb-3">Votre message</label>
-                            <textarea name="content" class="form-control" rows="12"
+                            <textarea name="content" required class="form-control" rows="12"
                                 placeholder="Ici commence le message"></textarea>
+                        </div>
+
+                        <div class="form-check mt-4 col-md-3 m-auto">
+                            <label class="form-check-label">Confirmer l'envoi du message</label>
+                            <input class="form-check-input" onchange="onReCaptchaValid()" type="checkbox" value="" style="margin: 4px -16px 0px 0px;">                   
+                        </div>
+
+                        <div class="form-group col-md-8 m-auto mt-4">
+                            <div class="g-recaptcha" align="center" data-sitekey="6LcCC1UaAAAAAKYiMBx_B6lnS4RmR0vkVcQWtTlr"></div>
                         </div>
                     </div>
 
                     <div class="mt-4">
-                        <button type="submit" class="btn btn-form-send ml-5">Envoyer le message</button> <button
+                        <button id="button_submit" style="display: none;" type="submit" onchange="onReCaptchaValid()" data-sitekey="6LcCC1UaAAAAAKYiMBx_B6lnS4RmR0vkVcQWtTlr" data-callback='onReCaptchaValid' class="btn btn-form-send ml-5">Envoyer le message</button> <button
                             type="reset" class="btn btn-form-reset">Effacer</button>
                     </div>
                 </form>
@@ -131,7 +138,7 @@
                 <h5 class="text-uppercase">Twitter</h5>
 
                 <a class="twitter-timeline mt-2" data-width="476" data-height="400" data-dnt="true" data-theme="dark"
-                    href="https://twitter.com/TwitterDev?ref_src=twsrc%5Etfw">Tweets by TwitterDev</a>
+                    href="https://twitter.com/OverGames72?ref_src=twsrc%5Etfw">Tweets by OverGames</a>
                 <script async defer crossorigin="anonymous" src="https://platform.twitter.com/widgets.js"></script>
 
             </div>
@@ -166,6 +173,9 @@
                     <li class="mb-3">
                         <a href="#contact" class="a-f"><i class="fas fa-reply ml-1" aria-hidden="true"></i> Contact</a>
                     </li>
+                    <li class="mb-3">
+                        <a href="cgu" class="a-f"><i class="fas fa-cog ml-1" aria-hidden="true"></i> CGU</a>
+                    </li>
                 </ul>
             </div>
             <!-- Grid colonne -->
@@ -176,7 +186,10 @@
                 <h5 class="text-uppercase">Commentaire récent</h5>
                 <div class="row d-flex justify-content-center mt-3">
                     <div class="col-md-12">
+                        <!-- Condition si il n'y à pas de commentaire alors on affiche un message d'erreur -->
                         {{#ifEquals commentCount 0}}
+
+                        <!-- Boucle pour afficher les derniers commentaires -->
                         {{#each (limit commentsAll 3) }}
                         <div class="card comment">
                             <div class="comment-widgets">
@@ -225,7 +238,7 @@
 
     <!-- Copyright -->
     <div class="footer-copyright text-center py-3">© 2020 Copyright
-        <a href="#"> Gaëtan Seigneur</a>
+        <a href="https://gaetan.store/"> Gaëtan Seigneur</a>
     </div>
     <!-- Copyright -->
 
@@ -240,6 +253,16 @@
 <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
 <!-- js icons -->
 <script src="/vendor/icons/9d1d83a1dd.js"></script>
+
+<script>
+if (localStorage.getItem("cookie-consent") === null) {
+    $('#cookie').modal({ backdrop: 'static', keyboard: false, show: true });
+    $("#cookieConsent").click(function() {
+        localStorage.setItem("cookie-consent", "accord-ok")
+        $('#cookie').modal({ backdrop: 'static', keyboard: false, show: false });
+    });
+}
+</script>
 
 <!-- Preloader -->
 <script>
@@ -269,5 +292,15 @@
         })(jQuery);
     });
 </script>
-
 <script src="/js/preloader.js"></script>
+<!-- Preloader -->
+
+<!-- RECAPTCHA V2 -->
+<script type="text/javascript">
+  function onReCaptchaValid(token) {
+    document.getElementById('button_submit').style.display = 'inline-block';
+    document.getElementById('message_submit').setAttribute('action', '/mail');
+
+    return false;
+  }
+</script>

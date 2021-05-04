@@ -1,23 +1,28 @@
+<!-- Section galerie pour le format mobile -->
 <div class="m-auto text-center mt-5 container-list" id="galerie_mobile">
-        <p class="text-center">GALERIE DU SITE INTERNET</p>
+    <p class="text-center">GALERIE DU SITE INTERNET</p>
+</div>
+
+<!-- Boucle pour afficher la galerie -->
+{{#each galeries}}
+
+<div class="list-group m-auto mb-2">
+    <div class="list-group-item list-group-item-action flex-column align-items-start text-center">
+        <p class="mb-1"><img class="w-100" src="{{image}}" alt="{{title}}"></p>
+        <p class="mb-1">{{title}}</p>
+        <p class="mb-1">{{#if isPrivate}}Image privé{{else}}Image public{{/if}}</p>
+        <p class="mb-1"><a href="" data-toggle="modal" data-target="#modif_galerie_{{_id}}"><i class="fas fa-edit ml-2"
+                    data-toggle="tooltip" data-placement="top" title="Editer l'image"></i></a>
+            <a href="" id="deleteGalerieMobile-{{_id}}" data-toggle="modal" data-target="#deleteModal"><i
+                    class="fas fa-trash" data-toggle="tooltip" data-placement="top" title="Supprimer l'image"></i></a>
+        </p>
     </div>
+</div>
 
-     {{#each galeries}}
+<!-- Affichage du modal correspondant pour l'édition -->
+{{> admin/modal/modal_edit_galerie galerie=this }}
 
-    <div class="list-group m-auto mb-2">
-        <div class="list-group-item list-group-item-action flex-column align-items-start text-center">
-            <p class="mb-1"><img class="w-100" src="{{image}}" alt="{{title}}"></p>
-            <p class="mb-1">{{title}}</p>
-             <p class="mb-1">{{#if isPrivate}}Image privé{{else}}Image public{{/if}}</p>
-             <p class="mb-1"><a href="" data-toggle="modal"
-                                    data-target="#modif_galerie_{{_id}}"><i class="fas fa-edit ml-2" data-toggle="tooltip"
-                                        data-placement="top" title="Editer l'image"></i></a>
-                                <a href="" id="deleteGalerieMobile-{{_id}}" data-toggle="modal" data-target="#deleteModal"><i
-                                        class="fas fa-trash" data-toggle="tooltip" data-placement="top"
-                                        title="Supprimer l'image"></i></a></p>
-        </div>
-    </div>
-    {{> admin/modal/modal_edit_galerie galerie=this }}
-    {{/each}}
+{{/each}}
 
-    {{{pagin4}}}
+<!-- Pagination -->
+{{{pagin4}}}

@@ -1,57 +1,65 @@
-    ​{{> section/connaissances}}
+<!-- Section Connaisance -->
+​{{> section/connaissances}}
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="separator"></div>
-            </div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="separator"></div>
         </div>
     </div>
+</div>
 
-    {{> section/projets}}
+<!-- Section Projet -->
+{{> section/projets}}
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="separator"></div>
-            </div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="separator"></div>
         </div>
     </div>
+</div>
 
-    {{> section/languages}}
+<!-- Section Language de programmation -->
+{{> section/languages}}
 
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="separator"></div>
-            </div>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="separator"></div>
         </div>
     </div>
+</div>
 
-    {{> section/galeries}}
+<!-- Section Galerie -->
+{{> section/galeries}}
 
-    <div class="container mt-1">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="separator"></div>
-            </div>
+<div class="container mt-1">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="separator"></div>
         </div>
     </div>
+</div>
 
-    {{> section/tutos}}
+<!-- Section Tutoriel -->
+{{> section/tutos}}
 
-    <div class="container mt-4">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="separator"></div>
-            </div>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="separator"></div>
         </div>
     </div>
+</div>
 
-    {{> section/articles}}
+<!-- Section Liste article du blog -->
+{{> section/articles}}
 
-    {{> modal/modal}}
+<!-- Modal utilisateur INSCRIPTION, CONNEXION, MOT DE PASSE PERDU -->
+{{> modal/modal}}
 
-    {{#if users}}
-        {{> modal/modal_user}}
-    {{/if}}
+<!-- Modal qui permet de modifier les informations de l'utilisateur à tout moment -->
+{{#if users}}
+{{> modal/modal_user}}
+{{/if}}

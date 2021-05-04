@@ -1,3 +1,4 @@
+<!-- Affichage de la section commentaire qui et masqué pour une raison d'affichage de card sur mobile  -->
 <div style="display: none;" id="comment">
 
     <div>
@@ -18,15 +19,17 @@
                         </tr>
                     </thead>
                     <tbody>
+
+                        <!-- Boucle pour afficher les articles  -->
                         {{#each comments}}
                         <tr>
-                            <th class="th-perso" style="vertical-align: middle;"><img width="97px;"
-                                    src="{{avatar}}"></th>
+                            <th class="th-perso" style="vertical-align: middle;"><img width="97px;" src="{{avatar}}">
+                            </th>
                             <th class="th-perso" style="vertical-align: middle;">{{author}}</th>
                             <td class="th-perso" style="vertical-align: middle;">{{generateDate dateCreate}}</td>
                             <td class="table-content th-perso" style="vertical-align: middle;">{{content}}</td>
-                            <td class="th-perso" style="vertical-align: middle;"><a href=""
-                                    data-toggle="modal" data-target="#modif_comment_{{_id}}"><i class="fas fa-edit ml-2"
+                            <td class="th-perso" style="vertical-align: middle;"><a href="" data-toggle="modal"
+                                    data-target="#modif_comment_{{_id}}"><i class="fas fa-edit ml-2"
                                         data-toggle="tooltip" data-placement="top"
                                         title="Editer le commentaire"></i></a>
                                 <a href="" id="deleteComment-{{_id}}" data-toggle="modal" data-target="#deleteModal"><i
@@ -35,12 +38,15 @@
                             </td>
                         </tr>
 
+                        <!-- Affichage du modal correspondant pour l'édition -->
                         {{> admin/modal/modal_edit_comment comment=this }}
 
                         {{/each}}
+
                     </tbody>
                 </table>
 
+                <!-- Pagination -->
                 {{{paginationComment}}}
             </div>
         </div>

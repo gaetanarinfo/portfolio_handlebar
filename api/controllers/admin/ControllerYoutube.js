@@ -102,6 +102,7 @@ module.exports = {
 
         Tuto
             .create({
+                category: req.body.category,
                 api: req.body.api,
                 links: req.body.links,
                 title: req.body.title,
@@ -137,6 +138,7 @@ module.exports = {
             api: req.body.api,
             date: req.body.date,
             links: req.body.links,
+            category: req.body.category,
             isPrivate: Boolean(req.body.isPrivate)
         }, (error) => {
 

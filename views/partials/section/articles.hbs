@@ -1,41 +1,48 @@
-    <!-- Section 6 -->
+<!-- Section 6 Pour afficher les derniers article du blog -->
 <div class="w-100 p-4" id="article">
-        <div class="row justify-content-center">
-            <div class="col-md-7">
-                <p class="title-h">Les derniers articles de mon blog</p>
-                <hr class="h-2 bg-light">
-            </div>
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+            <p class="title-h">Les derniers articles de mon blog</p>
+            <hr class="h-2 bg-light">
         </div>
     </div>
+</div>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="list-group" id="list-tab" role="tablist">
-                    {{#each (limit articles 4)}}
-                    <a style="{{#if isPrivate }}display: none;{{else}}{{/if}}" class="list-group-item list-group-item-action {{#if active}}active{{/if}}" id="list-home-list" data-toggle="list" href="#article{{_id}}" role="tab" aria-controls="article{{id}}"><i class="fas fa-chevron-right"></i> {{title}}</a>
-                    {{/each}}
-                </div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="list-group" id="list-tab" role="tablist">
+                <!-- Boucle pour l'affichage des actualités -->
+                {{#each (limit articles 4)}}
+                <a style="{{#if isPrivate }}display: none;{{else}}{{/if}}"
+                    class="list-group-item list-group-item-action {{#if active}}active{{/if}}" id="list-home-list"
+                    data-toggle="list" href="#article{{_id}}" role="tab" aria-controls="article{{id}}"><i
+                        class="fas fa-chevron-right"></i> {{title}}</a>
+                {{/each}}
             </div>
-            <div class="col-md-8 mt-1">
-                <div class="tab-content" id="nav-tabContent">
-                    {{#each (limit articles 4)}}
-                    <div class="tab-pane fade show {{#if active}}active{{/if}}" id="article{{_id}}" role="tabpanel" style="{{#if isPrivate }}display: none;{{else}}{{/if}}">
-                        <div class="tab-title">{{title}}</div>
-                        <div class="tab-img" style="background: url('{{image}}');"></div>
-                        <p class="p-2">
-                            {{courtContent}}
-                        </p>
-                        <div class="tab-icon p-2">
-                            <div><i class="fas fa-edit"></i> <span>Mise en ligne : Le {{generateDate dateCreate}}</span></div>
-                            <div class="mt-1"><i class="fas fa-user"></i> <span class="tab-user">Posté par {{author}}</span>
-                            </div>
+        </div>
+        <div class="col-md-8 mt-1">
+            <div class="tab-content" id="nav-tabContent">
+                <!-- Deuxième Boucle pour l'affichage des actualités -->
+                {{#each (limit articles 4)}}
+                <div class="tab-pane fade show {{#if active}}active{{/if}}" id="article{{_id}}" role="tabpanel"
+                    style="{{#if isPrivate }}display: none;{{else}}{{/if}}">
+                    <div class="tab-title">{{title}}</div>
+                    <div class="tab-img" style="background: url('{{image}}');"></div>
+                    <p class="p-2">
+                        {{courtContent}}
+                    </p>
+                    <div class="tab-icon p-2">
+                        <div><i class="fas fa-edit"></i> <span>Mise en ligne : Le {{generateDate dateCreate}}</span>
                         </div>
-                        <div class="tab-btn p-2"><a href="/article/{{_id}}" class="btn btn-tab">Lire la suite de l'article</a></div>
+                        <div class="mt-1"><i class="fas fa-user"></i> <span class="tab-user">Posté par {{author}}</span>
+                        </div>
                     </div>
-                    {{/each}}
+                    <div class="tab-btn p-2"><a href="/article/{{_id}}" class="btn btn-tab">Lire la suite de
+                            l'article</a></div>
                 </div>
+                {{/each}}
             </div>
         </div>
     </div>
-    <!-- Section 6 -->
+</div>

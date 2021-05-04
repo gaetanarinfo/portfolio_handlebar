@@ -12,7 +12,7 @@ const ProjetShema = new mongoose.Schema({
     image: String,
     name: String,
     date: String,
-    links: Number,
+    links: String,
     isPrivate: {
         type: Boolean,
         default: false

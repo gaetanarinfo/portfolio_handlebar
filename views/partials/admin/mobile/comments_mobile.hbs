@@ -1,26 +1,31 @@
+<!-- Section commentaire pour le format mobile -->
 <div class="m-auto text-center mt-5 container-list" id="comment_mobile">
-        <p class="text-center">Liste des commentaires blog du site internet</p>
-    </div>
+    <p class="text-center">Liste des commentaires blog du site internet</p>
+</div>
 
-    {{#each comments}}
-    <div class="list-group m-auto mb-2">
-        <div class="list-group-item list-group-item-action flex-column align-items-start text-center">
-            <div class="d-flex w-100 justify-content-between">
-                <h5 class="m-auto mt-1 mb-1">{{author}}</h5>
-            </div>
-            <p class="mb-1 mt-1"><img width="90px" src="../../../avatar/{{avatar}}"></p>
-            <p class="mb-1">Crée le {{generateDate dateCreate}}</p>
-            <p class="mb-1">{{content}}</p>
-            <p class="mb-1"><a href="" data-toggle="modal"
-                                    data-target="#modif_comment_{{_id}}"><i class="fas fa-edit ml-2" data-toggle="tooltip"
-                                        data-placement="top" title="Editer le commentaire"></i></a>
-                                <a href="" id="deleteCommentMobile-{{_id}}" data-toggle="modal" data-target="#deleteModal"><i
-                                        class="fas fa-trash" data-toggle="tooltip" data-placement="top"
-                                        title="Supprimer le commentaire"></i></a></p>
-
-            {{> admin/modal/modal_edit_comment comment=this }}                            
+<!-- Boucle pour afficher les commentaires -->
+{{#each comments}}
+<div class="list-group m-auto mb-2">
+    <div class="list-group-item list-group-item-action flex-column align-items-start text-center">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="m-auto mt-1 mb-1">{{author}}</h5>
         </div>
-    </div>
-    {{/each}}
+        <p class="mb-1 mt-1"><img width="90px" src="../../../avatar/{{avatar}}"></p>
+        <p class="mb-1">Crée le {{generateDate dateCreate}}</p>
+        <p class="mb-1">{{content}}</p>
+        <p class="mb-1"><a href="" data-toggle="modal" data-target="#modif_comment_{{_id}}"><i class="fas fa-edit ml-2"
+                    data-toggle="tooltip" data-placement="top" title="Editer le commentaire"></i></a>
+            <a href="" id="deleteCommentMobile-{{_id}}" data-toggle="modal" data-target="#deleteModal"><i
+                    class="fas fa-trash" data-toggle="tooltip" data-placement="top"
+                    title="Supprimer le commentaire"></i></a>
+        </p>
 
-    {{{pagin6}}}
+        <!-- Affichage du modal correspondant pour l'édition -->
+        {{> admin/modal/modal_edit_comment comment=this }}
+        
+    </div>
+</div>
+{{/each}}
+
+<!-- Pagination -->
+{{{pagin6}}}

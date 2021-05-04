@@ -19,51 +19,63 @@ module.exports = {
 
         // On recherche l'utilisateur
         User.findOne({ email }, (error, user) => {
+
             if (user) {
 
-                // On décrypte le mot de passe et on le compare avec l'utilisateur
-                bcrypt.compare(password, user.password, (error, same) => {
-                    if (same) {
+                if (user.isBanned) {
 
-                        // Récupère les informations du membre et les stock dans la session
-                        req.session.userId = user._id
-                        req.session.lastname = user.lastname
-                        req.session.firstname = user.firstname
-                        req.session.email = user.email
-                        req.session.avatar = user.avatar
-                        req.session.isAdmin = user.isAdmin
-                        req.session.isLog = user.isLog
-                        req.session.ip = user.ip
+                    // Message en cas d'erreur
+                    req.flash('error', "Votre compte à été bannis !")
+                    req.session.error = req.flash('error')
+                    res.redirect('/')
 
-                        // On récupere l'ip de l'utilisateur pour la stocker
-                        extIP.get((err, ip) => {
-                            if (err) {
-                                //console.error("callback error: " + err);
-                            } else {
+                } else {
 
-                                // On met à jour l'ip dans la BDD
-                                User.findOneAndUpdate({ '_id': user.id }, {
-                                    isLog: new Date(),
-                                    ip: ip
-                                }, (error) => {});
+                    // On décrypte le mot de passe et on le compare avec l'utilisateur
+                    bcrypt.compare(password, user.password, (error, same) => {
+                        if (same) {
 
-                            }
-                        })
+                            // Récupère les informations du membre et les stock dans la session
+                            req.session.userId = user._id
+                            req.session.lastname = user.lastname
+                            req.session.firstname = user.firstname
+                            req.session.email = user.email
+                            req.session.avatar = user.avatar
+                            req.session.isAdmin = user.isAdmin
+                            req.session.isLog = user.isLog
+                            req.session.ip = user.ip
 
-                        // Message en cas de success
-                        req.flash('success', 'Connexion réussie !')
-                        req.session.success = req.flash('success')
+                            // On récupere l'ip de l'utilisateur pour la stocker
+                            extIP.get((err, ip) => {
+                                if (err) {
+                                    //console.error("callback error: " + err);
+                                } else {
 
-                        res.redirect('/')
+                                    // On met à jour l'ip dans la BDD
+                                    User.findOneAndUpdate({ '_id': user.id }, {
+                                        isLog: new Date(),
+                                        ip: ip
+                                    }, (error) => {});
 
-                    } else {
+                                }
+                            })
 
-                        // Message en cas d'erreur
-                        req.flash('error', 'Une erreur est survenue !')
-                        req.session.error = req.flash('error')
-                        res.redirect('/')
-                    }
-                })
+                            // Message en cas de success
+                            req.flash('success', 'Connexion réussie !')
+                            req.session.success = req.flash('success')
+
+                            res.redirect('/')
+
+                        } else {
+
+                            // Message en cas d'erreur
+                            req.flash('error', 'Une erreur est survenue !')
+                            req.session.error = req.flash('error')
+                            res.redirect('/')
+                        }
+                    })
+
+                }
 
             } else {
 
@@ -72,6 +84,8 @@ module.exports = {
                 req.session.error = req.flash('error')
                 res.redirect('/')
             }
+
+
         })
     },
 
@@ -160,12 +174,12 @@ module.exports = {
     deleteUser: async(req, res) => {
 
         // Ici on déclare la récupération de notre articleID grace à notre recherche asynchrone filtrer avec notre req.params.id
-        const dbUser = await User.findById(req.params.id),
+        const dbUser = await User.findById(req.session.userId),
             // Ici on déclare le chemin de l'image qui devra etre supprimer
             pathImg = path.resolve("./public/images/avatar/" + dbUser.name)
 
         // Ici nous avons une fonction de suppression de notre article filtrer grace à req.params.id (objet dans la DB)
-        User.deleteOne({ _id: req.params.id }, (err) => {
+        User.deleteOne({ _id: req.session.userId }, (err) => {
             // Ici notre callback verifie bien que notre fonction c'est passer sans erreur
             if (err) {
                 //console.log(err)
@@ -184,7 +198,7 @@ module.exports = {
                         req.flash('success', "Votre compte a été supprimé !")
                         req.session.success = req.flash('success')
 
-                        res.redirect('/')
+                        res.redirect('/logout')
                     }
                 })
             }

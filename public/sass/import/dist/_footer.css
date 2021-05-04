@@ -1,0 +1,102 @@
+footer {
+  background-color: #383434;
+}
+
+.footer-copyright {
+  background-color: #302a2a;
+  color: #d6e0e0;
+  font-size: 20px;
+  letter-spacing: 1px;
+  font-family: "Kanit", sans-serif;
+}
+
+.footer-copyright a {
+  background-color: #302a2a;
+  color: #9da5a5;
+  font-size: 20px;
+  letter-spacing: 1px;
+  font-family: "Kanit", sans-serif;
+  transition: all 300ms;
+  text-decoration: none;
+}
+.footer-copyright a:hover {
+  color: #707575;
+}
+
+.page-footer h5 {
+  color: #d6e0e0;
+}
+
+.page-footer .a-f {
+  text-decoration: none;
+  color: #dededd;
+  font-size: 14px;
+  font-family: "Martel", sans-serif;
+  font-weight: 800;
+  letter-spacing: 2px;
+  transition: 500ms;
+}
+.page-footer .a-f:hover {
+  padding: 0 0px 0 37px;
+  color: #7c7c79;
+}
+
+.card-body {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  padding: 1.25rem;
+}
+
+.card .card-title {
+  position: relative;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.comment-widgets {
+  position: relative;
+  text-align: left;
+  font-family: "Roboto", sans-serif;
+}
+
+.comment-widgets .comment-row {
+  padding: 14px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 10px 0;
+  border-bottom: 1px solid transparent;
+}
+
+.comment-text {
+  padding-left: 15px;
+}
+
+.comment-text span {
+  font-size: 14px;
+}
+
+.comment-text h6 {
+  font-weight: 600;
+}
+
+.comment-text .text-muted {
+  font-weight: 600;
+}
+
+.comment {
+  background-color: #dee2e6;
+}
+
+.comment-widgets .comment-row:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.error-comment {
+  font-size: 14px;
+  font-weight: 500;
+  color: #d81616;
+  letter-spacing: 1px;
+  font-family: "Arimo", sans-serif;
+}
